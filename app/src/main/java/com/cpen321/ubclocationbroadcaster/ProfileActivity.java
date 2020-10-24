@@ -34,22 +34,13 @@ public class ProfileActivity extends AppCompatActivity {
     private Spinner mySpinner;
     private ListView course_list_view;
     private Button done_btn;
-
+    //TODO: the user can't choose one course twice
+    //TODO: don't go to the next page if data is invalid
+    //TODO: use mySkeleton if it works
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        //done button setup
-        done_btn = findViewById(R.id.course_page_done_button);
-        done_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent doneIntent = new Intent(ProfileActivity.this, CreateActivity.class);
-                startActivity(doneIntent);
-                Log.d("done button", "done button has been clicked");
-            }
-        });
 
         //drop down menu and view list
         mySpinner = findViewById(R.id.course_spinner);
@@ -114,13 +105,23 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        final RequestQueue requestQueue = Volley.newRequestQueue(this);
+
         Gson g = new Gson();
         String course_list_j = g.toJson(course_list);
+
+        //done button setup
+        done_btn = findViewById(R.id.course_page_done_button);
+        done_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent doneIntent = new Intent(ProfileActivity.this, CreateActivity.class);
+                startActivity(doneIntent);
+                Log.d("done button", "done button has been clicked");
 
         //TODO:url here
         String URL = "http://";
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         JsonArrayRequest json_obj = new JsonArrayRequest(Request.Method.POST, URL, null,
                 new Response.Listener<JSONArray> (){
@@ -150,7 +151,8 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         requestQueue.add(json_obj);
-
+            }
+        });
     }
 
 }

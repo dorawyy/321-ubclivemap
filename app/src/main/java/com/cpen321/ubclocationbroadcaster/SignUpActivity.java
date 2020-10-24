@@ -55,34 +55,36 @@ public class SignUpActivity extends AppCompatActivity {
                 Intent signUpIntent = new Intent(SignUpActivity.this, ProfileActivity.class);
                 startActivity(signUpIntent);
                 Log.d("sign up button", "sign up button has been clicked");
-            }
-        });
 
-        //TODO: insert the server url
-        String URL = "http://";
-        JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, null,
-                new Response.Listener<JSONObject> (){
+                //TODO: insert the server url
+                String URL = "http://";
+                JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, null,
+                        new Response.Listener<JSONObject> (){
+                            @Override
+                            public void onResponse(JSONObject response){
+                                try {
+                                    name.setText(response.getString("Name"));
+                                    username.setText(response.getString("Username"));
+                                    password.setText(response.getString("Password"));
+                                    email.setText(response.getString("email"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
                     @Override
-                    public void onResponse(JSONObject response){
-                        try {
-                        name.setText(response.getString("Name"));
-                        username.setText(response.getString("Username"));
-                        password.setText(response.getString("Password"));
-                        email.setText(response.getString("email"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    public void onErrorResponse(VolleyError error){
+                        Toast.makeText(SignUpActivity.this, "Unable to send the sign up data to the server!", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
                     }
-                    }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error){
-                Toast.makeText(SignUpActivity.this, "Unable to send the sign up data to the server!", Toast.LENGTH_SHORT).show();
-                error.printStackTrace();
+                });
+
+                MySingleton.getInstance(SignUpActivity.this).addToRequestQueue(json_obj);
+
+                //TODO: check if password 1 and password 2 are the same
             }
         });
 
-        MySingleton.getInstance(SignUpActivity.this).addToRequestQueue(json_obj);
 
-        //TODO: checks if password 1 and password 2 are the same
     }
 }

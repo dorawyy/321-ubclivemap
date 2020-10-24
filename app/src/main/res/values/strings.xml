@@ -12,7 +12,7 @@
     <string name="sign_up_name">"Name"</string>
     <string name="sign_up_username">"Username"</string>
     <string name="sign_up_password">"Password"</string>
-    <string name="sign_up_password2">"Re-enter Password"</string>
+    <string name="sign_up_password2">"Confirm \nPassword"</string>
     <string name="sign_up_email">"Email"</string>
     <string name="sign_up_done">"Sign Up"</string>
 

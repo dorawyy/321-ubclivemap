@@ -52,10 +52,13 @@ app.post("/usersearch", async (req, res) => {
 
 // update profile with new profile
 app.post("/userupdate", async (req, res) => {
-    const options = { upsert : true };
+    const options = { upsert : false };
     var response = await db.collection("profile-data").updateOne({"userid" : req.body.userid}, {$set: req.body}, options)
     if(response.result.ok == 1){
-        return res.json(formatResponse(true, "User profile updated successfully.", null));
+        if(response.matchedCount == 1){
+            return res.json(formatResponse(true, "User profile updated successfully.", null));
+        }
+        return res.json(formatResponse(false, "Userid does not exist", null));
     }
     return res.json(formatResponse(false, "User profile update failed.", null));
 });

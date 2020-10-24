@@ -78,3 +78,21 @@ Content-Type: application/json
     "inActivity" : false,
     "activityID" : -1
 }
+
+### update profile that doesnt exist
+POST http://localhost:4000/userupdate
+Content-Type: application/json
+
+{
+    "name" : "Jake J",
+    "userid" : "21309221",
+    "major" : "CPEN",
+    "CourseRegistered" : [
+        "ELEC201", "CPEN400"
+    ],
+    "school" : "UBC",
+    "phone" : "4442225555",
+    "private" : false,
+    "inActivity" : false,
+    "activityID" : -1
+}

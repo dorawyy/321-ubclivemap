@@ -23,6 +23,7 @@
     <string name="done_course_page">done</string>
 
     //course list for M6
+    <string name="title_activity_main_maps">Map</string>
     <string-array name="spinner">
         <item>select your courses here</item>
         <item>CPEN 211</item>

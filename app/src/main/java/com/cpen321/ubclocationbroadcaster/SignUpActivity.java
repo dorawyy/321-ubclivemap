@@ -76,7 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error){
-                Toast.makeText(SignUpActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpActivity.this, "Unable to send the sign up data to the server!", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
         });

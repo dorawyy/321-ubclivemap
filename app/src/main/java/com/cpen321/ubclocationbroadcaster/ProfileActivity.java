@@ -2,7 +2,9 @@ package com.cpen321.ubclocationbroadcaster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,12 +33,25 @@ public class ProfileActivity extends AppCompatActivity {
 
     private Spinner mySpinner;
     private ListView course_list_view;
+    private Button done_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        //done button setup
+        done_btn = findViewById(R.id.course_page_done_button);
+        done_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent doneIntent = new Intent(ProfileActivity.this, CreateActivity.class);
+                startActivity(doneIntent);
+                Log.d("done button", "done button has been clicked");
+            }
+        });
+
+        //drop down menu and view list
         mySpinner = findViewById(R.id.course_spinner);
         course_list_view = findViewById((R.id.course_list));
 
@@ -129,7 +144,7 @@ public class ProfileActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error){
-                Toast.makeText(ProfileActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this, "Unable to send the course data to the server!", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
         });
@@ -137,5 +152,5 @@ public class ProfileActivity extends AppCompatActivity {
         requestQueue.add(json_obj);
 
     }
-    
+
 }

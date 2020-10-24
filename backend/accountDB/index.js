@@ -3,17 +3,18 @@ var mongoclient = require("mongodb").MongoClient;
 var bcrypt = require("bcryptjs");
 
 var app = express();
-var url = 'mongodb://localhost:27018';
+const APP_PORT = 3000;
+const MONGO_URL = 'mongodb://localhost:27018';
 
 app.use(express.json());
 
 // init database
-mongoclient.connect(url,
+mongoclient.connect(MONGO_URL,
 {useUnifiedTopology: true},
 (err, client) => {
     if(err) return console.log("error");
     db = client.db("user-data");
-    var server = app.listen(3000, function () {
+    var server = app.listen(APP_PORT, function () {
         var port = server.address().port;
         console.log("Listening at %s", port);
     });

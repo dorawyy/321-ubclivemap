@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">UBC Location Broadcaster</string>
     <string name="title_activity_login">UBC Location Broadcaster</string>
-    <string name="prompt_email">Email</string>
+    <string name="prompt_email">Username</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -11,10 +11,27 @@
     <string name="login_failed">"Login failed"</string>
     <string name="action_sign_up">Don\'t have an account yet? Sign up here!</string>
 
-    <string name="sign_up_name">"Full Name"</string>
+    <string name="sign_up_name">"Name"</string>
     <string name="sign_up_username">"Username"</string>
     <string name="sign_up_password">"Password"</string>
+    <string name="sign_up_password2">"Re-enter Password"</string>
     <string name="sign_up_email">"Email"</string>
     <string name="sign_up_done">"Sign Up"</string>
 
+    <string name="add_course">"Add the course"</string>
+    <string name="course_list">"course list</string>
+    <string name="Course_selecting_spinner">"Select your courses"</string>
+    <string-array name="spinner">
+        <item>select your courses here</item>
+        <item>CPEN 211</item>
+        <item>CPEN 221</item>
+        <item>CPEN 281</item>
+        <item>CPEN 291</item>
+        <item>CPEN 311</item>
+        <item>CPEN 321</item>
+        <item>CPEN 331</item>
+        <item>CPEN 391</item>
+        <item>CPEN 411</item>
+        <item>CPEN 421</item>
+    </string-array>
 </resources>

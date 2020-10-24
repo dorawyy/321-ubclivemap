@@ -46,68 +46,49 @@ app.post('/users/register', async (req, res) => {
 
     // if username exists in database, fail
     findarr = [];
-    var cursor = db.collection("user-data").find({"name" : req.body.name});
-    cursor.forEach((doc,err) => {
-        findarr.push(doc);
-    }, async () => {
-        if(findarr.length != 0){
-            return res.json(formatResponse(false, "Username already exists."));
-        }
+    var response = await db.collection("user-data").findOne({"name" : req.body.name});
+    if(response != null){
+        return res.json(formatResponse(false, "User already exists."));
+    }
 
-        // enter user into database, encrypt password
-        try{
-            const salt = await bcrypt.genSalt(); 
-            const hashedPassword = await bcrypt.hash(req.body.password, salt);
-            console.log(salt);
+    // enter user into database, encrypt password
+    var salt;
+    var hashedPassword;
+    try{
+        salt = await bcrypt.genSalt(); 
+        hashedPassword = await bcrypt.hash(req.body.password, salt);
+    } catch (e) {
+        res.status(500).send("ERROR");
+    }
 
-            const user = { 
-                name : req.body.name,
-                password: hashedPassword
-            };
+    const user = { 
+        name : req.body.name,
+        password: hashedPassword
+    };
 
-            // insert 'user' into db
-            db.collection("user-data").insertOne(
-                user,
-                (err, request) => {
-                    if (err) {
-                        return res.json(formatResponse(false, "Database error."))
-                    }
-                    console.log("mongodb saved");
-                    return res.json(formatResponse(true, "User registered."))
-                }
-            );
-        } catch (e) {
-            res.status(500).send("ERROR");
-        }
-    });
-
+    // insert 'user' into db
+    var response2 = await db.collection("user-data").insertOne(user);
+    if(response2.result.ok == 1){
+        return res.json(formatResponse(true, "User registered successfully.", null));
+    }
+    return res.json(formatResponse(false, "User register failed.", null));
 });
 
 // login a user
 app.post('/users/login', async (req, res) => {
-    findarr = [];
-    var cursor = db.collection("user-data").find({"name" : req.body.name});
-
-    cursor.forEach((doc,err) => {
-        findarr.push(doc);
-    }, async () => {
-        // if username is not in database, user is not registered
-        if(findarr.length == 0){
-            return res.json(formatResponse(false, "Username does not exist."));
+    const response = await db.collection("user-data").findOne({"name" : req.body.name});
+    if(response == null){
+        return res.json(formatResponse(false, "Username does not exist."));
+    }
+    try {
+        if(await bcrypt.compare(req.body.password, response.password)) {
+            return res.json(formatResponse(true, "Authentication successful."));
+        } else {
+            return res.json(formatResponse(false, "Invalid password."));
         }
-
-        // check password (let bcrypt decrypt the password)
-        try {
-            if(await bcrypt.compare(req.body.password, findarr[0].password)) {
-                return res.json(formatResponse(true, "Authentication successful."));
-            } else {
-                return res.json(formatResponse(false, "Invalid password."));
-            }
-        } catch (e) {
-            return res.json(formatResponse(false, "I dunno"));
-        }
-    });
-
+    } catch (e) {
+        return res.json(formatResponse(false, "I dunno"));
+    }
 });
 
 

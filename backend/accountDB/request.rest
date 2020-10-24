@@ -1,0 +1,42 @@
+### check current users in database
+GET http://localhost:3000/users
+
+### store a user
+
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+    "name" : "Kyle",
+    "password" : "password"
+}
+
+### login user (wrong username)
+
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "name" : "aKyle",
+    "password" : "wrongpas"
+}
+
+### login user (wrong password)
+
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "name" : "Kyle",
+    "password" : "wrongpas"
+}
+
+### login user (success)
+
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "name" : "Kyle",
+    "password" : "password"
+}

@@ -50,14 +50,27 @@ public class MainActivity extends AppCompatActivity {
                 //TODO: GET request for credentials
                 //TODO: use mySkeleton if it works for volley request
                 //TODO: insert the server url
-                String URL = "http://";
-                JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, null,
+                String URL = "http://10.0.2.2:3000/users/login";
+                String usrname = username.getText().toString();
+                String passwrd = password.getText().toString();
+
+                //format request
+                JSONObject jsnRequest = new JSONObject();
+                try {
+                    jsnRequest.put("name", usrname);
+                    jsnRequest.put("password", passwrd);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnRequest,
                         new Response.Listener<JSONObject> (){
                             @Override
                             public void onResponse(JSONObject response){
                                 try {
-                                    username.setText(response.getString("Username"));
-                                    password.setText(response.getString("Password"));
+                                    boolean successVal = (boolean) response.get("success"); // check if user signed in successfully
+                                    String stat = response.get("status").toString(); // get status
+                                    Log.d("SignInActivity", stat);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

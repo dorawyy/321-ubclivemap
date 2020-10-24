@@ -35,6 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText email;
     private Button sign_up_btn;
     private ImageView profile_pic;
+    final String URL = "http://10.0.2.2:3000/users/register";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,17 +57,25 @@ public class SignUpActivity extends AppCompatActivity {
                 startActivity(signUpIntent);
                 Log.d("sign up button", "sign up button has been clicked");
 
-                //TODO: insert the server url
-                String URL = "http://";
-                JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, null,
+                // format request
+                String inputUsername = username.getText().toString();
+                String inputPassword = password.getText().toString();
+                JSONObject jsnReq = new JSONObject();
+                try {
+                    jsnReq.put("name", inputUsername);
+                    jsnReq.put("password", inputPassword);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnReq,
                         new Response.Listener<JSONObject> (){
                             @Override
                             public void onResponse(JSONObject response){
                                 try {
-                                    name.setText(response.getString("Name"));
-                                    username.setText(response.getString("Username"));
-                                    password.setText(response.getString("Password"));
-                                    email.setText(response.getString("email"));
+                                    boolean successVal = (boolean) response.get("success");
+                                    String stat = response.get("status").toString();
+                                    Log.d("SignUpActivity", stat);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

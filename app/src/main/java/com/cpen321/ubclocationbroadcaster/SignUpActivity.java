@@ -82,6 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
                 MySingleton.getInstance(SignUpActivity.this).addToRequestQueue(json_obj);
 
                 //TODO: check if password 1 and password 2 are the same
+                //TODO: if boxes are empty, don't go to the next page
             }
         });
 

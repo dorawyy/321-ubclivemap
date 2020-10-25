@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">UBC Location Broadcaster</string>
+    <string name="app_name">Activity Locator</string>
 
     //buttons for sign in page
-    <string name="title_activity_login">UBC Location Broadcaster</string>
+    <string name="title_activity_login">Activity Locator</string>
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="sign_in">Sign in</string>
@@ -37,4 +37,11 @@
         <item>CPEN 411</item>
         <item>CPEN 421</item>
     </string-array>
+
+    //buttons for main menu
+    <string name="view_map_btn">View Map</string>
+    <string name="activity_list_btn">List Activities</string>
+    <string name="my_activity_btn">My Activity</string>
+    <string name="sign_out_btn">Sign Out</string>
+
 </resources>

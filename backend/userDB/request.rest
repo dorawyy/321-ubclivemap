@@ -1,0 +1,98 @@
+### check current users in database
+GET http://localhost:4000/allprofiles
+
+### insert user
+POST http://localhost:4000/userprofile
+Content-Type: application/json
+
+{
+    "name" : "Kyle",
+    "userid" : "12",
+    "major" : "CPEN",
+    "CourseRegistered" : [
+        "CPEN331", "CPEN321"
+    ],
+    "school" : "UBC",
+    "phone" : "4444444444",
+    "private" : false,
+    "inActivity" : false,
+    "activityID" : -1
+}
+
+### insert other user 
+POST http://localhost:4000/userprofile
+Content-Type: application/json
+
+{
+    "name" : "Jake",
+    "userid" : "2",
+    "major" : "CPEN",
+    "CourseRegistered" : [
+        "ELEC201", "CPEN311"
+    ],
+    "school" : "UBC",
+    "phone" : "4444445555",
+    "private" : false,
+    "inActivity" : false,
+    "activityID" : -1
+}
+
+### search user by id
+POST http://localhost:4000/usersearch
+Content-Type: application/json
+
+{
+    "userid" : "1"
+}
+
+### search user by id
+POST http://localhost:4000/usersearch
+Content-Type: application/json
+
+{
+    "userid" : "2"
+}
+
+### search user by id (doesnt exist)
+POST http://localhost:4000/usersearch
+Content-Type: application/json
+
+{
+    "userid" : "3"
+}
+
+### update profile with new profile 
+POST http://localhost:4000/userupdate
+Content-Type: application/json
+
+{
+    "name" : "Jake J",
+    "userid" : "2",
+    "major" : "CPEN",
+    "CourseRegistered" : [
+        "ELEC201", "CPEN400"
+    ],
+    "school" : "UBC",
+    "phone" : "4442225555",
+    "private" : false,
+    "inActivity" : false,
+    "activityID" : -1
+}
+
+### update profile that doesnt exist
+POST http://localhost:4000/userupdate
+Content-Type: application/json
+
+{
+    "name" : "Jake J",
+    "userid" : "21309221",
+    "major" : "CPEN",
+    "CourseRegistered" : [
+        "ELEC201", "CPEN400"
+    ],
+    "school" : "UBC",
+    "phone" : "4442225555",
+    "private" : false,
+    "inActivity" : false,
+    "activityID" : -1
+}

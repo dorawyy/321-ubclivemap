@@ -1,0 +1,54 @@
+### check current activities
+GET http://localhost:5000/allactivities
+
+### insert activity
+POST http://localhost:5000/addactivity
+Content-Type: application/json
+
+{
+    "aid" : "1",
+    "name" : "Cpen321 Project",
+    "users" : ["1","3"],
+    "info" : "Understanding Javascript with TA",
+    "major" : "CPEN",
+    "Course" : "CPEN321",
+    "school" : "UBC"
+}
+### insert activity
+POST http://localhost:5000/addactivity
+Content-Type: application/json
+
+{
+    "aid" : "2",
+    "name" : "Cpen331 Assignment",
+    "users" : ["2","5"],
+    "info" : "Doing Lab 5",
+    "major" : "CPSC",
+    "Course" : "CPEN331",
+    "school" : "UBC"
+}
+
+
+### search activity
+POST http://localhost:5000/activitysearch
+Content-Type: application/json
+
+{
+    "aid" : "1"
+}
+
+
+### update users
+POST http://localhost:5000/updateUsers
+Content-Type: application/json
+
+{
+    "aid" : "1",
+    "name" : "Cpen321 Project",
+    "users" : ["1"],
+    "info" : "Understanding Javascript with TA",
+    "major" : "CPEN",
+    "Course" : "CPEN321",
+    "school" : "UBC"
+}
+

@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("sign in button", "sign in button has been clicked");
                 //TODO: use mySkeleton if it works for volley request
                 //TODO: insert the server url
-                String URL = "http://10.0.2.2:3000/users/login";
+                String URL = "http://10.0.0.145:3000/users/login";
                 String usrname = username.getText().toString();
                 String passwrd = password.getText().toString();
 
@@ -60,6 +61,39 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+             /*   final TextView mTextViewResult;
+                final RequestQueue mQueue;
+
+                mQueue = Volley.newRequestQueue(MainActivity.this);
+               // mTextViewResult = (TextView)findViewById(R.id.timeActivity);
+
+                //Log.d("time button", "Button 2 has been clicked");
+                //String url = "http://10.0.2.2:3000/time";
+                JsonObjectRequest strRequest = new JsonObjectRequest(Request.Method.POST, URL, jsnRequest,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Intent sign_in_Intent = new Intent(MainActivity.this, ProfileActivity.class);
+                                startActivity(sign_in_Intent);
+                                try {
+                                    boolean successVal = (boolean) response.get("success"); // check if user signed in successfully
+                                    String stat = response.get("status").toString(); // get status
+                                    Log.d("SignInActivity", stat);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MainActivity.this, "Unable to send the sign in data to the server!", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+
+                });
+
+                mQueue.add(strRequest);*/
 
                 JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnRequest,
                         new Response.Listener<JSONObject> (){
@@ -83,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                requestQueue.add(json_obj);
+                MySingleton.getInstance(MainActivity.this).addToRequestQueue(json_obj);
             }
         });
 

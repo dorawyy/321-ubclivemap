@@ -28,7 +28,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
     private Button sign_up_btn;
-    final String URL = "http://10.0.2.2:3000/users/register";
+    final String URL = "http://10.0.0.145:3000/users/register";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,6 @@ public class SignUpActivity extends AppCompatActivity {
                 // format request
                 String inputUsername = username.getText().toString();
                 String inputPassword = password.getText().toString();
-
 
                 JSONObject jsnReq = new JSONObject();
                 try {

@@ -76,34 +76,44 @@ public class ProfileActivity extends AppCompatActivity {
                     case 0:
                         break;
                     case 1:
-                        course_list.add(result);
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
                         break;
                     case 2:
-                        course_list.add(result);
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
                         break;
                     case 3:
-                        course_list.add(result);
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
                         break;
                     case 4:
-                        course_list.add(result);
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
                         break;
                     case 5:
-                        course_list.add(result);
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
                         break;
                     case 6:
-                        course_list.add(result);
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
                         break;
                     case 7:
-                        course_list.add(result);
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
                         break;
                     case 8:
-                        course_list.add(result);
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
                         break;
                     case 9:
-                        course_list.add(result);
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
                         break;
                     case 10:
-                        course_list.add(result);
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
                         break;
                 }
                 course_list_adapter.notifyDataSetChanged();

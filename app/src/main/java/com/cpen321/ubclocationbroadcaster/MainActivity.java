@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject> (){
                             @Override
                             public void onResponse(JSONObject response){
-                                Intent sign_in_Intent = new Intent(MainActivity.this, ProfileActivity.class);
+                                Intent sign_in_Intent = new Intent(MainActivity.this, MenuActivity.class);
                                 startActivity(sign_in_Intent);
                                 try {
                                     boolean successVal = (boolean) response.get("success"); // check if user signed in successfully

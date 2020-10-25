@@ -24,13 +24,9 @@ import org.json.JSONObject;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private EditText name;
+
     private EditText username;
     private EditText password;
-    private EditText phone_number;
-    private EditText email;
-    private EditText school;
-    private EditText major;
     private Button sign_up_btn;
     final String URL = "http://10.0.2.2:3000/users/register";
 
@@ -39,13 +35,9 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        name = findViewById((R.id.sign_up_name_button));
+
         username = findViewById(R.id.sign_up_username_button);
         password = findViewById(R.id.sign_up_password_button);
-        phone_number = findViewById(R.id.phone_number_button);
-        email = findViewById(R.id.sign_up_email_button);
-        school = findViewById(R.id.school_button);
-        major = findViewById(R.id.major_button);
         sign_up_btn = findViewById(R.id.sign_up_button);
 
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
@@ -58,21 +50,12 @@ public class SignUpActivity extends AppCompatActivity {
                 // format request
                 String inputUsername = username.getText().toString();
                 String inputPassword = password.getText().toString();
-                String inputName = name.getText().toString();
-                String inputPhone = phone_number.getText().toString();
-                String inputEmail = email.getText().toString();
-                String inputSchool = school.getText().toString();
-                String inputMajor = major.getText().toString();
+
 
                 JSONObject jsnReq = new JSONObject();
                 try {
                     jsnReq.put("name", inputUsername);
                     jsnReq.put("password", inputPassword);
-                    jsnReq.put("username", inputName);
-                    jsnReq.put("email", inputEmail);
-                    jsnReq.put("phone number", inputPhone);
-                    jsnReq.put("school", inputSchool);
-                    jsnReq.put("major", inputMajor);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -102,7 +85,6 @@ public class SignUpActivity extends AppCompatActivity {
 
                 MySingleton.getInstance(SignUpActivity.this).addToRequestQueue(json_obj);
 
-                //TODO: check if password 1 and password 2 are the same
                 //TODO: if boxes are empty, don't go to the next page
             }
         });

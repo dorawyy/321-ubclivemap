@@ -60,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                String result = mySpinner.getOnItemSelectedListener().toString();
+                String result = mySpinner.getSelectedItem().toString();
                 //for M6 we only have 10 cpen courses
                 switch (position){
                     case 0:
@@ -107,9 +107,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        Gson g = new Gson();
-        String course_list_j = g.toJson(course_list);
-
         //done button setup
         done_btn = findViewById(R.id.course_page_done_button);
         done_btn.setOnClickListener(new View.OnClickListener() {
@@ -121,15 +118,27 @@ public class ProfileActivity extends AppCompatActivity {
 
         //TODO:url here
         String URL = "http://";
+        String course1 = course_list.get(0).toString();
+        String course2 = course_list.get(1).toString();
+        String course3 = course_list.get(2).toString();
+        String course4 = course_list.get(3).toString();
+        String course5 = course_list.get(4).toString();
 
+        JSONArray jsnReq = new JSONArray();
+        jsnReq.put(course1);
+        jsnReq.put(course2);
+        jsnReq.put(course3);
+        jsnReq.put(course4);;
+        jsnReq.put(course5);
 
-        JsonArrayRequest json_obj = new JsonArrayRequest(Request.Method.POST, URL, null,
+        JsonArrayRequest json_obj = new JsonArrayRequest(Request.Method.POST, URL, jsnReq,
                 new Response.Listener<JSONArray> (){
                     @Override
                     public void onResponse(JSONArray response){
                         for (int i = 0; i < response.length(); i++){
                         try {
                             JSONObject jsonObj = response.getJSONObject(i);
+
                             //for M6 it only sends 5 courses to the DB
                             String course1 = jsonObj.getString("Course 1");
                             String course2 = jsonObj.getString("Course 2");

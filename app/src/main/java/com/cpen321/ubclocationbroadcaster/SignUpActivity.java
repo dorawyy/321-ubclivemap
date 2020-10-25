@@ -2,7 +2,6 @@ package com.cpen321.ubclocationbroadcaster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,12 +12,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,10 +27,11 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText name;
     private EditText username;
     private EditText password;
-    private EditText re_enter_password;
+    private EditText phone_number;
     private EditText email;
+    private EditText school;
+    private EditText major;
     private Button sign_up_btn;
-    private ImageView profile_pic;
     final String URL = "http://10.0.2.2:3000/users/register";
 
     @Override
@@ -42,12 +39,13 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        profile_pic = findViewById(R.id.sign_up_image_view);
         name = findViewById((R.id.sign_up_name_button));
         username = findViewById(R.id.sign_up_username_button);
         password = findViewById(R.id.sign_up_password_button);
-        re_enter_password = findViewById(R.id.sign_up_password_button2);
+        phone_number = findViewById(R.id.phone_number_button);
         email = findViewById(R.id.sign_up_email_button);
+        school = findViewById(R.id.school_button);
+        major = findViewById(R.id.major_button);
         sign_up_btn = findViewById(R.id.sign_up_button);
 
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
@@ -60,10 +58,22 @@ public class SignUpActivity extends AppCompatActivity {
                 // format request
                 String inputUsername = username.getText().toString();
                 String inputPassword = password.getText().toString();
+                String inputName = name.getText().toString();
+                String inputPhone = phone_number.getText().toString();
+                String inputEmail = email.getText().toString();
+                String inputSchool = school.getText().toString();
+                String inputMajor = major.getText().toString();
+
                 JSONObject jsnReq = new JSONObject();
                 try {
                     jsnReq.put("name", inputUsername);
                     jsnReq.put("password", inputPassword);
+                    jsnReq.put("username", inputName);
+                    jsnReq.put("email", inputEmail);
+                    jsnReq.put("phone number", inputPhone);
+                    jsnReq.put("school", inputSchool);
+                    jsnReq.put("major", inputMajor);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -72,6 +82,8 @@ public class SignUpActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject> (){
                             @Override
                             public void onResponse(JSONObject response){
+                                //Intent signUpIntent = new Intent(SignUpActivity.this, ProfileActivity.class);
+                                //startActivity(signUpIntent);
                                 try {
                                     boolean successVal = (boolean) response.get("success");
                                     String stat = response.get("status").toString();
@@ -91,6 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
                 MySingleton.getInstance(SignUpActivity.this).addToRequestQueue(json_obj);
 
                 //TODO: check if password 1 and password 2 are the same
+                //TODO: if boxes are empty, don't go to the next page
             }
         });
 

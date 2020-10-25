@@ -43,11 +43,9 @@ public class MainActivity extends AppCompatActivity {
         sign_in_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent sign_in_Intent = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivity(sign_in_Intent);
+                //Intent sign_in_Intent = new Intent(MainActivity.this, ProfileActivity.class);
+                //startActivity(sign_in_Intent);
                 Log.d("sign in button", "sign in button has been clicked");
-                //TODO: if the credentials are incorrect, don't go to the next page
-                //TODO: GET request for credentials
                 //TODO: use mySkeleton if it works for volley request
                 //TODO: insert the server url
                 String URL = "http://10.0.2.2:3000/users/login";
@@ -67,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject> (){
                             @Override
                             public void onResponse(JSONObject response){
+                                Intent sign_in_Intent = new Intent(MainActivity.this, ProfileActivity.class);
+                                startActivity(sign_in_Intent);
                                 try {
                                     boolean successVal = (boolean) response.get("success"); // check if user signed in successfully
                                     String stat = response.get("status").toString(); // get status

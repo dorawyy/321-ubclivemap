@@ -85,7 +85,6 @@ public class ProfileActivity extends AppCompatActivity {
                         course_list.add(result);
                         break;
                     case 4:
-                        course_list.add(result);
                         break;
                     case 5:
                         course_list.add(result);
@@ -126,6 +125,7 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(doneIntent);
                 Log.d("done button", "done button has been clicked");
 
+        //String URL = "http://10.0.2.2:4000/userprofile";
         String URL = "http://10.0.2.2:4000/userprofile";
 
         String course1 = course_list.get(0).toString();

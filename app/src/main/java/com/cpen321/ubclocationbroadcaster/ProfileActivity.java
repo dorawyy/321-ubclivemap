@@ -122,7 +122,7 @@ public class ProfileActivity extends AppCompatActivity {
         done_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent doneIntent = new Intent(ProfileActivity.this, CreateActivity.class);
+                Intent doneIntent = new Intent(ProfileActivity.this, MenuActivity.class);
                 startActivity(doneIntent);
                 Log.d("done button", "done button has been clicked");
 

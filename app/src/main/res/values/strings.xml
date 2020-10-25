@@ -9,13 +9,13 @@
     <string name="sign_up">Don\'t have an account yet? Sign up here!</string>
 
     //buttons for sign up page
-    <string name="sign_up_name">"Name"</string>
-    <string name="sign_up_username">"Username"</string>
-    <string name="sign_up_password">"Password"</string>
-    <string name="sign_up_phone_number">"Phone number"</string>
-    <string name="sign_up_school">"School"</string>
-    <string name="sign_up_major">"Major"</string>
-    <string name="sign_up_done">"Sign Up"</string>
+    <string name="sign_up_name">Name</string>
+    <string name="sign_up_username">Username</string>
+    <string name="sign_up_password">Password</string>
+    <string name="sign_up_phone_number">Phone Number</string>
+    <string name="sign_up_email">Email</string>
+    <string name="sign_up_major">Major</string>
+    <string name="sign_up_done">Sign Up</string>
 
     //buttons for course selection page
     <string name="add_course">"Add the course"</string>
@@ -25,12 +25,14 @@
 
     //course list for M6
     <string name="title_activity_main_maps">Map</string>
-    <string name="view_map_btn">View Map</string>
 
     //buttons for main menu
+    <string name="view_map_btn">View Map</string>
     <string name="activity_list_btn">List Activities</string>
     <string name="my_activity_btn">My Activity</string>
+    <string name="edit_profile_btn">Edit Profile</string>
     <string name="sign_out_btn">Sign Out</string>
+
     <string name="title_activity_list_scrolling">ScrollingActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"

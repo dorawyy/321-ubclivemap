@@ -12,6 +12,7 @@ public class MenuActivity extends AppCompatActivity {
     private Button viewMapButton;
     private Button listActivitesButton;
     private Button myActivityButton;
+    private Button editProfileButton;
     private Button signOutButton;
 
     @Override
@@ -43,6 +44,15 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent activityIntent = new Intent(MenuActivity.this, ActivityStuffMenu.class);
                 startActivity(activityIntent);
+            }
+        });
+
+        editProfileButton = findViewById(R.id.edit_profile_btn);
+        editProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent editProfileIntent = new Intent(MenuActivity.this, ProfileActivity.class);
+                startActivity(editProfileIntent);
             }
         });
 

@@ -27,25 +27,25 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(mapIntent);
             }
         });
-        /*
+
         listActivitesButton = findViewById(R.id.list_activites_btn);
         listActivitesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent activitesIntent = new Intent(MenuActivity.this, MainMapsActivity.class);
+                Intent activitesIntent = new Intent(MenuActivity.this, ListScrollingActivity.class);
                 startActivity(activitesIntent);
             }
         });
 
-        viewMapButton = findViewById(R.id.view_map_btn);
-        viewMapButton.setOnClickListener(new View.OnClickListener() {
+        myActivityButton = findViewById(R.id.my_activity_btn);
+        myActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mapIntent = new Intent(MenuActivity.this, MainMapsActivity.class);
-                startActivity(mapIntent);
+                Intent activityIntent = new Intent(MenuActivity.this, ActivityStuffMenu.class);
+                startActivity(activityIntent);
             }
         });
-        */
+
         signOutButton = findViewById(R.id.sign_out_btn);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override

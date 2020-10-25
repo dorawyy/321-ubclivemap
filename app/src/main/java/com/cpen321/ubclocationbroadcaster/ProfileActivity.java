@@ -85,6 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
                         course_list.add(result);
                         break;
                     case 4:
+                        course_list.add(result);
                         break;
                     case 5:
                         course_list.add(result);

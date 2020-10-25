@@ -62,39 +62,6 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-             /*   final TextView mTextViewResult;
-                final RequestQueue mQueue;
-
-                mQueue = Volley.newRequestQueue(MainActivity.this);
-               // mTextViewResult = (TextView)findViewById(R.id.timeActivity);
-
-                //Log.d("time button", "Button 2 has been clicked");
-                //String url = "http://10.0.2.2:3000/time";
-                JsonObjectRequest strRequest = new JsonObjectRequest(Request.Method.POST, URL, jsnRequest,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                Intent sign_in_Intent = new Intent(MainActivity.this, ProfileActivity.class);
-                                startActivity(sign_in_Intent);
-                                try {
-                                    boolean successVal = (boolean) response.get("success"); // check if user signed in successfully
-                                    String stat = response.get("status").toString(); // get status
-                                    Log.d("SignInActivity", stat);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this, "Unable to send the sign in data to the server!", Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
-                    }
-
-                });
-
-                mQueue.add(strRequest);*/
-
                 JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnRequest,
                         new Response.Listener<JSONObject> (){
                             @Override

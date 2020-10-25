@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -33,14 +34,23 @@ public class ProfileActivity extends AppCompatActivity {
 
     private Spinner mySpinner;
     private ListView course_list_view;
+    private EditText name;
+    private EditText phone_number;
+    private EditText school;
+    private EditText major;
     private Button done_btn;
-    //TODO: the user can't choose one course twice
+
     //TODO: don't go to the next page if data is invalid
     //TODO: use mySkeleton if it works
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        name = findViewById((R.id.sign_up_name_button));
+        phone_number = findViewById(R.id.phone_number_button);
+        school = findViewById(R.id.school_button);
+        major = findViewById(R.id.major_button);
 
         //drop down menu and view list
         mySpinner = findViewById(R.id.course_spinner);
@@ -116,48 +126,67 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(doneIntent);
                 Log.d("done button", "done button has been clicked");
 
-        //TODO:url here
-        String URL = "http://";
+        String URL = "http://10.0.2.2:4000/userprofile";
+
         String course1 = course_list.get(0).toString();
         String course2 = course_list.get(1).toString();
         String course3 = course_list.get(2).toString();
         String course4 = course_list.get(3).toString();
         String course5 = course_list.get(4).toString();
 
+        final String inputName = name.getText().toString();
+        final String inputPhone = phone_number.getText().toString();
+        final String inputSchool = school.getText().toString();
+        final String inputMajor = major.getText().toString();
+        final int userID = 198;
+        final boolean inputPrivate = false;
+        final boolean inputInActivity = false;
+        final int inputActivityID = -1;
+
         JSONArray jsnReq = new JSONArray();
         jsnReq.put(course1);
         jsnReq.put(course2);
         jsnReq.put(course3);
-        jsnReq.put(course4);;
+        jsnReq.put(course4);
         jsnReq.put(course5);
 
-        JsonArrayRequest json_obj = new JsonArrayRequest(Request.Method.POST, URL, jsnReq,
-                new Response.Listener<JSONArray> (){
+        JSONObject POSTjsnReq = new JSONObject();
+        try {
+            POSTjsnReq.put("name", inputName);
+            POSTjsnReq.put("phone", inputPhone);
+            POSTjsnReq.put("school", inputSchool);
+            POSTjsnReq.put("major", inputMajor);
+            POSTjsnReq.put("CourseRegistered",jsnReq);
+            POSTjsnReq.put("private", inputPrivate);
+            POSTjsnReq.put("userid", userID);
+            POSTjsnReq.put("inActivity", inputInActivity);
+            POSTjsnReq.put("activityID", inputActivityID);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+                JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, POSTjsnReq,
+                        new Response.Listener<JSONObject> (){
+                            @Override
+                            public void onResponse(JSONObject response){
+                                //Intent signUpIntent = new Intent(SignUpActivity.this, ProfileActivity.class);
+                                //startActivity(signUpIntent);
+                                try {
+                                    boolean successVal = (boolean) response.get("success");
+                                    String stat = response.get("status").toString();
+                                    Log.d("SignUpActivity", stat);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
                     @Override
-                    public void onResponse(JSONArray response){
-                        for (int i = 0; i < response.length(); i++){
-                        try {
-                            JSONObject jsonObj = response.getJSONObject(i);
-
-                            //for M6 it only sends 5 courses to the DB
-                            String course1 = jsonObj.getString("Course 1");
-                            String course2 = jsonObj.getString("Course 2");
-                            String course3 = jsonObj.getString("Course 3");
-                            String course4 = jsonObj.getString("Course 4");
-                            String course5 = jsonObj.getString("Course 5");
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        }
+                    public void onErrorResponse(VolleyError error){
+                        Toast.makeText(ProfileActivity.this, "Unable to send the user info to the server!", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error){
-                Toast.makeText(ProfileActivity.this, "Unable to send the course data to the server!", Toast.LENGTH_SHORT).show();
-                error.printStackTrace();
-            }
-        });
+                });
 
         requestQueue.add(json_obj);
             }

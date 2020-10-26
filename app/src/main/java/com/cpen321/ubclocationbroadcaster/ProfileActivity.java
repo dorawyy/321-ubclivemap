@@ -136,7 +136,6 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(doneIntent);
                 Log.d("done button", "done button has been clicked");
 
-        //String URL = "http://10.0.2.2:4000/userprofile";
         String URL = "http://10.0.2.2:4000/userprofile";
 
         String course1 = course_list.get(0).toString();
@@ -153,6 +152,14 @@ public class ProfileActivity extends AppCompatActivity {
         final boolean inputPrivate = false;
         final boolean inputInActivity = false;
         final int inputActivityID = -1;
+
+        doneIntent.putExtra("SCHOOL", inputSchool);
+        doneIntent.putExtra("MAJOR", inputMajor);
+        doneIntent.putExtra("COURSE1", course1);
+        doneIntent.putExtra("COURSE2", course2);
+        doneIntent.putExtra("COURSE3", course3);
+        doneIntent.putExtra("COURSE4", course4);
+        doneIntent.putExtra("COURSE5", course5);
 
         JSONArray jsnReq = new JSONArray();
         jsnReq.put(course1);

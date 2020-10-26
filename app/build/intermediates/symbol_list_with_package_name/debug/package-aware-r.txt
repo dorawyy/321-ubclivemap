@@ -2252,7 +2252,9 @@ string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string action_settings
 string activity_list_btn
+string activity_name
 string add_course
+string aid
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
@@ -2279,7 +2281,9 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string course
 string course_list
+string create_activity
 string default_web_client_id
 string done
 string done_course_page
@@ -2299,6 +2303,7 @@ string google_maps_key
 string google_storage_bucket
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
+string info
 string item_view_role_description
 string large_text
 string material_slider_range_end
@@ -2352,11 +2357,11 @@ string sign_in
 string sign_out_btn
 string sign_up
 string sign_up_done
-string sign_up_email
 string sign_up_major
 string sign_up_name
 string sign_up_password
 string sign_up_phone_number
+string sign_up_school
 string sign_up_username
 string status_bar_notification_info_overflow
 string title_activity_list_scrolling

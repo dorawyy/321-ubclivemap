@@ -28,6 +28,8 @@ public class CreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create);
 
         EditText name;
+
+      /*  EditText name;
         EditText aid;
         EditText info;
         EditText lat;
@@ -50,6 +52,23 @@ public class CreateActivity extends AppCompatActivity {
         final String inputLat = lat.getText().toString();
         final String inputLong = lon.getText().toString();
 
+        EditText lon;*/
+        Button done_btn;
+
+        //name = findViewById(R.id.activity_name);
+        /*EditText aid  = findViewById(R.id.activity_id);
+        EditText info = findViewById(R.id.activity_desc);
+        EditText course = findViewById(R.id.activity_course);
+        EditText lat = findViewById(R.id.activity_lat);
+        EditText lon = findViewById(R.id.activity_long);*/
+        done_btn = findViewById(R.id.activity_done);
+       // final String inputName = name.getText().toString();
+       /* final String inputaid = aid.getText().toString();
+        final String inputcourse = course.getText().toString();
+        final String inputInfo = info.getText().toString();
+        final String inputLat = lat.getText().toString();
+        final String inputLong = lon.getText().toString();*/
+/*
         Intent intent = getIntent();
         final String username = intent.getStringExtra("USERNAME");
         final String inputSchool = intent.getStringExtra("SCHOOL");
@@ -60,19 +79,52 @@ public class CreateActivity extends AppCompatActivity {
         final String course4 = intent.getStringExtra("COURSE4");
         final String course5 = intent.getStringExtra("COURSE5");
 
+*/
+
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         done_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent createActivityIntent = new Intent(CreateActivity.this, MenuActivity.class);
                 startActivity(createActivityIntent);
                 Log.d("sign in button", "sign in button has been clicked");
+
+                Intent intent = new Intent(CreateActivity.this, MenuActivity.class);
+                startActivity(intent);
+                Log.d("done button", "done button has been clicked");
+
 
                 String URL = "http://10.0.2.2:5000/addactivity";
 
                 //format request
                 JSONObject jsnRequest = new JSONObject();
+
+                EditText name = findViewById(R.id.activity_name);
+                EditText aid  = findViewById(R.id.activity_id);
+                EditText info = findViewById(R.id.activity_desc);
+                EditText course = findViewById(R.id.activity_course);
+                EditText lat = findViewById(R.id.activity_lat);
+                EditText lon = findViewById(R.id.activity_long);
+
+                String inputaid = aid.getText().toString();
+                String inputcourse = course.getText().toString();
+                String inputInfo = info.getText().toString();
+                String inputLat = lat.getText().toString();
+                String inputLong = lon.getText().toString();
+                String inputName = name.getText().toString();
+
+               // Intent intent = getIntent();
+                String username = getIntent().getStringExtra("USERNAME");
+                String inputSchool = getIntent().getStringExtra("SCHOOL");
+                String inputMajor = getIntent().getStringExtra("MAJOR");
+                String course1 = getIntent().getStringExtra("COURSE1");
+                String course2 = getIntent().getStringExtra("COURSE2");
+                String course3 = getIntent().getStringExtra("COURSE3");
+                String course4 = getIntent().getStringExtra("COURSE4");
+                String course5 = getIntent().getStringExtra("COURSE5");
+
                 try {
                     jsnRequest.put("name", inputName);
                     jsnRequest.put("aid", inputaid);
@@ -81,8 +133,11 @@ public class CreateActivity extends AppCompatActivity {
                     jsnRequest.put("school", inputSchool);
                     jsnRequest.put("major", inputMajor);
                     jsnRequest.put("info", inputInfo);
+
                     jsnRequest.put("lat", inputLat);
-                     jsnRequest.put("long", inputLong);
+                    jsnRequest.put("long", inputLong);
+                    jsnRequest.put("lat", inputLat);
+                    jsnRequest.put("long", inputLong);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

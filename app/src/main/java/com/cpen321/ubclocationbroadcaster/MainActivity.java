@@ -21,8 +21,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+//import com.google.firebase.iid.FirebaseInstanceId;
+//import com.google.firebase.iid.InstanceIdResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+/*
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("MainActivity", msg);
                     }
                 });
-
+*/
         username = findViewById(R.id.username_button);
         password = findViewById(R.id.password_button);
         sign_in_btn = findViewById(R.id.sign_in_button);
@@ -66,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 //Intent sign_in_Intent = new Intent(MainActivity.this, ProfileActivity.class);
                 //startActivity(sign_in_Intent);
                 Log.d("sign in button", "sign in button has been clicked");
-                //TODO: use mySkeleton if it works for volley request
-                //TODO: insert the server url
+
                 String URL = "http://10.0.2.2:3000/users/login";
                 final String usrname = username.getText().toString();
                 String passwrd = password.getText().toString();
@@ -90,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
                                     String stat = response.get("status").toString(); // get status
                                     if(successVal) {
                                         Intent sign_in_Intent = new Intent(MainActivity.this, MenuActivity.class);
-                                        startActivity(sign_in_Intent);
                                         sign_in_Intent.putExtra("USERNAME", usrname);
+                                        startActivity(sign_in_Intent);
                                     } else {
                                         Toast.makeText(MainActivity.this, "ERROR: " + stat, Toast.LENGTH_SHORT).show();
                                     }

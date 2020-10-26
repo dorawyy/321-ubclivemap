@@ -13,7 +13,7 @@
     <string name="sign_up_username">Username</string>
     <string name="sign_up_password">Password</string>
     <string name="sign_up_phone_number">Phone Number</string>
-    <string name="sign_up_email">Email</string>
+    <string name="sign_up_school">school</string>
     <string name="sign_up_major">Major</string>
     <string name="sign_up_done">Sign Up</string>
 
@@ -23,7 +23,13 @@
     <string name="Course_selecting_spinner">"Select your courses"</string>
     <string name="done_course_page">done</string>
 
-    //course list for M6
+    <string name="create_activity">Create Activity</string>
+    <string name="aid">Activity ID</string>
+    <string name="activity_name">Activity name</string>
+    <string name="info">Description</string>
+    <string name="course">course</string>
+    <string name="done">Done</string>
+
     <string name="title_activity_main_maps">Map</string>
 
     //buttons for main menu
@@ -32,7 +38,6 @@
     <string name="my_activity_btn">My Activity</string>
     <string name="edit_profile_btn">Edit Profile</string>
     <string name="sign_out_btn">Sign Out</string>
-    <string name="done">Done</string>
 
     <string name="title_activity_list_scrolling">ScrollingActivity</string>
     <string name="large_text">

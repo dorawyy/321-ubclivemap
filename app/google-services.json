@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "879453907745",
+    "firebase_url": "https://cpen321project.firebaseio.com",
+    "project_id": "cpen321project",
+    "storage_bucket": "cpen321project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879453907745:android:9213e4271e60894226ec60",
+        "android_client_info": {
+          "package_name": "com.cpen321.ubclocationbroadcaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879453907745-j3nbch33tid5ottvv10dev7o2r6ajs2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBe7SkYTh5h0D3yQEesKkWe5K_-9PAZOSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "879453907745-j3nbch33tid5ottvv10dev7o2r6ajs2e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

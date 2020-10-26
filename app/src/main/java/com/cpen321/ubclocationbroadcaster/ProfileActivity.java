@@ -136,13 +136,8 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(doneIntent);
                 Log.d("done button", "done button has been clicked");
 
-        String URL = "http://10.0.2.2:4000/userprofile";
+        String URL = "http://40.122.147.73:4000/userprofile";
 
-        String course1 = course_list.get(0).toString();
-        String course2 = course_list.get(1).toString();
-        String course3 = course_list.get(2).toString();
-        String course4 = course_list.get(3).toString();
-        String course5 = course_list.get(4).toString();
 
         final String inputName = name.getText().toString();
         final String inputPhone = phone_number.getText().toString();
@@ -155,18 +150,16 @@ public class ProfileActivity extends AppCompatActivity {
 
         doneIntent.putExtra("SCHOOL", inputSchool);
         doneIntent.putExtra("MAJOR", inputMajor);
-        doneIntent.putExtra("COURSE1", course1);
-        doneIntent.putExtra("COURSE2", course2);
-        doneIntent.putExtra("COURSE3", course3);
-        doneIntent.putExtra("COURSE4", course4);
-        doneIntent.putExtra("COURSE5", course5);
+        //doneIntent.putExtra("COURSE1", course1);
+        //doneIntent.putExtra("COURSE2", course2);
+        //doneIntent.putExtra("COURSE3", course3);
+        //doneIntent.putExtra("COURSE4", course4);
+        //doneIntent.putExtra("COURSE5", course5);
 
         JSONArray jsnReq = new JSONArray();
-        jsnReq.put(course1);
-        jsnReq.put(course2);
-        jsnReq.put(course3);
-        jsnReq.put(course4);
-        jsnReq.put(course5);
+        for(String course : course_list){
+            jsnReq.put(course);
+        }
 
         JSONObject POSTjsnReq = new JSONObject();
         try {

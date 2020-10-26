@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-#Mon Oct 26 06:20:33 PDT 2020
-base.0=C\:\\Users\\jaski\\Desktop\\ubc\\cpen321\\CPEN-321-Location-App\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-=======
-#Mon Oct 26 06:15:09 PDT 2020
-base.0=C\:\\Users\\kimib\\AndroidStudioProjects\\UBCLocationBroadcaster2\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
->>>>>>> c6ff41b10f72e2278574351c6d90a792aa2a7982
+#Mon Oct 26 07:00:49 PDT 2020
+base.0=C\:\\Users\\solom\\Documents\\CPEN32\\CPEN-321-Location-App\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

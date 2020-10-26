@@ -1,5 +1,5 @@
 ###
-POST http://localhost:6000/firebase/notification
+POST http://40.122.147.73:6000/firebase/notification
 content-type: application/json
 
 {
@@ -8,7 +8,7 @@ content-type: application/json
 }
 
 ###
-POST http://localhost:6000/hey
+POST http://40.122.147.73:6000/hey
 content-type: application/json
 
 {

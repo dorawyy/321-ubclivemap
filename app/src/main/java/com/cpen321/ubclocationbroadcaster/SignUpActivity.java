@@ -29,7 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
     private Button sign_up_btn;
-    final String URL = "http://10.0.2.2:3000/users/register";
+    final String URL = "http://40.122.147.73:3000/users/register";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

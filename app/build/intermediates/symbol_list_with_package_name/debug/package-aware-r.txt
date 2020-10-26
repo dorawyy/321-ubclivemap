@@ -1725,6 +1725,7 @@ id activity_id
 id activity_lat
 id activity_long
 id activity_name
+id activity_view
 id add
 id adjust_height
 id adjust_width

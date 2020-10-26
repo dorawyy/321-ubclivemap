@@ -58,7 +58,7 @@ app.post("/addactivity", async (req, res) => {
 
     var response = await db.collection("activity-data").findOne({"aid" : req.body.aid})
     if(response != null) {
-        return res.json(formatResponse(false, "Activity already exists.", null));
+        return res.json(formatResponse(false, "Activity Id Taken", null));
     }
 
     response = await db.collection("activity-data").insertOne(req.body);

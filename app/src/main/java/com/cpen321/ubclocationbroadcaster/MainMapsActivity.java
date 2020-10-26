@@ -41,9 +41,6 @@ public class MainMapsActivity extends FragmentActivity implements OnMapReadyCall
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
-
     }
 
     /**
@@ -66,7 +63,7 @@ public class MainMapsActivity extends FragmentActivity implements OnMapReadyCall
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         final RequestQueue requestQueueMA = Volley.newRequestQueue(this);
-        String urlMA = "http://10.0.2.2:5000/allactivities";
+        String urlMA = "http://40.122.147.73:5000/allactivities";
 
         JsonArrayRequest allActivities = new JsonArrayRequest(urlMA,
                 new Response.Listener<JSONArray> (){
@@ -74,7 +71,6 @@ public class MainMapsActivity extends FragmentActivity implements OnMapReadyCall
                     public void onResponse(JSONArray response){
                         try {
                             for(int i=0; i<response.length();i++){
-
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 String lat = jsonObject.getString("lat");
                                 Double la = Double.parseDouble(lat);

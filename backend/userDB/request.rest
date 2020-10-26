@@ -1,8 +1,8 @@
 ### check current users in database
-GET http://localhost:4000/allprofiles
+GET http://40.122.147.73:4000/allprofiles
 
 ### insert user
-POST http://localhost:4000/userprofile
+POST http://40.122.147.73:4000/userprofile
 Content-Type: application/json
 
 {
@@ -20,7 +20,7 @@ Content-Type: application/json
 }
 
 ### insert other user 
-POST http://localhost:4000/userprofile
+POST http://40.122.147.73:4000/userprofile
 Content-Type: application/json
 
 {
@@ -38,7 +38,7 @@ Content-Type: application/json
 }
 
 ### search user by id
-POST http://localhost:4000/usersearch
+POST http://40.122.147.73:4000/usersearch
 Content-Type: application/json
 
 {
@@ -46,7 +46,7 @@ Content-Type: application/json
 }
 
 ### search user by id
-POST http://localhost:4000/usersearch
+POST http://40.122.147.73:4000/usersearch
 Content-Type: application/json
 
 {
@@ -54,7 +54,7 @@ Content-Type: application/json
 }
 
 ### search user by id (doesnt exist)
-POST http://localhost:4000/usersearch
+POST http://40.122.147.73:4000/usersearch
 Content-Type: application/json
 
 {
@@ -62,7 +62,7 @@ Content-Type: application/json
 }
 
 ### update profile with new profile 
-POST http://localhost:4000/userupdate
+POST http://40.122.147.73:4000/userupdate
 Content-Type: application/json
 
 {
@@ -80,7 +80,7 @@ Content-Type: application/json
 }
 
 ### update profile that doesnt exist
-POST http://localhost:4000/userupdate
+POST http://40.122.147.73:4000/userupdate
 Content-Type: application/json
 
 {

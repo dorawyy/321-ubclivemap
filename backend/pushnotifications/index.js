@@ -26,11 +26,9 @@ app.post('/givetoken', (req,res) => {
 });
 
 app.post('/firebase/notification', (req, res)=>{
-    console.log("IM HERE");
     const registrationToken = req.body.registrationToken
     const message = req.body.message
     const options =  notification_options
-    console.log("COOL");
 
     const payload = {
         data : {

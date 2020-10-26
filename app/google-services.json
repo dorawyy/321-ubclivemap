@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "605518189111",
-    "firebase_url": "https://cpen321-c3272.firebaseio.com",
-    "project_id": "cpen321-c3272",
-    "storage_bucket": "cpen321-c3272.appspot.com"
+    "project_number": "606818645974",
+    "firebase_url": "https://cpen321projectworking.firebaseio.com",
+    "project_id": "cpen321projectworking",
+    "storage_bucket": "cpen321projectworking.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:605518189111:android:0506f811e48e2db257e5b2",
+        "mobilesdk_app_id": "1:606818645974:android:a315933738a5e183225677",
         "android_client_info": {
           "package_name": "com.cpen321.ubclocationbroadcaster"
         }
       },
       "oauth_client": [
         {
-          "client_id": "605518189111-jodpkvgc17edv06ldcbv84t2cpp7nat3.apps.googleusercontent.com",
+          "client_id": "606818645974-8vi0qb1gm9kttcs4hlu32m80f0b5j31b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBANGbsU5ak767LFkt5y-AwnwLOOkehDb8"
+          "current_key": "AIzaSyCzFNNh9n1gW-HKtjKZwY7eFXNzjrCtpJc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "605518189111-jodpkvgc17edv06ldcbv84t2cpp7nat3.apps.googleusercontent.com",
+              "client_id": "606818645974-8vi0qb1gm9kttcs4hlu32m80f0b5j31b.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

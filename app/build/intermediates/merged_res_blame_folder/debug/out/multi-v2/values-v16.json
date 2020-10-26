@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\jaski\\Desktop\\ubc\\cpen321\\CPEN-321-Location-App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
+            "outputFile": "C:\\Users\\solom\\Documents\\CPEN32\\CPEN-321-Location-App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\jaski\\.gradle\\caches\\transforms-2\\files-2.1\\e860753884041bf2af42acbd8ef84437\\core-1.3.1\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\solom\\.gradle\\caches\\transforms-2\\files-2.1\\2332c8a007a0a064fb88af5c16fb60e8\\core-1.3.1\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\jaski\\.gradle\\caches\\transforms-2\\files-2.1\\737e2827d82ffb44344753c59dea0478\\appcompat-1.2.0\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\solom\\.gradle\\caches\\transforms-2\\files-2.1\\643adb81776bc4f32f0e8ac61b12f06a\\appcompat-1.2.0\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

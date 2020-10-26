@@ -32,6 +32,7 @@
     <string name="my_activity_btn">My Activity</string>
     <string name="edit_profile_btn">Edit Profile</string>
     <string name="sign_out_btn">Sign Out</string>
+    <string name="done">Done</string>
 
     <string name="title_activity_list_scrolling">ScrollingActivity</string>
     <string name="large_text">

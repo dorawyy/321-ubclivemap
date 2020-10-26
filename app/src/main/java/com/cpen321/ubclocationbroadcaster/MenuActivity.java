@@ -14,6 +14,7 @@ public class MenuActivity extends AppCompatActivity {
     private Button myActivityButton;
     private Button editProfileButton;
     private Button signOutButton;
+    private Button createActivityButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,15 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent signInIntent = new Intent(MenuActivity.this, MainActivity.class);
+                startActivity(signInIntent);
+            }
+        });
+
+        createActivityButton = findViewById(R.id.create_activity_button);
+        createActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signInIntent = new Intent(MenuActivity.this, CreateActivity.class);
                 startActivity(signInIntent);
             }
         });

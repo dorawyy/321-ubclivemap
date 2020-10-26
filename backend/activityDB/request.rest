@@ -6,26 +6,30 @@ POST http://localhost:5000/addactivity
 Content-Type: application/json
 
 {
-    "aid" : "1",
+    "aid" : "sparklingdangers",
     "name" : "Cpen321 Project",
-    "users" : ["1","3"],
+    "usernames" : ["test","aplha"],
     "info" : "Understanding Javascript with TA",
     "major" : "CPEN",
     "Course" : "CPEN321",
-    "school" : "UBC"
+    "school" : "UBC",
+    "lat" : "49.267941",
+    "long" : "-123.247360"
 }
 ### insert activity
 POST http://localhost:5000/addactivity
 Content-Type: application/json
 
 {
-    "aid" : "2",
-    "name" : "Cpen331 Assignment",
-    "users" : ["2","5"],
-    "info" : "Doing Lab 5",
-    "major" : "CPSC",
+    "aid" : "ultracheapcow",
+    "name" : "Cpen331 Project",
+    "usernames" : ["hulk","blackwidow"],
+    "info" : "Understanding Life",
+    "major" : "CPEN",
     "Course" : "CPEN331",
-    "school" : "UBC"
+    "school" : "UBC",
+    "lat" : "49.104599",
+    "long" : "-122.823509"
 }
 
 
@@ -34,7 +38,7 @@ POST http://localhost:5000/activitysearch
 Content-Type: application/json
 
 {
-    "aid" : "1"
+    "aid" : "ultracheapcow"
 }
 
 
@@ -43,12 +47,14 @@ POST http://localhost:5000/updateUsers
 Content-Type: application/json
 
 {
-    "aid" : "1",
-    "name" : "Cpen321 Project",
-    "users" : ["1"],
-    "info" : "Understanding Javascript with TA",
+    "aid" : "ultracheapcow",
+    "name" : "Cpen331 Project",
+    "usernames" : ["blackwidow"],
+    "info" : "Understanding Life",
     "major" : "CPEN",
-    "Course" : "CPEN321",
-    "school" : "UBC"
+    "Course" : "CPEN331",
+    "school" : "UBC",
+    "lat" : "49.104599",
+    "long" : "-122.823509"
 }
 

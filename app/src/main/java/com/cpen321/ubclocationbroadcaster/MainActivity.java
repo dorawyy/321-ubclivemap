@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 //TODO: use mySkeleton if it works for volley request
                 //TODO: insert the server url
                 String URL = "http://10.0.2.2:3000/users/login";
-                String usrname = username.getText().toString();
+                final String usrname = username.getText().toString();
                 String passwrd = password.getText().toString();
 
                 //format request
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                                     if(successVal) {
                                         Intent sign_in_Intent = new Intent(MainActivity.this, MenuActivity.class);
                                         startActivity(sign_in_Intent);
+                                        sign_in_Intent.putExtra("USERNAME", usrname);
                                     } else {
                                         Toast.makeText(MainActivity.this, "ERROR: " + stat, Toast.LENGTH_SHORT).show();
                                     }

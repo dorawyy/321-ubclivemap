@@ -9,7 +9,7 @@ console.log("Activity server starting");
 
 
 //init database
-const MONGO_URL = "mongodb://localhost:27019";
+const MONGO_URL = "mongodb://localhost:27017";
 mongoclient.connect(MONGO_URL,
 {useUnifiedTopology: true},
 (err, client) => {

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-65:12
-INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-65:12
-INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-65:12
-INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-65:12
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-64:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.2] C:\Users\jaski\.gradle\caches\transforms-2\files-2.1\32ad49af09df29bffd66d2f2eb701db6\constraintlayout-2.0.2\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.material:material:1.2.1] C:\Users\jaski\.gradle\caches\transforms-2\files-2.1\29dadeeff5b1ab01a6a04be00e6f3b53\material-1.2.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\jaski\.gradle\caches\transforms-2\files-2.1\737e2827d82ffb44344753c59dea0478\appcompat-1.2.0\AndroidManifest.xml:17:1-24:12
@@ -55,20 +55,20 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\jaski\.gradle\ca
 MERGED from [com.android.volley:volley:1.1.0] C:\Users\jaski\.gradle\caches\transforms-2\files-2.1\487f43a0728f17c1b73656fcd3b80a2d\jetified-volley-1.1.0\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\jaski\.gradle\caches\transforms-2\files-2.1\6afa4308aa3aa137e2248f8d8fb2c9e1\jetified-annotation-experimental-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] C:\Users\jaski\.gradle\caches\transforms-2\files-2.1\a1fbcb6a4e6583bcada1d16436ca3db7\jetified-play-services-measurement-base-16.0.0\AndroidManifest.xml:17:1-24:12
-INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-65:12
-INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-65:12
-INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-65:12
+INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-64:12
+INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-64:12
 	package
 		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:3:5-49
 		INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-65:12
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-64:12
 		INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-65:12
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:1-64:12
 		INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:2:11-69
@@ -109,7 +109,7 @@ ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main
 	android:name
 		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:8:22-78
 application
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:10:5-63:19
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:10:5-62:19
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.2] C:\Users\jaski\.gradle\caches\transforms-2\files-2.1\32ad49af09df29bffd66d2f2eb701db6\constraintlayout-2.0.2\AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.2] C:\Users\jaski\.gradle\caches\transforms-2\files-2.1\32ad49af09df29bffd66d2f2eb701db6\constraintlayout-2.0.2\AndroidManifest.xml:9:5-20
 MERGED from [com.google.android.material:material:1.2.1] C:\Users\jaski\.gradle\caches\transforms-2\files-2.1\29dadeeff5b1ab01a6a04be00e6f3b53\material-1.2.1\AndroidManifest.xml:22:5-20
@@ -177,79 +177,79 @@ MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] C:\Us
 	android:usesCleartextTraffic
 		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:17:9-44
 service#com.cpen321.ubclocationbroadcaster.MyFireBaseService
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:19:9-24:19
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:19:9-23:19
 	android:name
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:20:13-46
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:19:18-51
 intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:21:13-23:29
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:20:13-22:29
 action#com.google.firebase.MESSAGING_EVENT
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:22:17-77
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:21:17-78
 	android:name
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:22:25-75
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:21:25-75
 activity#com.cpen321.ubclocationbroadcaster.ActivityStuffMenu
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:26:9-55
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:25:9-55
 	android:name
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:26:19-52
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:25:19-52
 activity#com.cpen321.ubclocationbroadcaster.ListScrollingActivity
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:27:9-30:59
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:26:9-29:59
 	android:label
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:29:13-66
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:28:13-66
 	android:theme
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:30:13-56
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:29:13-56
 	android:name
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:28:13-50
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:27:13-50
 activity#com.cpen321.ubclocationbroadcaster.MenuActivity
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:31:9-50
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:30:9-50
 	android:name
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:31:19-47
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:30:19-47
 activity#com.cpen321.ubclocationbroadcaster.MainMapsActivity
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:40:9-42:64
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:39:9-41:64
 	android:label
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:42:13-61
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:41:13-61
 	android:name
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:41:13-45
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:40:13-45
 activity#com.cpen321.ubclocationbroadcaster.CreateActivity
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:43:9-52
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:42:9-52
 	android:name
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:43:19-49
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:42:19-49
 activity#com.cpen321.ubclocationbroadcaster.ProfileActivity
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:44:9-53
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:43:9-53
 	android:name
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:44:19-50
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:43:19-50
 activity#com.cpen321.ubclocationbroadcaster.SignUpActivity
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:45:9-52
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:44:9-52
 	android:name
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:45:19-49
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:44:19-49
 activity#com.cpen321.ubclocationbroadcaster.MainActivity
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:46:9-54:20
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:45:9-53:20
 	android:label
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:48:13-57
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:47:13-57
 	android:name
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:47:13-41
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:46:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:49:13-53:29
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:48:13-52:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:50:17-69
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:49:17-69
 	android:name
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:50:25-66
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:49:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:52:17-77
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:51:17-77
 	android:name
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:52:27-74
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:51:27-74
 meta-data#com.google.android.geo.API_KEY
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:56:9-58:55
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:55:9-57:55
 	android:value
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:58:13-52
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:57:13-52
 	android:name
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:57:13-58
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:56:13-58
 uses-library#org.apache.http.legacy
-ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:60:9-62:40
+ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:59:9-61:40
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\jaski\.gradle\caches\transforms-2\files-2.1\b049c53a4b3835bad21ffe4655a41d3d\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\jaski\.gradle\caches\transforms-2\files-2.1\b049c53a4b3835bad21ffe4655a41d3d\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
 	android:required
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:62:13-37
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:61:13-37
 	android:name
-		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:61:13-50
+		ADDED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:60:13-50
 uses-sdk
 INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\jaski\Desktop\ubc\cpen321\CPEN-321-Location-App\app\src\main\AndroidManifest.xml

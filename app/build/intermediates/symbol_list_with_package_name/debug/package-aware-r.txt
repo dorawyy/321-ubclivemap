@@ -1718,6 +1718,13 @@ id action_settings
 id action_text
 id actions
 id activity_chooser_view_content
+id activity_course
+id activity_desc
+id activity_done
+id activity_id
+id activity_lat
+id activity_long
+id activity_name
 id add
 id adjust_height
 id adjust_width
@@ -1770,6 +1777,7 @@ id cos
 id course_list
 id course_page_done_button
 id course_spinner
+id create_activity_button
 id custom
 id customPanel
 id cut
@@ -2016,6 +2024,12 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textView
+id textView10
+id textView11
+id textView12
+id textView13
+id textView14
+id textView15
 id textView2
 id textView3
 id textView4
@@ -2267,6 +2281,7 @@ string common_signin_button_text
 string common_signin_button_text_long
 string course_list
 string default_web_client_id
+string done
 string done_course_page
 string edit_profile_btn
 string error_icon_content_description

@@ -124,6 +124,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="fcm_token">FCM TOKEN: %s</string>
     <string-array name="spinner">
         <item>select your courses here</item>
         <item>CPEN 211</item>

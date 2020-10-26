@@ -5,11 +5,12 @@ com/cpen321/ubclocationbroadcaster/SignUpActivity.java
  com.cpen321.ubclocationbroadcaster.SignUpActivity$1
  com.cpen321.ubclocationbroadcaster.SignUpActivity$1$1
  com.cpen321.ubclocationbroadcaster.SignUpActivity$1$2
-com/cpen321/ubclocationbroadcaster/CreateActivity.java
- com.cpen321.ubclocationbroadcaster.CreateActivity
- com.cpen321.ubclocationbroadcaster.CreateActivity$1
- com.cpen321.ubclocationbroadcaster.CreateActivity$1$1
- com.cpen321.ubclocationbroadcaster.CreateActivity$1$2
+com/cpen321/ubclocationbroadcaster/MainActivity.java
+ com.cpen321.ubclocationbroadcaster.MainActivity
+ com.cpen321.ubclocationbroadcaster.MainActivity$1
+ com.cpen321.ubclocationbroadcaster.MainActivity$1$1
+ com.cpen321.ubclocationbroadcaster.MainActivity$1$2
+ com.cpen321.ubclocationbroadcaster.MainActivity$2
 com/cpen321/ubclocationbroadcaster/MySingleton.java
  com.cpen321.ubclocationbroadcaster.MySingleton
 com/cpen321/ubclocationbroadcaster/MyFirebaseMessagingService.java
@@ -37,9 +38,8 @@ com/cpen321/ubclocationbroadcaster/MenuActivity.java
  com.cpen321.ubclocationbroadcaster.MenuActivity$4
  com.cpen321.ubclocationbroadcaster.MenuActivity$5
  com.cpen321.ubclocationbroadcaster.MenuActivity$6
-com/cpen321/ubclocationbroadcaster/MainActivity.java
- com.cpen321.ubclocationbroadcaster.MainActivity
- com.cpen321.ubclocationbroadcaster.MainActivity$1
- com.cpen321.ubclocationbroadcaster.MainActivity$1$1
- com.cpen321.ubclocationbroadcaster.MainActivity$1$2
- com.cpen321.ubclocationbroadcaster.MainActivity$2
+com/cpen321/ubclocationbroadcaster/CreateActivity.java
+ com.cpen321.ubclocationbroadcaster.CreateActivity
+ com.cpen321.ubclocationbroadcaster.CreateActivity$1
+ com.cpen321.ubclocationbroadcaster.CreateActivity$1$1
+ com.cpen321.ubclocationbroadcaster.CreateActivity$1$2

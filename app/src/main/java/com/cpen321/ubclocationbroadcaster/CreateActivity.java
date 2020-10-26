@@ -142,7 +142,7 @@ public class CreateActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if(inputcourse == course1 || inputcourse == course2 || inputcourse == course3 || inputcourse == course4 || inputcourse == course5){
+               // if(inputcourse == course1 || inputcourse == course2 || inputcourse == course3 || inputcourse == course4 || inputcourse == course5){
                     JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnRequest,
                             new Response.Listener<JSONObject> (){
                                 @Override
@@ -172,7 +172,7 @@ public class CreateActivity extends AppCompatActivity {
 
                     MySingleton.getInstance(CreateActivity.this).addToRequestQueue(json_obj);
                 }
-            }
+            //}
         });
     }
 }

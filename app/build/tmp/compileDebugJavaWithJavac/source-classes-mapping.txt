@@ -40,6 +40,7 @@ com/cpen321/ubclocationbroadcaster/MenuActivity.java
 com/cpen321/ubclocationbroadcaster/MainActivity.java
  com.cpen321.ubclocationbroadcaster.MainActivity
  com.cpen321.ubclocationbroadcaster.MainActivity$1
- com.cpen321.ubclocationbroadcaster.MainActivity$1$1
- com.cpen321.ubclocationbroadcaster.MainActivity$1$2
  com.cpen321.ubclocationbroadcaster.MainActivity$2
+ com.cpen321.ubclocationbroadcaster.MainActivity$2$1
+ com.cpen321.ubclocationbroadcaster.MainActivity$2$2
+ com.cpen321.ubclocationbroadcaster.MainActivity$3

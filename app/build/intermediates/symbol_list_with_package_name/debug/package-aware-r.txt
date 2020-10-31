@@ -2042,6 +2042,8 @@ id textView14
 id textView15
 id textView16
 id textView17
+id textView18
+id textView19
 id textView2
 id textView21
 id textView22

@@ -29,12 +29,17 @@ import com.google.firebase.iid.InstanceIdResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.SharedPreferences;
+
+
 public class MainActivity extends AppCompatActivity {
 
     private Button sign_in_btn;
     private Button sign_up_btn;
     private EditText username;
     private EditText password;
+    final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
 
+
         sign_in_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
                 String URL = "http://10.0.2.2:3000/users/login";
                 final String usrname = username.getText().toString();
                 String passwrd = password.getText().toString();
+
+                SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+                SharedPreferences.Editor prefEditor = userSettings.edit();
+                prefEditor.putString("USERNAME", usrname);
+                prefEditor.commit();
 
                 //format request
                 JSONObject jsnRequest = new JSONObject();

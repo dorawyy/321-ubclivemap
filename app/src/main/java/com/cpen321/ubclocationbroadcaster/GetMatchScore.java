@@ -44,6 +44,7 @@ public class GetMatchScore extends AppCompatActivity {
         final Button done_btn;
         final int[] priorities = new int[3];
         final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        final RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         getRadius = findViewById(R.id.getRadius);
         locPriority = findViewById(R.id.LocationPriority);
@@ -52,7 +53,6 @@ public class GetMatchScore extends AppCompatActivity {
         showMajorPriority = findViewById(R.id.showMajorPriority);
         coursePriority = findViewById(R.id.coursePriority);
         majorPriority = findViewById(R.id.majorPriority);
-        final RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         showLocPriority.setText("Location Priority: "+locPriority.getProgress()+"/"+locPriority.getMax());
         locPriority.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -120,7 +120,7 @@ public class GetMatchScore extends AppCompatActivity {
                 String URL = "http://10.0.2.2:5000/sortactivities";
 
                 final String inputDist = getRadius.getText().toString();
-                final String inputUsername = userSettings.getString("USERNAME", "");
+                String inputUsername = userSettings.getString("USERNAME", "");
                 final int inputLat = 123;
                 final int inputLong = 100;
                 final int inputLoc = priorities[0];

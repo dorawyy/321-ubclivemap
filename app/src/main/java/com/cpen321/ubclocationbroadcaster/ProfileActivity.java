@@ -255,18 +255,31 @@ public class ProfileActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject> (){
                             @Override
                             public void onResponse(JSONObject response){
-                                //Intent signUpIntent = new Intent(SignUpActivity.this, ProfileActivity.class);
-                                //startActivity(signUpIntent);
                                 try {
                                     boolean successVal = (boolean) response.get("success");
                                     String stat = response.get("status").toString();
                                     if(successVal){
+
+                                        UserDetails.name = inputName;
+                                        UserDetails.phone = inputPhone;
+                                        UserDetails.school = inputSchool;
+                                        UserDetails.major = inputMajor;
+                                        UserDetails.privatePublic = "False";
+                                        UserDetails.inactivity = "False";
+                                        UserDetails.activityID = "-1";
+                                        UserDetails.courseRegistered = new String[course_list.size()];
+                                        for(int i=0;i<course_list.size();i++){
+                                            UserDetails.courseRegistered[i] = course_list.get(i);
+                                            Log.d("courseList", "Element" + i + ": " + course_list.get(i));
+                                            Log.d("courseRegistered", "Element" + i + ": " + UserDetails.courseRegistered[i]);
+                                        }
+
+
                                         Log.d("SignUpActivity", stat);
                                     }
                                     else{
                                         Log.d("error1", "Error1 " + stat);
                                     }
-                                    //Log.d("SignUpActivity", stat);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                     Log.d("error2", "-------------------- " );

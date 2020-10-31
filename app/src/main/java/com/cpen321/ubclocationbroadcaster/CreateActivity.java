@@ -41,7 +41,7 @@ public class CreateActivity extends AppCompatActivity {
     //Number of Registered courses of the user
     private int numOfCourses =0;
     //Class that stores the user details
-    private UserDetails ud = new UserDetails();
+    //private UserDetails ud = new UserDetails();
 
     private boolean activityS , userS;
 
@@ -64,69 +64,16 @@ public class CreateActivity extends AppCompatActivity {
         JSONObject findUser = new JSONObject();
         mySpinner = findViewById(R.id.reg_course_spinner);
         reg_courses_view = findViewById((R.id.registered_courses));
+        
+        user_courses[0] = "Choose from your courses";
+        Log.d("checkpoint1","UserDetails.courseRegistered[0] : " + UserDetails.courseRegistered[0]);
+        for(int i = 0; i < UserDetails.courseRegistered.length; i++){
 
-        /*FIND THE USER AND STORE HIS/HER VALUES IN THE USERDETAILS CLASS.
-        * STORE THE REGISTERED COURSES IN THE user_courses STRING ARRAY
-        * DISPLAY THE COURSES USING A SPINNER AND STORE THE CHOSEN COURSES FROM USER REGISTERED COURSES
-        * INTO activity_courses TO BE ADDED INTO ACTIVITY*/
-        try {
-            findUser.put("username", username);
-        } catch (JSONException e) {
-            Log.d("objectCreation", "Could not create JSON object ");
-            e.printStackTrace();
+            user_courses[i+1] = UserDetails.courseRegistered[i];
+            Log.d("courses", "Display reg course " + user_courses[i]);
         }
-
-        JsonArrayRequest userDetails = new JsonArrayRequest("http://10.0.2.2:3000/allprofiles",
-                new Response.Listener<JSONArray> (){
-                    @Override
-                    public void onResponse(JSONArray response){
-                        try {
-                            //pos is the index of our user in userDB
-                            int pos = -1;
-                            for(int i=0; i<response.length();i++){
-                                JSONObject jsonObject = response.getJSONObject(i);
-                                if(jsonObject.getString("username").toString().equals(username)){
-                                    pos = i;
-                                    Log.d("poschange", "onResponse: " + pos);
-                                    break;
-                                }
-                            }
-
-                            //jsonObject is the user object
-                            JSONObject jsonObject = response.getJSONObject(pos);
-                            numOfCourses = jsonObject.getJSONArray("CourseRegistered").length();
-
-                            ud.real_name = jsonObject.getString("name");
-                            ud.major = jsonObject.getString("major");
-                            ud.school = jsonObject.getString("school");
-                            ud.phone = jsonObject.getString("phone");
-                            ud.privatePublic = jsonObject.getString("private");
-                            ud.inactivity = jsonObject.getString("inActivity");
-                            ud.activityID = jsonObject.getString("activityID");
-                            ud.courseRegistered = new String[numOfCourses];
-
-                            
-                            user_courses[0] = "Choose from your courses";
-                            for(int i = 0; i < numOfCourses; i++){
-                                ud.courseRegistered[i]= jsonObject.getJSONArray("CourseRegistered").getString(i);
-                                user_courses[i+1] = jsonObject.getJSONArray("CourseRegistered").getString(i);
-                                Log.d("courses", "Display reg course " + user_courses[i]);
-                            }
-                        } catch (JSONException e) {
-                            Toast.makeText(CreateActivity.this, "Unable to send the sign in data to the server!", Toast.LENGTH_SHORT).show();
-                            Log.d("error2", "---------------------------------------");
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        q.add(userDetails);
-
         //Fill the remaining places in the user_course with empty values, otherwise spinner gives an error
-        for(int i=(numOfCourses+1); i<10; i++){
+        for(int i=(UserDetails.courseRegistered.length+1); i<10; i++){
             user_courses[i] = " ";
         }
 
@@ -197,9 +144,9 @@ public class CreateActivity extends AppCompatActivity {
                     jsnRequest.put("leader", username);
                     jsnRequest.put("usernames", username);
                     jsnRequest.put("info", inputInfo);
-                    jsnRequest.put("major", ud.major);
+                    jsnRequest.put("major", UserDetails.major);
                     jsnRequest.put("course", courses);
-                    jsnRequest.put("school", ud.school);
+                    jsnRequest.put("school", UserDetails.school);
                     jsnRequest.put("lat", inputLat);
                     jsnRequest.put("long", inputLong);
                     jsnRequest.put("status","1");
@@ -251,12 +198,12 @@ public class CreateActivity extends AppCompatActivity {
 
                 JSONObject updateUser = new JSONObject();
                 try {
-                    updateUser.put("name", ud.real_name);
-                    updateUser.put("phone", ud.phone);
-                    updateUser.put("school", ud.school);
-                    updateUser.put("major", ud.major);
+                    updateUser.put("name", UserDetails.name);
+                    updateUser.put("phone", UserDetails.phone);
+                    updateUser.put("school", UserDetails.school);
+                    updateUser.put("major", UserDetails.major);
                     updateUser.put("CourseRegistered",reg_courses);
-                    updateUser.put("private", ud.privatePublic);
+                    updateUser.put("private", UserDetails.privatePublic);
                     updateUser.put("username", UserDetails.username);
                     updateUser.put("inActivity", "True");
                     updateUser.put("activityID", inputaid);

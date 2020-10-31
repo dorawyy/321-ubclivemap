@@ -132,17 +132,34 @@
     <string name="action_settings">Settings</string>
     <string name="fcm_token">FCM TOKEN: %s</string>
     <string-array name="spinner">
-        <item>select your courses here</item>
+        <item>Select your courses here</item>
         <item>CPEN 211</item>
         <item>CPEN 221</item>
+        <item>CPEN 223</item>
         <item>CPEN 281</item>
         <item>CPEN 291</item>
         <item>CPEN 311</item>
+        <item>CPEN 312</item>
         <item>CPEN 321</item>
         <item>CPEN 331</item>
+        <item>CPEN 333</item>
         <item>CPEN 391</item>
+        <item>CPEN 400A</item>
+        <item>CPEN 400D</item>
+        <item>CPEN 400U</item>
+        <item>CPEN 400Y</item>
         <item>CPEN 411</item>
+        <item>CPEN 412</item>
         <item>CPEN 421</item>
+        <item>CPEN 422</item>
+        <item>CPEN 431</item>
+        <item>CPEN 432</item>
+        <item>CPEN 441</item>
+        <item>CPEN 442</item>
+        <item>CPEN 481</item>
+        <item>CPEN 491</item>
+        <item>CPEN 499A</item>
+        <item>CPEN 499B</item>
     </string-array>
 
 </resources>

@@ -28,58 +28,8 @@ public class CreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create);
 
         EditText name;
-
-      /*  EditText name;
-        EditText aid;
-        EditText info;
-        EditText lat;
-        EditText course;
-        EditText lon;
         Button done_btn;
-
-        name = findViewById(R.id.activity_name);
-        aid  = findViewById(R.id.activity_id);
-        info = findViewById(R.id.activity_desc);
-        course = findViewById(R.id.activity_course);
         done_btn = findViewById(R.id.activity_done);
-        lat = findViewById(R.id.activity_lat);
-        lon = findViewById(R.id.activity_long);
-
-        final String inputName = name.getText().toString();
-        final String inputaid = aid.getText().toString();
-        final String inputcourse = course.getText().toString();
-        final String inputInfo = info.getText().toString();
-        final String inputLat = lat.getText().toString();
-        final String inputLong = lon.getText().toString();
-
-        EditText lon;*/
-        Button done_btn;
-
-        //name = findViewById(R.id.activity_name);
-        /*EditText aid  = findViewById(R.id.activity_id);
-        EditText info = findViewById(R.id.activity_desc);
-        EditText course = findViewById(R.id.activity_course);
-        EditText lat = findViewById(R.id.activity_lat);
-        EditText lon = findViewById(R.id.activity_long);*/
-        done_btn = findViewById(R.id.activity_done);
-       // final String inputName = name.getText().toString();
-       /* final String inputaid = aid.getText().toString();
-        final String inputcourse = course.getText().toString();
-        final String inputInfo = info.getText().toString();
-        final String inputLat = lat.getText().toString();
-        final String inputLong = lon.getText().toString();*/
-/*
-        Intent intent = getIntent();
-        final String username = intent.getStringExtra("USERNAME");
-        final String inputSchool = intent.getStringExtra("SCHOOL");
-        final String inputMajor = intent.getStringExtra("MAJOR");
-        final String course1 = intent.getStringExtra("COURSE1");
-        final String course2 = intent.getStringExtra("COURSE2");
-        final String course3 = intent.getStringExtra("COURSE3");
-        final String course4 = intent.getStringExtra("COURSE4");
-        final String course5 = intent.getStringExtra("COURSE5");
-
-*/
 
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
 

@@ -71,7 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 String result = mySpinner.getSelectedItem().toString();
-                //for M6 we only have 10 cpen courses
+                //all cpen courses
                 switch (position){
                     case 0:
                         break;
@@ -115,6 +115,75 @@ public class ProfileActivity extends AppCompatActivity {
                         if (!course_list.contains(result)){
                             course_list.add(result);}
                         break;
+                    case 11:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 12:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 13:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 14:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 15:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 16:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 17:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 18:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 19:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 20:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 21:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 22:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 23:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 24:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 25:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 26:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                    case 27:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+
                 }
                 course_list_adapter.notifyDataSetChanged();
             }

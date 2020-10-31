@@ -51,7 +51,7 @@ public class SignUpActivity extends AppCompatActivity {
                 Log.d("sign up button", "sign up button has been clicked");
 
                 // format request
-                String inputUsername = username.getText().toString();
+                final String inputUsername = username.getText().toString();
                 String inputPassword = password.getText().toString();
 
                 JSONObject jsnReq = new JSONObject();
@@ -72,6 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 try {
                                     boolean successVal = (boolean) response.get("success");
                                     String stat = response.get("status").toString();
+                                    UserDetails.username = inputUsername;
                                     Log.d("SignUpActivity", stat);
                                 } catch (JSONException e) {
                                     e.printStackTrace();

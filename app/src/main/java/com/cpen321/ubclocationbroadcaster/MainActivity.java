@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                                         Intent sign_in_Intent = new Intent(MainActivity.this, MenuActivity.class);
                                         sign_in_Intent.putExtra("USERNAME", usrname);
                                         startActivity(sign_in_Intent);
+                                        UserDetails.username = usrname;
                                     } else {
                                         Toast.makeText(MainActivity.this, "ERROR: " + stat, Toast.LENGTH_SHORT).show();
                                     }

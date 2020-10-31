@@ -52,7 +52,7 @@ public class ListScrollingActivity extends AppCompatActivity {
         }
 
         final RequestQueue requestQueueMA = Volley.newRequestQueue(this);
-        String urlMA = "http://10.0.2.2:5000/allactivities";
+        String urlMA = "http://10.0.2.2:3000/allactivities";
 
         JsonArrayRequest allActivities = new JsonArrayRequest(urlMA,
                 new Response.Listener<JSONArray> (){

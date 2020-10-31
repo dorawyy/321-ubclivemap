@@ -117,7 +117,7 @@ public class GetMatchScore extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("done button", "done button has been clicked");
                 //TODO: set the url here
-                String URL = "http://10.0.2.2:5000/sortactivities";
+                String URL = "http://10.0.2.2:3000/sortactivities";
 
                 final String inputDist = getRadius.getText().toString();
                 String inputUsername = userSettings.getString("USERNAME", "");

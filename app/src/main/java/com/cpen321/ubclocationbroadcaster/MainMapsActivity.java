@@ -58,12 +58,9 @@ public class MainMapsActivity extends FragmentActivity implements OnMapReadyCall
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         final RequestQueue requestQueueMA = Volley.newRequestQueue(this);
-        String urlMA = "http://10.0.2.2:5000/allactivities";
+        String urlMA = "http://10.0.2.2:3000/allactivities";
 
         JsonArrayRequest allActivities = new JsonArrayRequest(urlMA,
                 new Response.Listener<JSONArray> (){

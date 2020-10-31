@@ -1,0 +1,318 @@
+######################################################################
+##ACCOUNT DB REQUESTS
+######################################################################
+
+### check current users in database
+GET http://localhost:3000/users
+
+### store a user
+
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+    "name" : "Kyle",
+    "password" : "password"
+}
+
+### store a user
+
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+    "name" : "Adam",
+    "password" : "password1"
+}
+
+### login user (wrong username)
+
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "name" : "aKyle",
+    "password" : "wrongpas"
+}
+
+### login user (wrong password)
+
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "name" : "Kyle",
+    "password" : "wrongpas"
+}
+
+### login user (success)
+
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "name" : "Kyle",
+    "password" : "password"
+}
+
+### login user (success)
+
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "name" : "Adam",
+    "password" : "password1"
+}
+
+######################################################################
+##USER DB REQUESTS
+######################################################################
+
+### check current users in database
+GET http://localhost:3000/allprofiles
+
+### insert user
+POST http://localhost:3000/userprofile
+Content-Type: application/json
+
+{
+    "name" : "Kyle",
+    "username" : "12",
+    "major" : "CPEN",
+    "CourseRegistered" : [
+        "CPEN331", "CPEN321"
+    ],
+    "school" : "UBC",
+    "phone" : "4444444444",
+    "private" : false,
+    "inActivity" : false,
+    "activityID" : -1
+}
+
+### insert other user 
+POST http://localhost:3000/userprofile
+Content-Type: application/json
+
+{
+    "name" : "Jake",
+    "username" : "2",
+    "major" : "CPEN",
+    "CourseRegistered" : [
+        "ELEC201", "CPEN311"
+    ],
+    "school" : "UBC",
+    "phone" : "4444445555",
+    "private" : false,
+    "inActivity" : false,
+    "activityID" : -1
+}
+
+### search user by id
+POST http://localhost:3000/usersearch
+Content-Type: application/json
+
+{
+    "username" : "a"
+}
+
+### search user by id
+POST http://localhost:3000/usersearch
+Content-Type: application/json
+
+{
+    "username" : "12"
+}
+
+### search user by id (doesnt exist)
+POST http://localhost:3000/usersearch
+Content-Type: application/json
+
+{
+    "username" : "3"
+}
+
+### update profile with new profile 
+POST http://localhost:3000/userupdate
+Content-Type: application/json
+
+{
+    "name" : "Jake J",
+    "username" : "2",
+    "major" : "CPEN",
+    "CourseRegistered" : [
+        "ELEC201", "CPEN400"
+    ],
+    "school" : "UBC",
+    "phone" : "4442225555",
+    "private" : false,
+    "inActivity" : false,
+    "activityID" : -1
+}
+
+######################################################################
+##ACTIVITY DB REQUESTS
+######################################################################
+
+### check current activities
+GET http://localhost:3000/allactivities
+
+### insert activity
+POST http://localhost:3000/addactivity
+Content-Type: application/json
+
+{
+    "aid" : "sparklingdangers",
+    "name" : "Cpen321 Project",
+    "leader" : "test",
+    "usernames" : ["test","aplha"],
+    "info" : "Understanding Javascript with TA",
+    "major" : "CPEN",
+    "course" : ["CPEN321", "CPEN331"],
+    "school" : "UBC",
+    "lat" : "49.267941",
+    "long" : "-123.247360",
+    "status" : "1"
+}
+### insert activity
+POST http://localhost:3000/addactivity
+Content-Type: application/json
+
+{
+    "aid" : "ultracheapcow",
+    "name" : "Cpen331 Project",
+    "leader": "hulk",
+    "usernames" : ["hulk","blackwidow"],
+    "info" : "Understanding Life",
+    "major" : "CPEN",
+    "course" : ["CPEN331"],
+    "school" : "UBC",
+    "lat" : "49.104599",
+    "long" : "-122.823509",
+    "status" : "1"
+}
+### insert activity
+POST http://localhost:3000/addactivity
+Content-Type: application/json
+
+{
+    "aid" : "differentID",
+    "name" : "Cpen331 Project",
+    "leader": "hulk",
+    "usernames" : ["hulk","blackwidow"],
+    "info" : "GOOD ACTIVITY!",
+    "major" : "CPEN",
+    "course" : ["CPEN331", "CPEN321", "CPEN400"],
+    "school" : "UBC",
+    "lat" : "49.104599",
+    "long" : "-122.823509",
+    "status" : "1"
+}
+### insert activity
+POST http://localhost:3000/addactivity
+Content-Type: application/json
+
+{
+    "aid" : "diffID",
+    "name" : "Cpen331 Project",
+    "leader": "hulk",
+    "usernames" : ["hulk","blackwidow"],
+    "info" : "okay ACTIVITY!",
+    "major" : "CPEN",
+    "course" : ["CPEN331","CPEN400","CPEN321","ELEC221"],
+    "school" : "UBC",
+    "lat" : "50.3112",
+    "long" : "-122.213123",
+    "status" : "1"
+}
+### insert activity
+POST http://localhost:3000/addactivity
+Content-Type: application/json
+
+{
+    "aid" : "difffffid",
+    "name" : "Cpen331 Project",
+    "leader": "hulk",
+    "usernames" : ["hulk","blackwidow"],
+    "info" : "bad ACTIVITY!",
+    "major" : "CPSC",
+    "course" : ["CPEN221"],
+    "school" : "UBC",
+    "lat" : "49.3112",
+    "long" : "-122.43232",
+    "status" : "1"
+}
+### insert activity
+POST http://localhost:3000/addactivity
+Content-Type: application/json
+
+{
+    "aid" : "diffffffffid",
+    "name" : "Cpen331 Project",
+    "leader": "hulk",
+    "usernames" : ["hulk","blackwidow"],
+    "info" : "far ACTIVITY!",
+    "major" : "CPSC",
+    "course" : ["CPEN221"],
+    "school" : "UBC",
+    "lat" : "1",
+    "long" : "2",
+    "status" : "1"
+}
+
+
+### search activity
+POST http://localhost:3000/activitysearch
+Content-Type: application/json
+
+{
+    "aid" : "ultracheapcow"
+}
+
+
+### update users
+POST http://localhost:3000/updateUsers
+Content-Type: application/json
+
+{
+    "aid" : "ultracheapcow",
+    "name" : "Cpen331 Project",
+    "leader": "hulk",
+    "usernames" : ["blackwidow"],
+    "info" : "Understanding Life",
+    "major" : "CPEN",
+    "course" : ["CPEN331"],
+    "school" : "UBC",
+    "lat" : "49.104599",
+    "long" : "-122.823509",
+    "status" : "1"
+}
+
+### update users
+POST http://localhost:3000/sortactivities
+Content-Type: application/json
+
+{
+    "user" : {
+        "name" : "Kyle",
+        "userid" : "12",
+        "major" : "CPEN",
+        "courseRegistered" : [
+            "CPEN331", "CPEN321", "CPEN400", "ELEC221"
+        ],
+        "school" : "UBC",
+        "phone" : "4444444444",
+        "private" : false,
+        "inActivity" : false,
+        "activityID" : -1
+    } , 
+    "userlocation" : {
+        "lat" : "50.3112",
+        "long" : "-122.213123"
+    },
+    "radius" : 200,
+    "locationweight" : 2,
+    "coursesweight" : 3,
+    "majorweight" : 1
+}
+

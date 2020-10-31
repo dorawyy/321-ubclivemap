@@ -53,6 +53,11 @@ public class SignUpActivity extends AppCompatActivity {
                 // format request
                 String inputUsername = username.getText().toString();
                 String inputPassword = password.getText().toString();
+/*
+                SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+                SharedPreferences.Editor prefEditor = userSettings.edit();
+                prefEditor.putString("USERNAME", username.getText().toString());
+                prefEditor.commit();*/
 
                 JSONObject jsnReq = new JSONObject();
                 try {
@@ -89,11 +94,6 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
-
-        SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
-        SharedPreferences.Editor prefEditor = userSettings.edit();
-        prefEditor.putString("USERNAME", username.getText().toString());
-        prefEditor.commit();
 
     }
 }

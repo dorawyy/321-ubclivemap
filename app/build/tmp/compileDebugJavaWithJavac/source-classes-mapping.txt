@@ -39,6 +39,19 @@ com/cpen321/ubclocationbroadcaster/MainMapsActivity.java
  com.cpen321.ubclocationbroadcaster.MainMapsActivity
  com.cpen321.ubclocationbroadcaster.MainMapsActivity$1
  com.cpen321.ubclocationbroadcaster.MainMapsActivity$2
+<<<<<<< Updated upstream
+=======
+com/cpen321/ubclocationbroadcaster/BuildConfig.java
+ com.cpen321.ubclocationbroadcaster.BuildConfig
+com/cpen321/ubclocationbroadcaster/SignUpActivity.java
+ com.cpen321.ubclocationbroadcaster.SignUpActivity
+ com.cpen321.ubclocationbroadcaster.SignUpActivity$1
+ com.cpen321.ubclocationbroadcaster.SignUpActivity$1$1
+ com.cpen321.ubclocationbroadcaster.SignUpActivity$1$2
+com/cpen321/ubclocationbroadcaster/ActivityStuffMenu.java
+ com.cpen321.ubclocationbroadcaster.ActivityStuffMenu
+ com.cpen321.ubclocationbroadcaster.ActivityStuffMenu$1
+>>>>>>> Stashed changes
 com/cpen321/ubclocationbroadcaster/MenuActivity.java
  com.cpen321.ubclocationbroadcaster.MenuActivity
  com.cpen321.ubclocationbroadcaster.MenuActivity$1
@@ -47,14 +60,43 @@ com/cpen321/ubclocationbroadcaster/MenuActivity.java
  com.cpen321.ubclocationbroadcaster.MenuActivity$4
  com.cpen321.ubclocationbroadcaster.MenuActivity$5
  com.cpen321.ubclocationbroadcaster.MenuActivity$6
+<<<<<<< Updated upstream
+=======
+com/cpen321/ubclocationbroadcaster/MainActivity.java
+ com.cpen321.ubclocationbroadcaster.MainActivity
+ com.cpen321.ubclocationbroadcaster.MainActivity$1
+ com.cpen321.ubclocationbroadcaster.MainActivity$2
+ com.cpen321.ubclocationbroadcaster.MainActivity$2$1
+ com.cpen321.ubclocationbroadcaster.MainActivity$2$2
+ com.cpen321.ubclocationbroadcaster.MainActivity$3
+com/cpen321/ubclocationbroadcaster/GetMatchScore.java
+ com.cpen321.ubclocationbroadcaster.GetMatchScore
+ com.cpen321.ubclocationbroadcaster.GetMatchScore$1
+ com.cpen321.ubclocationbroadcaster.GetMatchScore$2
+ com.cpen321.ubclocationbroadcaster.GetMatchScore$3
+ com.cpen321.ubclocationbroadcaster.GetMatchScore$4
+ com.cpen321.ubclocationbroadcaster.GetMatchScore$4$1
+ com.cpen321.ubclocationbroadcaster.GetMatchScore$4$2
+>>>>>>> Stashed changes
 com/cpen321/ubclocationbroadcaster/ProfileActivity.java
  com.cpen321.ubclocationbroadcaster.ProfileActivity
  com.cpen321.ubclocationbroadcaster.ProfileActivity$1
  com.cpen321.ubclocationbroadcaster.ProfileActivity$2
  com.cpen321.ubclocationbroadcaster.ProfileActivity$2$1
  com.cpen321.ubclocationbroadcaster.ProfileActivity$2$2
+<<<<<<< Updated upstream
 com/cpen321/ubclocationbroadcaster/SignUpActivity.java
  com.cpen321.ubclocationbroadcaster.SignUpActivity
  com.cpen321.ubclocationbroadcaster.SignUpActivity$1
  com.cpen321.ubclocationbroadcaster.SignUpActivity$1$1
  com.cpen321.ubclocationbroadcaster.SignUpActivity$1$2
+=======
+com/cpen321/ubclocationbroadcaster/SortedActivityList.java
+ com.cpen321.ubclocationbroadcaster.SortedActivityList
+com/cpen321/ubclocationbroadcaster/ListScrollingActivity.java
+ com.cpen321.ubclocationbroadcaster.ListScrollingActivity
+ com.cpen321.ubclocationbroadcaster.ListScrollingActivity$1
+ com.cpen321.ubclocationbroadcaster.ListScrollingActivity$2
+com/cpen321/ubclocationbroadcaster/MyFirebaseMessagingService.java
+ com.cpen321.ubclocationbroadcaster.MyFirebaseMessagingService
+>>>>>>> Stashed changes

@@ -1,4 +1,9 @@
+<<<<<<< Updated upstream
 #Fri Oct 30 23:58:18 PDT 2020
 base.0=C\:\\Users\\jaski\\Desktop\\CPEN-321-Location-App\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+=======
+#Fri Oct 30 22:57:53 PDT 2020
+base.0=C\:\\Users\\kimib\\AndroidStudioProjects\\UBCLocationBroadcaster2\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+>>>>>>> Stashed changes
 path.0=classes.dex
 renamed.0=classes.dex

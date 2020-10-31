@@ -1,4 +1,4 @@
-#Mon Oct 26 07:21:19 PDT 2020
-base.0=C\:\\Users\\solom\\Documents\\CPEN32\\CPEN-321-Location-App\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Fri Oct 30 20:07:48 PDT 2020
+base.0=C\:\\Users\\kimib\\AndroidStudioProjects\\UBCLocationBroadcaster2\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

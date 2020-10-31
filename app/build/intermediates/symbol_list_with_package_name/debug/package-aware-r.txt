@@ -1655,6 +1655,7 @@ id BOTTOM_END
 id BOTTOM_START
 id CTRL
 id FUNCTION
+id LocationPriority
 id META
 id NO_DEBUG
 id SHIFT
@@ -1775,6 +1776,7 @@ id content
 id contentPanel
 id coordinator
 id cos
+id coursePriority
 id course_list
 id course_page_done_button
 id course_spinner
@@ -1801,6 +1803,7 @@ id direct
 id disableHome
 id disablePostScroll
 id disableScroll
+id done_button_activity
 id dragDown
 id dragEnd
 id dragLeft
@@ -1831,6 +1834,8 @@ id flip
 id floating
 id forever
 id fragment_container_view_tag
+id getMatchScore_button
+id getRadius
 id ghost_view
 id ghost_view_holder
 id gone
@@ -1868,6 +1873,7 @@ id linear
 id listMode
 id list_activites_btn
 id list_item
+id majorPriority
 id major_button
 id map
 id masked
@@ -1967,8 +1973,11 @@ id search_voice_btn
 id select_dialog_listview
 id selected
 id shortcut
+id showCoursePriority
 id showCustom
 id showHome
+id showLocPriority
+id showMajorPriority
 id showTitle
 id sign_in_button
 id sign_out_btn
@@ -2031,7 +2040,12 @@ id textView12
 id textView13
 id textView14
 id textView15
+id textView16
+id textView17
 id textView2
+id textView21
+id textView22
+id textView23
 id textView3
 id textView4
 id textView5
@@ -2143,12 +2157,14 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_create
+layout activity_get_match_score
 layout activity_list_scrolling
 layout activity_main
 layout activity_main_maps
 layout activity_menu
 layout activity_profile
 layout activity_sign_up
+layout activity_sorted_list
 layout activity_stuff_menu
 layout content_scrolling
 layout custom_dialog

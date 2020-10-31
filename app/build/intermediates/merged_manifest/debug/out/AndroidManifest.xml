@@ -29,8 +29,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
+        <activity android:name="com.cpen321.ubclocationbroadcaster.SortedActivityList" />
+        <activity android:name="com.cpen321.ubclocationbroadcaster.GetMatchScore" />
+
         <service
             android:name="com.cpen321.ubclocationbroadcaster.MyFirebaseMessagingService"
             android:exported="false" >

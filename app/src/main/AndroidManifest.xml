@@ -16,6 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".SortedActivityList"></activity>
+        <activity android:name=".GetMatchScore" />
 
         <service
             android:name=".MyFirebaseMessagingService"
@@ -25,7 +27,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
 
         <activity android:name=".ActivityStuffMenu" />
         <activity

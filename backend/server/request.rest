@@ -143,7 +143,7 @@ Content-Type: application/json
     "CourseRegistered" : [
         "ELEC201", "CPEN400"
     ],
-    "school" : "UBC",
+    "school" : "SFU",
     "phone" : "4442225555",
     "private" : false,
     "inActivity" : false,

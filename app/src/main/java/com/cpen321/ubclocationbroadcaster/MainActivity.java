@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Button sign_up_btn;
     private EditText username;
     private EditText password;
-    final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+    //final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
 
 
     @Override
@@ -78,11 +78,6 @@ public class MainActivity extends AppCompatActivity {
                 String URL = "http://10.0.2.2:3000/users/login";
                 final String usrname = username.getText().toString();
                 String passwrd = password.getText().toString();
-
-                SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
-                SharedPreferences.Editor prefEditor = userSettings.edit();
-                prefEditor.putString("USERNAME", usrname);
-                prefEditor.commit();
 
                 //format request
                 JSONObject jsnRequest = new JSONObject();

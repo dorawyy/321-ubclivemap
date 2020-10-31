@@ -233,6 +233,7 @@ public class ProfileActivity extends AppCompatActivity {
         for(String course : course_list){
             jsnReq.put(course);
         }
+                Log.d("debgg1", "username: " + UserDetails.username);
 
         JSONObject POSTjsnReq = new JSONObject();
         try {
@@ -242,7 +243,7 @@ public class ProfileActivity extends AppCompatActivity {
             POSTjsnReq.put("major", inputMajor);
             POSTjsnReq.put("CourseRegistered",jsnReq);
             POSTjsnReq.put("private", inputPrivate);
-            POSTjsnReq.put("userid", userID);
+            POSTjsnReq.put("username", UserDetails.username);
             POSTjsnReq.put("inActivity", inputInActivity);
             POSTjsnReq.put("activityID", inputActivityID);
 
@@ -259,9 +260,16 @@ public class ProfileActivity extends AppCompatActivity {
                                 try {
                                     boolean successVal = (boolean) response.get("success");
                                     String stat = response.get("status").toString();
-                                    Log.d("SignUpActivity", stat);
+                                    if(successVal){
+                                        Log.d("SignUpActivity", stat);
+                                    }
+                                    else{
+                                        Log.d("error1", "Error1 " + stat);
+                                    }
+                                    //Log.d("SignUpActivity", stat);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
+                                    Log.d("error2", "-------------------- " );
                                 }
                             }
                         }, new Response.ErrorListener() {

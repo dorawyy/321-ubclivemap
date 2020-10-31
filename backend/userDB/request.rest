@@ -1,13 +1,13 @@
 ### check current users in database
-GET http://40.122.147.73:4000/allprofiles
+GET http://localhost:4000/allprofiles
 
 ### insert user
-POST http://40.122.147.73:4000/userprofile
+POST http://localhost:4000/userprofile
 Content-Type: application/json
 
 {
     "name" : "Kyle",
-    "userid" : "12",
+    "username" : "12",
     "major" : "CPEN",
     "CourseRegistered" : [
         "CPEN331", "CPEN321"
@@ -20,12 +20,12 @@ Content-Type: application/json
 }
 
 ### insert other user 
-POST http://40.122.147.73:4000/userprofile
+POST http://localhost:4000/userprofile
 Content-Type: application/json
 
 {
     "name" : "Jake",
-    "userid" : "2",
+    "username" : "2",
     "major" : "CPEN",
     "CourseRegistered" : [
         "ELEC201", "CPEN311"
@@ -38,36 +38,36 @@ Content-Type: application/json
 }
 
 ### search user by id
-POST http://40.122.147.73:4000/usersearch
+POST http://localhost:4000/usersearch
 Content-Type: application/json
 
 {
-    "userid" : "1"
+    "username" : "a"
 }
 
 ### search user by id
-POST http://40.122.147.73:4000/usersearch
+POST http://localhost:4000/usersearch
 Content-Type: application/json
 
 {
-    "userid" : "2"
+    "username" : "12"
 }
 
 ### search user by id (doesnt exist)
-POST http://40.122.147.73:4000/usersearch
+POST http://localhost:4000/usersearch
 Content-Type: application/json
 
 {
-    "userid" : "3"
+    "username" : "3"
 }
 
 ### update profile with new profile 
-POST http://40.122.147.73:4000/userupdate
+POST http://localhost:4000/userupdate
 Content-Type: application/json
 
 {
     "name" : "Jake J",
-    "userid" : "2",
+    "username" : "2",
     "major" : "CPEN",
     "CourseRegistered" : [
         "ELEC201", "CPEN400"
@@ -80,19 +80,12 @@ Content-Type: application/json
 }
 
 ### update profile that doesnt exist
-POST http://40.122.147.73:4000/userupdate
+POST http://localhost:4000/inActivity
 Content-Type: application/json
 
 {
-    "name" : "Jake J",
-    "userid" : "21309221",
-    "major" : "CPEN",
-    "CourseRegistered" : [
-        "ELEC201", "CPEN400"
-    ],
-    "school" : "UBC",
-    "phone" : "4442225555",
-    "private" : false,
-    "inActivity" : false,
-    "activityID" : -1
+    "username" : "12",
+    
 }
+
+

@@ -1719,12 +1719,9 @@ id action_settings
 id action_text
 id actions
 id activity_chooser_view_content
-id activity_course
 id activity_desc
 id activity_done
 id activity_id
-id activity_lat
-id activity_long
 id activity_name
 id activity_view
 id add
@@ -1776,6 +1773,7 @@ id content
 id contentPanel
 id coordinator
 id cos
+id courseBTN
 id coursePriority
 id course_list
 id course_page_done_button
@@ -1942,6 +1940,8 @@ id progress_horizontal
 id radio
 id ratio
 id rectangles
+id reg_course_spinner
+id registered_courses
 id reverseSawtooth
 id right
 id right_icon
@@ -2013,6 +2013,9 @@ id stop
 id stretch
 id submenuarrow
 id submit_area
+id suggested_activity1
+id suggested_activity2
+id suggested_activity3
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -2037,9 +2040,6 @@ id textView
 id textView10
 id textView11
 id textView12
-id textView13
-id textView14
-id textView15
 id textView16
 id textView17
 id textView18

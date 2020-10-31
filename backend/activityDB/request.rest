@@ -8,13 +8,15 @@ Content-Type: application/json
 {
     "aid" : "sparklingdangers",
     "name" : "Cpen321 Project",
+    "leader" : "test",
     "usernames" : ["test","aplha"],
     "info" : "Understanding Javascript with TA",
     "major" : "CPEN",
-    "Course" : ["CPEN321", "CPEN331"],
+    "course" : ["CPEN321", "CPEN331"],
     "school" : "UBC",
     "lat" : "49.267941",
-    "long" : "-123.247360"
+    "long" : "-123.247360",
+    "status" : "1"
 }
 ### insert activity
 POST http://localhost:5000/addactivity
@@ -23,13 +25,15 @@ Content-Type: application/json
 {
     "aid" : "ultracheapcow",
     "name" : "Cpen331 Project",
+    "leader": "hulk",
     "usernames" : ["hulk","blackwidow"],
     "info" : "Understanding Life",
     "major" : "CPEN",
-    "Course" : ["CPEN331"],
+    "course" : ["CPEN331"],
     "school" : "UBC",
     "lat" : "49.104599",
-    "long" : "-122.823509"
+    "long" : "-122.823509",
+    "status" : "1"
 }
 ### insert activity
 POST http://localhost:5000/addactivity
@@ -38,13 +42,15 @@ Content-Type: application/json
 {
     "aid" : "differentID",
     "name" : "Cpen331 Project",
+    "leader": "hulk",
     "usernames" : ["hulk","blackwidow"],
     "info" : "GOOD ACTIVITY!",
     "major" : "CPEN",
-    "Course" : ["CPEN331", "CPEN321", "CPEN400"],
+    "course" : ["CPEN331", "CPEN321", "CPEN400"],
     "school" : "UBC",
     "lat" : "49.104599",
-    "long" : "-122.823509"
+    "long" : "-122.823509",
+    "status" : "1"
 }
 ### insert activity
 POST http://localhost:5000/addactivity
@@ -53,13 +59,15 @@ Content-Type: application/json
 {
     "aid" : "diffID",
     "name" : "Cpen331 Project",
+    "leader": "hulk",
     "usernames" : ["hulk","blackwidow"],
     "info" : "okay ACTIVITY!",
     "major" : "CPEN",
-    "Course" : ["CPEN331","CPEN400","CPEN321","ELEC221"],
+    "course" : ["CPEN331","CPEN400","CPEN321","ELEC221"],
     "school" : "UBC",
     "lat" : "50.3112",
-    "long" : "-122.213123"
+    "long" : "-122.213123",
+    "status" : "1"
 }
 ### insert activity
 POST http://localhost:5000/addactivity
@@ -68,13 +76,15 @@ Content-Type: application/json
 {
     "aid" : "difffffid",
     "name" : "Cpen331 Project",
+    "leader": "hulk",
     "usernames" : ["hulk","blackwidow"],
     "info" : "bad ACTIVITY!",
     "major" : "CPSC",
-    "Course" : ["CPEN221"],
+    "course" : ["CPEN221"],
     "school" : "UBC",
     "lat" : "49.3112",
-    "long" : "-122.43232"
+    "long" : "-122.43232",
+    "status" : "1"
 }
 ### insert activity
 POST http://localhost:5000/addactivity
@@ -83,13 +93,15 @@ Content-Type: application/json
 {
     "aid" : "diffffffffid",
     "name" : "Cpen331 Project",
+    "leader": "hulk",
     "usernames" : ["hulk","blackwidow"],
     "info" : "far ACTIVITY!",
     "major" : "CPSC",
-    "Course" : ["CPEN221"],
+    "course" : ["CPEN221"],
     "school" : "UBC",
     "lat" : "1",
-    "long" : "2"
+    "long" : "2",
+    "status" : "1"
 }
 
 
@@ -109,13 +121,15 @@ Content-Type: application/json
 {
     "aid" : "ultracheapcow",
     "name" : "Cpen331 Project",
+    "leader": "hulk",
     "usernames" : ["blackwidow"],
     "info" : "Understanding Life",
     "major" : "CPEN",
-    "Course" : ["CPEN331"],
+    "course" : ["CPEN331"],
     "school" : "UBC",
     "lat" : "49.104599",
-    "long" : "-122.823509"
+    "long" : "-122.823509",
+    "status" : "1"
 }
 
 ### update users
@@ -127,7 +141,7 @@ Content-Type: application/json
         "name" : "Kyle",
         "userid" : "12",
         "major" : "CPEN",
-        "CourseRegistered" : [
+        "courseRegistered" : [
             "CPEN331", "CPEN321", "CPEN400", "ELEC221"
         ],
         "school" : "UBC",

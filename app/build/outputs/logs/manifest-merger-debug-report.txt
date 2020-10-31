@@ -225,7 +225,7 @@ MERGED from [com.android.volley:volley:1.1.0] C:\Users\jaski\.gradle\caches\tran
 	android:usesCleartextTraffic
 		ADDED from C:\Users\jaski\Desktop\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:18:9-44
 activity#com.cpen321.ubclocationbroadcaster.SortedActivityList
-ADDED from C:\Users\jaski\Desktop\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:19:9-65
+ADDED from C:\Users\jaski\Desktop\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:19:9-56
 	android:name
 		ADDED from C:\Users\jaski\Desktop\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:19:19-53
 activity#com.cpen321.ubclocationbroadcaster.GetMatchScore

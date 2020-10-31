@@ -63,7 +63,7 @@ public class MainMapsActivity extends FragmentActivity implements OnMapReadyCall
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         final RequestQueue requestQueueMA = Volley.newRequestQueue(this);
-        String urlMA = "http://40.122.147.73:5000/allactivities";
+        String urlMA = "http://10.0.2.2:5000/allactivities";
 
         JsonArrayRequest allActivities = new JsonArrayRequest(urlMA,
                 new Response.Listener<JSONArray> (){

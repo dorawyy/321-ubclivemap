@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 //startActivity(sign_in_Intent);
                 Log.d("sign in button", "sign in button has been clicked");
 
-                String URL = "http://40.122.147.73:3000/users/login";
+                String URL = "http://10.0.2.2:3000/users/login";
                 final String usrname = username.getText().toString();
                 String passwrd = password.getText().toString();
 

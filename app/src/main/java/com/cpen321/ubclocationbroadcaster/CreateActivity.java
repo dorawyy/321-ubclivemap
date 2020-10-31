@@ -46,7 +46,7 @@ public class CreateActivity extends AppCompatActivity {
                 Log.d("done button", "done button has been clicked");
 
 
-                String URL = "http://40.122.147.73:5000/addactivity";
+                String URL = "http://10.0.2.2:5000/addactivity";
 
                 //format request
                 JSONObject jsnRequest = new JSONObject();

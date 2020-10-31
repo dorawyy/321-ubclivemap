@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.SharedPreferences;
+
+
 public class GetMatchScore extends AppCompatActivity {
 
     @Override
@@ -39,6 +43,7 @@ public class GetMatchScore extends AppCompatActivity {
         final SeekBar majorPriority;
         final Button done_btn;
         final int[] priorities = new int[3];
+        final SharedPreferences userSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
         getRadius = findViewById(R.id.getRadius);
         locPriority = findViewById(R.id.LocationPriority);
@@ -114,18 +119,21 @@ public class GetMatchScore extends AppCompatActivity {
                 //TODO: set the url here
                 String URL = "http://localhost:5000/sortactivities";
 
-
                 final String inputDist = getRadius.getText().toString();
+                final String inputUsername = userSettings.getString("username", "");
+                final int inputLat = 123;
+                final int inputLong = 100;
                 final int inputLoc = priorities[0];
                 final int inputCourse = priorities[1];
                 final int inputMajor = priorities[2];
 
-                //TODO: should i also post the username?
-
                 JSONObject jsnReq = new JSONObject();
                 try {
-                    jsnReq.put("radius", inputDist);
+                    jsnReq.put("maxradius", inputDist);
+                    jsnReq.put("user", inputUsername);
                     jsnReq.put("locationweight", inputLoc);
+                    jsnReq.put("userlat", inputLat);
+                    jsnReq.put("userlong", inputLong);
                     jsnReq.put("coursesweight", inputCourse);
                     jsnReq.put("majorweight", inputMajor);
 

@@ -3,7 +3,9 @@ package com.cpen321.ubclocationbroadcaster;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -51,6 +53,8 @@ public class ProfileActivity extends AppCompatActivity {
         phone_number = findViewById(R.id.phone_number_button);
         school = findViewById(R.id.school_button);
         major = findViewById(R.id.major_button);
+        final SharedPreferences userSettings = PreferenceManager.getDefaultSharedPreferences(this);
+
 
         //drop down menu and view list
         mySpinner = findViewById(R.id.course_spinner);
@@ -212,7 +216,7 @@ public class ProfileActivity extends AppCompatActivity {
         final String inputPhone = phone_number.getText().toString();
         final String inputSchool = school.getText().toString();
         final String inputMajor = major.getText().toString();
-        final int userID = 198;
+        final String userID =  userSettings.getString("username", "");
         final boolean inputPrivate = false;
         final boolean inputInActivity = false;
         final int inputActivityID = -1;

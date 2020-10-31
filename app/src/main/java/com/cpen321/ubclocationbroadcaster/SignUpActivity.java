@@ -20,6 +20,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.SharedPreferences;
+
 /* This activity creates a page to sign up,
    and sends the data to the database */
 
@@ -85,10 +87,13 @@ public class SignUpActivity extends AppCompatActivity {
 
                 MySingleton.getInstance(SignUpActivity.this).addToRequestQueue(json_obj);
 
-                //TODO: if boxes are empty, don't go to the next page
             }
         });
 
+        SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor prefEditor = userSettings.edit();
+        prefEditor.putString("UserName", String.valueOf(username));
+        prefEditor.commit();
 
     }
 }

@@ -43,7 +43,7 @@ public class GetMatchScore extends AppCompatActivity {
         final SeekBar majorPriority;
         final Button done_btn;
         final int[] priorities = new int[3];
-        final SharedPreferences userSettings = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
 
         getRadius = findViewById(R.id.getRadius);
         locPriority = findViewById(R.id.LocationPriority);
@@ -120,7 +120,7 @@ public class GetMatchScore extends AppCompatActivity {
                 String URL = "http://localhost:5000/sortactivities";
 
                 final String inputDist = getRadius.getText().toString();
-                final String inputUsername = userSettings.getString("username", "");
+                final String inputUsername = userSettings.getString("USERNAME", "");
                 final int inputLat = 123;
                 final int inputLong = 100;
                 final int inputLoc = priorities[0];

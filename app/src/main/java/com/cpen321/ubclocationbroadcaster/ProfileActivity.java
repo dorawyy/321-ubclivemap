@@ -53,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
         phone_number = findViewById(R.id.phone_number_button);
         school = findViewById(R.id.school_button);
         major = findViewById(R.id.major_button);
-        final SharedPreferences userSettings = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
 
 
         //drop down menu and view list
@@ -216,7 +216,7 @@ public class ProfileActivity extends AppCompatActivity {
         final String inputPhone = phone_number.getText().toString();
         final String inputSchool = school.getText().toString();
         final String inputMajor = major.getText().toString();
-        final String userID =  userSettings.getString("username", "");
+        final String userID =  userSettings.getString("USERNAME", "");
         final boolean inputPrivate = false;
         final boolean inputInActivity = false;
         final int inputActivityID = -1;

@@ -92,7 +92,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
         SharedPreferences.Editor prefEditor = userSettings.edit();
-        prefEditor.putString("UserName", String.valueOf(username));
+        prefEditor.putString("USERNAME", username.getText().toString());
         prefEditor.commit();
 
     }

@@ -64,7 +64,7 @@ public class CreateActivity extends AppCompatActivity {
         JSONObject findUser = new JSONObject();
         mySpinner = findViewById(R.id.reg_course_spinner);
         reg_courses_view = findViewById((R.id.registered_courses));
-        
+
         user_courses[0] = "Choose from your courses";
         Log.d("checkpoint1","UserDetails.courseRegistered[0] : " + UserDetails.courseRegistered[0]);
         for(int i = 0; i < UserDetails.courseRegistered.length; i++){

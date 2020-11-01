@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MenuActivity extends AppCompatActivity {
     private Button viewMapButton;
@@ -70,8 +71,13 @@ public class MenuActivity extends AppCompatActivity {
         createActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent signInIntent = new Intent(MenuActivity.this, CreateActivity.class);
-                startActivity(signInIntent);
+                if(UserDetails.inactivity.equals("False")){
+                    Intent signInIntent = new Intent(MenuActivity.this, CreateActivity.class);
+                    startActivity(signInIntent);
+                }
+                else{
+                    Toast.makeText(MenuActivity.this, "You are already in an Activity!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

@@ -9,10 +9,11 @@ var app = express();
 app.use(express.json())
 
 
-function formatResponse(successVal, status) {
+function formatResponse(successVal, status, val) {
     const resp = {
         success : successVal,
-        status : status
+        status : status,
+        value : val
     }
     return resp;
 }
@@ -22,7 +23,7 @@ function formatResponse(successVal, status) {
 ****************************************************************************/
 
 // list all users in database
-app.get('/users', async (req, res) => {
+app.get('/users/all', async (req, res) => {
     var retarr = [];
     var cursor = await Account.find().exec();
     return res.json(cursor)
@@ -43,12 +44,13 @@ app.post('/users/register', async (req, res) => {
 
     // if username exists in database, fail
     if(!userIsGoodRequest(req.body)){
-        return res.json(formatResponse(false, "Not well formed request."));
+        return res.json(formatResponse(false, "Not well formed request.", null));
     }
+
     findarr = [];
     var response = await Account.findOne({"name" : req.body.name}).exec();
     if(response != null){
-        return res.json(formatResponse(false, "User already exists."));
+        return res.json(formatResponse(false, "Account already exists.", null));
     }
 
     // enter user into database, encrypt password
@@ -72,23 +74,39 @@ app.post('/users/register', async (req, res) => {
     } catch (err) {
         return res.json(formatResponse(false, err, null));
     }
-    return res.json(formatResponse(true, "User registered successfully.", null));
+    return res.json(formatResponse(true, "Account registered successfully.", null));
 });
+
+app.post('/users/delete', async (req,res) =>{
+    if(!req.body.hasOwnProperty("name")){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+
+    var response = await Account.deleteOne({"name" : req.body.name});
+    if(response.n == 0){
+        return res.json(formatResponse(false, "Username does not exist.", null));
+    }
+    return res.json(formatResponse(true, "Account deleted successfully.", null));
+})
 
 // login a user
 app.post('/users/login', async (req, res) => {
+    if(!userIsGoodRequest(req.body)){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+
     var response = await Account.findOne({"name" : req.body.name}).exec();
     if(response == null){
-        return res.json(formatResponse(false, "Username does not exist."));
+        return res.json(formatResponse(false, "Username does not exist.", null));
     }
     try {
         if(await bcrypt.compare(req.body.password, response.password)) {
-            return res.json(formatResponse(true, "Authentication successful."));
+            return res.json(formatResponse(true, "Authentication successful.", null));
         } else {
-            return res.json(formatResponse(false, "Invalid password."));
+            return res.json(formatResponse(false, "Invalid password.", null));
         }
     } catch (e) {
-        return res.json(formatResponse(false, "I dunno"));
+        return res.json(formatResponse(false, "I dunno", null));
     }
 });
 
@@ -97,36 +115,88 @@ app.post('/users/login', async (req, res) => {
 ****************************************************************************/
 
 // list all user profile in database
-app.get('/allprofiles', async (req, res) => {
+app.get('/profiles/all', async (req, res) => {
     var retarr = [];
     var cursor = await Profile.find().exec();
     return res.json(cursor)
 });
 
+function profileIsGoodRequest(body){
+    if(!body.hasOwnProperty('name')){
+        return false;
+    }
+    if(!body.hasOwnProperty('username')){
+        return false;
+    }
+    if(!body.hasOwnProperty('major')){
+        return false;
+    }
+    if(!body.hasOwnProperty('CourseRegistered')){
+        return false;
+    }
+    if(!body.hasOwnProperty('school')){
+        return false;
+    }
+    if(!body.hasOwnProperty('phone')){
+        return false;
+    }
+    if(!body.hasOwnProperty('private')){
+        return false;
+    }
+    if(!body.hasOwnProperty('inActivity')){
+        return false;
+    }
+    if(!body.hasOwnProperty('activityID')){
+        return false;
+    }
+    return true;
+}
+
 // search for a user profile in the database
-app.post("/usersearch", async (req, res) => {
+app.post("/profiles/search", async (req, res) => {
+    if(!req.body.hasOwnProperty("username")){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
     var response = await Profile.findOne({"username" : req.body.username}).exec()
     if(response == null) {
-        return res.json(formatResponse(false, "User does not exist.", null));
+        return res.json(formatResponse(false, "Username does not exist.", null));
     }
     return res.json(formatResponse(true, "User found successfully.", response));
 });
 
 // update profile with new profile
-app.post("/userupdate", async (req, res) => {
+app.post("/profiles/update", async (req, res) => {
+    if(!profileIsGoodRequest(req.body)){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
     var response = await Profile.replaceOne({"username" : req.body.username}, req.body)
     if(response.n == 0){
-        return res.json(formatResponse(false, "username does not exist", null));
+        return res.json(formatResponse(false, "Username does not exist.", null));
     }
     return res.json(formatResponse(true, "User profile updated successfully.", null));
 });
 
+app.post('/profiles/delete', async (req,res) =>{
+    if(!req.body.hasOwnProperty("username")){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+
+    var response = await Profile.deleteOne({"username" : req.body.username});
+    if(response.n == 0){
+        return res.json(formatResponse(false, "Username does not exist.", null));
+    }
+    return res.json(formatResponse(true, "User profile deleted successfully.", null));
+})
+
 // add user profile to database
-app.post("/userprofile", async (req, res) => {
+app.post("/profiles/add", async (req, res) => {
     // if username is in database, cant add
+    if(!profileIsGoodRequest(req.body)){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
     var response = await Profile.findOne({"username" : req.body.username}).exec()
     if(response != null) {
-        return res.json(formatResponse(false, "username already exists.", null));
+        return res.json(formatResponse(false, "Username already exists.", null));
     }
     try {
         await Profile.create(req.body);
@@ -155,15 +225,14 @@ app.post("/inActivity", async(req, res) => {
 ****************************************************************************/
 
 // list all activities in database
-app.get('/allactivities', async (req, res) => {
+app.get('/activities/all', async (req, res) => {
     var retarr = [];
     var cursor = await Activity.find().exec();
     return res.json(cursor)
 });
 
 // search for an activity in the database
-app.post("/activitysearch", async (req, res) => {
-    //console.log("hihi " + req.bod.aid);
+app.post("/activities/search", async (req, res) => {
     var response = await Activity.findOne({"aid" : req.body.aid}).exec()
     if(response == null) {
         return res.json(formatResponse(false, "Activity not exist.", null));
@@ -172,7 +241,7 @@ app.post("/activitysearch", async (req, res) => {
 });
 
 // add a new activity
-app.post("/addactivity", async (req, res) => {
+app.post("/activities/add", async (req, res) => {
     var response = await Activity.findOne({"aid" : req.body.aid}).exec()
     if(response != null) {
         return res.json(formatResponse(false, "Activity Id Taken", null));
@@ -186,13 +255,21 @@ app.post("/addactivity", async (req, res) => {
 });
 
 // add a new user to the activity
-app.post("/updateUsers", async (req, res) => {
+app.post("/activities/update", async (req, res) => {
     var response = await Activity.replaceOne({"aid" : req.body.aid}, req.body)
     if(response.n == 0){
         return res.json(formatResponse(false, "Activity does not exist", null));
     }
-    return res.json(formatResponse(true, "Activity users updated successfully.", null));
+    return res.json(formatResponse(true, "Activity updated successfully.", null));
 });
+
+app.post('/activities/delete', async (req,res) =>{
+    var response = await Activity.deleteOne({"aid" : req.body.aid});
+    if(response.n == 0){
+        return res.json(formatResponse(false, "Activity does not exist.", null));
+    }
+    return res.json(formatResponse(true, "Activity deleted successfully.", null));
+})
 
 // REFERENCE : https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
@@ -213,7 +290,7 @@ function deg2rad(deg) {
     return deg * (Math.PI/180)
 }
 
-app.post("/sortactivities", async (req, res) => {
+app.post("/activities/sort", async (req, res) => {
     var sorted_activities = []
     var cursor = await Activity.find().exec();
 

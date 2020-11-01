@@ -29,15 +29,15 @@ com/cpen321/ubclocationbroadcaster/ListScrollingActivity.java
  com.cpen321.ubclocationbroadcaster.ListScrollingActivity
  com.cpen321.ubclocationbroadcaster.ListScrollingActivity$1
  com.cpen321.ubclocationbroadcaster.ListScrollingActivity$2
-com/cpen321/ubclocationbroadcaster/CreateActivity.java
- com.cpen321.ubclocationbroadcaster.CreateActivity
- com.cpen321.ubclocationbroadcaster.CreateActivity$1
- com.cpen321.ubclocationbroadcaster.CreateActivity$1$1
- com.cpen321.ubclocationbroadcaster.CreateActivity$2
- com.cpen321.ubclocationbroadcaster.CreateActivity$2$1
- com.cpen321.ubclocationbroadcaster.CreateActivity$2$2
- com.cpen321.ubclocationbroadcaster.CreateActivity$2$3
- com.cpen321.ubclocationbroadcaster.CreateActivity$2$4
+com/cpen321/ubclocationbroadcaster/MainActivity.java
+ com.cpen321.ubclocationbroadcaster.MainActivity
+ com.cpen321.ubclocationbroadcaster.MainActivity$1
+ com.cpen321.ubclocationbroadcaster.MainActivity$2
+ com.cpen321.ubclocationbroadcaster.MainActivity$2$1
+ com.cpen321.ubclocationbroadcaster.MainActivity$2$1$1
+ com.cpen321.ubclocationbroadcaster.MainActivity$2$1$2
+ com.cpen321.ubclocationbroadcaster.MainActivity$2$2
+ com.cpen321.ubclocationbroadcaster.MainActivity$3
 com/cpen321/ubclocationbroadcaster/UserDetails.java
  com.cpen321.ubclocationbroadcaster.UserDetails
 com/cpen321/ubclocationbroadcaster/SignUpActivity.java
@@ -59,12 +59,12 @@ com/cpen321/ubclocationbroadcaster/MenuActivity.java
  com.cpen321.ubclocationbroadcaster.MenuActivity$4
  com.cpen321.ubclocationbroadcaster.MenuActivity$5
  com.cpen321.ubclocationbroadcaster.MenuActivity$6
-com/cpen321/ubclocationbroadcaster/MainActivity.java
- com.cpen321.ubclocationbroadcaster.MainActivity
- com.cpen321.ubclocationbroadcaster.MainActivity$1
- com.cpen321.ubclocationbroadcaster.MainActivity$2
- com.cpen321.ubclocationbroadcaster.MainActivity$2$1
- com.cpen321.ubclocationbroadcaster.MainActivity$2$1$1
- com.cpen321.ubclocationbroadcaster.MainActivity$2$1$2
- com.cpen321.ubclocationbroadcaster.MainActivity$2$2
- com.cpen321.ubclocationbroadcaster.MainActivity$3
+com/cpen321/ubclocationbroadcaster/CreateActivity.java
+ com.cpen321.ubclocationbroadcaster.CreateActivity
+ com.cpen321.ubclocationbroadcaster.CreateActivity$1
+ com.cpen321.ubclocationbroadcaster.CreateActivity$1$1
+ com.cpen321.ubclocationbroadcaster.CreateActivity$2
+ com.cpen321.ubclocationbroadcaster.CreateActivity$2$1
+ com.cpen321.ubclocationbroadcaster.CreateActivity$2$2
+ com.cpen321.ubclocationbroadcaster.CreateActivity$2$3
+ com.cpen321.ubclocationbroadcaster.CreateActivity$2$4

@@ -6,7 +6,8 @@ node_js:
   - "stable" 
 
 before_install:
-  - mongod --port 27020 --dbpath ./backend/localdb
+  - mongod --port 27020 --dbpath ./backend/localdb &
+  - sleep 3
 
 script:
   - cd ./backend/server

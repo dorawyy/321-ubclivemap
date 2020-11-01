@@ -9,8 +9,11 @@ com/cpen321/ubclocationbroadcaster/CreateActivity.java
  com.cpen321.ubclocationbroadcaster.CreateActivity$2$2
  com.cpen321.ubclocationbroadcaster.CreateActivity$2$3
  com.cpen321.ubclocationbroadcaster.CreateActivity$2$4
+<<<<<<< HEAD
 com/cpen321/ubclocationbroadcaster/MyJSONArrayRequest.java
  com.cpen321.ubclocationbroadcaster.MyJSONArrayRequest
+=======
+>>>>>>> 8093c60c83357bf01adfe283e9775a63ad5c1d68
 com/cpen321/ubclocationbroadcaster/MySingleton.java
  com.cpen321.ubclocationbroadcaster.MySingleton
 com/cpen321/ubclocationbroadcaster/MainMapsActivity.java
@@ -26,8 +29,13 @@ com/cpen321/ubclocationbroadcaster/SignUpActivity.java
  com.cpen321.ubclocationbroadcaster.SignUpActivity$1
  com.cpen321.ubclocationbroadcaster.SignUpActivity$1$1
  com.cpen321.ubclocationbroadcaster.SignUpActivity$1$2
+<<<<<<< HEAD
 com/cpen321/ubclocationbroadcaster/SortedListClass.java
  com.cpen321.ubclocationbroadcaster.SortedListClass
+=======
+com/cpen321/ubclocationbroadcaster/ActivityPage.java
+ com.cpen321.ubclocationbroadcaster.ActivityPage
+>>>>>>> 8093c60c83357bf01adfe283e9775a63ad5c1d68
 com/cpen321/ubclocationbroadcaster/ActivityStuffMenu.java
  com.cpen321.ubclocationbroadcaster.ActivityStuffMenu
  com.cpen321.ubclocationbroadcaster.ActivityStuffMenu$1
@@ -64,6 +72,12 @@ com/cpen321/ubclocationbroadcaster/ProfileActivity.java
  com.cpen321.ubclocationbroadcaster.ProfileActivity$2$2
 com/cpen321/ubclocationbroadcaster/SortedActivityList.java
  com.cpen321.ubclocationbroadcaster.SortedActivityList
+<<<<<<< HEAD
+=======
+ com.cpen321.ubclocationbroadcaster.SortedActivityList$1
+ com.cpen321.ubclocationbroadcaster.SortedActivityList$1$1
+ com.cpen321.ubclocationbroadcaster.SortedActivityList$2
+>>>>>>> 8093c60c83357bf01adfe283e9775a63ad5c1d68
 com/cpen321/ubclocationbroadcaster/ListScrollingActivity.java
  com.cpen321.ubclocationbroadcaster.ListScrollingActivity
  com.cpen321.ubclocationbroadcaster.ListScrollingActivity$1

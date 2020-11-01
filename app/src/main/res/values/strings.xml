@@ -161,5 +161,7 @@
         <item>CPEN 499A</item>
         <item>CPEN 499B</item>
     </string-array>
-
+    <string-array name="spinner2">
+        <item>Select your Activities </item>
+    </string-array>
 </resources>

@@ -205,8 +205,8 @@ public class ProfileActivity extends AppCompatActivity {
         done_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent doneIntent = new Intent(ProfileActivity.this, MenuActivity.class);
-                startActivity(doneIntent);
+                //Intent doneIntent = new Intent(ProfileActivity.this, MenuActivity.class);
+                //startActivity(doneIntent);
                 Log.d("done button", "done button has been clicked");
 
         String URL = "http://40.122.147.73:3030/profiles/add";
@@ -242,7 +242,14 @@ public class ProfileActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+                if (inputName.isEmpty() || inputPhone.isEmpty() || inputSchool.isEmpty() || inputMajor.isEmpty()){
+                    Toast.makeText(ProfileActivity.this, "ERROR: Enter all fields!", Toast.LENGTH_SHORT).show();
+                }
 
+                else if (course_list.isEmpty()){
+                    Toast.makeText(ProfileActivity.this, "Select your courses!", Toast.LENGTH_SHORT).show();
+                }
+                else {
                 JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, POSTjsnReq,
                         new Response.Listener<JSONObject> (){
                             @Override
@@ -251,6 +258,8 @@ public class ProfileActivity extends AppCompatActivity {
                                     boolean successVal = (boolean) response.get("success");
                                     String stat = response.get("status").toString();
                                     if(successVal){
+                                        Intent doneIntent = new Intent(ProfileActivity.this, MenuActivity.class);
+                                        startActivity(doneIntent);
 
                                         UserDetails.name = inputName;
                                         UserDetails.phone = inputPhone;
@@ -286,7 +295,7 @@ public class ProfileActivity extends AppCompatActivity {
                 });
 
         requestQueue.add(json_obj);
-            }
+            }}
         });
     }
 

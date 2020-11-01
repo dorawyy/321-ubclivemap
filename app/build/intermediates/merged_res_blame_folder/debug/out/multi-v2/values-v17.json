@@ -1,17 +1,10 @@
 {
     "logs": [
         {
-<<<<<<< HEAD
-            "outputFile": "C:\\Users\\jaski\\Desktop\\final\\CPEN-321-Location-App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v17\\values-v17.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\jaski\\.gradle\\caches\\transforms-2\\files-2.1\\643adb81776bc4f32f0e8ac61b12f06a\\appcompat-1.2.0\\res\\values-v17\\values-v17.xml",
-=======
             "outputFile": "C:\\Users\\kimib\\AndroidStudioProjects\\CPEN-321-Location-App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v17\\values-v17.xml",
             "map": [
                 {
                     "source": "C:\\Users\\kimib\\.gradle\\caches\\transforms-2\\files-2.1\\643adb81776bc4f32f0e8ac61b12f06a\\appcompat-1.2.0\\res\\values-v17\\values-v17.xml",
->>>>>>> 464413f0f35376ca7dba5a2813d7532d4f716faa
                     "from": {
                         "startLines": "2,5,9,12,15,18,22,25,29,33,37,40,43,46,50,53,57",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

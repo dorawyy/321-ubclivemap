@@ -45,6 +45,7 @@ import static org.junit.Assert.*;
 public class ProfileActivityTest {
     @Rule
     public IntentsTestRule<ProfileActivity> mActivityTestRule = new IntentsTestRule<ProfileActivity>(ProfileActivity.class);
+
     private String name_t = "Jack";
     private String school_t = "UBC";
     private String major_t = "Computer Engineering";
@@ -91,6 +92,39 @@ public class ProfileActivityTest {
         //check if it has items in list
         Espresso.onView(withId(R.id.course_list)).check(matches(hasDescendant(withText(course_sel1))));
         Espresso.onView(withId(R.id.course_list)).check(matches(hasDescendant(withText(course_sel2))));
+    }
+
+    @Test
+    public void CreateProfileWithInvalidData(){
+        //trying to create a profile with empty fields
+        Espresso.onView(withId(R.id.sign_up_name_button)).perform(typeText(name_t));
+        Espresso.onView(withId(R.id.school_button)).perform(typeText(school_t));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.course_page_done_button)).perform(click());
+    }
+
+    @Test
+    public void CreateProfileWithNoCourse(){
+        //trying to create a profile with empty course list
+        Espresso.onView(withId(R.id.sign_up_name_button)).perform(typeText(name_t));
+        Espresso.onView(withId(R.id.school_button)).perform(typeText(school_t));
+        Espresso.onView(withId(R.id.major_button)).perform(typeText(major_t));
+        Espresso.onView(withId(R.id.phone_number_button)).perform(typeText(number_t));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.course_page_done_button)).perform(click());
+    }
+
+    @Test
+    public void CreateProfileWithValidInfo(){
+        //trying to create a profile with empty fields
+        Espresso.onView(withId(R.id.sign_up_name_button)).perform(typeText(name_t));
+        Espresso.onView(withId(R.id.school_button)).perform(typeText(school_t));
+        Espresso.onView(withId(R.id.major_button)).perform(typeText(major_t));
+        Espresso.onView(withId(R.id.phone_number_button)).perform(typeText(number_t));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.course_spinner)).perform(click());
+        Espresso.onData(allOf(is(instanceOf(String.class)), is(course_sel1))).perform(click());
+        Espresso.onView(withId(R.id.course_page_done_button)).perform(click());
     }
 
     @After

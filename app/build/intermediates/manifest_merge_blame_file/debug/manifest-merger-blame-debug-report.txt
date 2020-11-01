@@ -6,24 +6,6 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="16"
-<<<<<<< HEAD
-8-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml
-9        android:targetSdkVersion="30" />
-9-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml
-10
-11    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-11-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:6:5-79
-11-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:6:22-76
-12    <uses-permission android:name="android.permission.INTERNET" />
-12-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:7:5-67
-12-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:7:22-64
-13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-13-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:8:5-79
-13-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:8:22-76
-14    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-14-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:9:5-81
-14-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:9:22-78
-=======
 8-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="30" />
 9-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml
@@ -40,7 +22,6 @@
 14    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 14-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:9:5-81
 14-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:9:22-78
->>>>>>> 464413f0f35376ca7dba5a2813d7532d4f716faa
 15
 16    <uses-feature
 16-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\kimib\.gradle\caches\transforms-2\files-2.1\cba6c8734b8fd59577a0edb758423420\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
@@ -60,51 +41,13 @@
 22-->[com.google.android.gms:play-services-measurement:17.6.0] C:\Users\kimib\.gradle\caches\transforms-2\files-2.1\3110d8a723296d033cc98de2c935defb\jetified-play-services-measurement-17.6.0\AndroidManifest.xml:26:22-107
 23
 24    <application
-<<<<<<< HEAD
-24-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:11:5-68:19
-25        android:allowBackup="true"
-25-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:12:9-35
-=======
 24-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:11:5-68:19
 25        android:allowBackup="true"
 25-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:12:9-35
->>>>>>> 464413f0f35376ca7dba5a2813d7532d4f716faa
 26        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 26-->[androidx.core:core:1.3.1] C:\Users\kimib\.gradle\caches\transforms-2\files-2.1\2332c8a007a0a064fb88af5c16fb60e8\core-1.3.1\AndroidManifest.xml:24:18-86
 27        android:debuggable="true"
 28        android:icon="@mipmap/ic_launcher"
-<<<<<<< HEAD
-28-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:13:9-43
-29        android:label="@string/app_name"
-29-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:14:9-41
-30        android:roundIcon="@mipmap/ic_launcher_round"
-30-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:15:9-54
-31        android:supportsRtl="true"
-31-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:16:9-35
-32        android:testOnly="true"
-33        android:theme="@style/AppTheme"
-33-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:17:9-40
-34        android:usesCleartextTraffic="true" >
-34-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:18:9-44
-35        <activity android:name="com.cpen321.ubclocationbroadcaster.SortedActivityList" />
-35-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:19:9-56
-35-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:19:19-53
-36        <activity android:name="com.cpen321.ubclocationbroadcaster.GetMatchScore" />
-36-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:20:9-51
-36-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:20:19-48
-37
-38        <service
-38-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:22:9-29:19
-39            android:name="com.cpen321.ubclocationbroadcaster.MyFirebaseMessagingService"
-39-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:23:13-55
-40            android:exported="false" >
-40-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:24:13-37
-41            <intent-filter>
-41-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:26:13-28:29
-42                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-42-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:27:17-78
-42-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:27:25-75
-=======
 28-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:13:9-43
 29        android:label="@string/app_name"
 29-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:14:9-41
@@ -135,26 +78,10 @@
 42                <action android:name="com.google.firebase.MESSAGING_EVENT" />
 42-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:27:17-78
 42-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:27:25-75
->>>>>>> 464413f0f35376ca7dba5a2813d7532d4f716faa
 43            </intent-filter>
 44        </service>
 45
 46        <activity android:name="com.cpen321.ubclocationbroadcaster.ActivityStuffMenu" />
-<<<<<<< HEAD
-46-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:31:9-55
-46-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:31:19-52
-47        <activity
-47-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:32:9-35:59
-48            android:name="com.cpen321.ubclocationbroadcaster.ListScrollingActivity"
-48-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:33:13-50
-49            android:label="@string/title_activity_list_scrolling"
-49-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:34:13-66
-50            android:theme="@style/AppTheme.NoActionBar" />
-50-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:35:13-56
-51        <activity android:name="com.cpen321.ubclocationbroadcaster.MenuActivity" />
-51-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:36:9-50
-51-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:36:19-47
-=======
 46-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:31:9-55
 46-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:31:19-52
 47        <activity
@@ -168,7 +95,6 @@
 51        <activity android:name="com.cpen321.ubclocationbroadcaster.MenuActivity" />
 51-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:36:9-50
 51-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:36:19-47
->>>>>>> 464413f0f35376ca7dba5a2813d7532d4f716faa
 52        <!--
 53             The API key for Google Maps-based APIs is defined as a string resource.
 54             (See the file "res/values/google_maps_api.xml").
@@ -178,37 +104,6 @@
 58             You can define the keys for the debug and release targets in src/debug/ and src/release/.
 59        -->
 60        <activity
-<<<<<<< HEAD
-60-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:45:9-47:64
-61            android:name="com.cpen321.ubclocationbroadcaster.MainMapsActivity"
-61-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:46:13-45
-62            android:label="@string/title_activity_main_maps" />
-62-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:47:13-61
-63        <activity android:name="com.cpen321.ubclocationbroadcaster.CreateActivity" />
-63-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:48:9-52
-63-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:48:19-49
-64        <activity android:name="com.cpen321.ubclocationbroadcaster.ProfileActivity" />
-64-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:49:9-53
-64-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:49:19-50
-65        <activity android:name="com.cpen321.ubclocationbroadcaster.SignUpActivity" />
-65-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:50:9-52
-65-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:50:19-49
-66        <activity
-66-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:51:9-59:20
-67            android:name="com.cpen321.ubclocationbroadcaster.MainActivity"
-67-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:52:13-41
-68            android:label="@string/title_activity_login" >
-68-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:53:13-57
-69            <intent-filter>
-69-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:54:13-58:29
-70                <action android:name="android.intent.action.MAIN" />
-70-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:55:17-69
-70-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:55:25-66
-71
-72                <category android:name="android.intent.category.LAUNCHER" />
-72-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:57:17-77
-72-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:57:27-74
-=======
 60-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:45:9-47:64
 61            android:name="com.cpen321.ubclocationbroadcaster.MainMapsActivity"
 61-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:46:13-45
@@ -238,25 +133,10 @@
 72                <category android:name="android.intent.category.LAUNCHER" />
 72-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:57:17-77
 72-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:57:27-74
->>>>>>> 464413f0f35376ca7dba5a2813d7532d4f716faa
 73            </intent-filter>
 74        </activity>
 75
 76        <meta-data
-<<<<<<< HEAD
-76-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:61:9-63:55
-77            android:name="com.google.android.geo.API_KEY"
-77-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:62:13-58
-78            android:value="@string/google_maps_key" />
-78-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:63:13-52
-79
-80        <uses-library
-80-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:65:9-67:40
-81            android:name="org.apache.http.legacy"
-81-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:66:13-50
-82            android:required="false" />
-82-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:67:13-37
-=======
 76-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:61:9-63:55
 77            android:name="com.google.android.geo.API_KEY"
 77-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:62:13-58
@@ -269,7 +149,6 @@
 81-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:66:13-50
 82            android:required="false" />
 82-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:67:13-37
->>>>>>> 464413f0f35376ca7dba5a2813d7532d4f716faa
 83        <!--
 84             FirebaseMessagingService performs security checks at runtime,
 85             but set to not exported to explicitly avoid allowing another app to call it.
@@ -283,17 +162,10 @@
 90            android:exported="false" >
 90-->[com.google.firebase:firebase-messaging:20.3.0] C:\Users\kimib\.gradle\caches\transforms-2\files-2.1\ea7c1fecf28fba15ea402ccadff790be\jetified-firebase-messaging-20.3.0\AndroidManifest.xml:31:13-37
 91            <intent-filter android:priority="-500" >
-<<<<<<< HEAD
-91-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:26:13-28:29
-92                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-92-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:27:17-78
-92-->C:\Users\jaski\Desktop\final\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:27:25-75
-=======
 91-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:26:13-28:29
 92                <action android:name="com.google.firebase.MESSAGING_EVENT" />
 92-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:27:17-78
 92-->C:\Users\kimib\AndroidStudioProjects\CPEN-321-Location-App\app\src\main\AndroidManifest.xml:27:25-75
->>>>>>> 464413f0f35376ca7dba5a2813d7532d4f716faa
 93            </intent-filter>
 94        </service>
 95        <service

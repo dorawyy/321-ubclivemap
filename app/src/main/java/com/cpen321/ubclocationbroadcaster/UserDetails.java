@@ -2,22 +2,22 @@ package com.cpen321.ubclocationbroadcaster;
 
 public class UserDetails {
     public static String username;
-    public String real_name;
-    public String u_name;
-    public String major;
-    public String[] courseRegistered ;
-    public String school;
-    public String phone;
-    public String privatePublic;
-    public String inactivity;
-    public String activityID;
+    public static String name;
+    //public static String u_name;
+    public static String major;
+    public static String[] courseRegistered ;
+    public static String school;
+    public static String phone;
+    public static String privatePublic;
+    public static String inactivity;
+    public static String activityID;
 
-    public UserDetails(){
+    /*public UserDetails(){
         u_name = username;
-    }
+    }*/
 
 
-    public UserDetails(String uname){
+    UserDetails(String uname){
         username = uname;
     }
 }

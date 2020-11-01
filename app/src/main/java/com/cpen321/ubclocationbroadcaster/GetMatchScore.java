@@ -129,7 +129,7 @@ public class GetMatchScore extends AppCompatActivity {
                 JSONObject jsnReq = new JSONObject();
                 try {
                     jsnReq.put("radius", inputDist);
-                    jsnReq.put("user", UserDetails.real_name);
+                    jsnReq.put("user", UserDetails.name);
                     jsnReq.put("userid", UserDetails.username);
                     jsnReq.put("major", UserDetails.major);
                     jsnReq.put("school", UserDetails.school);

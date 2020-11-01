@@ -17,6 +17,7 @@ import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
 
 public class MainActivityTest {

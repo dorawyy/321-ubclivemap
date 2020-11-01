@@ -77,6 +77,14 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, "Enter a password", Toast.LENGTH_SHORT).show();
                 }
 
+                if(inputUsername.isEmpty()){
+                    Toast.makeText(SignUpActivity.this, "Enter a username", Toast.LENGTH_SHORT).show();
+                }
+
+                else if(inputPassword.isEmpty()){
+                    Toast.makeText(SignUpActivity.this, "Enter a password", Toast.LENGTH_SHORT).show();
+                }
+                else {
                 final JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnReq,
                         new Response.Listener<JSONObject> (){
                             @Override
@@ -88,7 +96,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         startActivity(signUpIntent);
                                     }
                                     else {
-                                            Toast.makeText(SignUpActivity.this, "ERROR: Invalid Username", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(SignUpActivity.this, "ERROR: Username Already Existed", Toast.LENGTH_SHORT).show();
                                     }
                                     String stat = response.get("status").toString();
                                     UserDetails.username = inputUsername;
@@ -107,7 +115,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 MySingleton.getInstance(SignUpActivity.this).addToRequestQueue(json_obj);
 
-            }
+            }}
         });
 
     }

@@ -2,9 +2,15 @@ package com.cpen321.ubclocationbroadcaster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -29,34 +36,49 @@ public class SortedActivityList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sorted_list);
 
-        final TextView act1;
-        final TextView act2;
-        final TextView act3;
-
-        act1 = findViewById(R.id.suggested_activity1);
-        act2 = findViewById(R.id.suggested_activity2);
-        act3 = findViewById(R.id.suggested_activity3);
-
-        String URL = "https://";
-        final List<String> jsonResponses = new ArrayList<>();
+        final String URL = "http://10.0.2.2:3000/sortactivities";
+        final String[] activity_list;
+        final ListView activity_list_show;
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
-        final String[] data = null;
-        JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.GET, URL, null,
-                new Response.Listener<JSONObject> (){
+
+        activity_list_show = findViewById(R.id.activity_list_show);
+
+        JsonArrayRequest json_obj = new JsonArrayRequest(Request.Method.GET, URL, null,
+                new Response.Listener<JSONArray> (){
                     @Override
-                    public void onResponse(JSONObject response){
+                    public void onResponse(JSONArray response){
                         //Intent intent = new Intent(SortedActivityList.this, ActivityPage.class);
                         //startActivity(intent);
+                        final ArrayList<String> activity_list = new ArrayList<String>();
+                        JSONArray jsonArray = response;
                         try {
-                            JSONObject obj = response.getJSONObject("colorObject");
-                            String color = obj.getString("colorName");
-                            String desc = obj.getString("description");
+                            for (int i = 0; i < jsonArray.length(); i++)
+                            {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                String aid = jsonObject.getString("aid");
+                                String name = jsonObject.getString("name");
+                                String leader = jsonObject.getString("leader");
+                                String usernames = jsonObject.getString("usernames");
+                                String info = jsonObject.getString("info");
+                                String major = jsonObject.getString("major");
+                                String course = jsonObject.getString("course");
+                                String school = jsonObject.getString("school");
+                                String locLat = jsonObject.getString("lat");
+                                String locLong = jsonObject.getString("long");
+                                String status = jsonObject.getString("status");
 
-                            // Adds strings from object to the "data" string
-                            data[0] += "Color Name: " + color;
+                                activity_list.add(name);
+                                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(SortedActivityList.this,
+                                        android.R.layout.simple_list_item_1, activity_list);
+                                activity_list_show.setAdapter(arrayAdapter);
 
-                            // Adds the data string to the TextView "results"
-                            act1.setText(data[0]);
+                                activity_list_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        Toast.makeText(SortedActivityList.this, "Unable to get the data from the server!", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -70,6 +92,5 @@ public class SortedActivityList extends AppCompatActivity {
         });
 
         requestQueue.add(json_obj);
-
     }
 }

@@ -53,6 +53,7 @@ animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
 array spinner
+array spinner2
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -1722,6 +1723,7 @@ id activity_chooser_view_content
 id activity_desc
 id activity_done
 id activity_id
+id activity_list_show
 id activity_name
 id activity_view
 id add
@@ -2013,9 +2015,6 @@ id stop
 id stretch
 id submenuarrow
 id submit_area
-id suggested_activity1
-id suggested_activity2
-id suggested_activity3
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -2164,6 +2163,7 @@ layout activity_list_scrolling
 layout activity_main
 layout activity_main_maps
 layout activity_menu
+layout activity_page
 layout activity_profile
 layout activity_sign_up
 layout activity_sorted_list

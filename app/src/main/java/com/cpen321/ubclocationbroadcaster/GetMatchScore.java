@@ -120,20 +120,26 @@ public class GetMatchScore extends AppCompatActivity {
                 String URL = "http://10.0.2.2:3000/sortactivities";
 
                 final String inputDist = getRadius.getText().toString();
-                String inputUsername = userSettings.getString("USERNAME", "");
-                final int inputLat = 123;
-                final int inputLong = 100;
+                final double inputLat = 123.232;
+                final double inputLong = -100.432;
                 final int inputLoc = priorities[0];
                 final int inputCourse = priorities[1];
                 final int inputMajor = priorities[2];
-
+                final double[] inputLatLong = new double[]{inputLat, inputLong};
                 JSONObject jsnReq = new JSONObject();
                 try {
-                    jsnReq.put("maxradius", inputDist);
-                    jsnReq.put("user", inputUsername);
+                    jsnReq.put("radius", inputDist);
+                    jsnReq.put("user", UserDetails.real_name);
+                    jsnReq.put("userid", UserDetails.username);
+                    jsnReq.put("major", UserDetails.major);
+                    jsnReq.put("school", UserDetails.school);
+                    jsnReq.put("courseRegistered", UserDetails.courseRegistered);
+                    jsnReq.put("phone", UserDetails.phone);
+                    jsnReq.put("private", UserDetails.privatePublic);
+                    jsnReq.put("inActivity", UserDetails.inactivity);
+                    jsnReq.put("activityID", UserDetails.activityID);
                     jsnReq.put("locationweight", inputLoc);
-                    jsnReq.put("userlat", inputLat);
-                    jsnReq.put("userlong", inputLong);
+                    jsnReq.put("userlocation", inputLatLong);
                     jsnReq.put("coursesweight", inputCourse);
                     jsnReq.put("majorweight", inputMajor);
 

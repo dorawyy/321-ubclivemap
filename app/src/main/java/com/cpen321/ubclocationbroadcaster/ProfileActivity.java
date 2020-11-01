@@ -216,18 +216,10 @@ public class ProfileActivity extends AppCompatActivity {
         final String inputPhone = phone_number.getText().toString();
         final String inputSchool = school.getText().toString();
         final String inputMajor = major.getText().toString();
-        final String userID =  userSettings.getString("USERNAME", "");
         final boolean inputPrivate = false;
         final boolean inputInActivity = false;
         final int inputActivityID = -1;
 
-        doneIntent.putExtra("SCHOOL", inputSchool);
-        doneIntent.putExtra("MAJOR", inputMajor);
-        //doneIntent.putExtra("COURSE1", course1);
-        //doneIntent.putExtra("COURSE2", course2);
-        //doneIntent.putExtra("COURSE3", course3);
-        //doneIntent.putExtra("COURSE4", course4);
-        //doneIntent.putExtra("COURSE5", course5);
 
         JSONArray jsnReq = new JSONArray();
         for(String course : course_list){

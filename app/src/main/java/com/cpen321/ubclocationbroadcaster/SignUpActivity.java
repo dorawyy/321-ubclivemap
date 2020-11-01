@@ -31,7 +31,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
     private Button sign_up_btn;
-    final String URL = "http://10.0.2.2:3000/users/register";
+    final String URL = "http://40.122.147.73:3030/users/register";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,14 @@ public class SignUpActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                
+                if(inputUsername.isEmpty()){
+                    Toast.makeText(SignUpActivity.this, "Enter a username", Toast.LENGTH_SHORT).show();
+                }
+
+                else if(inputPassword.isEmpty()){
+                    Toast.makeText(SignUpActivity.this, "Enter a password", Toast.LENGTH_SHORT).show();
+                }
 
                 final JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnReq,
                         new Response.Listener<JSONObject> (){
@@ -75,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
                             public void onResponse(JSONObject response){
                                 try {
                                     boolean successVal = (boolean) response.get("success");
-                                    if (successVal && (!inputUsername.isEmpty() || !inputPassword.isEmpty())){
+                                    if (successVal){
                                         Intent signUpIntent = new Intent(SignUpActivity.this, ProfileActivity.class);
                                         startActivity(signUpIntent);
                                     }

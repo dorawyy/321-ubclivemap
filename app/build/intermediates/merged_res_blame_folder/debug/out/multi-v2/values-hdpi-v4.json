@@ -1,17 +1,10 @@
 {
     "logs": [
         {
-<<<<<<< HEAD
-            "outputFile": "C:\\Users\\jaski\\Desktop\\321\\CPEN-321-Location-App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
+            "outputFile": "C:\\Users\\jaski\\Desktop\\final\\CPEN-321-Location-App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
             "map": [
                 {
                     "source": "C:\\Users\\jaski\\.gradle\\caches\\transforms-2\\files-2.1\\643adb81776bc4f32f0e8ac61b12f06a\\appcompat-1.2.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
-=======
-            "outputFile": "C:\\Users\\Sebastian Gonzalez\\Documents\\UBC Engineering Year 4\\CPEN 321\\M6\\CPEN-321-Location-App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\Sebastian Gonzalez\\.gradle\\caches\\transforms-2\\files-2.1\\643adb81776bc4f32f0e8ac61b12f06a\\appcompat-1.2.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
->>>>>>> 3e45cc7cfa869ae8ce782404fd50f226d580a3b7
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

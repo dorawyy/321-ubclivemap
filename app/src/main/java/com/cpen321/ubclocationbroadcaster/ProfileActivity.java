@@ -209,7 +209,7 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(doneIntent);
                 Log.d("done button", "done button has been clicked");
 
-        String URL = "http://10.0.2.2:3000/profiles/add";
+        String URL = "http://40.122.147.73:3030/profiles/add";
 
 
         final String inputName = name.getText().toString();

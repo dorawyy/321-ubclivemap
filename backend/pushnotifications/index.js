@@ -14,7 +14,7 @@ module.exports.admin = admin
 const app = express();
 app.use(express.json());
 
-const port = 6000;
+const port = 6060;
 const notification_options = {
     priority: "high",
     timeToLive: 60 * 60 * 24

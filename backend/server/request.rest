@@ -3,11 +3,11 @@
 ######################################################################
 
 ### check current users in database
-GET http://localhost:3000/users
+GET http://40.122.147.73:3030/users
 
 ### store a user
 
-POST http://localhost:3000/users/register
+POST http://40.122.147.73:3030/users/register
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 
 ### store a user
 
-POST http://localhost:3000/users/register
+POST http://40.122.147.73:3030/users/register
 Content-Type: application/json
 
 {
@@ -27,7 +27,7 @@ Content-Type: application/json
 
 ### login user (wrong username)
 
-POST http://localhost:3000/users/login
+POST http://40.122.147.73:3030/users/login
 Content-Type: application/json
 
 {
@@ -37,7 +37,7 @@ Content-Type: application/json
 
 ### login user (wrong password)
 
-POST http://localhost:3000/users/login
+POST http://40.122.147.73:3030/users/login
 Content-Type: application/json
 
 {
@@ -47,7 +47,7 @@ Content-Type: application/json
 
 ### login user (success)
 
-POST http://localhost:3000/users/login
+POST http://40.122.147.73:3030/users/login
 Content-Type: application/json
 
 {
@@ -57,7 +57,7 @@ Content-Type: application/json
 
 ### login user (success)
 
-POST http://localhost:3000/users/login
+POST http://40.122.147.73:3030/users/login
 Content-Type: application/json
 
 {
@@ -70,10 +70,10 @@ Content-Type: application/json
 ######################################################################
 
 ### check current users in database
-GET http://localhost:3000/profiles/all
+GET http://40.122.147.73:3030/profiles/all
 
 ### insert user
-POST http://localhost:3000/profiles/add
+POST http://40.122.147.73:3030/profiles/add
 Content-Type: application/json
 
 {
@@ -91,7 +91,7 @@ Content-Type: application/json
 }
 
 ### insert other user 
-POST http://localhost:3000/profiles/add
+POST http://40.122.147.73:3030/profiles/add
 Content-Type: application/json
 
 {
@@ -109,7 +109,7 @@ Content-Type: application/json
 }
 
 ### search user by id
-POST http://localhost:3000/profiles/search
+POST http://40.122.147.73:3030/profiles/search
 Content-Type: application/json
 
 {
@@ -117,7 +117,7 @@ Content-Type: application/json
 }
 
 ### search user by id
-POST http://localhost:3000/profiles/search
+POST http://40.122.147.73:3030/profiles/search
 Content-Type: application/json
 
 {
@@ -125,7 +125,7 @@ Content-Type: application/json
 }
 
 ### search user by id (doesnt exist)
-POST http://localhost:3000/profiles/search
+POST http://40.122.147.73:3030/profiles/search
 Content-Type: application/json
 
 {
@@ -133,7 +133,7 @@ Content-Type: application/json
 }
 
 ### update profile with new profile 
-POST http://localhost:3000/profiles/update
+POST http://40.122.147.73:3030/profiles/update
 Content-Type: application/json
 
 {
@@ -155,10 +155,10 @@ Content-Type: application/json
 ######################################################################
 
 ### check current activities
-GET http://localhost:3000/activities/all
+GET http://40.122.147.73:3030/activities/all
 
 ### insert activity
-POST http://localhost:3000/activities/add
+POST http://40.122.147.73:3030/activities/add
 Content-Type: application/json
 
 {
@@ -175,7 +175,7 @@ Content-Type: application/json
     "status" : "1"
 }
 ### insert activity
-POST http://localhost:3000/activities/add
+POST http://40.122.147.73:3030/activities/add
 Content-Type: application/json
 
 {
@@ -192,7 +192,7 @@ Content-Type: application/json
     "status" : "1"
 }
 ### insert activity
-POST http://localhost:3000/activities/add
+POST http://40.122.147.73:3030/activities/add
 Content-Type: application/json
 
 {
@@ -209,7 +209,7 @@ Content-Type: application/json
     "status" : "1"
 }
 ### insert activity
-POST http://localhost:3000/activities/add
+POST http://40.122.147.73:3030/activities/add
 Content-Type: application/json
 
 {
@@ -226,7 +226,7 @@ Content-Type: application/json
     "status" : "1"
 }
 ### insert activity
-POST http://localhost:3000/activities/add
+POST http://40.122.147.73:3030/activities/add
 Content-Type: application/json
 
 {
@@ -243,7 +243,7 @@ Content-Type: application/json
     "status" : "1"
 }
 ### insert activity
-POST http://localhost:3000/activities/add
+POST http://40.122.147.73:3030/activities/add
 Content-Type: application/json
 
 {
@@ -262,7 +262,7 @@ Content-Type: application/json
 
 
 ### search activity
-POST http://localhost:3000/activities/search
+POST http://40.122.147.73:3030/activities/search
 Content-Type: application/json
 
 {
@@ -271,7 +271,7 @@ Content-Type: application/json
 
 
 ### update users
-POST http://localhost:3000/activities/update
+POST http://40.122.147.73:3030/activities/update
 Content-Type: application/json
 
 {
@@ -289,7 +289,7 @@ Content-Type: application/json
 }
 
 ### update users
-POST http://localhost:3000/activities/sort
+POST http://40.122.147.73:3030/activities/sort
 Content-Type: application/json
 
 {

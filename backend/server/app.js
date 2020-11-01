@@ -231,17 +231,63 @@ app.get('/activities/all', async (req, res) => {
     return res.json(cursor)
 });
 
+function activityIsGoodRequest(body){
+    if(!body.hasOwnProperty('aid')){
+        return false;
+    }
+    if(!body.hasOwnProperty('name')){
+        return false;
+    }
+    if(!body.hasOwnProperty('leader')){
+        return false;
+    }
+    if(!body.hasOwnProperty('leader')){
+        return false;
+    }
+    if(!body.hasOwnProperty('usernames')){
+        return false;
+    }
+    if(!body.hasOwnProperty('info')){
+        return false;
+    }
+    if(!body.hasOwnProperty('major')){
+        return false;
+    }
+    if(!body.hasOwnProperty('course')){
+        return false;
+    }
+    if(!body.hasOwnProperty('school')){
+        return false;
+    }
+    if(!body.hasOwnProperty('lat')){
+        return false;
+    }
+    if(!body.hasOwnProperty('long')){
+        return false;
+    }
+    if(!body.hasOwnProperty('status')){
+        return false;
+    }
+    return true;
+}
+
 // search for an activity in the database
 app.post("/activities/search", async (req, res) => {
+    if(!req.body.hasOwnProperty("aid")){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
     var response = await Activity.findOne({"aid" : req.body.aid}).exec()
     if(response == null) {
-        return res.json(formatResponse(false, "Activity not exist.", null));
+        return res.json(formatResponse(false, "Activity does not exist.", null));
     }
     return res.json(formatResponse(true, "Activity found successfully.", response));
 });
 
 // add a new activity
 app.post("/activities/add", async (req, res) => {
+    if(!activityIsGoodRequest(req.body)){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
     var response = await Activity.findOne({"aid" : req.body.aid}).exec()
     if(response != null) {
         return res.json(formatResponse(false, "Activity Id Taken", null));
@@ -256,14 +302,20 @@ app.post("/activities/add", async (req, res) => {
 
 // add a new user to the activity
 app.post("/activities/update", async (req, res) => {
+    if(!activityIsGoodRequest(req.body)){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
     var response = await Activity.replaceOne({"aid" : req.body.aid}, req.body)
     if(response.n == 0){
-        return res.json(formatResponse(false, "Activity does not exist", null));
+        return res.json(formatResponse(false, "Activity does not exist.", null));
     }
     return res.json(formatResponse(true, "Activity updated successfully.", null));
 });
 
 app.post('/activities/delete', async (req,res) =>{
+    if(!req.body.hasOwnProperty("aid")){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
     var response = await Activity.deleteOne({"aid" : req.body.aid});
     if(response.n == 0){
         return res.json(formatResponse(false, "Activity does not exist.", null));
@@ -290,15 +342,46 @@ function deg2rad(deg) {
     return deg * (Math.PI/180)
 }
 
+function isGoodSortRequest(body){
+    if(!body.hasOwnProperty("user")){
+        return false;
+    }
+    if(!profileIsGoodRequest(body.user)){
+        return false;
+    }
+    if(!body.hasOwnProperty("userlat")){
+        return false;
+    }
+    if(!body.hasOwnProperty("userlong")){
+        return false;
+    }
+    if(!body.hasOwnProperty("maxradius")){
+        return false;
+    }
+    if(!body.hasOwnProperty("locationweight")){
+        return false;
+    }
+    if(!body.hasOwnProperty("coursesweight")){
+        return false;
+    }
+    if(!body.hasOwnProperty("majorweight")){
+        return false;
+    }
+    return true;
+}
+
 app.post("/activities/sort", async (req, res) => {
     var sorted_activities = []
     var cursor = await Activity.find().exec();
 
     // NECESSARY REQUEST INFORMATION !!!
+    if(!isGoodSortRequest(req.body)){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
     var user = req.body.user; // user json
-    var userlat = req.body.userlocation.lat;
-    var userlong = req.body.userlocation.long;
-    var maxradius = req.body.radius;
+    var userlat = req.body.userlat;
+    var userlong = req.body.userlong;
+    var maxradius = req.body.maxradius;
     var locationweight = req.body.locationweight;
     var coursesweight = req.body.coursesweight;
     var majorweight = req.body.majorweight;
@@ -314,11 +397,11 @@ app.post("/activities/sort", async (req, res) => {
         var coursefactor = 0;
         for(i_course=0; i_course<currentactivity.course.length; i_course++){
             var activityCourse = currentactivity.course[i_course];
-            if(user.courseRegistered.includes(activityCourse)){
+            if(user.CourseRegistered.includes(activityCourse)){
                 coursefactor += 1;
             }
         }
-        coursefactor = coursesweight * parseFloat(coursefactor / user.courseRegistered.length);
+        coursefactor = coursesweight * parseFloat(coursefactor / user.CourseRegistered.length);
         console.log("coursefactor = " + coursefactor/coursesweight)
 
         // Calculate location factor
@@ -330,8 +413,7 @@ app.post("/activities/sort", async (req, res) => {
         if(locationfactor <= 0){
             // location of activity outside of maxradius
             // dont include activity in sorted list
-            return  res.json(null);
-
+            continue;
         }
 
         // Calculate major factor

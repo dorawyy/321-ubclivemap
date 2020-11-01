@@ -1,3 +1,13 @@
+sudo : false
+
 language: node_js
+
 node_js:
-    - "0.15"
+  - node 
+
+install:
+  - npm ci
+
+script:
+  - cd backend/server
+  - npm test -- --coverage

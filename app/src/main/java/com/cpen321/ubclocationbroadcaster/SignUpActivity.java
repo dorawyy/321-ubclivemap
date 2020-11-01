@@ -69,18 +69,26 @@ public class SignUpActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                if(inputUsername.isEmpty()){
+                    Toast.makeText(SignUpActivity.this, "Enter a username", Toast.LENGTH_SHORT).show();
+                }
+
+                else if(inputPassword.isEmpty()){
+                    Toast.makeText(SignUpActivity.this, "Enter a password", Toast.LENGTH_SHORT).show();
+                }
+                else {
                 final JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnReq,
                         new Response.Listener<JSONObject> (){
                             @Override
                             public void onResponse(JSONObject response){
                                 try {
                                     boolean successVal = (boolean) response.get("success");
-                                    if (successVal && (!inputUsername.isEmpty() || !inputPassword.isEmpty())){
+                                    if (successVal){
                                         Intent signUpIntent = new Intent(SignUpActivity.this, ProfileActivity.class);
                                         startActivity(signUpIntent);
                                     }
                                     else {
-                                            Toast.makeText(SignUpActivity.this, "ERROR: Invalid Username", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(SignUpActivity.this, "ERROR: Username Already Existed", Toast.LENGTH_SHORT).show();
                                     }
                                     String stat = response.get("status").toString();
                                     UserDetails.username = inputUsername;
@@ -99,7 +107,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 MySingleton.getInstance(SignUpActivity.this).addToRequestQueue(json_obj);
 
-            }
+            }}
         });
 
     }

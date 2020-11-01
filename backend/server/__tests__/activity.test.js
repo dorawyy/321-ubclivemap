@@ -151,7 +151,7 @@ describe("successful tests", () => {
             .send(a1);
 
         var a4 = {
-            aid : "3",
+            aid : "4",
             name : "best",
             leader : "test",
             usernames : ["test","aplha"],

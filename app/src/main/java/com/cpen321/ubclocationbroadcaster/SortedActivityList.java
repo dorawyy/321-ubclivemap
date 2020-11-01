@@ -29,6 +29,10 @@ public class SortedActivityList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sorted_list);
 
+        for(int i=0;i<SortedListClass.aids.length;i++){
+            Log.d("SortedList aids",SortedListClass.aids[i]);
+        }
+        /*
         final TextView act1;
         final TextView act2;
         final TextView act3;
@@ -37,7 +41,7 @@ public class SortedActivityList extends AppCompatActivity {
         act2 = findViewById(R.id.suggested_activity2);
         act3 = findViewById(R.id.suggested_activity3);
 
-        String URL = "https://";
+
         final List<String> jsonResponses = new ArrayList<>();
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
         final String[] data = null;
@@ -69,7 +73,7 @@ public class SortedActivityList extends AppCompatActivity {
             }
         });
 
-        requestQueue.add(json_obj);
+        requestQueue.add(json_obj);*/
 
     }
 }

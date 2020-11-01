@@ -121,7 +121,7 @@ public class CreateActivity extends AppCompatActivity {
         done_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String URL = "http://10.0.2.2:3000/addactivity";
+                String URL = "http://10.0.2.2:3000/activities/add";
 
                 JSONObject jsnRequest = new JSONObject();
                 EditText name = findViewById(R.id.activity_name);
@@ -212,7 +212,7 @@ public class CreateActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                JsonObjectRequest userUpdateObject = new JsonObjectRequest(Request.Method.POST, "http://10.0.2.2:3000/userupdate", updateUser,
+                JsonObjectRequest userUpdateObject = new JsonObjectRequest(Request.Method.POST, "http://10.0.2.2:3000/profiles/update", updateUser,
                     new Response.Listener<JSONObject> (){
                         @Override
                         public void onResponse(JSONObject response){

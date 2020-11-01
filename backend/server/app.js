@@ -330,7 +330,8 @@ app.post("/activities/sort", async (req, res) => {
         if(locationfactor <= 0){
             // location of activity outside of maxradius
             // dont include activity in sorted list
-            return;
+            return  res.json(null);
+
         }
 
         // Calculate major factor
@@ -368,6 +369,7 @@ app.post("/activities/sort", async (req, res) => {
 
     return res.json(sorted_activities)
 });
+
 
 module.exports = {
     app

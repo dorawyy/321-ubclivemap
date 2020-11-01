@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -117,7 +118,7 @@ public class GetMatchScore extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("done button", "done button has been clicked");
                 //TODO: set the url here
-                String URL = "http://10.0.2.2:3000/sortactivities";
+                String URL = "http://10.0.2.2:3000/activities/sort";
 
                 final String inputDist = getRadius.getText().toString();
                 String inputUsername = userSettings.getString("USERNAME", "");
@@ -127,13 +128,35 @@ public class GetMatchScore extends AppCompatActivity {
                 final int inputCourse = priorities[1];
                 final int inputMajor = priorities[2];
 
+                JSONObject user = new JSONObject();
+                try {
+                    user.put("name", UserDetails.name);
+                    user.put("username", UserDetails.username);
+                    user.put("major", UserDetails.major);
+                    user.put("courseRegistered", UserDetails.courseRegistered);
+                    user.put("school", UserDetails.school);
+                    user.put("phone", UserDetails.phone);
+                    user.put("private", UserDetails.privatePublic);
+                    user.put("inActivity", UserDetails.inactivity);
+                    user.put("activityID", UserDetails.activityID);
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }
+
+                JSONObject userLoc = new JSONObject();
+                try {
+                    userLoc.put("lat",inputLat);
+                    userLoc.put("long", inputLong);
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+
                 JSONObject jsnReq = new JSONObject();
                 try {
-                    jsnReq.put("maxradius", inputDist);
-                    jsnReq.put("user", inputUsername);
+                    jsnReq.put("radius", inputDist);
+                    jsnReq.put("user", user);
                     jsnReq.put("locationweight", inputLoc);
-                    jsnReq.put("userlat", inputLat);
-                    jsnReq.put("userlong", inputLong);
+                    jsnReq.put("userlocation", userLoc);
                     jsnReq.put("coursesweight", inputCourse);
                     jsnReq.put("majorweight", inputMajor);
 
@@ -141,33 +164,33 @@ public class GetMatchScore extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnReq,
-                        new Response.Listener<JSONObject> (){
+                MyJSONArrayRequest json_obj = new MyJSONArrayRequest(Request.Method.POST, URL, jsnReq,
+                        new Response.Listener<JSONArray>() {
                             @Override
-                            public void onResponse(JSONObject response){
+                            public void onResponse(JSONArray response) {
                                 try {
-                                    boolean successVal = (boolean) response.get("success");
-                                    String stat = response.get("status").toString();
-                                    if(successVal) {
-                                        Intent sign_in_Intent = new Intent(GetMatchScore.this, SortedActivityList.class);
+                                    if(response.length()>0) {
+                                        SortedListClass.aids = new String[response.length()];
+                                        for(int i=0; i<response.length();i++){
+                                            SortedListClass.aids[i] = response.getJSONObject(i).getString("aid");
+                                        }
+                                        Intent transition = new Intent(GetMatchScore.this, SortedActivityList.class);
                                         Toast.makeText(GetMatchScore.this, "Activity added", Toast.LENGTH_SHORT).show();
-                                        startActivity(sign_in_Intent);
+                                        startActivity(transition);
                                     } else {
-                                        Toast.makeText(GetMatchScore.this, "ERROR: " + stat, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(GetMatchScore.this, "No activities in this range" , Toast.LENGTH_SHORT).show();
                                     }
-                                    Log.d("GetMatchScore", stat);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
                         }, new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error){
+                    public void onErrorResponse(VolleyError error) {
                         Toast.makeText(GetMatchScore.this, "Unable to send weighting data to the server!", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 });
-
                 requestQueue.add(json_obj);
             }
         });

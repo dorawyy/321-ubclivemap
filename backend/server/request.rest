@@ -70,10 +70,10 @@ Content-Type: application/json
 ######################################################################
 
 ### check current users in database
-GET http://localhost:3000/allprofiles
+GET http://localhost:3000/profiles/all
 
 ### insert user
-POST http://localhost:3000/userprofile
+POST http://localhost:3000/profiles/add
 Content-Type: application/json
 
 {
@@ -91,7 +91,7 @@ Content-Type: application/json
 }
 
 ### insert other user 
-POST http://localhost:3000/userprofile
+POST http://localhost:3000/profiles/add
 Content-Type: application/json
 
 {
@@ -109,7 +109,7 @@ Content-Type: application/json
 }
 
 ### search user by id
-POST http://localhost:3000/usersearch
+POST http://localhost:3000/profiles/search
 Content-Type: application/json
 
 {
@@ -117,7 +117,7 @@ Content-Type: application/json
 }
 
 ### search user by id
-POST http://localhost:3000/usersearch
+POST http://localhost:3000/profiles/search
 Content-Type: application/json
 
 {
@@ -125,7 +125,7 @@ Content-Type: application/json
 }
 
 ### search user by id (doesnt exist)
-POST http://localhost:3000/usersearch
+POST http://localhost:3000/profiles/search
 Content-Type: application/json
 
 {
@@ -133,7 +133,7 @@ Content-Type: application/json
 }
 
 ### update profile with new profile 
-POST http://localhost:3000/userupdate
+POST http://localhost:3000/profiles/update
 Content-Type: application/json
 
 {
@@ -155,10 +155,10 @@ Content-Type: application/json
 ######################################################################
 
 ### check current activities
-GET http://localhost:3000/allactivities
+GET http://localhost:3000/activities/all
 
 ### insert activity
-POST http://localhost:3000/addactivity
+POST http://localhost:3000/activities/add
 Content-Type: application/json
 
 {
@@ -175,7 +175,7 @@ Content-Type: application/json
     "status" : "1"
 }
 ### insert activity
-POST http://localhost:3000/addactivity
+POST http://localhost:3000/activities/add
 Content-Type: application/json
 
 {
@@ -192,7 +192,7 @@ Content-Type: application/json
     "status" : "1"
 }
 ### insert activity
-POST http://localhost:3000/addactivity
+POST http://localhost:3000/activities/add
 Content-Type: application/json
 
 {
@@ -209,7 +209,7 @@ Content-Type: application/json
     "status" : "1"
 }
 ### insert activity
-POST http://localhost:3000/addactivity
+POST http://localhost:3000/activities/add
 Content-Type: application/json
 
 {
@@ -226,7 +226,7 @@ Content-Type: application/json
     "status" : "1"
 }
 ### insert activity
-POST http://localhost:3000/addactivity
+POST http://localhost:3000/activities/add
 Content-Type: application/json
 
 {
@@ -243,7 +243,7 @@ Content-Type: application/json
     "status" : "1"
 }
 ### insert activity
-POST http://localhost:3000/addactivity
+POST http://localhost:3000/activities/add
 Content-Type: application/json
 
 {
@@ -262,7 +262,7 @@ Content-Type: application/json
 
 
 ### search activity
-POST http://localhost:3000/activitysearch
+POST http://localhost:3000/activities/search
 Content-Type: application/json
 
 {
@@ -271,7 +271,7 @@ Content-Type: application/json
 
 
 ### update users
-POST http://localhost:3000/updateUsers
+POST http://localhost:3000/activities/update
 Content-Type: application/json
 
 {
@@ -295,7 +295,7 @@ Content-Type: application/json
 {
     "user" : {
         "name" : "Kyle",
-        "userid" : "12",
+        "username" : "12",
         "major" : "CPEN",
         "courseRegistered" : [
             "CPEN331", "CPEN321", "CPEN400", "ELEC221"
@@ -310,7 +310,7 @@ Content-Type: application/json
         "lat" : "50.3112",
         "long" : "-122.213123"
     },
-    "radius" : 200,
+    "radius" : 100000,
     "locationweight" : 2,
     "coursesweight" : 3,
     "majorweight" : 1

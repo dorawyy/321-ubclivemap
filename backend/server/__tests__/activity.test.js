@@ -150,6 +150,44 @@ describe("successful tests", () => {
             .type('json')
             .send(a1);
 
+        var a4 = {
+            aid : "4",
+            name : "best",
+            leader : "test",
+            usernames : ["test","aplha"],
+            info : "Understanding Javascript with TA",
+            major : "CPEN",
+            course : ["CPEN321", "CPEN331", "CPEN400"],
+            school : "UBC",
+            lat : "50",
+            long : "-124",
+            status : "1"
+        }
+
+        response = await request(app)
+            .post("/activities/add")
+            .type('json')
+            .send(a4);
+
+        var a3 = {
+            aid : "3",
+            name : "best",
+            leader : "test",
+            usernames : ["test","aplha"],
+            info : "Understanding Javascript with TA",
+            major : "CPEN",
+            course : ["CPEN321", "CPEN331", "CPEN400"],
+            school : "UBC",
+            lat : "49.9",
+            long : "-123.9",
+            status : "1"
+        }
+
+        response = await request(app)
+            .post("/activities/add")
+            .type('json')
+            .send(a3);
+
         var a2 = {
             aid : "2",
             name : "better",
@@ -169,24 +207,6 @@ describe("successful tests", () => {
             .type('json')
             .send(a2);
 
-        var a3 = {
-            aid : "3",
-            name : "best",
-            leader : "test",
-            usernames : ["test","aplha"],
-            info : "Understanding Javascript with TA",
-            major : "CPEN",
-            course : ["CPEN321", "CPEN331", "CPEN400"],
-            school : "UBC",
-            lat : "50",
-            long : "-124",
-            status : "1"
-        }
-
-        response = await request(app)
-            .post("/activities/add")
-            .type('json')
-            .send(a3);
 
         response = await request(app)
             .post("/activities/sort")
@@ -213,14 +233,14 @@ describe("successful tests", () => {
                 majorweight : 1
             });
         
-        expectedArr = [a3,a2,a1];
+        expectedArr = [a4,a3,a2,a1];
         for(i=0; i<expectedArr.length; i++){
             expect(response.body[i]).toMatchObject(expectedArr[i]);
         }
-        await Activity.deleteMany({});
     })
 
     afterAll(async () => {
+        await Activity.deleteMany({});
         await Activity.insertMany(before);
         await models.disconnectDb()
     });

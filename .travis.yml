@@ -6,9 +6,7 @@ node_js:
   - "stable" 
 
 install:
-  - cd ./backend/server
-  - npm ci
-  - npm install jest
 
 script:
+  - cd ./backend/server
   - npm test -- --coverage

@@ -57,36 +57,9 @@ public class MainMapsActivity extends FragmentActivity implements OnMapReadyCall
 
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-
         final RequestQueue requestQueueMA = Volley.newRequestQueue(this);
         String urlMA = "http://10.0.2.2:3000/activities/all";
 
-        /*JsonArrayRequest allActivities = new JsonArrayRequest(urlMA,
-                new Response.Listener<JSONArray> (){
-                    @Override
-                    public void onResponse(JSONArray response){
-                        try {
-                            for(int i=0; i<response.length();i++){
-                                JSONObject jsonObject = response.getJSONObject(i);
-                                String lat = jsonObject.getString("lat");
-                                Double la = Double.parseDouble(lat);
-                                String lon = jsonObject.getString("long");
-                                Double lo = Double.parseDouble(lon);
-                                String name = jsonObject.getString("name");
-                                LatLng sydney = new LatLng(la, lo);
-                                mMap.addMarker(new MarkerOptions().position(sydney).title(name));
-                                mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });*/
         MyJSONArrayRequest allActivities = new MyJSONArrayRequest(Request.Method.GET,urlMA,null,
                 new Response.Listener<JSONArray> (){
                     @Override

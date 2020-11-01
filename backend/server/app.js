@@ -341,30 +341,38 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
 function deg2rad(deg) {
     return deg * (Math.PI/180)
 }
-
+var tpye = 0;
 function isGoodSortRequest(body){
     if(!body.hasOwnProperty("user")){
+        type =1;
         return false;
     }
     if(!profileIsGoodRequest(body.user)){
+        type =2;
         return false;
     }
     if(!body.hasOwnProperty("userlat")){
+        type =3;
         return false;
     }
     if(!body.hasOwnProperty("userlong")){
+        type = 4;
         return false;
     }
     if(!body.hasOwnProperty("maxradius")){
+        type = 5;
         return false;
     }
     if(!body.hasOwnProperty("locationweight")){
+        type = 6;
         return false;
     }
     if(!body.hasOwnProperty("coursesweight")){
+        type = 7;
         return false;
     }
     if(!body.hasOwnProperty("majorweight")){
+        type = 8;
         return false;
     }
     return true;
@@ -376,7 +384,7 @@ app.post("/activities/sort", async (req, res) => {
 
     // NECESSARY REQUEST INFORMATION !!!
     if(!isGoodSortRequest(req.body)){
-        return res.json(formatResponse(false, "Not well formed request.", null));
+        return res.json(formatResponse(false, "Not well formed request." + type, null));
     }
     var user = req.body.user; // user json
     var userlat = req.body.userlat;

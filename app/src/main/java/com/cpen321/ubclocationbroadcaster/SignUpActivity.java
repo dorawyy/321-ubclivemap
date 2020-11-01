@@ -46,13 +46,14 @@ public class SignUpActivity extends AppCompatActivity {
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent signUpIntent = new Intent(SignUpActivity.this, ProfileActivity.class);
-                startActivity(signUpIntent);
+                //Intent signUpIntent = new Intent(SignUpActivity.this, ProfileActivity.class);
+                //startActivity(signUpIntent);
                 Log.d("sign up button", "sign up button has been clicked");
 
                 // format request
                 final String inputUsername = username.getText().toString();
-                String inputPassword = password.getText().toString();
+                final String inputPassword = password.getText().toString();
+
 /*
                 SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
                 SharedPreferences.Editor prefEditor = userSettings.edit();
@@ -68,14 +69,19 @@ public class SignUpActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnReq,
+                final JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnReq,
                         new Response.Listener<JSONObject> (){
                             @Override
                             public void onResponse(JSONObject response){
-                                //Intent signUpIntent = new Intent(SignUpActivity.this, ProfileActivity.class);
-                                //startActivity(signUpIntent);
                                 try {
                                     boolean successVal = (boolean) response.get("success");
+                                    if (successVal && (!inputUsername.isEmpty() || !inputPassword.isEmpty())){
+                                        Intent signUpIntent = new Intent(SignUpActivity.this, ProfileActivity.class);
+                                        startActivity(signUpIntent);
+                                    }
+                                    else {
+                                            Toast.makeText(SignUpActivity.this, "ERROR: Invalid Username", Toast.LENGTH_SHORT).show();
+                                    }
                                     String stat = response.get("status").toString();
                                     UserDetails.username = inputUsername;
                                     Log.d("SignUpActivity", stat);

@@ -27,12 +27,32 @@ public class SignUpActivityTest {
     }
 
     @Test
-    public void testSignIn(){
+    public void testSignUp(){
         Espresso.onView(withId(R.id.sign_up_username_button)).perform(typeText(username_t));
         Espresso.onView(withId(R.id.sign_up_password_button)).perform(typeText(password_t));
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.sign_up_button)).perform(click());
         intended(hasComponent(ProfileActivity.class.getName()));
+    }
+
+    @Test
+    public void testSignUpNoUsername(){
+        Espresso.onView(withId(R.id.sign_up_password_button)).perform(typeText(password_t));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.sign_up_button)).perform(click());
+    }
+
+    @Test
+    public void testSignUpNoPassword(){
+        Espresso.onView(withId(R.id.sign_up_username_button)).perform(typeText(username_t));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.sign_up_button)).perform(click());
+    }
+
+    @Test
+    public void testSignUpNoUserNoPass(){
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.sign_up_button)).perform(click());
     }
 
     @After

@@ -1719,11 +1719,11 @@ id action_mode_close_button
 id action_settings
 id action_text
 id actions
+id activitiesSpinner
 id activity_chooser_view_content
 id activity_desc
 id activity_done
 id activity_id
-id activity_list_show
 id activity_name
 id activity_view
 id add

@@ -32,20 +32,44 @@ public class MainActivityTest {
     }
 
     @Test
-    public void testSignIn(){
+    public void testSignInWithWrongPassword() {
         //testing sign in with wrong username and password
         Espresso.onView(withId(R.id.username_button)).perform(typeText(username_t));
         Espresso.onView(withId(R.id.password_button)).perform(typeText(password1_t));
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.sign_in_button)).perform(click());
+    }
 
-        //testing sign in with correct username and password
-        Espresso.onView(withId(R.id.password_button)).perform(clearText());
+    @Test
+    public void testSignInWithNoUsername() {
+        //testing sign in with no username
         Espresso.onView(withId(R.id.password_button)).perform(typeText(password2_t));
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.sign_in_button)).perform(click());
+    }
 
+    @Test
+    public void testSignInWithNoPassword() {
+        //testing sign in with no password entered
+        Espresso.onView(withId(R.id.username_button)).perform(typeText(username_t));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.sign_in_button)).perform(click());
+    }
+
+    @Test
+    public void testSignInWithNoPassNoUsername() {
+        //testing sign in with no password entered
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.sign_in_button)).perform(click());
+    }
+
+    @Test
+    public void testSignIn(){
         //test if correct username/password leads to the corresponding intent
+        Espresso.onView(withId(R.id.username_button)).perform(typeText(username_t));
+        Espresso.onView(withId(R.id.password_button)).perform(typeText(password2_t));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.sign_in_button)).perform(click());
         intended(hasComponent(MenuActivity.class.getName()));
     }
 

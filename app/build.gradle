@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'jacoco'
+jacoco {
+    toolVersion = '0.7.5.201505241946'
+}
 
 android {
     compileSdkVersion 30
@@ -17,8 +21,11 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled = false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            testCoverageEnabled = true
         }
     }
 }
@@ -50,6 +57,15 @@ dependencies {
         buildTypes {
             debug {
                 testCoverageEnabled = true
+            }
+        }
+        buildscript {
+            repositories {
+                mavenCentral()
+                jcenter()
+                maven {
+                    url "https://plugins.gradle.org/m2/"
+                }
             }
         }
     }

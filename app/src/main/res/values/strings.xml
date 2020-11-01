@@ -18,9 +18,9 @@
     <string name="sign_up_done">Sign Up</string>
 
     //buttons for course selection page
-    <string name="add_course">"Add the course"</string>
-    <string name="course_list">"course list</string>
-    <string name="Course_selecting_spinner">"Select your courses"</string>
+    <string name="add_course">Add the course</string>
+    <string name="course_list">course list</string>
+    <string name="Course_selecting_spinner">Select your courses</string>
     <string name="done_course_page">done</string>
 
     <string name="create_activity">Create Activity</string>

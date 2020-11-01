@@ -45,7 +45,6 @@ public class CreateActivity extends AppCompatActivity {
 
     private boolean activityS , userS;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,9 +114,9 @@ public class CreateActivity extends AppCompatActivity {
 
         /*CREATE A NEW ACTIVITY
         * CREATE A NEW JSONOBJECT WITH ACTIVITY FIELDS AND SEND A POST REQUEST*/
-
         Button done_btn;
         done_btn = findViewById(R.id.activity_done);
+
         done_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,7 +154,10 @@ public class CreateActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-
+                if(inputaid.isEmpty()||inputInfo.isEmpty()||inputName.isEmpty()){
+                    Toast.makeText(CreateActivity.this, "Please Enter Valid Values for all fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnRequest,
                         new Response.Listener<JSONObject> (){
                             @Override

@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                                     String stat = response.get("status").toString(); // get status
                                     if(successVal) {
 
-                                        JsonArrayRequest userDetails = new JsonArrayRequest("http://10.0.2.2:3000/profiles/all",
+                                        final JsonArrayRequest userDetails = new JsonArrayRequest("http://10.0.2.2:3000/profiles/all",
                                                 new Response.Listener<JSONArray> (){
                                                     @Override
                                                     public void onResponse(JSONArray response){

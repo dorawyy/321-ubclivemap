@@ -31,74 +31,38 @@ import java.util.List;
 
 public class SortedActivityList extends AppCompatActivity {
 
+    //Spinner that will display the suggest Activity IDs
+    private Spinner activitySpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sorted_list);
+        activitySpinner = findViewById(R.id.activitiesSpinner);
 
+        final String [] activities = new String[SortedListClass.aids.length + 1];
+        activities[0] = "Suggested Ranked Activities";
         for(int i=0;i<SortedListClass.aids.length;i++){
-            Log.d("SortedList aids",SortedListClass.aids[i]);
+            activities[i+1] = SortedListClass.aids[i];
+            Log.d("SortedList aids","Number: " + i + " : " + SortedListClass.aids[i] + "\n");
         }
-        /*
-        final TextView act1;
-        final TextView act2;
-        final TextView act3;
 
-        activity_list_show = findViewById(R.id.activity_list_show);
+        final RequestQueue q = Volley.newRequestQueue(this);
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(SortedActivityList.this,
+                android.R.layout.simple_list_item_1, activities);
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        activitySpinner.setAdapter(myAdapter);
 
-
-        final List<String> jsonResponses = new ArrayList<>();
-        final RequestQueue requestQueue = Volley.newRequestQueue(this);
-        final String[] data = null;
-        JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.GET, URL, null,
-                new Response.Listener<JSONObject> (){
-                    @Override
-                    public void onResponse(JSONArray response){
-                        //Intent intent = new Intent(SortedActivityList.this, ActivityPage.class);
-                        //startActivity(intent);
-                        final ArrayList<String> activity_list = new ArrayList<String>();
-                        JSONArray jsonArray = response;
-                        try {
-                            for (int i = 0; i < jsonArray.length(); i++)
-                            {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                String aid = jsonObject.getString("aid");
-                                String name = jsonObject.getString("name");
-                                String leader = jsonObject.getString("leader");
-                                String usernames = jsonObject.getString("usernames");
-                                String info = jsonObject.getString("info");
-                                String major = jsonObject.getString("major");
-                                String course = jsonObject.getString("course");
-                                String school = jsonObject.getString("school");
-                                String locLat = jsonObject.getString("lat");
-                                String locLong = jsonObject.getString("long");
-                                String status = jsonObject.getString("status");
-
-                                activity_list.add(name);
-                                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(SortedActivityList.this,
-                                        android.R.layout.simple_list_item_1, activity_list);
-                                activity_list_show.setAdapter(arrayAdapter);
-
-                                activity_list_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Toast.makeText(SortedActivityList.this, "Unable to get the data from the server!", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
+        activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onErrorResponse(VolleyError error){
-                Toast.makeText(SortedActivityList.this, "Unable to get the data from the server!", Toast.LENGTH_SHORT).show();
-                error.printStackTrace();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+                Toast.makeText(SortedActivityList.this, "Activity ID: " + activitySpinner.getSelectedItem().toString() , Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
-
-        requestQueue.add(json_obj);*/
 
     }
 }

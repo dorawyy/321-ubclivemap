@@ -132,7 +132,7 @@ public class GetMatchScore extends AppCompatActivity {
                     user.put("name", UserDetails.name);
                     user.put("username", UserDetails.username);
                     user.put("major", UserDetails.major);
-                    user.put("courseRegistered", UserDetails.courseRegistered);
+                    user.put("CourseRegistered", UserDetails.courseRegistered);
                     user.put("school", UserDetails.school);
                     user.put("phone", UserDetails.phone);
                     user.put("private", UserDetails.privatePublic);
@@ -142,20 +142,13 @@ public class GetMatchScore extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                JSONObject userLoc = new JSONObject();
-                try {
-                    userLoc.put("lat",inputLat);
-                    userLoc.put("long", inputLong);
-                }catch (JSONException e){
-                    e.printStackTrace();
-                }
-
                 JSONObject jsnReq = new JSONObject();
                 try {
-                    jsnReq.put("radius", inputDist);
+                    jsnReq.put("maxradius", inputDist);
                     jsnReq.put("user", user);
                     jsnReq.put("locationweight", inputLoc);
-                    jsnReq.put("userlocation", userLoc);
+                    jsnReq.put("userlat", inputLat);
+                    jsnReq.put("userlong", inputLong);
                     jsnReq.put("coursesweight", inputCourse);
                     jsnReq.put("majorweight", inputMajor);
 

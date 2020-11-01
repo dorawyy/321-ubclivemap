@@ -297,7 +297,7 @@ Content-Type: application/json
         "name" : "Kyle",
         "username" : "12",
         "major" : "CPEN",
-        "courseRegistered" : [
+        "CourseRegistered" : [
             "CPEN331", "CPEN321", "CPEN400", "ELEC221"
         ],
         "school" : "UBC",
@@ -306,13 +306,11 @@ Content-Type: application/json
         "inActivity" : false,
         "activityID" : -1
     } , 
-    "userlocation" : {
-        "lat" : "50.3112",
-        "long" : "-122.213123"
-    },
-    "radius" : 100000,
+    "userlat" : "50.3112",
+    "userlong" : "-122.213123",
+    "maxradius" : 100000,
     "locationweight" : 2,
     "coursesweight" : 3,
-    "majorweight" : 1
+    "majorweightt" : 1
 }
 

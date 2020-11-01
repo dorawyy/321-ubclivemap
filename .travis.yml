@@ -9,5 +9,5 @@ install:
 
 script:
   - cd ./backend/server
-  - mongod --port 27020
+  - mongod --port 27020 --dbpath ../localdb
   - npm test -- --coverage

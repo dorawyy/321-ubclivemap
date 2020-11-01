@@ -6,8 +6,8 @@ node_js:
   - "stable" 
 
 install:
+  - cd ./backend/server
   - npm ci
 
 script:
-  - cd backend/server
   - npm test -- --coverage

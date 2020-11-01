@@ -66,6 +66,7 @@ public class CreateActivity extends AppCompatActivity {
 
         user_courses[0] = "Choose from your courses";
         Log.d("checkpoint1","UserDetails.courseRegistered[0] : " + UserDetails.courseRegistered[0]);
+
         for(int i = 0; i < UserDetails.courseRegistered.length; i++){
 
             user_courses[i+1] = UserDetails.courseRegistered[i];

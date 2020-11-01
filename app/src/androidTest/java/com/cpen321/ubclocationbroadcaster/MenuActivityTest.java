@@ -41,7 +41,7 @@ public class MenuActivityTest {
     @Test
     public void buttonSelectionTest1() {
         Espresso.onView(withId(R.id.view_map_btn)).perform(click());
-        intended(hasComponent(MainMapsActivity.class.getName());
+        intended(hasComponent(MainMapsActivity.class.getName()));
     }
 
     @Test

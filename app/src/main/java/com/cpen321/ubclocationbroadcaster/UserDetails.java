@@ -20,4 +20,11 @@ public class UserDetails {
     UserDetails(String uname){
         username = uname;
     }
+    UserDetails(String [] temp){
+        courseRegistered = new String[temp.length];
+        for(int i=0;i<temp.length;i++){
+            courseRegistered[i] = temp [i];
+        }
+    }
+
 }

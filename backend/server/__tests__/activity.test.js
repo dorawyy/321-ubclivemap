@@ -399,7 +399,7 @@ describe("fail tests", () => {
                 majorweight : 1
             });
         expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
+        expect(response.body.status).toBe("Not well formed request.2");
     })
 
     afterAll(async () => {

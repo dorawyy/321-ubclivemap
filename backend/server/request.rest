@@ -289,7 +289,7 @@ Content-Type: application/json
 }
 
 ### update users
-POST http://localhost:3000/sortactivities
+POST http://localhost:3000/activities/sort
 Content-Type: application/json
 
 {

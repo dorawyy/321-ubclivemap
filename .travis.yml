@@ -8,6 +8,7 @@ node_js:
 install:
   - cd ./backend/server
   - npm ci
+  - npm install jest
 
 script:
   - npm test -- --coverage

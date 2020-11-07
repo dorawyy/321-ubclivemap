@@ -164,4 +164,10 @@
     <string-array name="spinner2">
         <item>Select your Activities </item>
     </string-array>
+
+    <string name="title_activity_display_details">Display Activity Details</string>
+    <string name="tab_text_1">Information</string>
+    <string name="tab_text_2">Location on Map</string>
+    <string name="tab_text_3">Join Activity</string>
+    <string name="title_activity_display_activitiy_details">DisplayActivitiyDetails</string>
 </resources>

@@ -118,7 +118,8 @@ public class GetMatchScore extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("done button", "done button has been clicked");
                 //TODO: set the url here
-                String URL = "http://40.122.147.73:3030/activities/sort";
+                //String URL = "http://40.122.147.73:3030/activities/sort";
+                String URL = "http://10.0.2.2:3000/activities/sort";
 
                 final String inputDist = getRadius.getText().toString();
                 final double inputLat = 123.232;
@@ -167,10 +168,9 @@ public class GetMatchScore extends AppCompatActivity {
                                             SortedListClass.aids[i] = response.getJSONObject(i).getString("aid");
                                         }
                                         Intent transition = new Intent(GetMatchScore.this, SortedActivityList.class);
-                                        Toast.makeText(GetMatchScore.this, "Activity added", Toast.LENGTH_SHORT).show();
                                         startActivity(transition);
                                     } else {
-                                        Toast.makeText(GetMatchScore.this, "No activities in this range" , Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(GetMatchScore.this, "No activities in this range, Please try another Combination." , Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

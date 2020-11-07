@@ -205,20 +205,23 @@ app.post("/profiles/add", async (req, res) => {
     }
     return res.json(formatResponse(true, "User profile insert successfully.", null));
 });
-/*
-app.post("/inActivity", async(req, res) => {
-    
-    const options = { upsert : false };
-    var response = await userDB.collection("profile-data").updateOne({"username" : req.body.username}, {$set: {inActivity: "True"}}, options)
-    if(response.result.ok == 1){
-        if(response.matchedCount == 1){
-            return res.json(formatResponse(true, "User profile updated successfully.", null));
-        }
-        return res.json(formatResponse(false, "username does not exist", null));
+
+//update userdetails when the user joins an activity
+app.post("/profiles/join",async(req,res)=>{
+    if(!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("aid")){
+        return res.json(formatResponse(false, "Not well formed request.", null));
     }
-    return res.json(formatResponse(false, "User profile update failed.", null));
-   
-});*/
+    var response = await Profile.findOne({"username" : req.body.username}).exec()
+    if(response == null) {
+        return res.json(formatResponse(false, "User does not exist.", null));
+    }
+    response.inActivity = "true";
+    console.log("------" + req.body.aid);
+    response.activityID = req.body.aid;
+    return res.json(formatResponse(true, "User Joined successfully.", response));
+
+});
+
 
 /****************************************************************************
  ********************* ACTIVITY DATA BASE API CALLS *************************
@@ -310,6 +313,19 @@ app.post("/activities/update", async (req, res) => {
         return res.json(formatResponse(false, "Activity does not exist.", null));
     }
     return res.json(formatResponse(true, "Activity updated successfully.", null));
+});
+
+app.post("/activities/join",async(req,res)=>{
+    if(!req.body.hasOwnProperty("aid") || !req.body.hasOwnProperty("user")){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
+    if(response == null) {
+        return res.json(formatResponse(false, "Activity does not exist.", null));
+    }
+    response.usernames.push(req.body.user);
+    return res.json(formatResponse(true, "Activity Joined successfully.", response));
+
 });
 
 app.post('/activities/delete', async (req,res) =>{

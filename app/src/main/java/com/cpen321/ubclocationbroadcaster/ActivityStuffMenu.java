@@ -37,7 +37,7 @@ public class ActivityStuffMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent sign_in_Intent = new Intent(ActivityStuffMenu.this, GetMatchScore.class);
                 startActivity(sign_in_Intent);
-                Log.d("sign in button", "sign in button has been clicked");
+                Log.d("ActivityStuffMenu", "Get Match Score Button has been pressed");
             }
         });
     }

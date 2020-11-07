@@ -209,7 +209,7 @@ public class ProfileActivity extends AppCompatActivity {
                 //startActivity(doneIntent);
                 Log.d("done button", "done button has been clicked");
 
-        String URL = "http://40.122.147.73:3030/profiles/add";
+        String URL = "http://10.0.2.2:3000/profiles/add";
 
 
         final String inputName = name.getText().toString();
@@ -218,7 +218,7 @@ public class ProfileActivity extends AppCompatActivity {
         final String inputMajor = major.getText().toString();
         final boolean inputPrivate = false;
         final boolean inputInActivity = false;
-        final int inputActivityID = -1;
+        final String inputActivityID = "-1";
 
 
         JSONArray jsnReq = new JSONArray();

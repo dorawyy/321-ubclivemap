@@ -77,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 //startActivity(sign_in_Intent);
                 Log.d("sign in button", "sign in button has been clicked");
 
-                String URL = "http://40.122.147.73:3030/users/login";
+                //String URL = "http://40.122.147.73:3030/users/login";
+                String URL = "http://10.0.2.2:3000/users/login";
                 final String usrname = username.getText().toString();
                 String passwrd = password.getText().toString();
 
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                                     String stat = response.get("status").toString(); // get status
                                     if(successVal) {
 
-                                        final JsonArrayRequest userDetails = new JsonArrayRequest("http://40.122.147.73:3030/profiles/all",
+                                        final JsonArrayRequest userDetails = new JsonArrayRequest("http://10.0.2.2:3000/profiles/all",
                                                 new Response.Listener<JSONArray> (){
                                                     @Override
                                                     public void onResponse(JSONArray response){

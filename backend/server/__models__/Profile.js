@@ -9,7 +9,7 @@ const userSchema = new Schema({
     phone : String,
     private : Boolean,
     inActivity : Boolean, 
-    activityID : Number
+    activityID : String
 })
 
 module.exports = mongoose.model('Profile', userSchema)

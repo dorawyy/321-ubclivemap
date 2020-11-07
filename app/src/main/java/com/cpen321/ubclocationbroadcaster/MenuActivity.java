@@ -35,7 +35,7 @@ public class MenuActivity extends AppCompatActivity {
         listActivitesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent activitesIntent = new Intent(MenuActivity.this, ListScrollingActivity.class);
+                Intent activitesIntent = new Intent(MenuActivity.this, DisplayActivityDetails.class);
                 startActivity(activitesIntent);
             }
         });

@@ -56,7 +56,14 @@ public class SortedActivityList extends AppCompatActivity {
         activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
-                Toast.makeText(SortedActivityList.this, "Activity ID: " + activitySpinner.getSelectedItem().toString() , Toast.LENGTH_SHORT).show();
+                if(position>0){
+                    String result = activitySpinner.getSelectedItem().toString();
+                    SortedListClass.activity_to_be_displayed = new String();
+                    SortedListClass.activity_to_be_displayed = result;
+                    Log.d("SortedActivityList","Selected activity aid: " + SortedListClass.activity_to_be_displayed);
+                    Intent transition = new Intent(SortedActivityList.this, DisplayActivityDetails.class);
+                    startActivity(transition);
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

@@ -58,7 +58,7 @@ public class MainMapsActivity extends FragmentActivity implements OnMapReadyCall
         mMap = googleMap;
 
         final RequestQueue requestQueueMA = Volley.newRequestQueue(this);
-        String urlMA = "http://40.122.147.73:3030/activities/all";
+        String urlMA = "http://10.0.2.2:3000/activities/all";
 
         MyJSONArrayRequest allActivities = new MyJSONArrayRequest(Request.Method.GET,urlMA,null,
                 new Response.Listener<JSONArray> (){

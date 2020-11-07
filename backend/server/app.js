@@ -216,9 +216,9 @@ app.post("/profiles/join",async(req,res)=>{
         return res.json(formatResponse(false, "User does not exist.", null));
     }
     response.inActivity = "true";
-    console.log("------" + req.body.aid);
     response.activityID = req.body.aid;
-    return res.json(formatResponse(true, "User Joined successfully.", response));
+    var result = await Profile.replaceOne({"username" : req.body.username}, response)
+    return res.json(formatResponse(true, "User Joined successfully.", result));
 
 });
 
@@ -324,7 +324,8 @@ app.post("/activities/join",async(req,res)=>{
         return res.json(formatResponse(false, "Activity does not exist.", null));
     }
     response.usernames.push(req.body.user);
-    return res.json(formatResponse(true, "Activity Joined successfully.", response));
+    var result = await Activity.replaceOne({"aid" : req.body.aid}, response)
+    return res.json(formatResponse(true, "Activity Joined successfully.", result));
 
 });
 

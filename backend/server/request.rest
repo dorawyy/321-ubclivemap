@@ -189,7 +189,7 @@ POST http://localhost:3000/activities/join
 Content-Type: application/json
 
 {
-    "aid" : "dancing",
+    "aid" : "ultracheapcow",
     "user" : "Kyle"
 }
 

@@ -32,7 +32,7 @@ import org.json.JSONObject;
 
 public class Joined extends AppCompatActivity {
 
-    private boolean joinStatus = false;
+    private boolean joinStatus;
     private boolean userJoinStatus = false;
 
     @Override
@@ -62,6 +62,7 @@ public class Joined extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+
             //Update the Activity Database Entry's usernames.
             //That is: Add the username of the current user to the users of the activity
             JsonObjectRequest activity_object = new JsonObjectRequest(Request.Method.POST, "http://10.0.2.2:3000/activities/join", joinObject,
@@ -71,6 +72,8 @@ public class Joined extends AppCompatActivity {
                             try {
                                 Log.d("Join", "Entered activity_object");
                                 joinStatus = (boolean) response.get("success");
+                                Log.d("Join","joinStatus: " + joinStatus);
+                                Log.d("Join","response success: " + response.get("success").toString());
                                 if(joinStatus){
                                     Toast.makeText(Joined.this, "Successfully Joined Activity", Toast.LENGTH_SHORT).show();
                                 }
@@ -94,20 +97,25 @@ public class Joined extends AppCompatActivity {
         }
 
         //Update the UserDetails locally and the UserDB backend Database to reflect that the user is in a activity now.
-        if(joinStatus){
+        //if(joinStatus){
+            Log.d("Join", "Passed if(joinStatus)");
             JSONObject userObject = new JSONObject();
             try{
                 userObject.put("username",UserDetails.username);
                 userObject.put("aid",SortedListClass.activity_to_be_displayed);
+                Log.d("Join", "Created joinObject" + userObject.getString("aid") + userObject.getString("username"));
             }catch (JSONException e){
                 e.printStackTrace();
+                Log.d("Join", "Error: Could not create userObject");
             }
             JsonObjectRequest user_join = new JsonObjectRequest(Request.Method.POST, "http://10.0.2.2:3000/profiles/join", userObject,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
+                                Log.d("userJoin", "Entered user_join");
                                 userJoinStatus = (boolean) response.get("success");
+                                Log.d("userJoin", "userJoinStatus: " + userJoinStatus);
                                 if(userJoinStatus){
                                     //Update Locally
                                     UserDetails.inactivity = "true";
@@ -133,14 +141,14 @@ public class Joined extends AppCompatActivity {
             });
 
             uj.add(user_join);
-        }
+       // }
 
         mb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent sign_up_Intent = new Intent(Joined.this, MenuActivity.class);
                 startActivity(sign_up_Intent);
-                Log.d("Done", "Going Joined");
+                Log.d("Done", "Going Menu");
             }
         });
     }

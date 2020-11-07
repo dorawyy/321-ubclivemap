@@ -2,25 +2,12 @@ package com.cpen321.ubclocationbroadcaster;
 
 import android.os.Bundle;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.View;
-import android.widget.ListView;
-import android.widget.Spinner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ListScrollingActivity extends AppCompatActivity {
-    private RecyclerView activity_view;
+    RecyclerView activity_view;
     ArrayList<String> user_course_list = new ArrayList<>();
 
     @Override
@@ -51,7 +38,7 @@ public class ListScrollingActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        final RequestQueue requestQueueMA = Volley.newRequestQueue(this);
+        //final RequestQueue requestQueueMA = Volley.newRequestQueue(this);
         //String urlMA = "http://40.122.147.73:3030/activities/all";
         String urlMA = "http://10.0.2.2:3000/activities/all";
 

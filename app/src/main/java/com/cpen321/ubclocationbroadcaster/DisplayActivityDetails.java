@@ -4,14 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,18 +16,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /*This Activity is opened when a user clicks on an activity either
 * while viewing the suggested activities list, or while viewing
@@ -47,9 +36,9 @@ public class DisplayActivityDetails extends AppCompatActivity {
     //Boolean value becomes true if successfully received activity details from server
     private boolean success = false;
 
-    private boolean joinStatus = false;
-    private boolean userJoinStatus = false;
-    private int numOfusers = 0;
+    //private boolean joinStatus = false;
+    //private boolean userJoinStatus = false;
+    //private int numOfusers = 0;
 
     private int counter = 0;
 
@@ -63,8 +52,8 @@ public class DisplayActivityDetails extends AppCompatActivity {
         String URL = "http://10.0.2.2:3000/activities/search";
 
         final RequestQueue queue = Volley.newRequestQueue(this);
-        final RequestQueue ao = Volley.newRequestQueue(this);
-        final RequestQueue uj = Volley.newRequestQueue(this);
+        //final RequestQueue ao = Volley.newRequestQueue(this);
+        //final RequestQueue uj = Volley.newRequestQueue(this);
 
         Log.d("DisplayActivity",SortedListClass.activity_to_be_displayed);
         //JSONObject containing activity id to be sent to backend inorder to receive the corresponding activity
@@ -180,7 +169,7 @@ public class DisplayActivityDetails extends AppCompatActivity {
 
         queue.add(activity_object);
 
-        Button onMap = findViewById(R.id.MapButton);
+        //Button onMap = findViewById(R.id.MapButton);
         final Button join = findViewById(R.id.JoinButton);
 
         

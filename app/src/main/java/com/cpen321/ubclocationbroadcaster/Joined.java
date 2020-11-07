@@ -33,14 +33,13 @@ import org.json.JSONObject;
 public class Joined extends AppCompatActivity {
 
     private boolean joinStatus;
-    private boolean userJoinStatus = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joined);
 
-        TextView joined = findViewById(R.id.textView14);
+        //TextView joined = findViewById(R.id.textView14);
         Button mb = findViewById(R.id.menubutton10);
 
         final RequestQueue ao = Volley.newRequestQueue(this);
@@ -113,6 +112,7 @@ public class Joined extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
+                                boolean userJoinStatus = false;
                                 Log.d("userJoin", "Entered user_join");
                                 userJoinStatus = (boolean) response.get("success");
                                 Log.d("userJoin", "userJoinStatus: " + userJoinStatus);

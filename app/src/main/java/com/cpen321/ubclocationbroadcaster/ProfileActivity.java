@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,10 +19,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,25 +32,22 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     private Spinner mySpinner;
-    private ListView course_list_view;
     private EditText name;
     private EditText phone_number;
     private EditText school;
     private EditText major;
-    private Button done_btn;
 
-    //TODO: don't go to the next page if data is invalid
-    //TODO: use mySkeleton if it works
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        ListView course_list_view;
 
         name = findViewById((R.id.sign_up_name_button));
         phone_number = findViewById(R.id.phone_number_button);
         school = findViewById(R.id.school_button);
         major = findViewById(R.id.major_button);
-        final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        //final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
 
 
         //drop down menu and view list
@@ -79,11 +73,15 @@ public class ProfileActivity extends AppCompatActivity {
                 switch (position){
                     case 0:
                         break;
-                    case 1:
+                    default:
                         if (!course_list.contains(result)){
                             course_list.add(result);}
                         break;
-                    case 2:
+                 /*    case 1:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                   case 2:
                         if (!course_list.contains(result)){
                             course_list.add(result);}
                         break;
@@ -187,7 +185,7 @@ public class ProfileActivity extends AppCompatActivity {
                         if (!course_list.contains(result)){
                             course_list.add(result);}
                         break;
-
+*/
                 }
                 course_list_adapter.notifyDataSetChanged();
             }
@@ -201,6 +199,7 @@ public class ProfileActivity extends AppCompatActivity {
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         //done button setup
+        Button done_btn;
         done_btn = findViewById(R.id.course_page_done_button);
         done_btn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,12 +18,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,18 +35,19 @@ public class CreateActivity extends AppCompatActivity {
     //List of courses from the registered courses of the leader to be put in the Activity
     final private ArrayList<String> activity_courses = new ArrayList<String>();
     //Number of Registered courses of the user
-    private int numOfCourses =0;
+    //private int numOfCourses =0;
     //Class that stores the user details
     //private UserDetails ud = new UserDetails();
 
-    private boolean activityS , userS;
+    private boolean activityS;
+    private boolean userS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
 
-        final RequestQueue q = Volley.newRequestQueue(this);
+        //final RequestQueue q = Volley.newRequestQueue(this);
         final RequestQueue r = Volley.newRequestQueue(this);
         final RequestQueue s = Volley.newRequestQueue(this);
 
@@ -60,7 +57,7 @@ public class CreateActivity extends AppCompatActivity {
 
         /*For courses in the activity. The user should be able to choose the courses in the activity from his/her registered courses.*/
 
-        JSONObject findUser = new JSONObject();
+        //JSONObject findUser = new JSONObject();
         mySpinner = findViewById(R.id.reg_course_spinner);
         reg_courses_view = findViewById((R.id.registered_courses));
 

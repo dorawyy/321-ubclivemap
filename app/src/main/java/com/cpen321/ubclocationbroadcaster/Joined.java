@@ -33,7 +33,7 @@ import org.json.JSONObject;
 public class Joined extends AppCompatActivity {
 
     private boolean joinStatus;
-    private boolean userJoinStatus = false;
+    private boolean userJoinStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,13 +92,8 @@ public class Joined extends AppCompatActivity {
             });
 
             ao.add(activity_object);
-        }else {
-            Toast.makeText(Joined.this, "Sorry, you are already in an activity!", Toast.LENGTH_SHORT).show();
-        }
 
-        //Update the UserDetails locally and the UserDB backend Database to reflect that the user is in a activity now.
-        //if(joinStatus){
-            Log.d("Join", "Passed if(joinStatus)");
+            //Update the UserDetails locally and the UserDB backend Database to reflect that the user is in a activity now.
             JSONObject userObject = new JSONObject();
             try{
                 userObject.put("username",UserDetails.username);
@@ -139,10 +134,11 @@ public class Joined extends AppCompatActivity {
                     error.printStackTrace();
                 }
             });
+            ao.add(user_join);
 
-            uj.add(user_join);
-       // }
-
+        }else {
+            Toast.makeText(Joined.this, "Sorry, you are already in an activity!", Toast.LENGTH_SHORT).show();
+        }
         mb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

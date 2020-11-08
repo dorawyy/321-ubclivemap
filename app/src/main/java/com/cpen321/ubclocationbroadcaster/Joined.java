@@ -45,7 +45,7 @@ public class Joined extends AppCompatActivity {
 
         Log.d("Join", "Join has been clicked");
         //Check that the user should not already be in an activity
-        if(UserDetails.inactivity.equals("false") || UserDetails.inactivity.equals("False")){
+        if(!UserDetails.inactivity){
             Log.d("Join", "It seems inactivity was false.");
 
             //Object Required by Backend to update the Activity users
@@ -111,12 +111,12 @@ public class Joined extends AppCompatActivity {
                                 Log.d("userJoin", "userJoinStatus: " + userJoinStatus);
                                 if(userJoinStatus){
                                     //Update Locally
-                                    UserDetails.inactivity = "true";
+                                    UserDetails.inactivity = true;
                                     UserDetails.activityID = SortedListClass.activity_to_be_displayed;
 
                                     //For Debugging
                                     Log.d("UserDBUpdate", "Successfully Updated User to reflect Joined Activity");
-                                    Log.d("UserDBUpdate", UserDetails.inactivity);
+                                    Log.d("UserDBUpdate", " : " + UserDetails.inactivity);
                                     Log.d("UserDBUpdate", UserDetails.activityID);
 
                                 }

@@ -155,8 +155,8 @@ public class ProfileActivity extends AppCompatActivity {
                                         UserDetails.phone = inputPhone;
                                         UserDetails.school = inputSchool;
                                         UserDetails.major = inputMajor;
-                                        UserDetails.privatePublic = "False";
-                                        UserDetails.inactivity = "False";
+                                        UserDetails.privatePublic = false;
+                                        UserDetails.inactivity = false;
                                         UserDetails.activityID = "-1";
                                         UserDetails.courseRegistered = new String[course_list.size()];
                                         for(int i=0;i<course_list.size();i++){

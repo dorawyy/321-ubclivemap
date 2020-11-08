@@ -36,10 +36,6 @@ public class DisplayActivityDetails extends AppCompatActivity {
     //Boolean value becomes true if successfully received activity details from server
     private boolean success = false;
 
-    //private boolean joinStatus = false;
-    //private boolean userJoinStatus = false;
-    //private int numOfusers = 0;
-
     private int counter = 0;
 
 
@@ -48,15 +44,12 @@ public class DisplayActivityDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_details);
 
-        //String URL = "http://40.122.147.73:3030/activities/search";
         String URL = BackendURL.getURL() + "/activities/search";
 
         final RequestQueue queue = Volley.newRequestQueue(this);
-        //final RequestQueue ao = Volley.newRequestQueue(this);
-        //final RequestQueue uj = Volley.newRequestQueue(this);
 
         Log.d("DisplayActivity",SortedListClass.activity_to_be_displayed);
-        //JSONObject containing activity id to be sent to backend inorder to receive the corresponding activity
+
         JSONObject aid_for_search = new JSONObject();
         try{
             aid_for_search.put("aid",SortedListClass.activity_to_be_displayed);
@@ -73,38 +66,26 @@ public class DisplayActivityDetails extends AppCompatActivity {
                         try{
                             success = (boolean)response.get("success");
                             JSONObject activity = response.getJSONObject("value");
-
                             SortedListClass.aname = activity.getString("name");
-                            Log.d("DisplayActivityAO",SortedListClass.aname);
                             SortedListClass.major = activity.getString("major");
-                            Log.d("DisplayActivityAO",SortedListClass.major);
                             SortedListClass.aschool = activity.getString("school");
-                            Log.d("DisplayActivityAO",SortedListClass.aschool);
                             SortedListClass.course = new String[activity.getJSONArray("course").length()];
                             for(int i=0;i<activity.getJSONArray("course").length();i++){
                                 SortedListClass.course[i] = activity.getJSONArray("course").getString(i);
-                                Log.d("DisplayActivityAO",SortedListClass.course[i]);
                             }
 
                             SortedListClass.users = new String[10];
                             for(int i=0;i<activity.getJSONArray("usernames").length();i++){
                                 SortedListClass.users[i] = activity.getJSONArray("usernames").getString(i);
-                                Log.d("DisplayActivityAO",SortedListClass.users[i] + i);
                             }
                             for(int i=activity.getJSONArray("usernames").length();i<10;i++){
                                 SortedListClass.users[i] = " ";
                             }
 
-
-
                             SortedListClass.info = activity.getString("info");
-                            Log.d("DisplayActivityAO",SortedListClass.info);
                             SortedListClass.lat = activity.getString("lat");
-                            Log.d("DisplayActivityAO",SortedListClass.lat);
                             SortedListClass.lon = activity.getString("long");
-                            Log.d("DisplayActivityAO",SortedListClass.lon);
                             SortedListClass.leader = activity.getString("leader");
-                            Log.d("DisplayActivityAO",SortedListClass.leader);
 
 
                             if(success){

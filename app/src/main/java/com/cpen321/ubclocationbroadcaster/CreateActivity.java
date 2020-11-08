@@ -196,6 +196,8 @@ public class CreateActivity extends AppCompatActivity {
                     if((!course.equals(" ")) && (!course.equals("Choose from your courses")))
                         reg_courses.put(course);
                 }
+                final boolean inActivity = true;
+                //final boolean privateorNOt = (boolean)UserDetails.privatePublic;
 
                 JSONObject updateUser = new JSONObject();
                 try {
@@ -206,7 +208,7 @@ public class CreateActivity extends AppCompatActivity {
                     updateUser.put("CourseRegistered",reg_courses);
                     updateUser.put("private", UserDetails.privatePublic);
                     updateUser.put("username", UserDetails.username);
-                    updateUser.put("inActivity", "True");
+                    updateUser.put("inActivity", inActivity);
                     updateUser.put("activityID", inputaid);
 
                 } catch (JSONException e) {

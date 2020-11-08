@@ -49,7 +49,7 @@ public class SortedActivityList extends AppCompatActivity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                Log.d("SortedActivityList","Nothing selected");
             }
         });
 

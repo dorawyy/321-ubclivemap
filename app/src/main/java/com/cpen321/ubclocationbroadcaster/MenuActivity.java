@@ -71,7 +71,7 @@ public class MenuActivity extends AppCompatActivity {
         createActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(UserDetails.inactivity.equals("False") || UserDetails.inactivity.equals("false")){
+                if(!UserDetails.inactivity){
                     Intent signInIntent = new Intent(MenuActivity.this, CreateActivity.class);
                     startActivity(signInIntent);
                 }

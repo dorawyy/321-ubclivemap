@@ -8,8 +8,8 @@ public class UserDetails {
     public static String[] courseRegistered ;
     public static String school;
     public static String phone;
-    public static String privatePublic;
-    public static String inactivity;
+    public static boolean privatePublic;
+    public static boolean inactivity;
     public static String activityID;
 
     /*public UserDetails(){

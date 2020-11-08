@@ -220,7 +220,7 @@ app.post('/profiles/delete', async (req,res) =>{
     }
 
     var response = await Profile.deleteOne({"username" : req.body.username});
-    if(response.n == 0){
+    if(response.n === 0){
         return res.json(formatResponse(false, "Username does not exist.", null));
     }
     return res.json(formatResponse(true, "User profile deleted successfully.", null));
@@ -236,11 +236,8 @@ app.post("/profiles/add", async (req, res) => {
     if(response != null) {
         return res.json(formatResponse(false, "Username already exists.", null));
     }
-    try {
-        await Profile.create(req.body);
-    } catch (err) {
-        return res.json(formatResponse(false, err, null));
-    }
+
+    await Profile.create(req.body);
     return res.json(formatResponse(true, "User profile insert successfully.", null));
 });
 

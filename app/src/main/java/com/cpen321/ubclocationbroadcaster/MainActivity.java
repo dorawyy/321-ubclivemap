@@ -118,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
                                                             UserDetails.phone = jsonObject.getString("phone");
                                                             UserDetails.school = jsonObject.getString("school");
                                                             UserDetails.major = jsonObject.getString("major");
-                                                            UserDetails.privatePublic = jsonObject.getString("private");
-                                                            UserDetails.inactivity = jsonObject.getString("inActivity");
+                                                            UserDetails.privatePublic = jsonObject.getBoolean("private");
+                                                            UserDetails.inactivity = jsonObject.getBoolean("inActivity");
                                                             UserDetails.activityID = jsonObject.getString("activityID");
                                                             UserDetails.courseRegistered = new String[numOfCourses];
                                                             for(int i=0;i<numOfCourses;i++){
@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                                                 }, new Response.ErrorListener() {
                                             @Override
                                             public void onErrorResponse(VolleyError error) {
+                                                error.printStackTrace();
                                             }
                                         });
                                         q.add(userDetails);

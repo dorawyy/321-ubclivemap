@@ -74,15 +74,15 @@ public class GetMatchScore extends AppCompatActivity {
 
                 JSONObject user = new JSONObject();
                 try {
-                    user.put("name", UserDetails.name);
-                    user.put("username", UserDetails.username);
-                    user.put("major", UserDetails.major);
-                    user.put("CourseRegistered", UserDetails.courseRegistered);
-                    user.put("school", UserDetails.school);
-                    user.put("phone", UserDetails.phone);
-                    user.put("private", UserDetails.privatePublic);
-                    user.put("inActivity", UserDetails.inactivity);
-                    user.put("activityID", UserDetails.activityID);
+                    user.put("name", UserdetailsUtil.name);
+                    user.put("username", UserdetailsUtil.username);
+                    user.put("major", UserdetailsUtil.major);
+                    user.put("CourseRegistered", UserdetailsUtil.courseRegistered);
+                    user.put("school", UserdetailsUtil.school);
+                    user.put("phone", UserdetailsUtil.phone);
+                    user.put("private", UserdetailsUtil.privatePublic);
+                    user.put("inActivity", UserdetailsUtil.inactivity);
+                    user.put("activityID", UserdetailsUtil.activityID);
                     Log.d("Createduser:","User Details: " + user.getString("name") +
                             user.getString("username") + user.getString("school") +
                             user.getString("phone") + user.getString("private") +

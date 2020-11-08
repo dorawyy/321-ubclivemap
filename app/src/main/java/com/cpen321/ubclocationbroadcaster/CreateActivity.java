@@ -199,7 +199,7 @@ public class CreateActivity extends AppCompatActivity {
                 //Update the UserDetails locally and the UserDB backend Database to reflect that the user is in a activity now.
                 JSONObject userObject = new JSONObject();
                 try{
-                    userObject.put("username", UserDetails.username);
+                    userObject.put("username", UserdetailsUtil.username);
                     userObject.put("aid", inputaid);
                 }catch (JSONException e){
                     e.printStackTrace();
@@ -215,16 +215,16 @@ public class CreateActivity extends AppCompatActivity {
                                 userJoinStatus = (boolean) response.get("success");
                                 if(userJoinStatus && activityS){
                                     //Update Locally
-                                    UserDetails.inactivity = true;
-                                    UserDetails.activityID = SortedListClass.activity_to_be_displayed;
+                                    UserdetailsUtil.inactivity = true;
+                                    UserdetailsUtil.activityID = SortedlistclassUtil.activity_to_be_displayed;
                                     Intent menu_Intent = new Intent(CreateActivity.this, MenuActivity.class);
                                     startActivity(menu_Intent);
                                     Log.d("Next button", "Next button has been clicked");
                                 }
                                 else if (userJoinStatus){
                                     //Update Locally
-                                    UserDetails.inactivity = true;
-                                    UserDetails.activityID = SortedListClass.activity_to_be_displayed;
+                                    UserdetailsUtil.inactivity = true;
+                                    UserdetailsUtil.activityID = SortedlistclassUtil.activity_to_be_displayed;
                                 }
                                 else{
                                     Log.d("Error5", "Error5 ");

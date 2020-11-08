@@ -33,9 +33,6 @@ public class DisplayActivityDetails extends AppCompatActivity {
     private Spinner coursesSpinner;
     //Displays the users in this activity
     private Spinner usersSpinner;
-    //Boolean value becomes true if successfully received activity details from server
-    //private boolean success = false;
-
     private int counter = 0;
 
 
@@ -65,75 +62,7 @@ public class DisplayActivityDetails extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try{
-                            success[0] = (boolean)response.get("success");
-                            JSONObject activity = response.getJSONObject("value");
-                            SortedlistclassUtil.aname = activity.getString("name");
-                            SortedlistclassUtil.major = activity.getString("major");
-                            SortedlistclassUtil.aschool = activity.getString("school");
-                            SortedlistclassUtil.course = new String[activity.getJSONArray("course").length()];
-                            for(int i=0;i<activity.getJSONArray("course").length();i++){
-                                SortedlistclassUtil.course[i] = activity.getJSONArray("course").getString(i);
-                            }
-
-                            SortedlistclassUtil.users = new String[10];
-                            for(int i=0;i<activity.getJSONArray("usernames").length();i++){
-                                SortedlistclassUtil.users[i] = activity.getJSONArray("usernames").getString(i);
-                            }
-                            for(int i=activity.getJSONArray("usernames").length();i<10;i++){
-                                SortedlistclassUtil.users[i] = " ";
-                            }
-
-                            SortedlistclassUtil.info = activity.getString("info");
-                            SortedlistclassUtil.lat = activity.getString("lat");
-                            SortedlistclassUtil.lon = activity.getString("long");
-                            SortedlistclassUtil.leader = activity.getString("leader");
-
-
-                            if(success[0]){
-                                TextView nameBox = findViewById(R.id.ActivityNameBox);
-                                TextView infoBox = findViewById(R.id.InfoBox);
-                                TextView leaderBox = findViewById(R.id.LeaderBox);
-                                TextView schoolBox = findViewById(R.id.SchoolBox);
-                                TextView majorBox = findViewById(R.id.MajorBox);
-
-
-                                nameBox.setText(SortedlistclassUtil.aname);
-                                infoBox.setText(SortedlistclassUtil.info);
-                                leaderBox.setText(SortedlistclassUtil.leader);
-                                schoolBox.setText(SortedlistclassUtil.aschool);
-                                majorBox.setText(SortedlistclassUtil.major);
-
-                                final String [] courses = new String[SortedlistclassUtil.course.length + 1];
-                                courses[0] = "Click to see Courses in Activity";
-                                for(int i = 0; i< SortedlistclassUtil.course.length; i++){
-                                    courses[i+1] = SortedlistclassUtil.course[i];
-                                }
-
-                                //numOfusers = SortedListClass.users.length;
-                                for(int i = 0; i< SortedlistclassUtil.users.length; i++){
-                                    if(!SortedlistclassUtil.users[i].equals(" "))
-                                        counter++;
-                                }
-                                final String [] users = new String[counter + 1];
-                                users[0] = "Click to see Users in Activity";
-                                for(int i = 0; i< SortedlistclassUtil.users.length; i++){
-                                    if(!SortedlistclassUtil.users[i].equals(" "))
-                                        users[i+1] = SortedlistclassUtil.users[i];
-                                }
-
-                                coursesSpinner = findViewById(R.id.CoursesSpinner);
-                                ArrayAdapter<String> myAdapter1 = new ArrayAdapter<String>(DisplayActivityDetails.this,
-                                        android.R.layout.simple_list_item_1, courses);
-                                myAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                coursesSpinner.setAdapter(myAdapter1);
-
-                                usersSpinner = findViewById(R.id.UsersSpinner);
-                                ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(DisplayActivityDetails.this,
-                                        android.R.layout.simple_list_item_1, users);
-                                myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                usersSpinner.setAdapter(myAdapter2);
-
-                            }
+                            helperFunction(response, success);
 
                         }catch (JSONException e){
                             Log.d("ActivityExtractor",":(");
@@ -151,11 +80,7 @@ public class DisplayActivityDetails extends AppCompatActivity {
 
         queue.add(activity_object);
 
-        //Button onMap = findViewById(R.id.MapButton);
         final Button join = findViewById(R.id.JoinButton);
-
-        
-
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,5 +90,77 @@ public class DisplayActivityDetails extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void helperFunction(JSONObject response, boolean [] success) throws JSONException {
+        success[0] = (boolean)response.get("success");
+        JSONObject activity = response.getJSONObject("value");
+        SortedlistclassUtil.aname = activity.getString("name");
+        SortedlistclassUtil.major = activity.getString("major");
+        SortedlistclassUtil.aschool = activity.getString("school");
+        SortedlistclassUtil.course = new String[activity.getJSONArray("course").length()];
+        for(int i=0;i<activity.getJSONArray("course").length();i++){
+            SortedlistclassUtil.course[i] = activity.getJSONArray("course").getString(i);
+        }
+
+        SortedlistclassUtil.users = new String[10];
+        for(int i=0;i<activity.getJSONArray("usernames").length();i++){
+            SortedlistclassUtil.users[i] = activity.getJSONArray("usernames").getString(i);
+        }
+        for(int i=activity.getJSONArray("usernames").length();i<10;i++){
+            SortedlistclassUtil.users[i] = " ";
+        }
+
+        SortedlistclassUtil.info = activity.getString("info");
+        SortedlistclassUtil.lat = activity.getString("lat");
+        SortedlistclassUtil.lon = activity.getString("long");
+        SortedlistclassUtil.leader = activity.getString("leader");
+
+
+        if(success[0]){
+            TextView nameBox = findViewById(R.id.ActivityNameBox);
+            TextView infoBox = findViewById(R.id.InfoBox);
+            TextView leaderBox = findViewById(R.id.LeaderBox);
+            TextView schoolBox = findViewById(R.id.SchoolBox);
+            TextView majorBox = findViewById(R.id.MajorBox);
+
+
+            nameBox.setText(SortedlistclassUtil.aname);
+            infoBox.setText(SortedlistclassUtil.info);
+            leaderBox.setText(SortedlistclassUtil.leader);
+            schoolBox.setText(SortedlistclassUtil.aschool);
+            majorBox.setText(SortedlistclassUtil.major);
+
+            final String [] courses = new String[SortedlistclassUtil.course.length + 1];
+            courses[0] = "Click to see Courses in Activity";
+            for(int i = 0; i< SortedlistclassUtil.course.length; i++){
+                courses[i+1] = SortedlistclassUtil.course[i];
+            }
+
+            //numOfusers = SortedListClass.users.length;
+            for(int i = 0; i< SortedlistclassUtil.users.length; i++){
+                if(!SortedlistclassUtil.users[i].equals(" "))
+                    counter++;
+            }
+            final String [] users = new String[counter + 1];
+            users[0] = "Click to see Users in Activity";
+            for(int i = 0; i< SortedlistclassUtil.users.length; i++){
+                if(!SortedlistclassUtil.users[i].equals(" "))
+                    users[i+1] = SortedlistclassUtil.users[i];
+            }
+
+            coursesSpinner = findViewById(R.id.CoursesSpinner);
+            ArrayAdapter<String> myAdapter1 = new ArrayAdapter<String>(DisplayActivityDetails.this,
+                    android.R.layout.simple_list_item_1, courses);
+            myAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            coursesSpinner.setAdapter(myAdapter1);
+
+            usersSpinner = findViewById(R.id.UsersSpinner);
+            ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(DisplayActivityDetails.this,
+                    android.R.layout.simple_list_item_1, users);
+            myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            usersSpinner.setAdapter(myAdapter2);
+
+        }
     }
 }

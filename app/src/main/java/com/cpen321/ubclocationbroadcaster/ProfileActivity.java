@@ -35,30 +35,24 @@ public class ProfileActivity extends AppCompatActivity {
     private EditText phone_number;
     private EditText school;
     private EditText major;
+    private ListView course_list_view;
+    private ArrayList<String> course_list;
+
+    private String inputName;
+    private String inputPhone;
+    private String inputSchool;
+    private String inputMajor;
+    private boolean inputPrivate;
+    private boolean inputInActivity;
+    private String inputActivityID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        ListView course_list_view;
 
-        name = findViewById((R.id.sign_up_name_button));
-        phone_number = findViewById(R.id.phone_number_button);
-        school = findViewById(R.id.school_button);
-        major = findViewById(R.id.major_button);
-        //final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
-
-
-        //drop down menu and view list
-        mySpinner = findViewById(R.id.course_spinner);
-        course_list_view = findViewById((R.id.course_list));
-
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(ProfileActivity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.spinner));
-        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mySpinner.setAdapter(myAdapter);
-
-        final ArrayList<String> course_list = new ArrayList<String>();
+        setVar();
+        course_list = new ArrayList<String>();
         final ArrayAdapter<String> course_list_adapter = new ArrayAdapter<String>(ProfileActivity.this,
                 android.R.layout.simple_list_item_1, course_list);
         course_list_view.setAdapter(course_list_adapter);
@@ -101,15 +95,13 @@ public class ProfileActivity extends AppCompatActivity {
 
                 String URL = UserdetailsUtil.getURL() + "/profiles/add";
 
-
-                final String inputName = name.getText().toString();
-                final String inputPhone = phone_number.getText().toString();
-                final String inputSchool = school.getText().toString();
-                final String inputMajor = major.getText().toString();
-                final boolean inputPrivate = false;
-                final boolean inputInActivity = false;
-                final String inputActivityID = "-1";
-
+                inputName = name.getText().toString();
+                inputPhone = phone_number.getText().toString();
+                inputSchool = school.getText().toString();
+                inputMajor = major.getText().toString();
+                inputPrivate = false;
+                inputInActivity = false;
+                inputActivityID = "-1";
 
                 JSONArray jsnReq = new JSONArray();
                 for(String course : course_list){
@@ -119,16 +111,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 JSONObject POSTjsnReq = new JSONObject();
                 try {
-                    POSTjsnReq.put("name", inputName);
-                    POSTjsnReq.put("phone", inputPhone);
-                    POSTjsnReq.put("school", inputSchool);
-                    POSTjsnReq.put("major", inputMajor);
-                    POSTjsnReq.put("CourseRegistered",jsnReq);
-                    POSTjsnReq.put("private", inputPrivate);
-                    POSTjsnReq.put("username", UserdetailsUtil.username);
-                    POSTjsnReq.put("inActivity", inputInActivity);
-                    POSTjsnReq.put("activityID", inputActivityID);
-
+                    helperFunction2(jsnReq, POSTjsnReq);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -145,32 +128,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(JSONObject response){
                                     try {
-                                        boolean successVal = (boolean) response.get("success");
-                                        String stat = response.get("status").toString();
-                                        if(successVal){
-                                            Intent doneIntent = new Intent(ProfileActivity.this, MenuActivity.class);
-                                            startActivity(doneIntent);
-
-                                            UserdetailsUtil.name = inputName;
-                                            UserdetailsUtil.phone = inputPhone;
-                                            UserdetailsUtil.school = inputSchool;
-                                            UserdetailsUtil.major = inputMajor;
-                                            UserdetailsUtil.privatePublic = false;
-                                            UserdetailsUtil.inactivity = false;
-                                            UserdetailsUtil.activityID = "-1";
-                                            UserdetailsUtil.courseRegistered = new String[course_list.size()];
-                                            for(int i=0;i<course_list.size();i++){
-                                                UserdetailsUtil.courseRegistered[i] = course_list.get(i);
-                                                Log.d("courseList", "Element" + i + ": " + course_list.get(i));
-                                                Log.d("courseRegistered", "Element" + i + ": " + UserdetailsUtil.courseRegistered[i]);
-                                            }
-
-
-                                            Log.d("SignUpActivity", stat);
-                                        }
-                                        else{
-                                            Log.d("error1", "Error1 " + stat);
-                                        }
+                                        helperFunction(response, inputName, inputPhone, inputSchool, inputMajor);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                         Log.d("error2", "-------------------- " );
@@ -186,7 +144,68 @@ public class ProfileActivity extends AppCompatActivity {
 
                     requestQueue.add(json_obj);
                 }}
+
+
         });
+    }
+
+    private void helperFunction2(JSONArray jsnReq, JSONObject POSTjsnReq) throws JSONException {
+        POSTjsnReq.put("name", inputName);
+        POSTjsnReq.put("phone", inputPhone);
+        POSTjsnReq.put("school", inputSchool);
+        POSTjsnReq.put("major", inputMajor);
+        POSTjsnReq.put("CourseRegistered",jsnReq);
+        POSTjsnReq.put("private", inputPrivate);
+        POSTjsnReq.put("username", UserdetailsUtil.username);
+        POSTjsnReq.put("inActivity", inputInActivity);
+        POSTjsnReq.put("activityID", inputActivityID);
+    }
+
+    private void helperFunction(JSONObject response, String inputName, String inputPhone, String inputSchool, String inputMajor) throws JSONException {
+        boolean successVal = (boolean) response.get("success");
+        String stat = response.get("status").toString();
+        if(successVal){
+            Intent doneIntent = new Intent(ProfileActivity.this, MenuActivity.class);
+            startActivity(doneIntent);
+
+            UserdetailsUtil.name = inputName;
+            UserdetailsUtil.phone = inputPhone;
+            UserdetailsUtil.school = inputSchool;
+            UserdetailsUtil.major = inputMajor;
+            UserdetailsUtil.privatePublic = false;
+            UserdetailsUtil.inactivity = false;
+            UserdetailsUtil.activityID = "-1";
+            UserdetailsUtil.courseRegistered = new String[course_list.size()];
+            for(int i=0;i<course_list.size();i++){
+                UserdetailsUtil.courseRegistered[i] = course_list.get(i);
+                Log.d("courseList", "Element" + i + ": " + course_list.get(i));
+                Log.d("courseRegistered", "Element" + i + ": " + UserdetailsUtil.courseRegistered[i]);
+            }
+
+
+            Log.d("SignUpActivity", stat);
+        }
+        else{
+            Log.d("error1", "Error1 " + stat);
+        }
+    }
+
+    private void setVar() {
+        name = findViewById((R.id.sign_up_name_button));
+        phone_number = findViewById(R.id.phone_number_button);
+        school = findViewById(R.id.school_button);
+        major = findViewById(R.id.major_button);
+        //final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+
+
+        //drop down menu and view list
+        mySpinner = findViewById(R.id.course_spinner);
+        course_list_view = findViewById((R.id.course_list));
+
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(ProfileActivity.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.spinner));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner.setAdapter(myAdapter);
     }
 
 }

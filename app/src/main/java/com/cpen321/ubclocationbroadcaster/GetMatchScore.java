@@ -27,80 +27,42 @@ import org.json.JSONObject;
 public class GetMatchScore extends AppCompatActivity {
     private EditText getRadius;
     private int[] priorities;
-
+    final String inputDist = getRadius.getText().toString();
+    final double inputLat = 123.232;
+    final double inputLong = -100.432;
+    final int inputLoc = priorities[0];
+    final int inputCourse = priorities[1];
+    final int inputMajor = priorities[2];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_get_match_score);
-        TextView showLocPriority;
-        TextView showCoursePriority;
-        TextView showMajorPriority;
-        SeekBar locPriority;
-        SeekBar coursePriority;
-        SeekBar majorPriority;
+
         Button done_btn;
 
-        //final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
         priorities = new int[3];
-
         getRadius = findViewById(R.id.getRadius);
-        locPriority = findViewById(R.id.LocationPriority);
-        showLocPriority = findViewById(R.id.showLocPriority);
-        showCoursePriority = findViewById(R.id.showCoursePriority);
-        showMajorPriority = findViewById(R.id.showMajorPriority);
-        coursePriority = findViewById(R.id.coursePriority);
-        majorPriority = findViewById(R.id.majorPriority);
 
-        helperFunction(showLocPriority, locPriority, "Location Priority", 0);
-        helperFunction(showCoursePriority, coursePriority, "Course Priority", 1);
-        helperFunction(showMajorPriority, majorPriority, "Major Priority", 2);
+        serVar();
 
         done_btn = findViewById(R.id.done_button_activity);
         done_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("done button", "done button has been clicked");
-                //TODO: set the url here
-                //String URL = "http://40.122.147.73:3030/activities/sort";
                 String URL = UserdetailsUtil.getURL() + "/activities/sort";
-
-                final String inputDist = getRadius.getText().toString();
-                final double inputLat = 123.232;
-                final double inputLong = -100.432;
-                final int inputLoc = priorities[0];
-                final int inputCourse = priorities[1];
-                final int inputMajor = priorities[2];
 
                 JSONObject user = new JSONObject();
                 try {
-                    user.put("name", UserdetailsUtil.name);
-                    user.put("username", UserdetailsUtil.username);
-                    user.put("major", UserdetailsUtil.major);
-                    user.put("CourseRegistered", UserdetailsUtil.courseRegistered);
-                    user.put("school", UserdetailsUtil.school);
-                    user.put("phone", UserdetailsUtil.phone);
-                    user.put("private", UserdetailsUtil.privatePublic);
-                    user.put("inActivity", UserdetailsUtil.inactivity);
-                    user.put("activityID", UserdetailsUtil.activityID);
-                    Log.d("Createduser:","User Details: " + user.getString("name") +
-                            user.getString("username") + user.getString("school") +
-                            user.getString("phone") + user.getString("private") +
-                            user.getString("inActivity") + user.getString("activityID") +
-                            user.getString("major") + user.getString("CourseRegistered"));
+                    getuserDetail(user);
+
                 } catch (JSONException e){
                     e.printStackTrace();
                 }
 
                 JSONObject jsnReq = new JSONObject();
                 try {
-                    jsnReq.put("maxradius", inputDist);
-                    jsnReq.put("user", user);
-                    jsnReq.put("locationweight", inputLoc);
-                    jsnReq.put("userlat", inputLat);
-                    jsnReq.put("userlong", inputLong);
-                    jsnReq.put("coursesweight", inputCourse);
-                    jsnReq.put("majorweight", inputMajor);
+                    getJsnReq(jsnReq, user);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -112,12 +74,7 @@ public class GetMatchScore extends AppCompatActivity {
                             public void onResponse(JSONArray response) {
                                 try {
                                     if(response.length()>0) {
-                                        SortedlistclassUtil.aids = new String[response.length()];
-                                        for(int i=0; i<response.length();i++){
-                                            SortedlistclassUtil.aids[i] = response.getJSONObject(i).getString("aid");
-                                        }
-                                        Intent transition = new Intent(GetMatchScore.this, SortedActivityList.class);
-                                        startActivity(transition);
+                                        helperFunction2(response);
                                     } else {
                                         Toast.makeText(GetMatchScore.this, "No activities in this range, Please try another Combination." , Toast.LENGTH_SHORT).show();
                                     }
@@ -135,6 +92,56 @@ public class GetMatchScore extends AppCompatActivity {
                 requestQueue.add(json_obj);
             }
         });
+    }
+
+    private void serVar() {
+        setContentView(R.layout.activity_get_match_score);
+        TextView showLocPriority = findViewById(R.id.showLocPriority);
+        TextView showCoursePriority = findViewById(R.id.showCoursePriority);
+        TextView showMajorPriority = findViewById(R.id.showMajorPriority);
+        SeekBar locPriority = findViewById(R.id.LocationPriority);
+        SeekBar coursePriority = findViewById(R.id.coursePriority);
+        SeekBar majorPriority = findViewById(R.id.majorPriority);
+        helperFunction(showLocPriority, locPriority, "Location Priority", 0);
+        helperFunction(showCoursePriority, coursePriority, "Course Priority", 1);
+        helperFunction(showMajorPriority, majorPriority, "Major Priority", 2);
+    }
+
+    private void helperFunction2(JSONArray response) throws JSONException {
+        SortedlistclassUtil.aids = new String[response.length()];
+        for(int i=0; i<response.length();i++){
+            SortedlistclassUtil.aids[i] = response.getJSONObject(i).getString("aid");
+        }
+        Intent transition = new Intent(GetMatchScore.this, SortedActivityList.class);
+        startActivity(transition);
+    }
+
+    private void getJsnReq(JSONObject jsnReq, JSONObject user) throws JSONException {
+
+        jsnReq.put("maxradius", inputDist);
+        jsnReq.put("user", user);
+        jsnReq.put("locationweight", inputLoc);
+        jsnReq.put("userlat", inputLat);
+        jsnReq.put("userlong", inputLong);
+        jsnReq.put("coursesweight", inputCourse);
+        jsnReq.put("majorweight", inputMajor);
+    }
+
+    private void getuserDetail(JSONObject user) throws JSONException {
+        user.put("name", UserdetailsUtil.name);
+        user.put("username", UserdetailsUtil.username);
+        user.put("major", UserdetailsUtil.major);
+        user.put("CourseRegistered", UserdetailsUtil.courseRegistered);
+        user.put("school", UserdetailsUtil.school);
+        user.put("phone", UserdetailsUtil.phone);
+        user.put("private", UserdetailsUtil.privatePublic);
+        user.put("inActivity", UserdetailsUtil.inactivity);
+        user.put("activityID", UserdetailsUtil.activityID);
+        Log.d("Createduser:","User Details: " + user.getString("name") +
+                user.getString("username") + user.getString("school") +
+                user.getString("phone") + user.getString("private") +
+                user.getString("inActivity") + user.getString("activityID") +
+                user.getString("major") + user.getString("CourseRegistered"));
     }
 
     private void helperFunction(final TextView t, final SeekBar s, final String priorityName, final int i) {

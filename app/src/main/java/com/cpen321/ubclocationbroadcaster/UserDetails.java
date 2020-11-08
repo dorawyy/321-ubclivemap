@@ -1,6 +1,6 @@
 package com.cpen321.ubclocationbroadcaster;
 
-public class Userdetails {
+public class UserDetails {
     public static String username;
     public static String name;
     //public static String u_name;

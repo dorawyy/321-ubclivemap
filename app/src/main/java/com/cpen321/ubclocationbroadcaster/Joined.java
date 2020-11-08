@@ -44,14 +44,14 @@ public class Joined extends AppCompatActivity {
 
         Log.d("Join", "Join has been clicked");
         //Check that the user should not already be in an activity
-        if(!Userdetails.inactivity){
+        if(!UserDetails.inactivity){
             Log.d("Join", "It seems inactivity was false.");
 
             //Object Required by Backend to update the Activity users
             JSONObject joinObject = new JSONObject();
             try{
-                joinObject.put("aid", Sortedlistclass.activity_to_be_displayed);
-                joinObject.put("user", Userdetails.username);
+                joinObject.put("aid", SortedListClass.activity_to_be_displayed);
+                joinObject.put("user", UserDetails.username);
                 Log.d("Join", "Created joinObject" + joinObject.getString("aid") + joinObject.getString("user"));
             }catch (JSONException e){
                 Log.d("Join", "Error: Could not create joinObject");
@@ -61,7 +61,7 @@ public class Joined extends AppCompatActivity {
 
             //Update the Activity Database Entry's usernames.
             //That is: Add the username of the current user to the users of the activity
-            JsonObjectRequest activity_object = new JsonObjectRequest(Request.Method.POST, Userdetails.getURL() + "/activities/join", joinObject,
+            JsonObjectRequest activity_object = new JsonObjectRequest(Request.Method.POST, UserDetails.getURL() + "/activities/join", joinObject,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -92,14 +92,14 @@ public class Joined extends AppCompatActivity {
             //Update the UserDetails locally and the UserDB backend Database to reflect that the user is in a activity now.
             JSONObject userObject = new JSONObject();
             try{
-                userObject.put("username", Userdetails.username);
-                userObject.put("aid", Sortedlistclass.activity_to_be_displayed);
+                userObject.put("username", UserDetails.username);
+                userObject.put("aid", SortedListClass.activity_to_be_displayed);
                 Log.d("Join", "Created joinObject" + userObject.getString("aid") + userObject.getString("username"));
             }catch (JSONException e){
                 e.printStackTrace();
                 Log.d("Join", "Error: Could not create userObject");
             }
-            JsonObjectRequest user_join = new JsonObjectRequest(Request.Method.POST, Userdetails.getURL() + "/profiles/join", userObject,
+            JsonObjectRequest user_join = new JsonObjectRequest(Request.Method.POST, UserDetails.getURL() + "/profiles/join", userObject,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -110,13 +110,13 @@ public class Joined extends AppCompatActivity {
                                 Log.d("userJoin", "userJoinStatus: " + userJoinStatus);
                                 if(userJoinStatus){
                                     //Update Locally
-                                    Userdetails.inactivity = true;
-                                    Userdetails.activityID = Sortedlistclass.activity_to_be_displayed;
+                                    UserDetails.inactivity = true;
+                                    UserDetails.activityID = SortedListClass.activity_to_be_displayed;
 
                                     //For Debugging
                                     Log.d("UserDBUpdate", "Successfully Updated User to reflect Joined Activity");
-                                    Log.d("UserDBUpdate", " : " + Userdetails.inactivity);
-                                    Log.d("UserDBUpdate", Userdetails.activityID);
+                                    Log.d("UserDBUpdate", " : " + UserDetails.inactivity);
+                                    Log.d("UserDBUpdate", UserDetails.activityID);
 
                                 }
                             } catch (JSONException e) {

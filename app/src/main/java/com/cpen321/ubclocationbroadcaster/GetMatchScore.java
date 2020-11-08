@@ -26,19 +26,19 @@ import org.json.JSONObject;
 
 public class GetMatchScore extends AppCompatActivity {
     private EditText getRadius;
-    private TextView showLocPriority;
-    private TextView showCoursePriority;
-    private TextView showMajorPriority;
-    private SeekBar locPriority;
-    private SeekBar coursePriority;
-    private SeekBar majorPriority;
-    private Button done_btn;
     private int[] priorities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_match_score);
+        TextView showLocPriority;
+        TextView showCoursePriority;
+        TextView showMajorPriority;
+        SeekBar locPriority;
+        SeekBar coursePriority;
+        SeekBar majorPriority;
+        Button done_btn;
 
         //final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -63,7 +63,7 @@ public class GetMatchScore extends AppCompatActivity {
                 Log.d("done button", "done button has been clicked");
                 //TODO: set the url here
                 //String URL = "http://40.122.147.73:3030/activities/sort";
-                String URL = Userdetails.getURL() + "/activities/sort";
+                String URL = UserDetails.getURL() + "/activities/sort";
 
                 final String inputDist = getRadius.getText().toString();
                 final double inputLat = 123.232;
@@ -74,15 +74,15 @@ public class GetMatchScore extends AppCompatActivity {
 
                 JSONObject user = new JSONObject();
                 try {
-                    user.put("name", Userdetails.name);
-                    user.put("username", Userdetails.username);
-                    user.put("major", Userdetails.major);
-                    user.put("CourseRegistered", Userdetails.courseRegistered);
-                    user.put("school", Userdetails.school);
-                    user.put("phone", Userdetails.phone);
-                    user.put("private", Userdetails.privatePublic);
-                    user.put("inActivity", Userdetails.inactivity);
-                    user.put("activityID", Userdetails.activityID);
+                    user.put("name", UserDetails.name);
+                    user.put("username", UserDetails.username);
+                    user.put("major", UserDetails.major);
+                    user.put("CourseRegistered", UserDetails.courseRegistered);
+                    user.put("school", UserDetails.school);
+                    user.put("phone", UserDetails.phone);
+                    user.put("private", UserDetails.privatePublic);
+                    user.put("inActivity", UserDetails.inactivity);
+                    user.put("activityID", UserDetails.activityID);
                 } catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -107,9 +107,9 @@ public class GetMatchScore extends AppCompatActivity {
                             public void onResponse(JSONArray response) {
                                 try {
                                     if(response.length()>0) {
-                                        Sortedlistclass.aids = new String[response.length()];
+                                        SortedListClass.aids = new String[response.length()];
                                         for(int i=0; i<response.length();i++){
-                                            Sortedlistclass.aids[i] = response.getJSONObject(i).getString("aid");
+                                            SortedListClass.aids[i] = response.getJSONObject(i).getString("aid");
                                         }
                                         Intent transition = new Intent(GetMatchScore.this, SortedActivityList.class);
                                         startActivity(transition);
@@ -132,7 +132,7 @@ public class GetMatchScore extends AppCompatActivity {
         });
     }
 
-    void helperFunction(final TextView t, final SeekBar s, final String priorityName, final int i) {
+    private void helperFunction(final TextView t, final SeekBar s, final String priorityName, final int i) {
         t.setText(priorityName + ": " + s.getProgress() + "/" + s.getMax());
         s.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

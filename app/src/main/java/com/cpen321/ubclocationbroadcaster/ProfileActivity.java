@@ -57,35 +57,17 @@ public class ProfileActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, course_list);
         course_list_view.setAdapter(course_list_adapter);
 
-        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                String result = mySpinner.getSelectedItem().toString();
-                //all cpen courses
-                switch (position){
-                    case 0:
-                        break;
-
-                    default:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                }
-                course_list_adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Log.d("ProfileActivity","Nothing Selected");
-            }
-        });
+        spinnerSet(course_list_adapter);
 
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         //done button setup
         Button done_btn;
         done_btn = findViewById(R.id.course_page_done_button);
+        doneBtnSet(requestQueue, done_btn);
+    }
+
+    private void doneBtnSet(final RequestQueue requestQueue, Button done_btn) {
         done_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,14 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.d("done button", "done button has been clicked");
 
                 String URL = UserdetailsUtil.getURL() + "/profiles/add";
-
-                inputName = name.getText().toString();
-                inputPhone = phone_number.getText().toString();
-                inputSchool = school.getText().toString();
-                inputMajor = major.getText().toString();
-                inputPrivate = false;
-                inputInActivity = false;
-                inputActivityID = "-1";
+                setInputs();
 
                 JSONArray jsnReq = new JSONArray();
                 for(String course : course_list){
@@ -144,8 +119,42 @@ public class ProfileActivity extends AppCompatActivity {
 
                     requestQueue.add(json_obj);
                 }}
+        });
+    }
 
+    private void setInputs() {
+        inputName = name.getText().toString();
+        inputPhone = phone_number.getText().toString();
+        inputSchool = school.getText().toString();
+        inputMajor = major.getText().toString();
+        inputPrivate = false;
+        inputInActivity = false;
+        inputActivityID = "-1";
+    }
 
+    private void spinnerSet(final ArrayAdapter<String> course_list_adapter) {
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String result = mySpinner.getSelectedItem().toString();
+                //all cpen courses
+                switch (position){
+                    case 0:
+                        break;
+
+                    default:
+                        if (!course_list.contains(result)){
+                            course_list.add(result);}
+                        break;
+                }
+                course_list_adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.d("ProfileActivity","Nothing Selected");
+            }
         });
     }
 

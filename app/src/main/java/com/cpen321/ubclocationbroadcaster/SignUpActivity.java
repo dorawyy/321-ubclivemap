@@ -12,9 +12,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +31,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
 
-    private String URL = UserDetails.getURL() + "/users/register";
+    private String URL = Userdetails.getURL() + "/users/register";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class SignUpActivity extends AppCompatActivity {
         username = findViewById(R.id.sign_up_username_button);
         password = findViewById(R.id.sign_up_password_button);
         sign_up_btn = findViewById(R.id.sign_up_button);
+
+        final RequestQueue q = Volley.newRequestQueue(this);
 
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             Toast.makeText(SignUpActivity.this, "ERROR: Username Already Existed", Toast.LENGTH_SHORT).show();
                                     }
                                     String stat = response.get("status").toString();
-                                    UserDetails.username = inputUsername;
+                                    Userdetails.username = inputUsername;
                                     Log.d("SignUpActivity", stat);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -112,7 +116,8 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
 
-                MySingleton.getInstance(SignUpActivity.this).addToRequestQueue(json_obj);
+
+               q.add(json_obj);
 
             }}
         });

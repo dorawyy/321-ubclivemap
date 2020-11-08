@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("sign in button", "sign in button has been clicked");
 
                 //String URL = "http://40.122.147.73:3030/users/login";
-                String URL = UserDetails.getURL() + "/users/login";
+                String URL = Userdetails.getURL() + "/users/login";
                 final String usrname = username.getText().toString();
                 String passwrd = password.getText().toString();
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                     String stat = response.get("status").toString(); // get status
                                     if(successVal) {
 
-                                        final JsonArrayRequest userDetails = new JsonArrayRequest(UserDetails.getURL() + "/profiles/all",
+                                        final JsonArrayRequest userDetails = new JsonArrayRequest(Userdetails.getURL() + "/profiles/all",
                                                 new Response.Listener<JSONArray> (){
                                                     @Override
                                                     public void onResponse(JSONArray response){
@@ -114,16 +114,16 @@ public class MainActivity extends AppCompatActivity {
                                                             //jsonObject is the user object
                                                             JSONObject jsonObject = response.getJSONObject(pos);
                                                             int numOfCourses = jsonObject.getJSONArray("CourseRegistered").length();
-                                                            UserDetails.name = jsonObject.getString("name");
-                                                            UserDetails.phone = jsonObject.getString("phone");
-                                                            UserDetails.school = jsonObject.getString("school");
-                                                            UserDetails.major = jsonObject.getString("major");
-                                                            UserDetails.privatePublic = jsonObject.getBoolean("private");
-                                                            UserDetails.inactivity = jsonObject.getBoolean("inActivity");
-                                                            UserDetails.activityID = jsonObject.getString("activityID");
-                                                            UserDetails.courseRegistered = new String[numOfCourses];
+                                                            Userdetails.name = jsonObject.getString("name");
+                                                            Userdetails.phone = jsonObject.getString("phone");
+                                                            Userdetails.school = jsonObject.getString("school");
+                                                            Userdetails.major = jsonObject.getString("major");
+                                                            Userdetails.privatePublic = jsonObject.getBoolean("private");
+                                                            Userdetails.inactivity = jsonObject.getBoolean("inActivity");
+                                                            Userdetails.activityID = jsonObject.getString("activityID");
+                                                            Userdetails.courseRegistered = new String[numOfCourses];
                                                             for(int i=0;i<numOfCourses;i++){
-                                                                UserDetails.courseRegistered[i] = jsonObject.getJSONArray("CourseRegistered").getString(i);
+                                                                Userdetails.courseRegistered[i] = jsonObject.getJSONArray("CourseRegistered").getString(i);
                                                             }
 
                                                         } catch (JSONException e) {
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                                         Intent sign_in_Intent = new Intent(MainActivity.this, MenuActivity.class);
                                         sign_in_Intent.putExtra("USERNAME", usrname);
                                         startActivity(sign_in_Intent);
-                                        UserDetails.username = usrname;
+                                        Userdetails.username = usrname;
                                     } else {
                                         Toast.makeText(MainActivity.this, "ERROR: " + stat, Toast.LENGTH_SHORT).show();
                                     }
@@ -159,8 +159,7 @@ public class MainActivity extends AppCompatActivity {
                         error.printStackTrace();
                     }
                 });
-
-                MySingleton.getInstance(MainActivity.this).addToRequestQueue(json_obj);
+                q.add(json_obj);
             }
         });
 

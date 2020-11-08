@@ -16,7 +16,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         Button viewMapButton;
-        Button listActivitesButton;
         Button myActivityButton;
         Button editProfileButton;
         Button signOutButton;
@@ -62,7 +61,7 @@ public class MenuActivity extends AppCompatActivity {
         createActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!UserDetails.inactivity){
+                if(!Userdetails.inactivity){
                     Intent signInIntent = new Intent(MenuActivity.this, CreateActivity.class);
                     startActivity(signInIntent);
                 }

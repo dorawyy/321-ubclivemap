@@ -51,7 +51,7 @@ public class CreateActivity extends AppCompatActivity {
         final RequestQueue r = Volley.newRequestQueue(this);
         final RequestQueue s = Volley.newRequestQueue(this);
 
-        final String username = UserDetails.username;
+        final String username = Userdetails.username;
         final String[] user_courses = new String[10];
 
 
@@ -62,15 +62,15 @@ public class CreateActivity extends AppCompatActivity {
         reg_courses_view = findViewById((R.id.registered_courses));
 
         user_courses[0] = "Choose from your courses";
-        Log.d("checkpoint1","UserDetails.courseRegistered[0] : " + UserDetails.courseRegistered[0]);
+        Log.d("checkpoint1","UserDetails.courseRegistered[0] : " + Userdetails.courseRegistered[0]);
 
-        for(int i = 0; i < UserDetails.courseRegistered.length; i++){
+        for(int i = 0; i < Userdetails.courseRegistered.length; i++){
 
-            user_courses[i+1] = UserDetails.courseRegistered[i];
+            user_courses[i+1] = Userdetails.courseRegistered[i];
             Log.d("courses", "Display reg course " + user_courses[i]);
         }
         //Fill the remaining places in the user_course with empty values, otherwise spinner gives an error
-        for(int i=(UserDetails.courseRegistered.length+1); i<10; i++){
+        for(int i = (Userdetails.courseRegistered.length+1); i<10; i++){
             user_courses[i] = " ";
         }
 
@@ -119,7 +119,7 @@ public class CreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //String URL = "http://40.122.147.73:3030/activities/add";
-                String URL = UserDetails.getURL() + "/activities/add";
+                String URL = Userdetails.getURL() + "/activities/add";
 
                 JSONObject jsnRequest = new JSONObject();
                 EditText name = findViewById(R.id.activity_name);
@@ -142,9 +142,9 @@ public class CreateActivity extends AppCompatActivity {
                     jsnRequest.put("leader", username);
                     jsnRequest.put("usernames", username);
                     jsnRequest.put("info", inputInfo);
-                    jsnRequest.put("major", UserDetails.major);
+                    jsnRequest.put("major", Userdetails.major);
                     jsnRequest.put("course", courses);
-                    jsnRequest.put("school", UserDetails.school);
+                    jsnRequest.put("school", Userdetails.school);
                     jsnRequest.put("lat", inputLat);
                     jsnRequest.put("long", inputLong);
                     jsnRequest.put("status","1");
@@ -201,13 +201,13 @@ public class CreateActivity extends AppCompatActivity {
 
                 JSONObject updateUser = new JSONObject();
                 try {
-                    updateUser.put("name", UserDetails.name);
-                    updateUser.put("phone", UserDetails.phone);
-                    updateUser.put("school", UserDetails.school);
-                    updateUser.put("major", UserDetails.major);
+                    updateUser.put("name", Userdetails.name);
+                    updateUser.put("phone", Userdetails.phone);
+                    updateUser.put("school", Userdetails.school);
+                    updateUser.put("major", Userdetails.major);
                     updateUser.put("CourseRegistered",reg_courses);
-                    updateUser.put("private", UserDetails.privatePublic);
-                    updateUser.put("username", UserDetails.username);
+                    updateUser.put("private", Userdetails.privatePublic);
+                    updateUser.put("username", Userdetails.username);
                     updateUser.put("inActivity", inActivity);
                     updateUser.put("activityID", inputaid);
 

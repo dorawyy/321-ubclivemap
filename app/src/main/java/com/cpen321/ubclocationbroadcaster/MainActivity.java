@@ -129,7 +129,14 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             //pos is the index of our user in userDB
                             int pos = -1;
-                            getPos(response, pos);
+                            for(int i=0; i<response.length();i++){
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                if(jsonObject.getString("username").toString().equals(usrname)){
+                                    pos = i;
+                                    Log.d("poschange", "onResponse: " + pos);
+                                    break;
+                                }
+                            }
 
                             //jsonObject is the user object
                             JSONObject jsonObject = response.getJSONObject(pos);
@@ -167,17 +174,6 @@ public class MainActivity extends AppCompatActivity {
         UserdetailsUtil.courseRegistered = new String[numOfCourses];
         for(int i=0;i<numOfCourses;i++){
             UserdetailsUtil.courseRegistered[i] = jsonObject.getJSONArray("CourseRegistered").getString(i);
-        }
-    }
-
-    private void getPos(JSONArray response, int pos) throws JSONException {
-        for(int i=0; i<response.length();i++){
-            JSONObject jsonObject = response.getJSONObject(i);
-            if(jsonObject.getString("username").toString().equals(usrname)){
-                pos = i;
-                Log.d("poschange", "onResponse: " + pos);
-                break;
-            }
         }
     }
 }

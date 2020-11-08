@@ -20,9 +20,11 @@ public class SignUpActivityTest {
     private String username_t = "newUser";
     private String password_t = "password";
 
+    /*
     @Before
     public void setUp() throws Exception {
     }
+    */
 
     @Test
     public void testSignUp(){
@@ -53,7 +55,9 @@ public class SignUpActivityTest {
         Espresso.onView(withId(R.id.sign_up_button)).perform(click());
     }
 
+    /*
     @After
     public void tearDown() throws Exception {
     }
+     */
 }

@@ -22,9 +22,12 @@ public class CreateActivityTest {
     private String name_t = "testname";
     private String info_t = "testinfo";
 
+    /*
     @Before
     public void setUp() throws Exception {
     }
+     */
+
     @Test
     public void testCreate() throws JSONException {
         UserDetails.name = "test_name";
@@ -46,9 +49,10 @@ public class CreateActivityTest {
         Espresso.onView(withId(R.id.activity_done)).perform(click());
         intended(hasComponent(MenuActivity.class.getName()));
     }
+
+    /*
     @After
     public void tearDown() throws Exception {
     }
-
-
+    */
 }

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,15 +16,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.SharedPreferences;
 
 
 public class GetMatchScore extends AppCompatActivity {
@@ -44,7 +40,7 @@ public class GetMatchScore extends AppCompatActivity {
         final SeekBar majorPriority;
         final Button done_btn;
         final int[] priorities = new int[3];
-        final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        //final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         getRadius = findViewById(R.id.getRadius);
@@ -119,7 +115,7 @@ public class GetMatchScore extends AppCompatActivity {
                 Log.d("done button", "done button has been clicked");
                 //TODO: set the url here
                 //String URL = "http://40.122.147.73:3030/activities/sort";
-                String URL = "http://10.0.2.2:3000/activities/sort";
+                String URL = BackendURL.getURL() + "/activities/sort";
 
                 final String inputDist = getRadius.getText().toString();
                 final double inputLat = 123.232;

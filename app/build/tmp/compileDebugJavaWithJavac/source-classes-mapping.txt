@@ -1,5 +1,7 @@
 com/cpen321/ubclocationbroadcaster/MyProfile.java
  com.cpen321.ubclocationbroadcaster.MyProfile
+com/cpen321/ubclocationbroadcaster/BackendURL.java
+ com.cpen321.ubclocationbroadcaster.BackendURL
 com/cpen321/ubclocationbroadcaster/CreateActivity.java
  com.cpen321.ubclocationbroadcaster.CreateActivity
  com.cpen321.ubclocationbroadcaster.CreateActivity$1

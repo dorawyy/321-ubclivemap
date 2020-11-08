@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,16 +32,14 @@ import org.json.JSONObject;
 public class Joined extends AppCompatActivity {
 
     private boolean joinStatus;
-    private boolean userJoinStatus = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joined);
 
-        TextView joined = findViewById(R.id.textView14);
+        //TextView joined = findViewById(R.id.textView14);
         Button mb = findViewById(R.id.menubutton10);
-
         final RequestQueue ao = Volley.newRequestQueue(this);
         final RequestQueue uj = Volley.newRequestQueue(this);
 
@@ -65,7 +62,7 @@ public class Joined extends AppCompatActivity {
 
             //Update the Activity Database Entry's usernames.
             //That is: Add the username of the current user to the users of the activity
-            JsonObjectRequest activity_object = new JsonObjectRequest(Request.Method.POST, "http://10.0.2.2:3000/activities/join", joinObject,
+            JsonObjectRequest activity_object = new JsonObjectRequest(Request.Method.POST, BackendURL.getURL() + "/activities/join", joinObject,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -108,11 +105,12 @@ public class Joined extends AppCompatActivity {
                 e.printStackTrace();
                 Log.d("Join", "Error: Could not create userObject");
             }
-            JsonObjectRequest user_join = new JsonObjectRequest(Request.Method.POST, "http://10.0.2.2:3000/profiles/join", userObject,
+            JsonObjectRequest user_join = new JsonObjectRequest(Request.Method.POST, BackendURL.getURL() + "/profiles/join", userObject,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
+                                boolean userJoinStatus = false;
                                 Log.d("userJoin", "Entered user_join");
                                 userJoinStatus = (boolean) response.get("success");
                                 Log.d("userJoin", "userJoinStatus: " + userJoinStatus);

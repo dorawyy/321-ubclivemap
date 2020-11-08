@@ -4,23 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 public class MenuActivity extends AppCompatActivity {
-    private Button viewMapButton;
-    private Button listActivitesButton;
-    private Button myActivityButton;
-    private Button editProfileButton;
-    private Button signOutButton;
-    private Button createActivityButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        Button viewMapButton;
+        Button listActivitesButton;
+        Button myActivityButton;
+        Button editProfileButton;
+        Button signOutButton;
+        Button createActivityButton;
 
         viewMapButton = findViewById(R.id.view_map_btn);
         viewMapButton.setOnClickListener(new View.OnClickListener() {

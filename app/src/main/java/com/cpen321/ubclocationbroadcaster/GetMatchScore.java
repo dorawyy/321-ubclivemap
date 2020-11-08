@@ -115,7 +115,7 @@ public class GetMatchScore extends AppCompatActivity {
                 Log.d("done button", "done button has been clicked");
                 //TODO: set the url here
                 //String URL = "http://40.122.147.73:3030/activities/sort";
-                String URL = "http://10.0.2.2:3000/activities/sort";
+                String URL = BackendURL.getURL() + "/activities/sort";
 
                 final String inputDist = getRadius.getText().toString();
                 final double inputLat = 123.232;

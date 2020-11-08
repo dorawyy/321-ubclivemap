@@ -49,7 +49,7 @@ public class DisplayActivityDetails extends AppCompatActivity {
         setContentView(R.layout.activity_display_details);
 
         //String URL = "http://40.122.147.73:3030/activities/search";
-        String URL = "http://10.0.2.2:3000/activities/search";
+        String URL = BackendURL.getURL() + "/activities/search";
 
         final RequestQueue queue = Volley.newRequestQueue(this);
         //final RequestQueue ao = Volley.newRequestQueue(this);

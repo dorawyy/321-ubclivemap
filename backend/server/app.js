@@ -121,7 +121,7 @@ app.post('/users/delete', async (req,res) =>{
     }
 
     var response = await Account.deleteOne({"name" : req.body.name});
-    if(response.n == 0){
+    if(response.n === 0){
         return res.json(formatResponse(false, "Username does not exist.", null));
     }
     return res.json(formatResponse(true, "Account deleted successfully.", null));
@@ -494,7 +494,7 @@ app.post("/activities/sort", async (req, res) => {
         // INSERTION SORT ALGORITHM
         sorted_activities.push(currentactivity); 
         i = sorted_activities.length - 1 
-        if(i != 0){
+        if(i !== 0){
             var j = i-1; 
             while ((j > -1) && (matchfactor > activity_matchfactor[JSON.stringify(sorted_activities[j])])) {
                 sorted_activities[j+1] = sorted_activities[j];

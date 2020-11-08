@@ -16,7 +16,6 @@ import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
@@ -81,8 +80,8 @@ public class ProfileActivityTest {
         onData(allOf(is(instanceOf(String.class)), is(course_sel2))).perform(click());
 
         //check if it has items in list
-        onView(withId(R.id.course_list)).check(matches(hasDescendant(withText(course_sel1))));
-        onView(withId(R.id.course_list)).check(matches(hasDescendant(withText(course_sel2))));
+        onView(withId(R.id.course_list)).check(ViewAssertions.matches(hasDescendant(withText(course_sel1))));
+        onView(withId(R.id.course_list)).check(ViewAssertions.matches(hasDescendant(withText(course_sel2))));
     }
 
     @Test

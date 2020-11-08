@@ -3,8 +3,6 @@ package com.cpen321.ubclocationbroadcaster;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 

@@ -4,8 +4,6 @@ import androidx.test.espresso.Espresso;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 
 import org.json.JSONException;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 

@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("sign in button", "sign in button has been clicked");
 
                 //String URL = "http://40.122.147.73:3030/users/login";
-                String URL = UserDetails.getURL() + "/users/login";
+                String URL = userDetails.getURL() + "/users/login";
                 final String usrname = username.getText().toString();
                 String passwrd = password.getText().toString();
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                     String stat = response.get("status").toString(); // get status
                                     if(successVal) {
 
-                                        final JsonArrayRequest userDetails = new JsonArrayRequest(UserDetails.getURL() + "/profiles/all",
+                                        final JsonArrayRequest userDetails = new JsonArrayRequest(com.cpen321.ubclocationbroadcaster.userDetails.getURL() + "/profiles/all",
                                                 new Response.Listener<JSONArray> (){
                                                     @Override
                                                     public void onResponse(JSONArray response){
@@ -114,16 +114,16 @@ public class MainActivity extends AppCompatActivity {
                                                             //jsonObject is the user object
                                                             JSONObject jsonObject = response.getJSONObject(pos);
                                                             int numOfCourses = jsonObject.getJSONArray("CourseRegistered").length();
-                                                            UserDetails.name = jsonObject.getString("name");
-                                                            UserDetails.phone = jsonObject.getString("phone");
-                                                            UserDetails.school = jsonObject.getString("school");
-                                                            UserDetails.major = jsonObject.getString("major");
-                                                            UserDetails.privatePublic = jsonObject.getBoolean("private");
-                                                            UserDetails.inactivity = jsonObject.getBoolean("inActivity");
-                                                            UserDetails.activityID = jsonObject.getString("activityID");
-                                                            UserDetails.courseRegistered = new String[numOfCourses];
+                                                            com.cpen321.ubclocationbroadcaster.userDetails.name = jsonObject.getString("name");
+                                                            com.cpen321.ubclocationbroadcaster.userDetails.phone = jsonObject.getString("phone");
+                                                            com.cpen321.ubclocationbroadcaster.userDetails.school = jsonObject.getString("school");
+                                                            com.cpen321.ubclocationbroadcaster.userDetails.major = jsonObject.getString("major");
+                                                            com.cpen321.ubclocationbroadcaster.userDetails.privatePublic = jsonObject.getBoolean("private");
+                                                            com.cpen321.ubclocationbroadcaster.userDetails.inactivity = jsonObject.getBoolean("inActivity");
+                                                            com.cpen321.ubclocationbroadcaster.userDetails.activityID = jsonObject.getString("activityID");
+                                                            com.cpen321.ubclocationbroadcaster.userDetails.courseRegistered = new String[numOfCourses];
                                                             for(int i=0;i<numOfCourses;i++){
-                                                                UserDetails.courseRegistered[i] = jsonObject.getJSONArray("CourseRegistered").getString(i);
+                                                                com.cpen321.ubclocationbroadcaster.userDetails.courseRegistered[i] = jsonObject.getJSONArray("CourseRegistered").getString(i);
                                                             }
 
                                                         } catch (JSONException e) {
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                                         Intent sign_in_Intent = new Intent(MainActivity.this, MenuActivity.class);
                                         sign_in_Intent.putExtra("USERNAME", usrname);
                                         startActivity(sign_in_Intent);
-                                        UserDetails.username = usrname;
+                                        com.cpen321.ubclocationbroadcaster.userDetails.username = usrname;
                                     } else {
                                         Toast.makeText(MainActivity.this, "ERROR: " + stat, Toast.LENGTH_SHORT).show();
                                     }

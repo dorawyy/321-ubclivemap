@@ -2,7 +2,7 @@ package com.cpen321.ubclocationbroadcaster;
 
 /*Public Static String array 'aids' holds the Activity Ids of all the activities
 * in the database ordered by most suggested at position aids[0] and least suggested at aids[total number of activities-1] */
-public class SortedListClass {
+public class sortedListClass {
     public static String [] aids;
     public static String activity_to_be_displayed;
     public static String aname;

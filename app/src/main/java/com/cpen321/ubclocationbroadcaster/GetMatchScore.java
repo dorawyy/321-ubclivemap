@@ -63,7 +63,7 @@ public class GetMatchScore extends AppCompatActivity {
                 Log.d("done button", "done button has been clicked");
                 //TODO: set the url here
                 //String URL = "http://40.122.147.73:3030/activities/sort";
-                String URL = UserDetails.getURL() + "/activities/sort";
+                String URL = userDetails.getURL() + "/activities/sort";
 
                 final String inputDist = getRadius.getText().toString();
                 final double inputLat = 123.232;
@@ -74,15 +74,15 @@ public class GetMatchScore extends AppCompatActivity {
 
                 JSONObject user = new JSONObject();
                 try {
-                    user.put("name", UserDetails.name);
-                    user.put("username", UserDetails.username);
-                    user.put("major", UserDetails.major);
-                    user.put("CourseRegistered", UserDetails.courseRegistered);
-                    user.put("school", UserDetails.school);
-                    user.put("phone", UserDetails.phone);
-                    user.put("private", UserDetails.privatePublic);
-                    user.put("inActivity", UserDetails.inactivity);
-                    user.put("activityID", UserDetails.activityID);
+                    user.put("name", userDetails.name);
+                    user.put("username", userDetails.username);
+                    user.put("major", userDetails.major);
+                    user.put("CourseRegistered", userDetails.courseRegistered);
+                    user.put("school", userDetails.school);
+                    user.put("phone", userDetails.phone);
+                    user.put("private", userDetails.privatePublic);
+                    user.put("inActivity", userDetails.inactivity);
+                    user.put("activityID", userDetails.activityID);
                 } catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -107,9 +107,9 @@ public class GetMatchScore extends AppCompatActivity {
                             public void onResponse(JSONArray response) {
                                 try {
                                     if(response.length()>0) {
-                                        SortedListClass.aids = new String[response.length()];
+                                        sortedListClass.aids = new String[response.length()];
                                         for(int i=0; i<response.length();i++){
-                                            SortedListClass.aids[i] = response.getJSONObject(i).getString("aid");
+                                            sortedListClass.aids[i] = response.getJSONObject(i).getString("aid");
                                         }
                                         Intent transition = new Intent(GetMatchScore.this, SortedActivityList.class);
                                         startActivity(transition);

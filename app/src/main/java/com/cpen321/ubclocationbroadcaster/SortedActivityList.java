@@ -22,11 +22,11 @@ public class SortedActivityList extends AppCompatActivity {
         setContentView(R.layout.activity_sorted_list);
         activitySpinner = findViewById(R.id.activitiesSpinner);
 
-        final String [] activities = new String[SortedListClass.aids.length + 1];
+        final String [] activities = new String[sortedListClass.aids.length + 1];
         activities[0] = "Suggested Ranked Activities";
-        for(int i = 0; i< SortedListClass.aids.length; i++){
-            activities[i+1] = SortedListClass.aids[i];
-            Log.d("SortedList aids","Number: " + i + " : " + SortedListClass.aids[i] + "\n");
+        for(int i = 0; i< sortedListClass.aids.length; i++){
+            activities[i+1] = sortedListClass.aids[i];
+            Log.d("SortedList aids","Number: " + i + " : " + sortedListClass.aids[i] + "\n");
         }
 
         //final RequestQueue q = Volley.newRequestQueue(this);
@@ -41,8 +41,8 @@ public class SortedActivityList extends AppCompatActivity {
                 if(position>0){
                     String result = activitySpinner.getSelectedItem().toString();
                     //Sortedlistclass.activity_to_be_displayed = new String();
-                    SortedListClass.activity_to_be_displayed = result;
-                    Log.d("SortedActivityList","Selected activity aid: " + SortedListClass.activity_to_be_displayed);
+                    sortedListClass.activity_to_be_displayed = result;
+                    Log.d("SortedActivityList","Selected activity aid: " + sortedListClass.activity_to_be_displayed);
                     Intent transition = new Intent(SortedActivityList.this, DisplayActivityDetails.class);
                     startActivity(transition);
                 }

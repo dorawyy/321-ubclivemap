@@ -59,8 +59,8 @@ public class MenuActivityTest {
 
     @Test
     public void buttonSelectionTest6(){
-        UserDetails.inactivity = false;
-        UserDetails.courseRegistered = new String[]{"cpen321", "cpen 331"};
+        userDetails.inactivity = false;
+        userDetails.courseRegistered = new String[]{"cpen321", "cpen 331"};
         Espresso.onView(withId(R.id.create_activity_button)).perform(click());
         intended(hasComponent(CreateActivity.class.getName()));
     }

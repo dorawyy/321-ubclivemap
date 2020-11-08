@@ -99,7 +99,7 @@ public class ProfileActivity extends AppCompatActivity {
                 //startActivity(doneIntent);
                 Log.d("done button", "done button has been clicked");
 
-        String URL = UserDetails.getURL() + "/profiles/add";
+        String URL = userDetails.getURL() + "/profiles/add";
 
 
         final String inputName = name.getText().toString();
@@ -115,7 +115,7 @@ public class ProfileActivity extends AppCompatActivity {
         for(String course : course_list){
             jsnReq.put(course);
         }
-                Log.d("debgg1", "username: " + UserDetails.username);
+                Log.d("debgg1", "username: " + userDetails.username);
 
         JSONObject POSTjsnReq = new JSONObject();
         try {
@@ -125,7 +125,7 @@ public class ProfileActivity extends AppCompatActivity {
             POSTjsnReq.put("major", inputMajor);
             POSTjsnReq.put("CourseRegistered",jsnReq);
             POSTjsnReq.put("private", inputPrivate);
-            POSTjsnReq.put("username", UserDetails.username);
+            POSTjsnReq.put("username", userDetails.username);
             POSTjsnReq.put("inActivity", inputInActivity);
             POSTjsnReq.put("activityID", inputActivityID);
 
@@ -151,18 +151,18 @@ public class ProfileActivity extends AppCompatActivity {
                                         Intent doneIntent = new Intent(ProfileActivity.this, MenuActivity.class);
                                         startActivity(doneIntent);
 
-                                        UserDetails.name = inputName;
-                                        UserDetails.phone = inputPhone;
-                                        UserDetails.school = inputSchool;
-                                        UserDetails.major = inputMajor;
-                                        UserDetails.privatePublic = false;
-                                        UserDetails.inactivity = false;
-                                        UserDetails.activityID = "-1";
-                                        UserDetails.courseRegistered = new String[course_list.size()];
+                                        userDetails.name = inputName;
+                                        userDetails.phone = inputPhone;
+                                        userDetails.school = inputSchool;
+                                        userDetails.major = inputMajor;
+                                        userDetails.privatePublic = false;
+                                        userDetails.inactivity = false;
+                                        userDetails.activityID = "-1";
+                                        userDetails.courseRegistered = new String[course_list.size()];
                                         for(int i=0;i<course_list.size();i++){
-                                            UserDetails.courseRegistered[i] = course_list.get(i);
+                                            userDetails.courseRegistered[i] = course_list.get(i);
                                             Log.d("courseList", "Element" + i + ": " + course_list.get(i));
-                                            Log.d("courseRegistered", "Element" + i + ": " + UserDetails.courseRegistered[i]);
+                                            Log.d("courseRegistered", "Element" + i + ": " + userDetails.courseRegistered[i]);
                                         }
 
 

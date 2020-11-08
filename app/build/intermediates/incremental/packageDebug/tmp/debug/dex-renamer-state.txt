@@ -1,4 +1,4 @@
-#Sat Nov 07 11:56:28 PST 2020
-base.0=C\:\\Users\\solom\\Documents\\CPEN321\\CPEN-321-Location-App\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Sat Nov 07 13:10:22 PST 2020
+base.0=C\:\\Users\\Sebastian Gonzalez\\Documents\\UBC Engineering Year 4\\CPEN 321\\Project\\CPEN-321-Location-App\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

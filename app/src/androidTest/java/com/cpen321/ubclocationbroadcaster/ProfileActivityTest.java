@@ -39,9 +39,11 @@ public class ProfileActivityTest {
     private String course_sel1 = "CPEN 211";
     private String course_sel2 = "CPEN 331";
 
+    /*
     @Before
     public void setUp() throws Exception {
     }
+    */
 
     /*
     @Test
@@ -113,7 +115,9 @@ public class ProfileActivityTest {
         Espresso.onView(withId(R.id.course_page_done_button)).perform(click());
     }
 
+    /*
     @After
     public void tearDown() throws Exception {
     }
+    */
 }

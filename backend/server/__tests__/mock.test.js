@@ -49,8 +49,9 @@ describe("mock functions", () =>{
     })
 
     test("badurl", async () => {
+        var response;
         try {
-            await axios.get("http://localhost:3000/users/register");
+            response = await axios.get("http://localhost:3000/users/register");
             fail("bad url");
         } catch (err) {
             expect(err.message).toBe("bad url");

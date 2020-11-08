@@ -3,7 +3,6 @@ package com.cpen321.ubclocationbroadcaster;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -73,119 +72,11 @@ public class ProfileActivity extends AppCompatActivity {
                 switch (position){
                     case 0:
                         break;
+
                     default:
                         if (!course_list.contains(result)){
                             course_list.add(result);}
                         break;
-                 /*    case 1:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                   case 2:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 3:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 4:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 5:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 6:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 7:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 8:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 9:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 10:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 11:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 12:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 13:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 14:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 15:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 16:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 17:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 18:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 19:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 20:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 21:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 22:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 23:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 24:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 25:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 26:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-                    case 27:
-                        if (!course_list.contains(result)){
-                            course_list.add(result);}
-                        break;
-*/
                 }
                 course_list_adapter.notifyDataSetChanged();
             }

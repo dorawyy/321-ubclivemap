@@ -1,5 +1,4 @@
 package com.cpen321.ubclocationbroadcaster;
-import android.view.View;
 
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.intent.rule.IntentsTestRule;

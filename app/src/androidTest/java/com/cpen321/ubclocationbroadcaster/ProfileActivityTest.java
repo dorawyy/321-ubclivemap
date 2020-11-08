@@ -1,5 +1,6 @@
 package com.cpen321.ubclocationbroadcaster;
 
+
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -20,6 +21,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
+
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -81,7 +83,7 @@ public class ProfileActivityTest {
     }
 
     @Test
-    public void CreateProfileWithInvalidData(){
+    public void createProfileWithInvalidData(){
         //trying to create a profile with empty fields
         Espresso.onView(withId(R.id.sign_up_name_button)).perform(typeText(name_t));
         Espresso.onView(withId(R.id.school_button)).perform(typeText(school_t));
@@ -90,7 +92,7 @@ public class ProfileActivityTest {
     }
 
     @Test
-    public void CreateProfileWithNoCourse(){
+    public void createProfileWithNoCourse(){
         //trying to create a profile with empty course list
         Espresso.onView(withId(R.id.sign_up_name_button)).perform(typeText(name_t));
         Espresso.onView(withId(R.id.school_button)).perform(typeText(school_t));
@@ -101,7 +103,7 @@ public class ProfileActivityTest {
     }
 
     @Test
-    public void CreateProfileWithValidInfo(){
+    public void createProfileWithValidInfo(){
         //trying to create a profile with empty fields
         Espresso.onView(withId(R.id.sign_up_name_button)).perform(typeText(name_t));
         Espresso.onView(withId(R.id.school_button)).perform(typeText(school_t));

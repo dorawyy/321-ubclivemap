@@ -10,8 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 
 public class SortedActivityList extends AppCompatActivity {
 

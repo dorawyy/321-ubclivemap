@@ -26,11 +26,13 @@ com/cpen321/ubclocationbroadcaster/DisplayActivityDetails.java
  com.cpen321.ubclocationbroadcaster.DisplayActivityDetails$1
  com.cpen321.ubclocationbroadcaster.DisplayActivityDetails$2
  com.cpen321.ubclocationbroadcaster.DisplayActivityDetails$3
-com/cpen321/ubclocationbroadcaster/SignUpActivity.java
- com.cpen321.ubclocationbroadcaster.SignUpActivity
- com.cpen321.ubclocationbroadcaster.SignUpActivity$1
- com.cpen321.ubclocationbroadcaster.SignUpActivity$1$1
- com.cpen321.ubclocationbroadcaster.SignUpActivity$1$2
+com/cpen321/ubclocationbroadcaster/Joined.java
+ com.cpen321.ubclocationbroadcaster.Joined
+ com.cpen321.ubclocationbroadcaster.Joined$1
+ com.cpen321.ubclocationbroadcaster.Joined$2
+ com.cpen321.ubclocationbroadcaster.Joined$3
+ com.cpen321.ubclocationbroadcaster.Joined$4
+ com.cpen321.ubclocationbroadcaster.Joined$5
 com/cpen321/ubclocationbroadcaster/ActivityPage.java
  com.cpen321.ubclocationbroadcaster.ActivityPage
 com/cpen321/ubclocationbroadcaster/SortedListClass.java
@@ -38,14 +40,8 @@ com/cpen321/ubclocationbroadcaster/SortedListClass.java
 com/cpen321/ubclocationbroadcaster/ActivityStuffMenu.java
  com.cpen321.ubclocationbroadcaster.ActivityStuffMenu
  com.cpen321.ubclocationbroadcaster.ActivityStuffMenu$1
-com/cpen321/ubclocationbroadcaster/MenuActivity.java
- com.cpen321.ubclocationbroadcaster.MenuActivity
- com.cpen321.ubclocationbroadcaster.MenuActivity$1
- com.cpen321.ubclocationbroadcaster.MenuActivity$2
- com.cpen321.ubclocationbroadcaster.MenuActivity$3
- com.cpen321.ubclocationbroadcaster.MenuActivity$4
- com.cpen321.ubclocationbroadcaster.MenuActivity$5
- com.cpen321.ubclocationbroadcaster.MenuActivity$6
+com/cpen321/ubclocationbroadcaster/MyFirebaseMessagingService.java
+ com.cpen321.ubclocationbroadcaster.MyFirebaseMessagingService
 com/cpen321/ubclocationbroadcaster/MainActivity.java
  com.cpen321.ubclocationbroadcaster.MainActivity
  com.cpen321.ubclocationbroadcaster.MainActivity$1
@@ -63,25 +59,29 @@ com/cpen321/ubclocationbroadcaster/GetMatchScore.java
  com.cpen321.ubclocationbroadcaster.GetMatchScore$4
  com.cpen321.ubclocationbroadcaster.GetMatchScore$4$1
  com.cpen321.ubclocationbroadcaster.GetMatchScore$4$2
+com/cpen321/ubclocationbroadcaster/ListScrollingActivity.java
+ com.cpen321.ubclocationbroadcaster.ListScrollingActivity
+ com.cpen321.ubclocationbroadcaster.ListScrollingActivity$1
+ com.cpen321.ubclocationbroadcaster.ListScrollingActivity$2
+com/cpen321/ubclocationbroadcaster/SortedActivityList.java
+ com.cpen321.ubclocationbroadcaster.SortedActivityList
+ com.cpen321.ubclocationbroadcaster.SortedActivityList$1
+com/cpen321/ubclocationbroadcaster/MenuActivity.java
+ com.cpen321.ubclocationbroadcaster.MenuActivity
+ com.cpen321.ubclocationbroadcaster.MenuActivity$1
+ com.cpen321.ubclocationbroadcaster.MenuActivity$2
+ com.cpen321.ubclocationbroadcaster.MenuActivity$3
+ com.cpen321.ubclocationbroadcaster.MenuActivity$4
+ com.cpen321.ubclocationbroadcaster.MenuActivity$5
+ com.cpen321.ubclocationbroadcaster.MenuActivity$6
 com/cpen321/ubclocationbroadcaster/ProfileActivity.java
  com.cpen321.ubclocationbroadcaster.ProfileActivity
  com.cpen321.ubclocationbroadcaster.ProfileActivity$1
  com.cpen321.ubclocationbroadcaster.ProfileActivity$2
  com.cpen321.ubclocationbroadcaster.ProfileActivity$2$1
  com.cpen321.ubclocationbroadcaster.ProfileActivity$2$2
-com/cpen321/ubclocationbroadcaster/SortedActivityList.java
- com.cpen321.ubclocationbroadcaster.SortedActivityList
- com.cpen321.ubclocationbroadcaster.SortedActivityList$1
-com/cpen321/ubclocationbroadcaster/Joined.java
- com.cpen321.ubclocationbroadcaster.Joined
- com.cpen321.ubclocationbroadcaster.Joined$1
- com.cpen321.ubclocationbroadcaster.Joined$2
- com.cpen321.ubclocationbroadcaster.Joined$3
- com.cpen321.ubclocationbroadcaster.Joined$4
- com.cpen321.ubclocationbroadcaster.Joined$5
-com/cpen321/ubclocationbroadcaster/ListScrollingActivity.java
- com.cpen321.ubclocationbroadcaster.ListScrollingActivity
- com.cpen321.ubclocationbroadcaster.ListScrollingActivity$1
- com.cpen321.ubclocationbroadcaster.ListScrollingActivity$2
-com/cpen321/ubclocationbroadcaster/MyFirebaseMessagingService.java
- com.cpen321.ubclocationbroadcaster.MyFirebaseMessagingService
+com/cpen321/ubclocationbroadcaster/SignUpActivity.java
+ com.cpen321.ubclocationbroadcaster.SignUpActivity
+ com.cpen321.ubclocationbroadcaster.SignUpActivity$1
+ com.cpen321.ubclocationbroadcaster.SignUpActivity$1$1
+ com.cpen321.ubclocationbroadcaster.SignUpActivity$1$2

@@ -63,7 +63,7 @@ public class GetMatchScore extends AppCompatActivity {
                 Log.d("done button", "done button has been clicked");
                 //TODO: set the url here
                 //String URL = "http://40.122.147.73:3030/activities/sort";
-                String URL = UserDetails.getURL() + "/activities/sort";
+                String URL = UserdetailsUtil.getURL() + "/activities/sort";
 
                 final String inputDist = getRadius.getText().toString();
                 final double inputLat = 123.232;
@@ -112,9 +112,9 @@ public class GetMatchScore extends AppCompatActivity {
                             public void onResponse(JSONArray response) {
                                 try {
                                     if(response.length()>0) {
-                                        SortedListClass.aids = new String[response.length()];
+                                        SortedlistclassUtil.aids = new String[response.length()];
                                         for(int i=0; i<response.length();i++){
-                                            SortedListClass.aids[i] = response.getJSONObject(i).getString("aid");
+                                            SortedlistclassUtil.aids[i] = response.getJSONObject(i).getString("aid");
                                         }
                                         Intent transition = new Intent(GetMatchScore.this, SortedActivityList.class);
                                         startActivity(transition);

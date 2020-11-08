@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                     String stat = response.get("status").toString(); // get status
                                     if(successVal) {
 
-                                        final JsonArrayRequest userDetails = new JsonArrayRequest(com.cpen321.ubclocationbroadcaster.userDetails.getURL() + "/profiles/all",
+                                        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(userDetails.getURL() + "/profiles/all",
                                                 new Response.Listener<JSONArray> (){
                                                     @Override
                                                     public void onResponse(JSONArray response){
@@ -114,16 +114,16 @@ public class MainActivity extends AppCompatActivity {
                                                             //jsonObject is the user object
                                                             JSONObject jsonObject = response.getJSONObject(pos);
                                                             int numOfCourses = jsonObject.getJSONArray("CourseRegistered").length();
-                                                            com.cpen321.ubclocationbroadcaster.userDetails.name = jsonObject.getString("name");
-                                                            com.cpen321.ubclocationbroadcaster.userDetails.phone = jsonObject.getString("phone");
-                                                            com.cpen321.ubclocationbroadcaster.userDetails.school = jsonObject.getString("school");
-                                                            com.cpen321.ubclocationbroadcaster.userDetails.major = jsonObject.getString("major");
-                                                            com.cpen321.ubclocationbroadcaster.userDetails.privatePublic = jsonObject.getBoolean("private");
-                                                            com.cpen321.ubclocationbroadcaster.userDetails.inactivity = jsonObject.getBoolean("inActivity");
-                                                            com.cpen321.ubclocationbroadcaster.userDetails.activityID = jsonObject.getString("activityID");
-                                                            com.cpen321.ubclocationbroadcaster.userDetails.courseRegistered = new String[numOfCourses];
+                                                            userDetails.name = jsonObject.getString("name");
+                                                            userDetails.phone = jsonObject.getString("phone");
+                                                            userDetails.school = jsonObject.getString("school");
+                                                            userDetails.major = jsonObject.getString("major");
+                                                            userDetails.privatePublic = jsonObject.getBoolean("private");
+                                                            userDetails.inactivity = jsonObject.getBoolean("inActivity");
+                                                            userDetails.activityID = jsonObject.getString("activityID");
+                                                            userDetails.courseRegistered = new String[numOfCourses];
                                                             for(int i=0;i<numOfCourses;i++){
-                                                                com.cpen321.ubclocationbroadcaster.userDetails.courseRegistered[i] = jsonObject.getJSONArray("CourseRegistered").getString(i);
+                                                                userDetails.courseRegistered[i] = jsonObject.getJSONArray("CourseRegistered").getString(i);
                                                             }
 
                                                         } catch (JSONException e) {
@@ -138,12 +138,12 @@ public class MainActivity extends AppCompatActivity {
                                                 error.printStackTrace();
                                             }
                                         });
-                                        q.add(userDetails);
+                                        q.add(jsonArrayRequest);
 
                                         Intent sign_in_Intent = new Intent(MainActivity.this, MenuActivity.class);
                                         sign_in_Intent.putExtra("USERNAME", usrname);
                                         startActivity(sign_in_Intent);
-                                        com.cpen321.ubclocationbroadcaster.userDetails.username = usrname;
+                                        userDetails.username = usrname;
                                     } else {
                                         Toast.makeText(MainActivity.this, "ERROR: " + stat, Toast.LENGTH_SHORT).show();
                                     }

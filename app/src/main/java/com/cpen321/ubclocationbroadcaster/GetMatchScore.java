@@ -83,6 +83,11 @@ public class GetMatchScore extends AppCompatActivity {
                     user.put("private", UserDetails.privatePublic);
                     user.put("inActivity", UserDetails.inactivity);
                     user.put("activityID", UserDetails.activityID);
+                    Log.d("Createduser:","User Details: " + user.getString("name") +
+                            user.getString("username") + user.getString("school") +
+                            user.getString("phone") + user.getString("private") +
+                            user.getString("inActivity") + user.getString("activityID") +
+                            user.getString("major") + user.getString("CourseRegistered"));
                 } catch (JSONException e){
                     e.printStackTrace();
                 }

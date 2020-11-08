@@ -195,47 +195,43 @@ public class CreateActivity extends AppCompatActivity {
                     if((!course.equals(" ")) && (!course.equals("Choose from your courses")))
                         reg_courses.put(course);
                 }
-                final boolean inActivity = true;
-                //final boolean privateorNOt = (boolean)UserDetails.privatePublic;
 
-                JSONObject updateUser = new JSONObject();
-                try {
-                    updateUser.put("name", UserDetails.name);
-                    updateUser.put("phone", UserDetails.phone);
-                    updateUser.put("school", UserDetails.school);
-                    updateUser.put("major", UserDetails.major);
-                    updateUser.put("CourseRegistered",reg_courses);
-                    updateUser.put("private", UserDetails.privatePublic);
-                    updateUser.put("username", UserDetails.username);
-                    updateUser.put("inActivity", inActivity);
-                    updateUser.put("activityID", inputaid);
-
-                } catch (JSONException e) {
+                //Update the UserDetails locally and the UserDB backend Database to reflect that the user is in a activity now.
+                JSONObject userObject = new JSONObject();
+                try{
+                    userObject.put("username", UserDetails.username);
+                    userObject.put("aid", inputaid);
+                }catch (JSONException e){
                     e.printStackTrace();
+                    Log.d("Join", "Error: Could not create userObject");
                 }
 
-                JsonObjectRequest userUpdateObject = new JsonObjectRequest(Request.Method.POST, "http://10.0.2.2:3000/profiles/update", updateUser,
+                JsonObjectRequest userUpdateObject = new JsonObjectRequest(Request.Method.POST, "http://10.0.2.2:3000/profiles/join", userObject,
                     new Response.Listener<JSONObject> (){
                         @Override
                         public void onResponse(JSONObject response){
                             try {
-                                userS = (boolean) response.get("success");
-                                String stat = response.get("status").toString();
-                                if(userS && activityS){
-                                    Log.d("UpdatingUser", stat);
+                                boolean userJoinStatus = false;
+                                userJoinStatus = (boolean) response.get("success");
+                                if(userJoinStatus && activityS){
+                                    //Update Locally
+                                    UserDetails.inactivity = true;
+                                    UserDetails.activityID = SortedListClass.activity_to_be_displayed;
                                     Intent menu_Intent = new Intent(CreateActivity.this, MenuActivity.class);
                                     startActivity(menu_Intent);
                                     Log.d("Next button", "Next button has been clicked");
                                 }
-                                else if (userS){
-                                    Log.d("UserUpdate", stat);
+                                else if (userJoinStatus){
+                                    //Update Locally
+                                    UserDetails.inactivity = true;
+                                    UserDetails.activityID = SortedListClass.activity_to_be_displayed;
                                 }
                                 else{
-                                    Log.d("Error5", "Error5 " + stat);
+                                    Log.d("Error5", "Error5 ");
                                 }
                             } catch (JSONException e) {
+                                Log.d("UserDBUpdate", "UNSuccessfully Updated User to reflect Joined Activity");
                                 e.printStackTrace();
-                                Log.d("Error6", "-------could not update user------------- " );
                             }
                         }
                     }, new Response.ErrorListener() {

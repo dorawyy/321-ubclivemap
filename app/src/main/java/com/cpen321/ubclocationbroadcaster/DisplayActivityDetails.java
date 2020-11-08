@@ -45,15 +45,15 @@ public class DisplayActivityDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_details);
 
-        String URL = userDetails.getURL() + "/activities/search";
+        String URL = UserdetailsUtil.getURL() + "/activities/search";
 
         final RequestQueue queue = Volley.newRequestQueue(this);
 
-        Log.d("DisplayActivity", sortedListClass.activity_to_be_displayed);
+        Log.d("DisplayActivity", SortedlistclassUtil.activity_to_be_displayed);
 
         JSONObject aid_for_search = new JSONObject();
         try{
-            aid_for_search.put("aid", sortedListClass.activity_to_be_displayed);
+            aid_for_search.put("aid", SortedlistclassUtil.activity_to_be_displayed);
         }catch (JSONException e) {
             Log.d("Check0","Not able to form JSON Object aid_for_search");
             e.printStackTrace();
@@ -67,26 +67,26 @@ public class DisplayActivityDetails extends AppCompatActivity {
                         try{
                             success[0] = (boolean)response.get("success");
                             JSONObject activity = response.getJSONObject("value");
-                            sortedListClass.aname = activity.getString("name");
-                            sortedListClass.major = activity.getString("major");
-                            sortedListClass.aschool = activity.getString("school");
-                            sortedListClass.course = new String[activity.getJSONArray("course").length()];
+                            SortedlistclassUtil.aname = activity.getString("name");
+                            SortedlistclassUtil.major = activity.getString("major");
+                            SortedlistclassUtil.aschool = activity.getString("school");
+                            SortedlistclassUtil.course = new String[activity.getJSONArray("course").length()];
                             for(int i=0;i<activity.getJSONArray("course").length();i++){
-                                sortedListClass.course[i] = activity.getJSONArray("course").getString(i);
+                                SortedlistclassUtil.course[i] = activity.getJSONArray("course").getString(i);
                             }
 
-                            sortedListClass.users = new String[10];
+                            SortedlistclassUtil.users = new String[10];
                             for(int i=0;i<activity.getJSONArray("usernames").length();i++){
-                                sortedListClass.users[i] = activity.getJSONArray("usernames").getString(i);
+                                SortedlistclassUtil.users[i] = activity.getJSONArray("usernames").getString(i);
                             }
                             for(int i=activity.getJSONArray("usernames").length();i<10;i++){
-                                sortedListClass.users[i] = " ";
+                                SortedlistclassUtil.users[i] = " ";
                             }
 
-                            sortedListClass.info = activity.getString("info");
-                            sortedListClass.lat = activity.getString("lat");
-                            sortedListClass.lon = activity.getString("long");
-                            sortedListClass.leader = activity.getString("leader");
+                            SortedlistclassUtil.info = activity.getString("info");
+                            SortedlistclassUtil.lat = activity.getString("lat");
+                            SortedlistclassUtil.lon = activity.getString("long");
+                            SortedlistclassUtil.leader = activity.getString("leader");
 
 
                             if(success[0]){
@@ -97,28 +97,28 @@ public class DisplayActivityDetails extends AppCompatActivity {
                                 TextView majorBox = findViewById(R.id.MajorBox);
 
 
-                                nameBox.setText(sortedListClass.aname);
-                                infoBox.setText(sortedListClass.info);
-                                leaderBox.setText(sortedListClass.leader);
-                                schoolBox.setText(sortedListClass.aschool);
-                                majorBox.setText(sortedListClass.major);
+                                nameBox.setText(SortedlistclassUtil.aname);
+                                infoBox.setText(SortedlistclassUtil.info);
+                                leaderBox.setText(SortedlistclassUtil.leader);
+                                schoolBox.setText(SortedlistclassUtil.aschool);
+                                majorBox.setText(SortedlistclassUtil.major);
 
-                                final String [] courses = new String[sortedListClass.course.length + 1];
+                                final String [] courses = new String[SortedlistclassUtil.course.length + 1];
                                 courses[0] = "Click to see Courses in Activity";
-                                for(int i = 0; i< sortedListClass.course.length; i++){
-                                    courses[i+1] = sortedListClass.course[i];
+                                for(int i = 0; i< SortedlistclassUtil.course.length; i++){
+                                    courses[i+1] = SortedlistclassUtil.course[i];
                                 }
 
                                 //numOfusers = SortedListClass.users.length;
-                                for(int i = 0; i< sortedListClass.users.length; i++){
-                                    if(!sortedListClass.users[i].equals(" "))
+                                for(int i = 0; i< SortedlistclassUtil.users.length; i++){
+                                    if(!SortedlistclassUtil.users[i].equals(" "))
                                         counter++;
                                 }
                                 final String [] users = new String[counter + 1];
                                 users[0] = "Click to see Users in Activity";
-                                for(int i = 0; i< sortedListClass.users.length; i++){
-                                    if(!sortedListClass.users[i].equals(" "))
-                                        users[i+1] = sortedListClass.users[i];
+                                for(int i = 0; i< SortedlistclassUtil.users.length; i++){
+                                    if(!SortedlistclassUtil.users[i].equals(" "))
+                                        users[i+1] = SortedlistclassUtil.users[i];
                                 }
 
                                 coursesSpinner = findViewById(R.id.CoursesSpinner);

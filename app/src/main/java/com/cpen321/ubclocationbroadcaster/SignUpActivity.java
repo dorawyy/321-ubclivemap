@@ -31,7 +31,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
 
-    private String URL = userDetails.getURL() + "/users/register";
+    private String URL = UserdetailsUtil.getURL() + "/users/register";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             Toast.makeText(SignUpActivity.this, "ERROR: Username Already Existed", Toast.LENGTH_SHORT).show();
                                     }
                                     String stat = response.get("status").toString();
-                                    userDetails.username = inputUsername;
+                                    UserdetailsUtil.username = inputUsername;
                                     Log.d("SignUpActivity", stat);
                                 } catch (JSONException e) {
                                     e.printStackTrace();

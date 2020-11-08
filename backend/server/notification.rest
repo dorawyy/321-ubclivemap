@@ -1,0 +1,26 @@
+###
+POST http://localhost:3000/firebase/notification
+content-type: application/json
+
+{
+    "message" : "HEY",
+    "registrationToken" : "feAJEGypS_ugqlwdqid37X:APA91bFK3s1tkSRn7rEbJ8CwirqR75jVvLro5pnt6_pfb-rp4zrdWVwTmTKafjiZ8Kn6FbqQtbtGF8f1h-c2z9OB8SaUQazJuzNrE_D8bP2V2xj_FYqVfgBwKktSqYj556LRjw8mTVmw",
+    "payload" : {
+        "data" : {
+            "key1" : "This is data"
+        },
+        "notification" : {
+            "title" : "Cool title",
+            "body" : "Cool body"
+        }
+    }
+}
+
+###
+POST http://40.122.147.73:6060/hey
+content-type: application/json
+
+{
+    "message" : "HEY"
+}
+

@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,7 +19,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.SharedPreferences;
 
 /* This activity creates a page to sign up,
    and sends the data to the database */
@@ -30,14 +28,15 @@ public class SignUpActivity extends AppCompatActivity {
 
     private EditText username;
     private EditText password;
-    private Button sign_up_btn;
-    final String URL = "http://10.0.2.2:3000/users/register";
+
+    private String URL = BackendURL.getURL() + "/users/register";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        Button sign_up_btn;
 
         username = findViewById(R.id.sign_up_username_button);
         password = findViewById(R.id.sign_up_password_button);

@@ -1,5 +1,7 @@
 var express = require("express");
 var bcrypt = require("bcryptjs");
+var admin = require("firebase-admin");
+var serviceAccount = require("./accountkey.json");
 
 var Account = require("./__models__/models").Account;
 var Profile = require("./__models__/models").Profile;
@@ -17,6 +19,42 @@ function formatResponse(successVal, status, val) {
     }
     return resp;
 }
+
+/****************************************************************************
+ ********************** PUSH NOTIFICATIONS BASE *****************************
+****************************************************************************/
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://cpen321projectworking.firebaseio.com"
+})
+
+module.exports.admin = admin
+
+const notification_options = {
+    priority: "high",
+    timeToLive: 60 * 60 * 24
+};
+
+var REG_TOKEN;
+app.post('/givetoken', (req,res) => {
+    REG_TOKEN = req.body.token; 
+});
+
+app.post('/firebase/notification', (req, res)=>{
+    const registrationToken = req.body.registrationToken
+    const message = req.body.message
+    const options =  notification_options
+
+    
+    admin.messaging().sendToDevice(registrationToken, req.body.payload, options)
+    .then( response => {
+        res.status(200).send("Notification sent successfully")
+    })
+    .catch( error => {
+        console.log(error);
+    });
+})
 
 /****************************************************************************
  ********************** ACCOUNT DATA BASE API CALLS *************************
@@ -83,7 +121,7 @@ app.post('/users/delete', async (req,res) =>{
     }
 
     var response = await Account.deleteOne({"name" : req.body.name});
-    if(response.n == 0){
+    if(response.n === 0){
         return res.json(formatResponse(false, "Username does not exist.", null));
     }
     return res.json(formatResponse(true, "Account deleted successfully.", null));
@@ -456,7 +494,7 @@ app.post("/activities/sort", async (req, res) => {
         // INSERTION SORT ALGORITHM
         sorted_activities.push(currentactivity); 
         i = sorted_activities.length - 1 
-        if(i != 0){
+        if(i !== 0){
             var j = i-1; 
             while ((j > -1) && (matchfactor > activity_matchfactor[JSON.stringify(sorted_activities[j])])) {
                 sorted_activities[j+1] = sorted_activities[j];

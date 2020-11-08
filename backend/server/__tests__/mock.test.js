@@ -50,7 +50,7 @@ describe("mock functions", () =>{
 
     test("badurl", async () => {
         try {
-            var response = await axios.get("http://localhost:3000/users/register");
+            await axios.get("http://localhost:3000/users/register");
             fail("bad url");
         } catch (err) {
             expect(err.message).toBe("bad url");

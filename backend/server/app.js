@@ -330,11 +330,12 @@ app.post("/activities/add", async (req, res) => {
     if(response != null) {
         return res.json(formatResponse(false, "Activity Id Taken", null));
     }
-    try {
-        await Activity.create(req.body);
-    } catch (err) {
-        return res.json(formatResponse(false, err, null));
-    }
+
+    //try {
+    await Activity.create(req.body);
+    //} catch (err) {
+        //return res.json(formatResponse(false, err, null));
+    //}
     return res.json(formatResponse(true, "Activity insert successful.", null));
 });
 
@@ -461,31 +462,44 @@ app.post("/activities/sort", async (req, res) => {
                 coursefactor += 1;
             }
         }
-        coursefactor = coursesweight * parseFloat(coursefactor / user.CourseRegistered.length);
-        console.log("coursefactor = " + coursefactor/coursesweight)
+
+        if(user.CourseRegistered.length != 0 && coursesweight != 0){
+            coursefactor = coursesweight * parseFloat(coursefactor / user.CourseRegistered.length);
+            console.log("coursefactor = " + coursefactor/coursesweight)
+        } else {
+            coursefactor = 0;
+        }
 
         // Calculate location factor
         var locationfactor = 0
-        var dist = getDistanceFromLatLonInKm(parseFloat(userlat), parseFloat(userlong),
-                        parseFloat(currentactivity.lat), parseFloat(currentactivity.long));
-        locationfactor = locationweight * parseFloat((maxradius - dist) / maxradius)
-        console.log("locationfactor = " + locationfactor/locationweight)
-        if(locationfactor <= 0){
-            // location of activity outside of maxradius
-            // dont include activity in sorted list
-            continue;
-        }
+        if(maxradius != 0 && locationweight != 0){
+            var dist = getDistanceFromLatLonInKm(parseFloat(userlat), parseFloat(userlong),
+                            parseFloat(currentactivity.lat), parseFloat(currentactivity.long));
+            locationfactor = locationweight * parseFloat((maxradius - dist) / maxradius)
+            console.log("locationfactor = " + locationfactor/locationweight)
+            if(locationfactor < 0){
+                // location of activity outside of maxradius
+                // dont include activity in sorted list
+                continue;
+            }
+        } 
+        
 
         // Calculate major factor
         var majorfactor = 0
-        majorfactor = majorweight * (user.major == currentactivity.major) ? 1 : 0;
-        console.log("majorfactor = " + majorfactor/majorweight)
-        console.log("")
-        console.log("")
+        if(majorweight != 0){
+            majorfactor = majorweight * (user.major == currentactivity.major) ? 1 : 0;
+            console.log("majorfactor = " + majorfactor/majorweight)
+            console.log("")
+            console.log("")
+        }
 
         // Store matchfactor with their respective activity
         var matchfactor = 0;
-        matchfactor = (coursefactor + locationfactor + majorfactor) / (coursesweight + locationweight + majorweight)
+        var weightsum = coursesweight + locationweight + majorweight;
+        if(weightsum != 0) {
+            matchfactor = (coursefactor + locationfactor + majorfactor) / (coursesweight + locationweight + majorweight)
+        }
         activity_matchfactor[JSON.stringify(currentactivity)] = matchfactor;
 
         // INSERTION SORT ALGORITHM

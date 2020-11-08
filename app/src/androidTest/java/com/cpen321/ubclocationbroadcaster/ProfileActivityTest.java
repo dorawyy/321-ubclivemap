@@ -68,14 +68,10 @@ public class ProfileActivityTest {
     }
 
     public void checkEntry() {
-        try {
             onView(withId(R.id.sign_up_name_button)).check(ViewAssertions.matches(withText(name_t)));
             onView(withId(R.id.school_button)).check(ViewAssertions.matches(withText(school_t)));
             onView(withId(R.id.major_button)).check(ViewAssertions.matches(withText(major_t)));
             onView(withId(R.id.phone_number_button)).check(ViewAssertions.matches(withText(number_t)));
-        }catch(Exception e) {
-            fail("Exception thrown");
-        }
     }
 
     @Test
@@ -83,7 +79,11 @@ public class ProfileActivityTest {
         setEntry();
 
         //check to make sure entry works
-        checkEntry();
+        try {
+            checkEntry();
+        }catch (Exception e) {
+            fail("Exception thrown");
+        }
     }
 
     @Test

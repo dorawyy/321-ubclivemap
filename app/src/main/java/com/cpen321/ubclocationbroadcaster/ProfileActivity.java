@@ -46,31 +46,25 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        ListView course_list_view = findViewById((R.id.course_list));;
-
+        ListView course_list_view = findViewById((R.id.course_list));
         //drop down menu and view list
         mySpinner = findViewById(R.id.course_spinner);
-
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(ProfileActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.spinner));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
-
         final ArrayList<String> course_list = new ArrayList<String>();
         final ArrayAdapter<String> course_list_adapter = new ArrayAdapter<String>(ProfileActivity.this,
                 android.R.layout.simple_list_item_1, course_list);
         course_list_view.setAdapter(course_list_adapter);
-
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 String result = mySpinner.getSelectedItem().toString();
                 //all cpen courses
                 switch (position){
                     case 0:
                         break;
-
                     default:
                         if (!course_list.contains(result)){
                             course_list.add(result);}
@@ -78,26 +72,19 @@ public class ProfileActivity extends AppCompatActivity {
                 }
                 course_list_adapter.notifyDataSetChanged();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 Log.d("ProfileActivity","Nothing Selected");
             }
         });
-
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
-
         //done button setup
         Button done_btn;
         done_btn = findViewById(R.id.course_page_done_button);
         done_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent doneIntent = new Intent(ProfileActivity.this, MenuActivity.class);
-                //startActivity(doneIntent);
                 Log.d("done button", "done button has been clicked");
-
-
         JSONArray jsnReq = new JSONArray();
         for(String course : course_list){
             jsnReq.put(course);

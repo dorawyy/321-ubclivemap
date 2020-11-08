@@ -109,7 +109,7 @@ public class CreateActivity extends AppCompatActivity {
     private void updateUserDB(String[] user_courses, String inputaid) {
         final RequestQueue s = Volley.newRequestQueue(this);
         final JSONArray reg_courses = new JSONArray();
-        helperFunction3(user_courses, inputaid, reg_courses);
+        helperFunction3(user_courses, reg_courses);
         JSONObject userObject = new JSONObject();
         helperFunction5(inputaid, userObject);
         JsonObjectRequest userUpdateObject = new JsonObjectRequest(Request.Method.POST, "http://10.0.2.2:3000/profiles/join", userObject,
@@ -185,7 +185,7 @@ public class CreateActivity extends AppCompatActivity {
         }
     }
 
-    private void helperFunction3(String[] user_courses, String inputaid, JSONArray reg_courses) {
+    private void helperFunction3(String[] user_courses, JSONArray reg_courses) {
         for (String course : user_courses) {
             if ((!course.equals(" ")) && (!course.equals("Choose from your courses")))
                 reg_courses.put(course);

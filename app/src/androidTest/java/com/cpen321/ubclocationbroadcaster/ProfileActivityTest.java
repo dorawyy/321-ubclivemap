@@ -1,6 +1,7 @@
 package com.cpen321.ubclocationbroadcaster;
 
 
+import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -65,10 +66,10 @@ public class ProfileActivityTest {
         closeSoftKeyboard();
 
         //check to make sure entry works
-        onView(withId(R.id.sign_up_name_button)).check(matches(withText(name_t)));
-        onView(withId(R.id.school_button)).check(matches(withText(school_t)));
-        onView(withId(R.id.major_button)).check(matches(withText(major_t)));
-        onView(withId(R.id.phone_number_button)).check(matches(withText(number_t)));
+        onView(withId(R.id.sign_up_name_button)).check(ViewAssertions.matches(withText(name_t)));
+        onView(withId(R.id.school_button)).check(ViewAssertions.matches(withText(school_t)));
+        onView(withId(R.id.major_button)).check(ViewAssertions.matches(withText(major_t)));
+        onView(withId(R.id.phone_number_button)).check(ViewAssertions.matches(withText(number_t)));
     }
 
     @Test

@@ -25,23 +25,24 @@ import org.json.JSONObject;
 
 
 public class GetMatchScore extends AppCompatActivity {
+    private EditText getRadius;
+    private TextView showLocPriority;
+    private TextView showCoursePriority;
+    private TextView showMajorPriority;
+    private SeekBar locPriority;
+    private SeekBar coursePriority;
+    private SeekBar majorPriority;
+    private Button done_btn;
+    private int[] priorities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_match_score);
 
-        final EditText getRadius;
-        final TextView showLocPriority;
-        final TextView showCoursePriority;
-        final TextView showMajorPriority;
-        final SeekBar locPriority;
-        final SeekBar coursePriority;
-        final SeekBar majorPriority;
-        final Button done_btn;
-        final int[] priorities = new int[3];
         //final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
+        priorities = new int[3];
 
         getRadius = findViewById(R.id.getRadius);
         locPriority = findViewById(R.id.LocationPriority);
@@ -51,62 +52,9 @@ public class GetMatchScore extends AppCompatActivity {
         coursePriority = findViewById(R.id.coursePriority);
         majorPriority = findViewById(R.id.majorPriority);
 
-        showLocPriority.setText("Location Priority: "+locPriority.getProgress()+"/"+locPriority.getMax());
-        locPriority.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                showLocPriority.setText("Location Priority: "+progress+"/"+locPriority.getMax());
-                priorities[0] = progress;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                Log.d("GetMatchScore","Should not get here part1");
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                Log.d("GetMatchScore","Should not get here part1");
-            }
-        });
-
-        showCoursePriority.setText("Course Priority: "+coursePriority.getProgress()+"/"+coursePriority.getMax());
-        coursePriority.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                showCoursePriority.setText("Course Priority: "+progress+"/"+coursePriority.getMax());
-                priorities[1] = progress;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        showMajorPriority.setText("Major Priority: "+majorPriority.getProgress()+"/"+majorPriority.getMax());
-        majorPriority.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                showMajorPriority.setText("Major Priority: "+progress+"/"+majorPriority.getMax());
-                priorities[2] = progress;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
+        helperFunction(showLocPriority, locPriority, "Location Priority", 0);
+        helperFunction(showCoursePriority, coursePriority, "Course Priority", 1);
+        helperFunction(showMajorPriority, majorPriority, "Major Priority", 2);
 
         done_btn = findViewById(R.id.done_button_activity);
         done_btn.setOnClickListener(new View.OnClickListener() {
@@ -182,6 +130,26 @@ public class GetMatchScore extends AppCompatActivity {
                 requestQueue.add(json_obj);
             }
         });
+    }
 
+    void helperFunction(final TextView t, final SeekBar s, final String priorityName, final int i) {
+        t.setText(priorityName + ": " + s.getProgress() + "/" + s.getMax());
+        s.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                t.setText(priorityName + ": " + progress + "/" + s.getMax());
+                priorities[i] = progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                //unused
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                //unused
+            }
+        });
     }
 }

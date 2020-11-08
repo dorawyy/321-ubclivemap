@@ -32,7 +32,6 @@ public class SignUpActivityTest {
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.sign_up_button)).perform(click());
         intended(hasComponent(ProfileActivity.class.getName()));
-        assert(true);
     }
 
     @Test
@@ -40,7 +39,6 @@ public class SignUpActivityTest {
         Espresso.onView(withId(R.id.sign_up_password_button)).perform(typeText(password_t));
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.sign_up_button)).perform(click());
-        assert(true);
     }
 
     @Test
@@ -48,14 +46,12 @@ public class SignUpActivityTest {
         Espresso.onView(withId(R.id.sign_up_username_button)).perform(typeText(username_t));
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.sign_up_button)).perform(click());
-        assert(true);
     }
 
     @Test
     public void testSignUpNoUserNoPass(){
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.sign_up_button)).perform(click());
-        assert(true);
     }
 
     /*

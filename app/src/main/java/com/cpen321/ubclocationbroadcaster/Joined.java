@@ -83,8 +83,8 @@ public class Joined extends AppCompatActivity {
     private JSONObject getUserObject (String username, String aid){
         JSONObject userObject = new JSONObject();
         try{
-            userObject.put("username", UserdetailsUtil.username);
-            userObject.put("aid", SortedlistclassUtil.activity_to_be_displayed);
+            userObject.put("username", username);
+            userObject.put("aid", aid);
             Log.d("Join", "Created joinObject" + userObject.getString("aid") + userObject.getString("username"));
         }catch (JSONException e){
             e.printStackTrace();

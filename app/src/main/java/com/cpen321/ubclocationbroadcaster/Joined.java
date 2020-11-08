@@ -31,7 +31,6 @@ import org.json.JSONObject;
 
 public class Joined extends AppCompatActivity {
 
-    private boolean joinStatus;
 
     private JSONObject getJoinObject(String aid, String username){
         JSONObject joinObject = new JSONObject();
@@ -57,7 +56,7 @@ public class Joined extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             Log.d("Join", "Entered activity_object");
-                            joinStatus = (boolean) response.get("success");
+                            boolean joinStatus = (boolean) response.get("success");
                             Log.d("Join","joinStatus: " + joinStatus);
                             Log.d("Join","response success: " + response.get("success").toString());
                             if(joinStatus){
@@ -136,7 +135,7 @@ public class Joined extends AppCompatActivity {
 
         //TextView joined = findViewById(R.id.textView14);
         Button mb = findViewById(R.id.menubutton10);
-        final RequestQueue ao = Volley.newRequestQueue(this);
+        
 
         Log.d("Join", "Join has been clicked");
         //Check that the user should not already be in an activity

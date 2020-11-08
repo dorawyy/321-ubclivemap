@@ -36,13 +36,6 @@ public class MenuActivityTest {
     }
 
     @Test
-    public void buttonSelectionTest2() {
-        Espresso.onView(withId(R.id.list_activites_btn)).perform(click());
-        intended(hasComponent(ListScrollingActivity.class.getName()));
-        assertEquals(1, 1);
-    }
-
-    @Test
     public void buttonSelectionTest3() {
         Espresso.onView(withId(R.id.my_activity_btn)).perform(click());
         intended(hasComponent(ActivityStuffMenu.class.getName()));

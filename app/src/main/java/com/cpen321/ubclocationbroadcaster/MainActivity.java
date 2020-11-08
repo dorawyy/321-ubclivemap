@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText username;
     private EditText password;
-    private String usrname = username.getText().toString();
-    private RequestQueue q = Volley.newRequestQueue(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         sign_in_btn = findViewById(R.id.sign_in_button);
         sign_up_btn = findViewById(R.id.sign_up_button);
 
+        final RequestQueue q = Volley.newRequestQueue(this);
+
         sign_in_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
                 String URL = UserdetailsUtil.getURL() + "/users/login";
                 String passwrd = password.getText().toString();
+                final String usrname = username.getText().toString();
+
 
                 //format request
                 JSONObject jsnRequest = new JSONObject();
@@ -122,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getSuccessval() {
+        RequestQueue q = Volley.newRequestQueue(this);
+        final String usrname = getUsername();
         final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(UserdetailsUtil.getURL() + "/profiles/all",
                 new Response.Listener<JSONArray> (){
                     @Override
@@ -160,6 +164,11 @@ public class MainActivity extends AppCompatActivity {
         sign_in_Intent.putExtra("USERNAME", usrname);
         startActivity(sign_in_Intent);
         UserdetailsUtil.username = usrname;
+    }
+
+    private String getUsername() {
+        String usrname = username.getText().toString();
+        return usrname;
     }
 
     private void getJsonObj(JSONObject jsonObject) throws JSONException {

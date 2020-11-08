@@ -56,16 +56,18 @@ public class ProfileActivityTest {
         assertEquals("com.cpen321.ubclocationbroadcaster", appContext.getPackageName());
     }
     */
-    @Test
-    public void testStringEntry() {
+
+    //helper functions
+    public void setEntry() {
         //testing sign in with wrong username and password
         onView(withId(R.id.sign_up_name_button)).perform(typeText(name_t));
         onView(withId(R.id.school_button)).perform(typeText(school_t));
         onView(withId(R.id.major_button)).perform(typeText(major_t));
         onView(withId(R.id.phone_number_button)).perform(typeText(number_t));
         closeSoftKeyboard();
+    }
 
-        //check to make sure entry works
+    public void checkEntry() {
         try {
             onView(withId(R.id.sign_up_name_button)).check(ViewAssertions.matches(withText(name_t)));
             onView(withId(R.id.school_button)).check(ViewAssertions.matches(withText(school_t)));
@@ -74,6 +76,14 @@ public class ProfileActivityTest {
         }catch(Exception e) {
             fail("Exception thrown");
         }
+    }
+
+    @Test
+    public void testStringEntry() {
+        setEntry();
+
+        //check to make sure entry works
+        checkEntry();
     }
 
     @Test
@@ -110,34 +120,9 @@ public class ProfileActivityTest {
     }
 
     @Test
-    public void createProfileWithNoCourse(){
-        //trying to create a profile with empty course list
-        onView(withId(R.id.sign_up_name_button)).perform(typeText(name_t));
-        onView(withId(R.id.school_button)).perform(typeText(school_t));
-        onView(withId(R.id.major_button)).perform(typeText(major_t));
-        onView(withId(R.id.phone_number_button)).perform(typeText(number_t));
-        closeSoftKeyboard();
-        onView(withId(R.id.course_page_done_button)).perform(click());
-
-        try {
-            onView(withId(R.id.sign_up_name_button)).check(ViewAssertions.matches(withText(name_t)));
-            onView(withId(R.id.school_button)).check(ViewAssertions.matches(withText(school_t)));
-            onView(withId(R.id.major_button)).check(ViewAssertions.matches(withText(major_t)));
-            onView(withId(R.id.phone_number_button)).check(ViewAssertions.matches(withText(number_t)));
-        }catch(Exception e){
-            //passes
-            fail("Exception thrown.");
-        }
-    }
-
-    @Test
     public void createProfileWithValidInfo(){
         //trying to create a profile with empty fields
-        onView(withId(R.id.sign_up_name_button)).perform(typeText(name_t));
-        onView(withId(R.id.school_button)).perform(typeText(school_t));
-        onView(withId(R.id.major_button)).perform(typeText(major_t));
-        onView(withId(R.id.phone_number_button)).perform(typeText(number_t));
-        closeSoftKeyboard();
+        setEntry();
         onView(withId(R.id.course_spinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is(course_sel1))).perform(click());
         onView(withId(R.id.course_page_done_button)).perform(click());

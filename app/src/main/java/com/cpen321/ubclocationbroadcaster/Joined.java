@@ -62,7 +62,7 @@ public class Joined extends AppCompatActivity {
 
             //Update the Activity Database Entry's usernames.
             //That is: Add the username of the current user to the users of the activity
-            JsonObjectRequest activity_object = new JsonObjectRequest(Request.Method.POST, BackendURL.getURL() + "/activities/join", joinObject,
+            JsonObjectRequest activity_object = new JsonObjectRequest(Request.Method.POST, UserDetails.getURL() + "/activities/join", joinObject,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -100,7 +100,7 @@ public class Joined extends AppCompatActivity {
                 e.printStackTrace();
                 Log.d("Join", "Error: Could not create userObject");
             }
-            JsonObjectRequest user_join = new JsonObjectRequest(Request.Method.POST, BackendURL.getURL() + "/profiles/join", userObject,
+            JsonObjectRequest user_join = new JsonObjectRequest(Request.Method.POST, UserDetails.getURL() + "/profiles/join", userObject,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {

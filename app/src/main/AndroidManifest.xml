@@ -32,10 +32,7 @@
         </service>
 
         <activity android:name=".ActivityStuffMenu" />
-        <activity
-            android:name=".ListScrollingActivity"
-            android:label="@string/title_activity_list_scrolling"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".MenuActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

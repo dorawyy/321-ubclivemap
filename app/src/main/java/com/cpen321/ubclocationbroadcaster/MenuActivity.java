@@ -31,15 +31,6 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        listActivitesButton = findViewById(R.id.list_activites_btn);
-        listActivitesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent activitesIntent = new Intent(MenuActivity.this, DisplayActivityDetails.class);
-                startActivity(activitesIntent);
-            }
-        });
-
         myActivityButton = findViewById(R.id.my_activity_btn);
         myActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -11,5 +11,9 @@ public class UserDetails {
     public static boolean privatePublic;
     public static boolean inactivity;
     public static String activityID;
+    public static String getURL(){
+        return "http://10.0.2.2:3000";
+    }
+
 
 }

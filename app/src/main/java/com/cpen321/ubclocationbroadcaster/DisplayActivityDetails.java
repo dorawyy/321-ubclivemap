@@ -34,17 +34,18 @@ public class DisplayActivityDetails extends AppCompatActivity {
     //Displays the users in this activity
     private Spinner usersSpinner;
     //Boolean value becomes true if successfully received activity details from server
-    private boolean success = false;
+    //private boolean success = false;
 
     private int counter = 0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final boolean[] success = new boolean[1];
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_details);
 
-        String URL = BackendURL.getURL() + "/activities/search";
+        String URL = UserDetails.getURL() + "/activities/search";
 
         final RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -64,7 +65,7 @@ public class DisplayActivityDetails extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try{
-                            success = (boolean)response.get("success");
+                            success[0] = (boolean)response.get("success");
                             JSONObject activity = response.getJSONObject("value");
                             SortedListClass.aname = activity.getString("name");
                             SortedListClass.major = activity.getString("major");
@@ -88,7 +89,7 @@ public class DisplayActivityDetails extends AppCompatActivity {
                             SortedListClass.leader = activity.getString("leader");
 
 
-                            if(success){
+                            if(success[0]){
                                 TextView nameBox = findViewById(R.id.ActivityNameBox);
                                 TextView infoBox = findViewById(R.id.InfoBox);
                                 TextView leaderBox = findViewById(R.id.LeaderBox);

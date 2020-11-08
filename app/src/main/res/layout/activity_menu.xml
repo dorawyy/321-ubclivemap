@@ -20,19 +20,6 @@
 
 
     <Button
-        android:id="@+id/list_activites_btn"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="@string/activity_list_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_map_btn"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
         android:id="@+id/my_activity_btn"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -42,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_activites_btn"
+        app:layout_constraintTop_toBottomOf="@+id/view_map_btn"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button

@@ -1736,7 +1736,6 @@ id activity_desc
 id activity_done
 id activity_id
 id activity_name
-id activity_view
 id add
 id adjust_height
 id adjust_width
@@ -1746,7 +1745,6 @@ id all
 id always
 id animateToEnd
 id animateToStart
-id app_bar
 id asConfigured
 id async
 id auto
@@ -1833,7 +1831,6 @@ id enterAlwaysCollapsed
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
-id fab
 id fade
 id fill
 id fill_horizontal
@@ -1882,7 +1879,6 @@ id line1
 id line3
 id linear
 id listMode
-id list_activites_btn
 id list_item
 id majorPriority
 id major_button
@@ -2085,8 +2081,6 @@ id title
 id titleDividerNoCustom
 id title_template
 id toggle
-id toolbar
-id toolbar_layout
 id top
 id topPanel
 id touch_outside
@@ -2179,7 +2173,6 @@ layout activity_create
 layout activity_display_details
 layout activity_get_match_score
 layout activity_joined
-layout activity_list_scrolling
 layout activity_main
 layout activity_main_maps
 layout activity_menu

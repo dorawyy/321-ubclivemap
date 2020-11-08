@@ -119,7 +119,7 @@ public class CreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //String URL = "http://40.122.147.73:3030/activities/add";
-                String URL = BackendURL.getURL() + "/activities/add";
+                String URL = UserDetails.getURL() + "/activities/add";
 
                 JSONObject jsnRequest = new JSONObject();
                 EditText name = findViewById(R.id.activity_name);

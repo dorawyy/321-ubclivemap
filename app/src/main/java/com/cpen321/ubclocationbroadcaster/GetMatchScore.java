@@ -61,12 +61,12 @@ public class GetMatchScore extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                Log.d("GetMatchScore","Should not get here part1");
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                Log.d("GetMatchScore","Should not get here part1");
             }
         });
 
@@ -115,7 +115,7 @@ public class GetMatchScore extends AppCompatActivity {
                 Log.d("done button", "done button has been clicked");
                 //TODO: set the url here
                 //String URL = "http://40.122.147.73:3030/activities/sort";
-                String URL = BackendURL.getURL() + "/activities/sort";
+                String URL = UserDetails.getURL() + "/activities/sort";
 
                 final String inputDist = getRadius.getText().toString();
                 final double inputLat = 123.232;

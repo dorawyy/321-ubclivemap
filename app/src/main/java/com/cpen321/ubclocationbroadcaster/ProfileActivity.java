@@ -29,29 +29,27 @@ import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
 
-
     private Spinner mySpinner;
-    private EditText name;
-    private EditText phone_number;
-    private EditText school;
-    private EditText major;
+    private EditText name = findViewById((R.id.sign_up_name_button));
+    private EditText phone_number = findViewById(R.id.phone_number_button);
+    private EditText school = findViewById(R.id.school_button);
+    private EditText major = findViewById(R.id.major_button);
+    private String inputName = name.getText().toString();
+    private String inputPhone = phone_number.getText().toString();
+    private String inputSchool = school.getText().toString();
+    private String inputMajor = major.getText().toString();
+    private boolean inputPrivate = false;
+    private boolean inputInActivity = false;
+    private String inputActivityID = "-1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        ListView course_list_view;
-
-        name = findViewById((R.id.sign_up_name_button));
-        phone_number = findViewById(R.id.phone_number_button);
-        school = findViewById(R.id.school_button);
-        major = findViewById(R.id.major_button);
-        //final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
-
+        ListView course_list_view = findViewById((R.id.course_list));;
 
         //drop down menu and view list
         mySpinner = findViewById(R.id.course_spinner);
-        course_list_view = findViewById((R.id.course_list));
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(ProfileActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.spinner));
@@ -99,17 +97,6 @@ public class ProfileActivity extends AppCompatActivity {
                 //startActivity(doneIntent);
                 Log.d("done button", "done button has been clicked");
 
-        String URL = UserdetailsUtil.getURL() + "/profiles/add";
-
-
-        final String inputName = name.getText().toString();
-        final String inputPhone = phone_number.getText().toString();
-        final String inputSchool = school.getText().toString();
-        final String inputMajor = major.getText().toString();
-        final boolean inputPrivate = false;
-        final boolean inputInActivity = false;
-        final String inputActivityID = "-1";
-
 
         JSONArray jsnReq = new JSONArray();
         for(String course : course_list){
@@ -119,58 +106,70 @@ public class ProfileActivity extends AppCompatActivity {
 
         JSONObject POSTjsnReq = new JSONObject();
         try {
-            POSTjsnReq.put("name", inputName);
-            POSTjsnReq.put("phone", inputPhone);
-            POSTjsnReq.put("school", inputSchool);
-            POSTjsnReq.put("major", inputMajor);
-            POSTjsnReq.put("CourseRegistered",jsnReq);
-            POSTjsnReq.put("private", inputPrivate);
-            POSTjsnReq.put("username", UserdetailsUtil.username);
-            POSTjsnReq.put("inActivity", inputInActivity);
-            POSTjsnReq.put("activityID", inputActivityID);
-
+           getjsnReq(POSTjsnReq, jsnReq);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-                if (inputName.isEmpty() || inputPhone.isEmpty() || inputSchool.isEmpty() || inputMajor.isEmpty()){
-                    Toast.makeText(ProfileActivity.this, "ERROR: Enter all fields!", Toast.LENGTH_SHORT).show();
-                }
+               helperFunction2(POSTjsnReq);
+    }
 
-                else if (course_list.isEmpty()){
-                    Toast.makeText(ProfileActivity.this, "Select your courses!", Toast.LENGTH_SHORT).show();
-                }
-                else {
+    private void getjsnReq(JSONObject POSTjsnReq, JSONArray jsnReq) throws JSONException {
+        POSTjsnReq.put("name", inputName);
+        POSTjsnReq.put("phone", inputPhone);
+        POSTjsnReq.put("school", inputSchool);
+        POSTjsnReq.put("major", inputMajor);
+        POSTjsnReq.put("CourseRegistered",jsnReq);
+        POSTjsnReq.put("private", inputPrivate);
+        POSTjsnReq.put("username", UserdetailsUtil.username);
+        POSTjsnReq.put("inActivity", inputInActivity);
+        POSTjsnReq.put("activityID", inputActivityID);
+    }
+
+    private void helperFunction(JSONObject response, ArrayList<String> course_list) throws JSONException {
+        boolean successVal = (boolean) response.get("success");
+        String stat = response.get("status").toString();
+        if(successVal){
+            Intent doneIntent = new Intent(ProfileActivity.this, MenuActivity.class);
+            startActivity(doneIntent);
+
+            UserdetailsUtil.name = inputName;
+            UserdetailsUtil.phone = inputPhone;
+            UserdetailsUtil.school = inputSchool;
+            UserdetailsUtil.major = inputMajor;
+            UserdetailsUtil.privatePublic = false;
+            UserdetailsUtil.inactivity = false;
+            UserdetailsUtil.activityID = "-1";
+            UserdetailsUtil.courseRegistered = new String[course_list.size()];
+            for(int i=0;i<course_list.size();i++){
+                UserdetailsUtil.courseRegistered[i] = course_list.get(i);
+                Log.d("courseList", "Element" + i + ": " + course_list.get(i));
+                Log.d("courseRegistered", "Element" + i + ": " + UserdetailsUtil.courseRegistered[i]);
+            }
+
+
+            Log.d("SignUpActivity", stat);
+        }
+        else{
+            Log.d("error1", "Error1 " + stat);
+        }
+    }
+
+    private void helperFunction2(JSONObject POSTjsnReq) {
+        String URL = UserdetailsUtil.getURL() + "/profiles/add";
+        if (inputName.isEmpty() || inputPhone.isEmpty() || inputSchool.isEmpty() || inputMajor.isEmpty()){
+                Toast.makeText(ProfileActivity.this, "ERROR: Enter all fields!", Toast.LENGTH_SHORT).show();
+            }
+
+            else if (course_list.isEmpty()){
+                Toast.makeText(ProfileActivity.this, "Select your courses!", Toast.LENGTH_SHORT).show();
+            }
+            else {
                 JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, POSTjsnReq,
                         new Response.Listener<JSONObject> (){
                             @Override
                             public void onResponse(JSONObject response){
                                 try {
-                                    boolean successVal = (boolean) response.get("success");
-                                    String stat = response.get("status").toString();
-                                    if(successVal){
-                                        Intent doneIntent = new Intent(ProfileActivity.this, MenuActivity.class);
-                                        startActivity(doneIntent);
-
-                                        UserdetailsUtil.name = inputName;
-                                        UserdetailsUtil.phone = inputPhone;
-                                        UserdetailsUtil.school = inputSchool;
-                                        UserdetailsUtil.major = inputMajor;
-                                        UserdetailsUtil.privatePublic = false;
-                                        UserdetailsUtil.inactivity = false;
-                                        UserdetailsUtil.activityID = "-1";
-                                        UserdetailsUtil.courseRegistered = new String[course_list.size()];
-                                        for(int i=0;i<course_list.size();i++){
-                                            UserdetailsUtil.courseRegistered[i] = course_list.get(i);
-                                            Log.d("courseList", "Element" + i + ": " + course_list.get(i));
-                                            Log.d("courseRegistered", "Element" + i + ": " + UserdetailsUtil.courseRegistered[i]);
-                                        }
-
-
-                                        Log.d("SignUpActivity", stat);
-                                    }
-                                    else{
-                                        Log.d("error1", "Error1 " + stat);
-                                    }
+                                    helperFunction(response, course_list);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                     Log.d("error2", "-------------------- " );
@@ -184,9 +183,8 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
 
-        requestQueue.add(json_obj);
+                requestQueue.add(json_obj);
             }}
-        });
+    });
+        }
     }
-
-}

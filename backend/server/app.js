@@ -463,7 +463,7 @@ app.post("/activities/sort", async (req, res) => {
             }
         }
 
-        if(user.CourseRegistered.length != 0 && coursesweight != 0){
+        if(user.CourseRegistered.length !== 0 && coursesweight !== 0){
             coursefactor = coursesweight * parseFloat(coursefactor / user.CourseRegistered.length);
             console.log("coursefactor = " + coursefactor/coursesweight)
         } else {
@@ -472,7 +472,7 @@ app.post("/activities/sort", async (req, res) => {
 
         // Calculate location factor
         var locationfactor = 0
-        if(maxradius != 0 && locationweight != 0){
+        if(maxradius !== 0 && locationweight !== 0){
             var dist = getDistanceFromLatLonInKm(parseFloat(userlat), parseFloat(userlong),
                             parseFloat(currentactivity.lat), parseFloat(currentactivity.long));
             locationfactor = locationweight * parseFloat((maxradius - dist) / maxradius)
@@ -487,7 +487,7 @@ app.post("/activities/sort", async (req, res) => {
 
         // Calculate major factor
         var majorfactor = 0
-        if(majorweight != 0){
+        if(majorweight !== 0){
             majorfactor = majorweight * (user.major == currentactivity.major) ? 1 : 0;
             console.log("majorfactor = " + majorfactor/majorweight)
             console.log("")
@@ -497,8 +497,8 @@ app.post("/activities/sort", async (req, res) => {
         // Store matchfactor with their respective activity
         var matchfactor = 0;
         var weightsum = coursesweight + locationweight + majorweight;
-        if(weightsum != 0) {
-            matchfactor = (coursefactor + locationfactor + majorfactor) / (coursesweight + locationweight + majorweight)
+        if(weightsum !== 0) {
+            matchfactor = (coursefactor + locationfactor + majorfactor) / weightsum;
         }
         activity_matchfactor[JSON.stringify(currentactivity)] = matchfactor;
 

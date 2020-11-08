@@ -369,7 +369,7 @@ app.post('/activities/delete', async (req,res) =>{
         return res.json(formatResponse(false, "Not well formed request.", null));
     }
     var response = await Activity.deleteOne({"aid" : req.body.aid});
-    if(response.n == 0){
+    if(response.n === 0){
         return res.json(formatResponse(false, "Activity does not exist.", null));
     }
     return res.json(formatResponse(true, "Activity deleted successfully.", null));

@@ -19,47 +19,55 @@ public class MenuActivityTest {
 
     @Before
     public void setUp() throws Exception {
+        // unused
     }
 
     @After
     public void tearDown() throws Exception {
+        // unused
     }
 
     @Test
     public void buttonSelectionTest1() {
         Espresso.onView(withId(R.id.view_map_btn)).perform(click());
         intended(hasComponent(MainMapsActivity.class.getName()));
+        assert(true);
     }
 
     @Test
     public void buttonSelectionTest2() {
         Espresso.onView(withId(R.id.list_activites_btn)).perform(click());
         intended(hasComponent(ListScrollingActivity.class.getName()));
+        assert(true);
     }
 
     @Test
     public void buttonSelectionTest3() {
         Espresso.onView(withId(R.id.my_activity_btn)).perform(click());
         intended(hasComponent(ActivityStuffMenu.class.getName()));
+        assert(true);
     }
 
     @Test
     public void buttonSelectionTest4() {
         Espresso.onView(withId(R.id.edit_profile_btn)).perform(click());
         intended(hasComponent(ProfileActivity.class.getName()));
+        assert(true);
     }
 
     @Test
     public void buttonSelectionTest5() {
         Espresso.onView(withId(R.id.sign_out_btn)).perform(click());
         intended(hasComponent(MainActivity.class.getName()));
+        assert(true);
     }
 
     @Test
     public void buttonSelectionTest6(){
-        UserDetails.inactivity = "false";
-        UserDetails.courseRegistered = new String[]{"cpen321", "cpen 331"};
+        Userdetails.inactivity = false;
+        Userdetails.courseRegistered = new String[]{"cpen321", "cpen 331"};
         Espresso.onView(withId(R.id.create_activity_button)).perform(click());
         intended(hasComponent(CreateActivity.class.getName()));
+        assert(true);
     }
 }

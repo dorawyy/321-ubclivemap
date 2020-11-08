@@ -27,12 +27,12 @@ import org.json.JSONObject;
 public class GetMatchScore extends AppCompatActivity {
     private EditText getRadius;
     private int[] priorities;
-    final String inputDist = getRadius.getText().toString();
-    final double inputLat = 123.232;
-    final double inputLong = -100.432;
-    final int inputLoc = priorities[0];
-    final int inputCourse = priorities[1];
-    final int inputMajor = priorities[2];
+    private String inputDist = getRadius.getText().toString();
+    private double inputLat = 123.232;
+    private double inputLong = -100.432;
+    private int inputLoc = priorities[0];
+    private int inputCourse = priorities[1];
+    private int inputMajor = priorities[2];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

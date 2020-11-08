@@ -5,8 +5,6 @@ import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +21,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.fail;
 
 
 /**
@@ -67,10 +66,14 @@ public class ProfileActivityTest {
         closeSoftKeyboard();
 
         //check to make sure entry works
-        onView(withId(R.id.sign_up_name_button)).check(ViewAssertions.matches(withText(name_t)));
-        onView(withId(R.id.school_button)).check(ViewAssertions.matches(withText(school_t)));
-        onView(withId(R.id.major_button)).check(ViewAssertions.matches(withText(major_t)));
-        onView(withId(R.id.phone_number_button)).check(ViewAssertions.matches(withText(number_t)));
+        try {
+            onView(withId(R.id.sign_up_name_button)).check(ViewAssertions.matches(withText(name_t)));
+            onView(withId(R.id.school_button)).check(ViewAssertions.matches(withText(school_t)));
+            onView(withId(R.id.major_button)).check(ViewAssertions.matches(withText(major_t)));
+            onView(withId(R.id.phone_number_button)).check(ViewAssertions.matches(withText(number_t)));
+        }catch(Exception e) {
+            fail("Exception thrown");
+        }
     }
 
     @Test
@@ -82,8 +85,12 @@ public class ProfileActivityTest {
         onData(allOf(is(instanceOf(String.class)), is(course_sel2))).perform(click());
 
         //check if it has items in list
-        onView(withId(R.id.course_list)).check(ViewAssertions.matches(hasDescendant(withText(course_sel1))));
-        onView(withId(R.id.course_list)).check(ViewAssertions.matches(hasDescendant(withText(course_sel2))));
+        try {
+            onView(withId(R.id.course_list)).check(ViewAssertions.matches(hasDescendant(withText(course_sel1))));
+            onView(withId(R.id.course_list)).check(ViewAssertions.matches(hasDescendant(withText(course_sel2))));
+        }catch(Exception e){
+            fail("Exception thrown.");
+        }
     }
 
     @Test
@@ -93,6 +100,13 @@ public class ProfileActivityTest {
         onView(withId(R.id.school_button)).perform(typeText(school_t));
         closeSoftKeyboard();
         onView(withId(R.id.course_page_done_button)).perform(click());
+
+        try {
+            onView(withId(R.id.sign_up_name_button)).check(ViewAssertions.matches(withText(name_t)));
+            onView(withId(R.id.school_button)).check(ViewAssertions.matches(withText(school_t)));
+        }catch(Exception e) {
+            fail("Exception thrown");
+        }
     }
 
     @Test
@@ -104,6 +118,16 @@ public class ProfileActivityTest {
         onView(withId(R.id.phone_number_button)).perform(typeText(number_t));
         closeSoftKeyboard();
         onView(withId(R.id.course_page_done_button)).perform(click());
+
+        try {
+            onView(withId(R.id.sign_up_name_button)).check(ViewAssertions.matches(withText(name_t)));
+            onView(withId(R.id.school_button)).check(ViewAssertions.matches(withText(school_t)));
+            onView(withId(R.id.major_button)).check(ViewAssertions.matches(withText(major_t)));
+            onView(withId(R.id.phone_number_button)).check(ViewAssertions.matches(withText(number_t)));
+        }catch(Exception e){
+            //passes
+            fail("Exception thrown.");
+        }
     }
 
     @Test
@@ -117,6 +141,16 @@ public class ProfileActivityTest {
         onView(withId(R.id.course_spinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is(course_sel1))).perform(click());
         onView(withId(R.id.course_page_done_button)).perform(click());
+
+        try {
+            onView(withId(R.id.sign_up_name_button)).check(ViewAssertions.matches(withText(name_t)));
+            onView(withId(R.id.school_button)).check(ViewAssertions.matches(withText(school_t)));
+            onView(withId(R.id.major_button)).check(ViewAssertions.matches(withText(major_t)));
+            onView(withId(R.id.phone_number_button)).check(ViewAssertions.matches(withText(number_t)));
+            onView(withId(R.id.course_list)).check(ViewAssertions.matches(hasDescendant(withText(course_sel1))));
+        }catch (Exception e) {
+            fail("Exception thrown");
+        }
     }
 
     /*

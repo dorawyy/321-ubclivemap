@@ -4,8 +4,6 @@ import androidx.test.espresso.Espresso;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 
 import org.json.JSONException;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -22,9 +20,12 @@ public class CreateActivityTest {
     private String name_t = "testname";
     private String info_t = "testinfo";
 
+    /*
     @Before
     public void setUp() throws Exception {
     }
+     */
+
     @Test
     public void testCreate() throws JSONException {
         UserDetails.name = "test_name";
@@ -46,9 +47,10 @@ public class CreateActivityTest {
         Espresso.onView(withId(R.id.activity_done)).perform(click());
         intended(hasComponent(MenuActivity.class.getName()));
     }
+
+    /*
     @After
     public void tearDown() throws Exception {
     }
-
-
+    */
 }

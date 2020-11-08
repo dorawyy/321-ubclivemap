@@ -12,19 +12,4 @@ public class UserDetails {
     public static boolean inactivity;
     public static String activityID;
 
-    /*public UserDetails(){
-        u_name = username;
-    }*/
-
-
-    UserDetails(String uname){
-        username = uname;
-    }
-    UserDetails(String [] temp){
-        courseRegistered = new String[temp.length];
-        for(int i=0;i<temp.length;i++){
-            courseRegistered[i] = temp [i];
-        }
-    }
-
 }

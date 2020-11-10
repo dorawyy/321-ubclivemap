@@ -49,8 +49,9 @@ describe("mock functions", () =>{
     })
 
     test("badurl", async () => {
+        var response;
         try {
-            var response = await axios.get("http://localhost:3000/users/register");
+            response = await axios.get("http://localhost:3000/users/register");
             fail("bad url");
         } catch (err) {
             expect(err.message).toBe("bad url");
@@ -58,8 +59,9 @@ describe("mock functions", () =>{
     })
 
     test("register", async () => {
+        var response;
         try {
-            var response = await axios.post("http://localhost:3000/users/register", {name : "Adam", password : "12345"});
+            response = await axios.post("http://localhost:3000/users/register", {name : "Adam", password : "12345"});
         } catch (err) {
             fail("good url");
         }

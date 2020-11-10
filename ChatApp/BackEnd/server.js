@@ -25,6 +25,6 @@ wsServer.on('request', (req) => {
 
     connection.on('close', (resCode, des) => {
         console.log('connection closed')
-        connections.splice(connection.indexOf(connection), 1)
+        connections.splice(connections.indexOf(connection), 1)
     })
 })

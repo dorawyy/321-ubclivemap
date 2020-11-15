@@ -1,6 +1,7 @@
 var express = require("express");
 var bcrypt = require("bcryptjs");
 var admin = require("firebase-admin");
+var axios = require("axios");
 var serviceAccount = require("./accountkey.json");
 
 var Account = require("./__models__/models").Account;
@@ -250,11 +251,32 @@ app.post("/profiles/join",async(req,res)=>{
     if(response == null) {
         return res.json(formatResponse(false, "User does not exist.", null));
     }
-    response.inActivity = "true";
+
+    if(response.inActivity == true){
+        return res.json(formatResponse(false, "User is already in an activity.", null));
+    }
+    response.inActivity = true;
     response.activityID = req.body.aid;
     var result = await Profile.replaceOne({"username" : req.body.username}, response)
     return res.json(formatResponse(true, "User Joined successfully.", result));
+});
 
+app.post("/profiles/leave",async(req,res)=>{
+    if(!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("aid")){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+    var response = await Profile.findOne({"username" : req.body.username}).exec()
+    if(response == null) {
+        return res.json(formatResponse(false, "User does not exist.", null));
+    }
+
+    if(response.inActivity == false){
+        return res.json(formatResponse(false, "User is not in an activity.", null));
+    }
+    response.inActivity = false;
+    response.activityID = "-1";
+    var result = await Profile.replaceOne({"username" : req.body.username}, response)
+    return res.json(formatResponse(true, "User Left the Activity successfully.", result));
 });
 
 
@@ -352,7 +374,7 @@ app.post("/activities/update", async (req, res) => {
 });
 
 app.post("/activities/join",async(req,res)=>{
-    if(!req.body.hasOwnProperty("aid") || !req.body.hasOwnProperty("user")){
+    if(!req.body.hasOwnProperty("aid") || !req.body.hasOwnProperty("username")){
         return res.json(formatResponse(false, "Not well formed request.", null));
     }
     var response = await Activity.findOne({"aid" : req.body.aid}).exec()
@@ -362,7 +384,59 @@ app.post("/activities/join",async(req,res)=>{
     response.usernames.push(req.body.user);
     var result = await Activity.replaceOne({"aid" : req.body.aid}, response)
     return res.json(formatResponse(true, "Activity Joined successfully.", result));
+});
 
+app.post("/activities/joinupdate",async(req,res)=>{
+    if(!req.body.hasOwnProperty("aid") || !req.body.hasOwnProperty("username")){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
+    if(response == null) {
+        return res.json(formatResponse(false, "Activity does not exist.", null));
+    }
+
+    var profileupdate;
+    try{
+        var url = req.protocol + "://" + req.get('host') + "/profiles/join";
+        profileupdate = await axios.post(url,
+                        req.body);
+    } catch (err) {
+        return res.json(formatResponse(false, "ERROR: " + err, null));
+    }
+    if(profileupdate.data.success == true){
+        response.usernames.push(req.body.username);
+        var result = await Activity.replaceOne({"aid" : req.body.aid}, response)
+        return res.json(formatResponse(true, "Activity Joined successfully.", result));
+    } else {
+        return res.json(profileupdate.data);
+    }
+});
+
+app.post("/activities/leaveupdate",async(req,res)=>{
+    if(!req.body.hasOwnProperty("aid") || !req.body.hasOwnProperty("username")){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
+    if(response == null) {
+        return res.json(formatResponse(false, "Activity does not exist.", null));
+    }
+
+    var profileupdate;
+    try{
+        var url = req.protocol + "://" + req.get('host') + "/profiles/leave";
+        profileupdate = await axios.post(url,
+                        req.body);
+    } catch (err) {
+        return res.json(formatResponse(false, "ERROR: " + err, null));
+    }
+
+    if(profileupdate.data.success == true){
+        response.usernames = response.usernames.filter(e => e !== req.body.username);
+        var result = await Activity.replaceOne({"aid" : req.body.aid}, response)
+        return res.json(formatResponse(true, "Activity Left successfully.", result));
+    } else {
+        return res.json(profileupdate.data);
+    }
 });
 
 app.post('/activities/delete', async (req,res) =>{
@@ -394,15 +468,23 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
 function deg2rad(deg) {
     return deg * (Math.PI/180)
 }
-var tpye = 0;
-function isGoodSortRequest(body){
-    if(!body.hasOwnProperty("user")){
-        type =1;
-        return false;
-    }
-    if(!profileIsGoodRequest(body.user)){
-        type =2;
-        return false;
+
+var type = 0;
+function isGoodSortRequest(func_type, body){
+    if(func_type == "with user"){
+        if(!body.hasOwnProperty("user")){
+            type =1;
+            return false;
+        }
+        if(!profileIsGoodRequest(body.user)){
+            type =2;
+            return false;
+        }
+    } else {
+        if(!body.hasOwnProperty("username")){
+            type =1;
+            return false;
+        }
     }
     if(!body.hasOwnProperty("userlat")){
         type =3;
@@ -436,8 +518,8 @@ app.post("/activities/sort", async (req, res) => {
     var cursor = await Activity.find().exec();
 
     // NECESSARY REQUEST INFORMATION !!!
-    if(!isGoodSortRequest(req.body)){
-        return res.json(formatResponse(false, "Not well formed request." + type, null));
+    if(!isGoodSortRequest("with user", req.body)){
+        return res.json(formatResponse(false, "Not well formed request.", null));
     }
     var user = req.body.user; // user json
     var userlat = req.body.userlat;
@@ -453,7 +535,6 @@ app.post("/activities/sort", async (req, res) => {
         i = sorted_activities.length
         var currentactivity = cursor[iter];
 
-        console.log("i = " + i)
         // Calculate course factor
         var coursefactor = 0;
         for(i_course=0; i_course<currentactivity.course.length; i_course++){
@@ -465,7 +546,6 @@ app.post("/activities/sort", async (req, res) => {
 
         if(user.CourseRegistered.length !== 0 && coursesweight !== 0){
             coursefactor = coursesweight * parseFloat(coursefactor / user.CourseRegistered.length);
-            console.log("coursefactor = " + coursefactor/coursesweight)
         } else {
             coursefactor = 0;
         }
@@ -476,7 +556,6 @@ app.post("/activities/sort", async (req, res) => {
             var dist = getDistanceFromLatLonInKm(parseFloat(userlat), parseFloat(userlong),
                             parseFloat(currentactivity.lat), parseFloat(currentactivity.long));
             locationfactor = locationweight * parseFloat((maxradius - dist) / maxradius)
-            console.log("locationfactor = " + locationfactor/locationweight)
             if(locationfactor < 0){
                 // location of activity outside of maxradius
                 // dont include activity in sorted list
@@ -489,9 +568,6 @@ app.post("/activities/sort", async (req, res) => {
         var majorfactor = 0
         if(majorweight !== 0){
             majorfactor = majorweight * (user.major == currentactivity.major) ? 1 : 0;
-            console.log("majorfactor = " + majorfactor/majorweight)
-            console.log("")
-            console.log("")
         }
 
         // Store matchfactor with their respective activity
@@ -515,18 +591,105 @@ app.post("/activities/sort", async (req, res) => {
         }
     }
 
-    for(i=0; i<sorted_activities.length; i++){
-        var currentactivity = sorted_activities[i];
-        console.log("activity = %o", currentactivity)
-        console.log("matchfactor = " + activity_matchfactor[JSON.stringify(currentactivity)])
-        console.log("")
-        console.log("")
-    }
+    //for(i=0; i<sorted_activities.length; i++){
+        //var currentactivity = sorted_activities[i];
+        //console.log("activity = %o", currentactivity)
+        //console.log("matchfactor = " + activity_matchfactor[JSON.stringify(currentactivity)])
+        //console.log("")
+        //console.log("")
+    //}
 
     return res.json(sorted_activities)
 });
 
 
+// GET USER FROM USERID
+app.post("/activities/sortnouser", async (req, res) => {
+    var sorted_activities = []
+    var cursor = await Activity.find().exec();
+
+    // NECESSARY REQUEST INFORMATION !!!
+    if(!isGoodSortRequest("without user", req.body)){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+
+    var r_username = req.body.username;
+    var userlat = req.body.userlat;
+    var userlong = req.body.userlong;
+    var maxradius = req.body.maxradius;
+    var locationweight = req.body.locationweight;
+    var coursesweight = req.body.coursesweight;
+    var majorweight = req.body.majorweight;
+
+    var profilereq;
+    var userjson = {
+        username : r_username
+    }
+
+    try{
+        var url = req.protocol + "://" + req.get('host') + "/profiles/search";
+        profilereq = await axios.post(url,
+                        userjson);
+    } catch (err) {
+        return res.json(formatResponse(false, "ERROR: " + err, null));
+    }
+
+    var user = profilereq.data.value;
+
+
+    var activity_matchfactor = {} // maps an activity -> their match factor
+    var i=0
+    for(iter=0; iter<cursor.length; iter++) {
+        i = sorted_activities.length
+        var currentactivity = cursor[iter];
+
+        // Calculate course factor
+        var coursefactor = 0;
+        for(i_course=0; i_course<currentactivity.course.length; i_course++){
+            var activityCourse = currentactivity.course[i_course];
+            if(user.CourseRegistered.includes(activityCourse)){
+                coursefactor += 1;
+            }
+        }
+        coursefactor = coursesweight * parseFloat(coursefactor / user.CourseRegistered.length);
+
+        // Calculate location factor
+        var locationfactor = 0
+        var dist = getDistanceFromLatLonInKm(parseFloat(userlat), parseFloat(userlong),
+                        parseFloat(currentactivity.lat), parseFloat(currentactivity.long));
+        locationfactor = locationweight * parseFloat((maxradius - dist) / maxradius)
+        if(locationfactor <= 0){
+            // location of activity outside of maxradius
+            // dont include activity in sorted list
+            continue;
+        }
+
+        // Calculate major factor
+        var majorfactor = 0
+        majorfactor = majorweight * (user.major == currentactivity.major) ? 1 : 0;
+
+        // Store matchfactor with their respective activity
+        var matchfactor = 0;
+        matchfactor = (coursefactor + locationfactor + majorfactor) / (coursesweight + locationweight + majorweight)
+        activity_matchfactor[JSON.stringify(currentactivity)] = matchfactor;
+
+        // INSERTION SORT ALGORITHM
+        sorted_activities.push(currentactivity); 
+        i = sorted_activities.length - 1 
+        if(i != 0){
+            var j = i-1; 
+            while ((j > -1) && (matchfactor > activity_matchfactor[JSON.stringify(sorted_activities[j])])) {
+                sorted_activities[j+1] = sorted_activities[j];
+                j--;
+            }
+            sorted_activities[j+1] = currentactivity;
+        }
+    }
+
+    return res.json(sorted_activities)
+});
+
 module.exports = {
-    app
+    app,
+    axios
 }

@@ -3,7 +3,7 @@
 ######################################################################
 
 ### check current users in database
-GET http://localhost:3000/users
+GET http://localhost:3000/users/all
 
 ### store a user
 
@@ -78,7 +78,7 @@ Content-Type: application/json
 
 {
     "name" : "Kyle",
-    "username" : "12",
+    "username" : "Kyle",
     "major" : "CPEN",
     "CourseRegistered" : [
         "CPEN331", "CPEN321"
@@ -115,14 +115,6 @@ Content-Type: application/json
     "private" : false,
     "inActivity" : false,
     "activityID" : "temp"
-}
-
-### search user by id
-POST http://localhost:3000/profiles/search
-Content-Type: application/json
-
-{
-    "username" : "a"
 }
 
 ### search user by id
@@ -288,6 +280,41 @@ Content-Type: application/json
     "aid" : "ultracheapcow"
 }
 
+### delete activity
+POST http://localhost:3000/activities/delete
+Content-Type: application/json
+
+{
+    "aid" : "ultracheapcow"
+}
+
+### search user by id
+POST http://localhost:3000/profiles/search
+Content-Type: application/json
+
+{
+    "username" : "Kyle"
+}
+
+
+### search user by id
+POST http://localhost:3000/profiles/leave
+Content-Type: application/json
+
+{
+    "aid" : "ultracheapcow",
+    "username" : "Kyle"
+}
+
+### search activity
+POST http://localhost:3000/activities/joinupdate
+Content-Type: application/json
+
+{
+    "aid" : "ultracheapcow",
+    "username" : "Kyle"
+}
+
 
 ### update users
 POST http://localhost:3000/activities/update
@@ -325,6 +352,20 @@ Content-Type: application/json
         "inActivity" : false,
         "activityID" : -1
     } , 
+    "userlat" : "50.3112",
+    "userlong" : "-122.213123",
+    "maxradius" : 100000,
+    "locationweight" : 2,
+    "coursesweight" : 3,
+    "majorweight" : 1
+}
+
+### update users
+POST http://localhost:3000/activities/sortnouser
+Content-Type: application/json
+
+{
+    "username" : "Kyle",
     "userlat" : "50.3112",
     "userlong" : "-122.213123",
     "maxradius" : 100000,

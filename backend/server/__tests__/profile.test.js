@@ -32,7 +32,7 @@ describe("successful tests", () => {
                 phone : "4444444444",
                 private : false,
                 inActivity : false,
-                activityID : -1
+                activityID : "-1"
             })
 
         expect(response.body.success).toBe(true)
@@ -59,7 +59,7 @@ describe("successful tests", () => {
             phone : "4444444444",
             private : false,
             inActivity : false,
-            activityID : -1
+            activityID : "-1"
         }
 
         expect(response.body.success).toBe(true)
@@ -83,7 +83,7 @@ describe("successful tests", () => {
                 phone : "4444445555",
                 private : false,
                 inActivity : false,
-                activityID : -1
+                activityID : "-1"
             })
         expect(response.body.success).toBe(true)
         expect(response.body.status).toBe("User profile updated successfully.");
@@ -106,7 +106,7 @@ describe("successful tests", () => {
             phone : "4444445555",
             private : false,
             inActivity : false,
-            activityID : -1
+            activityID : "-1"
         }
 
         expect(response.body.success).toBe(true)
@@ -151,7 +151,7 @@ describe("fail tests", () => {
                 phone : "4444444444",
                 private : false,
                 inActivity : false,
-                activityID : -1
+                activityID : "-1"
             })
     });
 
@@ -171,7 +171,7 @@ describe("fail tests", () => {
                 phone : "4444444444",
                 private : false,
                 inActivity : false,
-                activityID : -1
+                activityID : "-1"
             })
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Username already exists.");
@@ -188,7 +188,7 @@ describe("fail tests", () => {
                 phone : "4444444444",
                 private : false,
                 inActivity : false,
-                activityID : -1
+                activityID : "-1"
             })
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
@@ -207,7 +207,7 @@ describe("fail tests", () => {
                 phone : "4444445555",
                 private : false,
                 inActivity : false,
-                activityID : -1
+                activityID : "-1"
             })
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
@@ -226,7 +226,7 @@ describe("fail tests", () => {
                 phone : "4444445555",
                 private : false,
                 inActivity : false,
-                activityID : -1
+                activityID : "-1"
             })
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
@@ -245,7 +245,7 @@ describe("fail tests", () => {
                 phone : "4444445555",
                 private : false,
                 inActivity : false,
-                activityID : -1
+                activityID : "-1"
             })
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
@@ -264,7 +264,7 @@ describe("fail tests", () => {
                 phone : "4444445555",
                 private : false,
                 inActivity : false,
-                activityID : -1
+                activityID : "-1"
             })
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
@@ -283,7 +283,7 @@ describe("fail tests", () => {
                 school : "UBC",
                 private : false,
                 inActivity : false,
-                activityID : -1
+                activityID : "-1"
             })
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
@@ -302,7 +302,7 @@ describe("fail tests", () => {
                 school : "UBC",
                 phone : "4444445555",
                 inActivity : false,
-                activityID : -1
+                activityID : "-1"
             })
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
@@ -321,7 +321,7 @@ describe("fail tests", () => {
                 school : "UBC",
                 phone : "4444445555",
                 private : false,
-                activityID : -1
+                activityID : "-1"
             })
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
@@ -383,7 +383,7 @@ describe("fail tests", () => {
                 phone : "4444445555",
                 private : false,
                 inActivity : false,
-                activityID : -1
+                activityID : "-1"
             })
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Username does not exist.");
@@ -399,7 +399,7 @@ describe("fail tests", () => {
                 phone : "4444445555",
                 private : false,
                 inActivity : false,
-                activityID : -1
+                activityID : "-1"
             })
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");

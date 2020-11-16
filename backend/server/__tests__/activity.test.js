@@ -360,19 +360,7 @@ describe("fail tests", () => {
         const response = await request(app)
             .post("/activities/add")
             .type('json')
-            .send({
-                aid : "1",
-                name : "Cpen321 Project",
-                leader : "test",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "49.267941",
-                long : "-123.247360",
-                status : "1"
-            })
+            .send(constants.a1);
     });
 
     // test adding an activity
@@ -380,220 +368,18 @@ describe("fail tests", () => {
         var response = await request(app)
             .post("/activities/add")
             .type('json')
-            .send({
-                aid : "1",
-                name : "Cpen321 Project",
-                leader : "test",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "49.267941",
-                long : "-123.247360",
-                status : "1"
-            })
-
+            .send(constants.a1);
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Activity Id Taken");
 
-        response = await request(app)
-            .post("/activities/add")
-            .type('json')
-            .send({
-                name : "Cpen321 Project",
-                leader : "test",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "49.267941",
-                long : "-123.247360",
-                status : "1"
-            })
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
-
-        response = await request(app)
-            .post("/activities/add")
-            .type('json')
-            .send({
-                aid : "231",
-                leader : "test",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "49.267941",
-                long : "-123.247360",
-                status : "1"
-            })
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
-
-        response = await request(app)
-            .post("/activities/add")
-            .type('json')
-            .send({
-                aid : "231",
-                name : "Cpen321 Project",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "49.267941",
-                long : "-123.247360",
-                status : "1"
-            })
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
-
-        response = await request(app)
-            .post("/activities/add")
-            .type('json')
-            .send({
-                aid : "231",
-                name : "Cpen321 Project",
-                leader : "test",
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "49.267941",
-                long : "-123.247360",
-                status : "1"
-            })
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
-        
-        response = await request(app)
-            .post("/activities/add")
-            .type('json')
-            .send({
-                aid : "231",
-                name : "Cpen321 Project",
-                leader : "test",
-                usernames : ["test","aplha"],
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "49.267941",
-                long : "-123.247360",
-                status : "1"
-            })
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
-        
-        response = await request(app)
-            .post("/activities/add")
-            .type('json')
-            .send({
-                aid : "231",
-                name : "Cpen321 Project",
-                leader : "test",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "49.267941",
-                long : "-123.247360",
-                status : "1"
-            })
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
-        
-        response = await request(app)
-            .post("/activities/add")
-            .type('json')
-            .send({
-                aid : "231",
-                name : "Cpen321 Project",
-                leader : "test",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                school : "UBC",
-                lat : "49.267941",
-                long : "-123.247360",
-                status : "1"
-            })
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
-        
-        response = await request(app)
-            .post("/activities/add")
-            .type('json')
-            .send({
-                aid : "231",
-                name : "Cpen321 Project",
-                leader : "test",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                lat : "49.267941",
-                long : "-123.247360",
-                status : "1"
-            })
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
-        
-        response = await request(app)
-            .post("/activities/add")
-            .type('json')
-            .send({
-                aid : "231",
-                name : "Cpen321 Project",
-                leader : "test",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                long : "-123.247360",
-                status : "1"
-            })
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
-        
-        response = await request(app)
-            .post("/activities/add")
-            .type('json')
-            .send({
-                aid : "231",
-                name : "Cpen321 Project",
-                leader : "test",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "49.267941",
-                status : "1"
-            })
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
-        
-        response = await request(app)
-            .post("/activities/add")
-            .type('json')
-            .send({
-                aid : "231",
-                name : "Cpen321 Project",
-                leader : "test",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "49.267941",
-                long : "-123.247360",
-            })
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
+        for(i=0; i<constants.bad_activities.length; i++){
+            response = await request(app)
+                .post("/activities/add")
+                .type('json')
+                .send(constants.bad_activities[i]);
+            expect(response.body.success).toBe(false)
+            expect(response.body.status).toBe("Not well formed request.");
+        }
     })
 
     // test searching an activity
@@ -603,7 +389,7 @@ describe("fail tests", () => {
             .type('json')
             .send({
                 aid : "sparklingdangers",
-            })
+            });
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Activity does not exist.");
 
@@ -638,23 +424,14 @@ describe("fail tests", () => {
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Activity does not exist.");
 
-        response = await request(app)
-            .post("/activities/update")
-            .type('json')
-            .send({
-                aid : "1",
-                leader : "test",
-                usernames : ["test","aplha","anotheruser"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331", "CPEN400"],
-                school : "UBC",
-                lat : "50.2321039",
-                long : "-123.247360",
-                status : "1"
-            })
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
+        for(i=0; i<constants.bad_activities.length; i++){
+            response = await request(app)
+                .post("/activities/update")
+                .type('json')
+                .send(constants.bad_activities[i]);
+            expect(response.body.success).toBe(false)
+            expect(response.body.status).toBe("Not well formed request.");
+        }
     })
 
     // test deleting an activity
@@ -694,23 +471,28 @@ describe("fail tests", () => {
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
 
+        for(i=0; i<constants.bad_profiles.length; i++){
+            response = await request(app)
+                .post("/activities/sort")
+                .type('json')
+                .send({
+                    user : constants.bad_profiles[i],
+                    userlat : "50",
+                    userlong : "-124",
+                    maxradius : "2000",
+                    locationweight : 1,
+                    coursesweight : 1,
+                    majorweight : 1
+                });
+            expect(response.body.success).toBe(false)
+            expect(response.body.status).toBe("Not well formed request.");
+        }
+
         response = await request(app)
             .post("/activities/sort")
             .type('json')
             .send({
-                user : {
-                    name : "Kyle",
-                    major : "CPEN",
-                    CourseRegistered : [
-                        "CPEN331", "CPEN321", "CPEN400"
-                    ],
-                    school : "UBC",
-                    phone : "4444445555",
-                    private : false,
-                    inActivity : false,
-                    activityID : -1
-                },
-                userlat : "50",
+                user : constants.kyle_p[i],
                 userlong : "-124",
                 maxradius : "2000",
                 locationweight : 1,
@@ -724,45 +506,7 @@ describe("fail tests", () => {
             .post("/activities/sort")
             .type('json')
             .send({
-                user : {
-                    name : "Kyle",
-                    username : "12",
-                    major : "CPEN",
-                    CourseRegistered : [
-                        "CPEN331", "CPEN321", "CPEN400"
-                    ],
-                    school : "UBC",
-                    phone : "4444445555",
-                    private : false,
-                    inActivity : false,
-                    activityID : -1
-                },
-                userlong : "-124",
-                maxradius : "2000",
-                locationweight : 1,
-                coursesweight : 1,
-                majorweight : 1
-            });
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
-
-        response = await request(app)
-            .post("/activities/sort")
-            .type('json')
-            .send({
-                user : {
-                    name : "Kyle",
-                    username : "12",
-                    major : "CPEN",
-                    CourseRegistered : [
-                        "CPEN331", "CPEN321", "CPEN400"
-                    ],
-                    school : "UBC",
-                    phone : "4444445555",
-                    private : false,
-                    inActivity : false,
-                    activityID : -1
-                },
+                user : constants.kyle_p[i],
                 userlat : "50",
                 maxradius : "2000",
                 locationweight : 1,
@@ -773,106 +517,58 @@ describe("fail tests", () => {
         expect(response.body.status).toBe("Not well formed request.");
 
         response = await request(app)
-            .post("/activities/sort")
-            .type('json')
-            .send({
-                user : {
-                    name : "Kyle",
-                    username : "12",
-                    major : "CPEN",
-                    CourseRegistered : [
-                        "CPEN331", "CPEN321", "CPEN400"
-                    ],
-                    school : "UBC",
-                    phone : "4444445555",
-                    private : false,
-                    inActivity : false,
-                    activityID : -1
-                },
-                userlat : "50",
-                userlong : "-124",
-                locationweight : 1,
-                coursesweight : 1,
-                majorweight : 1
-            });
+        .post("/activities/sort")
+        .type('json')
+        .send({
+            user : constants.kyle_p[i],
+            userlat : "50",
+            userlong : "-124",
+            locationweight : 1,
+            coursesweight : 1,
+            majorweight : 1
+        });
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
 
         response = await request(app)
-            .post("/activities/sort")
-            .type('json')
-            .send({
-                user : {
-                    name : "Kyle",
-                    username : "12",
-                    major : "CPEN",
-                    CourseRegistered : [
-                        "CPEN331", "CPEN321", "CPEN400"
-                    ],
-                    school : "UBC",
-                    phone : "4444445555",
-                    private : false,
-                    inActivity : false,
-                    activityID : -1
-                },
-                userlat : "50",
-                userlong : "-124",
-                maxradius : "2000",
-                coursesweight : 1,
-                majorweight : 1
-            });
+        .post("/activities/sort")
+        .type('json')
+        .send({
+            user : constants.kyle_p[i],
+            userlat : "50",
+            userlong : "-124",
+            maxradius : "2000",
+            coursesweight : 1,
+            majorweight : 1
+        });
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
 
         response = await request(app)
-            .post("/activities/sort")
-            .type('json')
-            .send({
-                user : {
-                    name : "Kyle",
-                    username : "12",
-                    major : "CPEN",
-                    CourseRegistered : [
-                        "CPEN331", "CPEN321", "CPEN400"
-                    ],
-                    school : "UBC",
-                    phone : "4444445555",
-                    private : false,
-                    inActivity : false,
-                    activityID : -1
-                },
-                userlat : "50",
-                userlong : "-124",
-                maxradius : "2000",
-                locationweight : 1,
-                majorweight : 1
-            });
+        .post("/activities/sort")
+        .type('json')
+        .send({
+            user : constants.kyle_p[i],
+            userlat : "50",
+            userlong : "-124",
+            maxradius : "2000",
+            locationweight : 1,
+            majorweight : 1
+        });
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
 
         response = await request(app)
-            .post("/activities/sort")
-            .type('json')
-            .send({
-                user : {
-                    name : "Kyle",
-                    username : "12",
-                    major : "CPEN",
-                    CourseRegistered : [
-                        "CPEN331", "CPEN321", "CPEN400"
-                    ],
-                    school : "UBC",
-                    phone : "4444445555",
-                    private : false,
-                    inActivity : false,
-                    activityID : -1
-                },
-                userlat : "50",
-                userlong : "-124",
-                maxradius : "2000",
-                locationweight : 1,
-                coursesweight : 1
-            });
+        .post("/activities/sort")
+        .type('json')
+        .send({
+            user : constants.kyle_p[i],
+            userlat : "50",
+            userlong : "-124",
+            maxradius : "2000",
+            locationweight : 1,
+            coursesweight : 1,
+        });
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
     })

@@ -29,13 +29,26 @@ describe("successful tests", () => {
         expect(response.body.status).toBe("Account registered successfully.");
     })
 
+    test("update user", async () => {
+        const response = await request(app)
+            .post("/users/update")
+            .type('json')
+            .send({
+                name: "Jack",
+                password: "pass234"
+            })
+
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("Account updated successfully.");
+    })
+
     test("login user", async() => {
         const response = await request(app)
             .post("/users/login")
             .type('json')
             .send({
                 name: "Jack",
-                password: "pass123"
+                password: "pass234"
             })
 
         expect(response.body.success).toBe(true)
@@ -91,6 +104,29 @@ describe("fail tests", () => {
             .send({
                 password: "pass123"
             })
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Not well formed request.");
+    })
+
+    test("update user", async () => {
+        var response = await request(app)
+            .post("/users/update")
+            .type('json')
+            .send({
+                name: "badbj",
+                password: "pass234"
+            })
+
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Username does not exist.");
+
+        response = await request(app)
+            .post("/users/update")
+            .type('json')
+            .send({
+                password: "pass234"
+            })
+
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
     })

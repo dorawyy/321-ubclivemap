@@ -83,13 +83,13 @@ app.post('/users/register', async (req, res) => {
 
     // if username exists in database, fail
     if(!userIsGoodRequest(req.body)){
-        return res.json(formatResponse(false, "Not well formed request.", null));
+        return res.status(401).json(formatResponse(false, "Not well formed request.", null));
     }
 
     findarr = [];
     var response = await Account.findOne({"name" : req.body.name}).exec();
     if(response != null){
-        return res.json(formatResponse(false, "Account already exists.", null));
+        return res.status(402).json(formatResponse(false, "Account already exists.", null));
     }
 
     // enter user into database, encrypt password
@@ -113,36 +113,62 @@ app.post('/users/register', async (req, res) => {
     } catch (err) {
         return res.json(formatResponse(false, err, null));
     }
-    return res.json(formatResponse(true, "Account registered successfully.", null));
+    return res.status(200).json(formatResponse(true, "Account registered successfully.", null));
+});
+
+app.post("/users/update", async (req, res) => {
+    if(!userIsGoodRequest(req.body)){
+        return res.status(401).json(formatResponse(false, "Not well formed request.", null));
+    }
+
+    var salt;
+    var hashedPassword;
+    try{
+        salt = await bcrypt.genSalt(); 
+        hashedPassword = await bcrypt.hash(req.body.password, salt);
+    } catch (e) {
+        res.status(500).send("ERROR");
+    }
+
+    const user = { 
+        name : req.body.name,
+        password: hashedPassword
+    };
+
+    var response = await Account.replaceOne({"name" : req.body.name}, user);
+
+    if(response.n == 0){
+        return res.status(402).json(formatResponse(false, "Username does not exist.", null));
+    }
+    return res.status(200).json(formatResponse(true, "Account updated successfully.", null));
 });
 
 app.post('/users/delete', async (req,res) =>{
     if(!req.body.hasOwnProperty("name")){
-        return res.json(formatResponse(false, "Not well formed request.", null));
+        return res.status(401).json(formatResponse(false, "Not well formed request.", null));
     }
-
     var response = await Account.deleteOne({"name" : req.body.name});
     if(response.n === 0){
-        return res.json(formatResponse(false, "Username does not exist.", null));
+        return res.status(402).json(formatResponse(false, "Username does not exist.", null));
     }
-    return res.json(formatResponse(true, "Account deleted successfully.", null));
+    return res.status(200).json(formatResponse(true, "Account deleted successfully.", null));
 })
 
 // login a user
 app.post('/users/login', async (req, res) => {
     if(!userIsGoodRequest(req.body)){
-        return res.json(formatResponse(false, "Not well formed request.", null));
+        return res.status(401).json(formatResponse(false, "Not well formed request.", null));
     }
 
     var response = await Account.findOne({"name" : req.body.name}).exec();
     if(response == null){
-        return res.json(formatResponse(false, "Username does not exist.", null));
+        return res.status(402).json(formatResponse(false, "Username does not exist.", null));
     }
     try {
         if(await bcrypt.compare(req.body.password, response.password)) {
-            return res.json(formatResponse(true, "Authentication successful.", null));
+            return res.status(200).json(formatResponse(true, "Authentication successful.", null));
         } else {
-            return res.json(formatResponse(false, "Invalid password.", null));
+            return res.status(403).json(formatResponse(false, "Invalid password.", null));
         }
     } catch (e) {
         return res.json(formatResponse(false, "I dunno", null));
@@ -273,6 +299,11 @@ app.post("/profiles/leave",async(req,res)=>{
     if(response.inActivity == false){
         return res.json(formatResponse(false, "User is not in an activity.", null));
     }
+
+    if(response.activityID != req.body.aid){
+        return res.json(formatResponse(false, "User is not in this activity.", null));
+    }
+
     response.inActivity = false;
     response.activityID = "-1";
     var result = await Profile.replaceOne({"username" : req.body.username}, response)
@@ -296,9 +327,6 @@ function activityIsGoodRequest(body){
         return false;
     }
     if(!body.hasOwnProperty('name')){
-        return false;
-    }
-    if(!body.hasOwnProperty('leader')){
         return false;
     }
     if(!body.hasOwnProperty('leader')){
@@ -353,11 +381,41 @@ app.post("/activities/add", async (req, res) => {
         return res.json(formatResponse(false, "Activity Id Taken", null));
     }
 
-    //try {
     await Activity.create(req.body);
-    //} catch (err) {
-        //return res.json(formatResponse(false, err, null));
-    //}
+    return res.json(formatResponse(true, "Activity insert successful.", null));
+});
+
+app.post("/activities/addleader", async (req, res) => {
+    if(!activityIsGoodRequest(req.body)){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
+    if(response != null) {
+        return res.json(formatResponse(false, "Activity Id Taken", null));
+    }
+
+    response = await Profile.findOne({"username" : req.body.leader}).exec();
+    if(response == null) {
+        return res.json(formatResponse(false, "Leader does not exist.", null));
+    }
+    if(response.inActivity == true){
+        return res.json(formatResponse(false, "Leader is in an activity.", null));
+    }
+    await Activity.create(req.body);
+    return res.json(formatResponse(true, "Activity insert successful.", null));
+});
+
+// add a new activity
+app.post("/activities/usercreate", async (req, res) => {
+    if(!activityIsGoodRequest(req.body)){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
+    if(response != null) {
+        return res.json(formatResponse(false, "Activity Id Taken", null));
+    }
+
+    await Activity.create(req.body);
     return res.json(formatResponse(true, "Activity insert successful.", null));
 });
 
@@ -514,106 +572,22 @@ function isGoodSortRequest(func_type, body){
 }
 
 app.post("/activities/sort", async (req, res) => {
-    var sorted_activities = []
     var cursor = await Activity.find().exec();
 
     // NECESSARY REQUEST INFORMATION !!!
     if(!isGoodSortRequest("with user", req.body)){
         return res.json(formatResponse(false, "Not well formed request.", null));
     }
+
     var user = req.body.user; // user json
-    var userlat = req.body.userlat;
-    var userlong = req.body.userlong;
-    var maxradius = req.body.maxradius;
-    var locationweight = req.body.locationweight;
-    var coursesweight = req.body.coursesweight;
-    var majorweight = req.body.majorweight;
-
-    var activity_matchfactor = {} // maps an activity -> their match factor
-    var i=0
-    for(iter=0; iter<cursor.length; iter++) {
-        i = sorted_activities.length
-        var currentactivity = cursor[iter];
-
-        // Calculate course factor
-        var coursefactor = 0;
-        for(i_course=0; i_course<currentactivity.course.length; i_course++){
-            var activityCourse = currentactivity.course[i_course];
-            if(user.CourseRegistered.includes(activityCourse)){
-                coursefactor += 1;
-            }
-        }
-
-        if(user.CourseRegistered.length !== 0 && coursesweight !== 0){
-            coursefactor = coursesweight * parseFloat(coursefactor / user.CourseRegistered.length);
-        } else {
-            coursefactor = 0;
-        }
-
-        // Calculate location factor
-        var locationfactor = 0
-        if(maxradius !== 0 && locationweight !== 0){
-            var dist = getDistanceFromLatLonInKm(parseFloat(userlat), parseFloat(userlong),
-                            parseFloat(currentactivity.lat), parseFloat(currentactivity.long));
-            locationfactor = locationweight * parseFloat((maxradius - dist) / maxradius)
-            if(locationfactor < 0){
-                // location of activity outside of maxradius
-                // dont include activity in sorted list
-                continue;
-            }
-        } 
-        
-
-        // Calculate major factor
-        var majorfactor = 0
-        if(majorweight !== 0){
-            majorfactor = majorweight * (user.major == currentactivity.major) ? 1 : 0;
-        }
-
-        // Store matchfactor with their respective activity
-        var matchfactor = 0;
-        var weightsum = coursesweight + locationweight + majorweight;
-        if(weightsum !== 0) {
-            matchfactor = (coursefactor + locationfactor + majorfactor) / weightsum;
-        }
-        activity_matchfactor[JSON.stringify(currentactivity)] = matchfactor;
-
-        // INSERTION SORT ALGORITHM
-        sorted_activities.push(currentactivity); 
-        i = sorted_activities.length - 1 
-        if(i !== 0){
-            var j = i-1; 
-            while ((j > -1) && (matchfactor > activity_matchfactor[JSON.stringify(sorted_activities[j])])) {
-                sorted_activities[j+1] = sorted_activities[j];
-                j--;
-            }
-            sorted_activities[j+1] = currentactivity;
-        }
-    }
-
-    //for(i=0; i<sorted_activities.length; i++){
-        //var currentactivity = sorted_activities[i];
-        //console.log("activity = %o", currentactivity)
-        //console.log("matchfactor = " + activity_matchfactor[JSON.stringify(currentactivity)])
-        //console.log("")
-        //console.log("")
-    //}
-
-    return res.json(sorted_activities)
+    return res.json(sort_activities(req, user, cursor))
 });
 
-
-// GET USER FROM USERID
-app.post("/activities/sortnouser", async (req, res) => {
+function sort_activities(req, user, cursor){
     var sorted_activities = []
-    var cursor = await Activity.find().exec();
+    var activity_matchfactor = {} // maps an activity -> their match factor
+    var i=0
 
-    // NECESSARY REQUEST INFORMATION !!!
-    if(!isGoodSortRequest("without user", req.body)){
-        return res.json(formatResponse(false, "Not well formed request.", null));
-    }
-
-    var r_username = req.body.username;
     var userlat = req.body.userlat;
     var userlong = req.body.userlong;
     var maxradius = req.body.maxradius;
@@ -621,24 +595,6 @@ app.post("/activities/sortnouser", async (req, res) => {
     var coursesweight = req.body.coursesweight;
     var majorweight = req.body.majorweight;
 
-    var profilereq;
-    var userjson = {
-        username : r_username
-    }
-
-    try{
-        var url = req.protocol + "://" + req.get('host') + "/profiles/search";
-        profilereq = await axios.post(url,
-                        userjson);
-    } catch (err) {
-        return res.json(formatResponse(false, "ERROR: " + err, null));
-    }
-
-    var user = profilereq.data.value;
-
-
-    var activity_matchfactor = {} // maps an activity -> their match factor
-    var i=0
     for(iter=0; iter<cursor.length; iter++) {
         i = sorted_activities.length
         var currentactivity = cursor[iter];
@@ -672,21 +628,50 @@ app.post("/activities/sortnouser", async (req, res) => {
         var matchfactor = 0;
         matchfactor = (coursefactor + locationfactor + majorfactor) / (coursesweight + locationweight + majorweight)
         activity_matchfactor[JSON.stringify(currentactivity)] = matchfactor;
-
-        // INSERTION SORT ALGORITHM
-        sorted_activities.push(currentactivity); 
-        i = sorted_activities.length - 1 
-        if(i != 0){
-            var j = i-1; 
-            while ((j > -1) && (matchfactor > activity_matchfactor[JSON.stringify(sorted_activities[j])])) {
-                sorted_activities[j+1] = sorted_activities[j];
-                j--;
-            }
-            sorted_activities[j+1] = currentactivity;
-        }
+        sorted_activities.push(currentactivity);
     }
 
-    return res.json(sorted_activities)
+    //for(i=0; i<sorted_activities.length; i++){
+        //var currentactivity = sorted_activities[i];
+        //console.log("activity = %o", currentactivity)
+        //console.log("matchfactor = " + activity_matchfactor[JSON.stringify(currentactivity)])
+        //console.log("")
+        //console.log("")
+    //}
+
+    sorted_activities.sort((a, b) => parseFloat(activity_matchfactor[JSON.stringify(b)]) - parseFloat(activity_matchfactor[JSON.stringify(a)]));
+    return sorted_activities;
+}
+
+
+// GET USER FROM USERID
+app.post("/activities/sortnouser", async (req, res) => {
+    var cursor = await Activity.find().exec();
+
+    // NECESSARY REQUEST INFORMATION !!!
+    if(!isGoodSortRequest("without user", req.body)){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+
+    var r_username = req.body.username;
+    var profilereq;
+    var userjson = {
+        username : r_username
+    }
+
+    try{
+        var url = req.protocol + "://" + req.get('host') + "/profiles/search";
+        profilereq = await axios.post(url,
+                        userjson);
+    } catch (err) {
+        return res.json(formatResponse(false, "ERROR: " + err, null));
+    }
+
+    if(profilereq.data.success == false){
+        return res.json(profilereq.data);
+    }
+    var user = profilereq.data.value;
+    return res.json(sort_activities(req, user, cursor));
 });
 
 module.exports = {

@@ -17,6 +17,7 @@
             android:layout_width="116dp"
             android:layout_height="32dp"
             android:text="ActivityName"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="About:"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,13 +39,13 @@
             android:id="@+id/textView34"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Leader:"
             android:layout_marginTop="25dp"
+            android:text="Leader:"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="194dp"
-            app:layout_constraintTop_toBottomOf="@+id/InfoBox"/>
+            app:layout_constraintTop_toBottomOf="@+id/InfoBox" />
 
         <TextView
             android:id="@+id/textView35"
@@ -51,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="Major:"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +68,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView35" />
+            app:layout_constraintTop_toBottomOf="@+id/textView35"
+            android:textSize="18sp" />
 
         <Spinner
             android:id="@+id/CoursesSpinner"
@@ -93,6 +97,7 @@
             android:layout_height="144dp"
             android:layout_marginTop="25dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,6 +109,7 @@
             android:layout_height="19dp"
             android:layout_marginTop="25dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -115,6 +121,7 @@
             android:layout_height="19dp"
             android:layout_marginTop="25dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -126,6 +133,7 @@
             android:layout_height="19dp"
             android:layout_marginTop="25dp"
             android:text="TextView"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"

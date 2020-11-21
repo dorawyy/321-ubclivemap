@@ -20,6 +20,7 @@ public class MenuActivity extends AppCompatActivity {
         Button editProfileButton;
         Button signOutButton;
         Button createActivityButton;
+        Button currActivityButton;
 
         viewMapButton = findViewById(R.id.view_map_btn);
         viewMapButton.setOnClickListener(new View.OnClickListener() {
@@ -34,7 +35,7 @@ public class MenuActivity extends AppCompatActivity {
         myActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent activityIntent = new Intent(MenuActivity.this, ActivityStuffMenu.class);
+                Intent activityIntent = new Intent(MenuActivity.this, GetMatchScore.class);
                 startActivity(activityIntent);
             }
         });
@@ -48,10 +49,26 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        currActivityButton = findViewById(R.id.currentActivity);
+        currActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!UserdetailsUtil.inactivity){
+                    Toast.makeText(MenuActivity.this, "~ Such Empty, Much Wow ~", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Intent intent = new Intent(MenuActivity.this, ActivityPage.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
         signOutButton = findViewById(R.id.sign_out_btn);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                UserdetailsUtil.cleanup();
+                SortedlistclassUtil.cleanup();
                 Intent signInIntent = new Intent(MenuActivity.this, MainActivity.class);
                 startActivity(signInIntent);
             }

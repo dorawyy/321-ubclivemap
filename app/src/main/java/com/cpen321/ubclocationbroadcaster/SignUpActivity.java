@@ -22,16 +22,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-/* This activity creates a page to sign up,
+/** This activity creates a page to sign up,
    and sends the data to the database */
 
 public class SignUpActivity extends AppCompatActivity {
 
-
+    /**INITIALIZATION - START*/
     private EditText username;
     private EditText password;
 
     private String URL = UserdetailsUtil.getURL() + "/users/register";
+    /**INITIALIZATION - END*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +50,11 @@ public class SignUpActivity extends AppCompatActivity {
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent signUpIntent = new Intent(SignUpActivity.this, ProfileActivity.class);
-                //startActivity(signUpIntent);
-                Log.d("sign up button", "sign up button has been clicked");
 
                 // format request
                 final String inputUsername = username.getText().toString();
                 final String inputPassword = password.getText().toString();
 
-/*
-                SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
-                SharedPreferences.Editor prefEditor = userSettings.edit();
-                prefEditor.putString("USERNAME", username.getText().toString());
-                prefEditor.commit();*/
 
                 JSONObject jsnReq = new JSONObject();
                 try {
@@ -70,14 +63,6 @@ public class SignUpActivity extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
-                
-                if(inputUsername.isEmpty()){
-                    Toast.makeText(SignUpActivity.this, "Enter a username", Toast.LENGTH_SHORT).show();
-                }
-
-                else if(inputPassword.isEmpty()){
-                    Toast.makeText(SignUpActivity.this, "Enter a password", Toast.LENGTH_SHORT).show();
                 }
 
                 if(inputUsername.isEmpty()){
@@ -99,19 +84,25 @@ public class SignUpActivity extends AppCompatActivity {
                                         startActivity(signUpIntent);
                                     }
                                     else {
-                                            Toast.makeText(SignUpActivity.this, "ERROR: Username Already Existed", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(SignUpActivity.this, "ERROR: Username Already Exists", Toast.LENGTH_SHORT).show();
                                     }
                                     String stat = response.get("status").toString();
                                     UserdetailsUtil.username = inputUsername;
                                     Log.d("SignUpActivity", stat);
                                 } catch (JSONException e) {
+                                    Log.d("SignUpActivity", "Error parsing the response from users/register");
                                     e.printStackTrace();
                                 }
                             }
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error){
-                        Toast.makeText(SignUpActivity.this, "Unable to send the sign up data to the server!", Toast.LENGTH_SHORT).show();
+                        if(error.networkResponse.statusCode == 401)
+                            Toast.makeText(SignUpActivity.this, "Please Enter all the details", Toast.LENGTH_SHORT).show();
+                        else if(error.networkResponse.statusCode == 402)
+                            Toast.makeText(SignUpActivity.this, "Username Already Exists", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(SignUpActivity.this, "Unable to send the sign up data to the server!", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 });

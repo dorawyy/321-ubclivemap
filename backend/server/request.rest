@@ -114,7 +114,7 @@ Content-Type: application/json
     "phone" : "4444445555",
     "private" : false,
     "inActivity" : false,
-    "activityID" : "temp"
+    "activityID" : "-1"
 }
 
 ### search user by id
@@ -130,7 +130,7 @@ POST http://localhost:3000/profiles/search
 Content-Type: application/json
 
 {
-    "username" : "3"
+    "username" : "2"
 }
 
 ### update profile with new profile 
@@ -163,9 +163,9 @@ POST http://localhost:3000/activities/add
 Content-Type: application/json
 
 {
-    "aid" : "sparklingdangers",
+    "aid" : "sparklingdangerst",
     "name" : "Cpen321 Project",
-    "leader" : "test",
+    "leader" : "2",
     "usernames" : ["test","aplha"],
     "info" : "Understanding Javascript with TA",
     "major" : "CPEN",

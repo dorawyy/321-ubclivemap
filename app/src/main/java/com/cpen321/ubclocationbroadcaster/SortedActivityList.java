@@ -13,7 +13,6 @@ import android.widget.Spinner;
 
 public class SortedActivityList extends AppCompatActivity {
 
-    //Spinner that will display the suggest Activity IDs
     private Spinner activitySpinner;
 
     @Override
@@ -29,7 +28,6 @@ public class SortedActivityList extends AppCompatActivity {
             Log.d("SortedList aids","Number: " + i + " : " + SortedlistclassUtil.aids[i] + "\n");
         }
 
-        //final RequestQueue q = Volley.newRequestQueue(this);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(SortedActivityList.this,
                 android.R.layout.simple_list_item_1, activities);
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

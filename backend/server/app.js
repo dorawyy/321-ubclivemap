@@ -116,6 +116,8 @@ app.post('/users/register', async (req, res) => {
     return res.status(200).json(formatResponse(true, "Account registered successfully.", null));
 });
 
+
+//Not in Use
 app.post("/users/update", async (req, res) => {
     if(!userIsGoodRequest(req.body)){
         return res.status(401).json(formatResponse(false, "Not well formed request.", null));
@@ -143,6 +145,7 @@ app.post("/users/update", async (req, res) => {
     return res.status(200).json(formatResponse(true, "Account updated successfully.", null));
 });
 
+//Not in Use
 app.post('/users/delete', async (req,res) =>{
     if(!req.body.hasOwnProperty("name")){
         return res.status(401).json(formatResponse(false, "Not well formed request.", null));
@@ -241,6 +244,7 @@ app.post("/profiles/update", async (req, res) => {
     return res.json(formatResponse(true, "User profile updated successfully.", null));
 });
 
+//Not in use
 app.post('/profiles/delete', async (req,res) =>{
     if(!req.body.hasOwnProperty("username")){
         return res.json(formatResponse(false, "Not well formed request.", null));
@@ -277,13 +281,12 @@ app.post("/profiles/join",async(req,res)=>{
     if(response == null) {
         return res.json(formatResponse(false, "User does not exist.", null));
     }
-
     if(response.inActivity == true){
         return res.json(formatResponse(false, "User is already in an activity.", null));
     }
     response.inActivity = true;
     response.activityID = req.body.aid;
-    var result = await Profile.replaceOne({"username" : req.body.username}, response)
+    var result = await Profile.replaceOne({"username" : req.body.username}, response);
     return res.json(formatResponse(true, "User Joined successfully.", result));
 });
 
@@ -380,11 +383,28 @@ app.post("/activities/add", async (req, res) => {
     if(response != null) {
         return res.json(formatResponse(false, "Activity Id Taken", null));
     }
-
-    await Activity.create(req.body);
-    return res.json(formatResponse(true, "Activity insert successful.", null));
+    
+    var userJoin = {
+        username : req.body.leader,
+        aid : req.body.aid
+    }
+    var profileupdate;
+    try{
+        var url = req.protocol + "://localhost:3000/profiles/join";
+        //var url = req.protocol + "://" + req.get('host') +"/profiles/join";
+        profileupdate = await axios.post(url, userJoin);
+    } catch (err) {
+        return res.json(formatResponse(false, "ERROR: " + err, null));
+    }
+    if(profileupdate.data.success == true){
+        await Activity.create(req.body);
+        return res.json(formatResponse(true, "Activity insert successful.", null));
+    } else {
+        return res.json(profileupdate.data);
+    }
 });
 
+//No Need
 app.post("/activities/addleader", async (req, res) => {
     if(!activityIsGoodRequest(req.body)){
         return res.json(formatResponse(false, "Not well formed request.", null));
@@ -405,7 +425,7 @@ app.post("/activities/addleader", async (req, res) => {
     return res.json(formatResponse(true, "Activity insert successful.", null));
 });
 
-// add a new activity
+// No Need
 app.post("/activities/usercreate", async (req, res) => {
     if(!activityIsGoodRequest(req.body)){
         return res.json(formatResponse(false, "Not well formed request.", null));
@@ -419,7 +439,7 @@ app.post("/activities/usercreate", async (req, res) => {
     return res.json(formatResponse(true, "Activity insert successful.", null));
 });
 
-// add a new user to the activity
+//No Need
 app.post("/activities/update", async (req, res) => {
     if(!activityIsGoodRequest(req.body)){
         return res.json(formatResponse(false, "Not well formed request.", null));
@@ -431,6 +451,7 @@ app.post("/activities/update", async (req, res) => {
     return res.json(formatResponse(true, "Activity updated successfully.", null));
 });
 
+//No Need
 app.post("/activities/join",async(req,res)=>{
     if(!req.body.hasOwnProperty("aid") || !req.body.hasOwnProperty("username")){
         return res.json(formatResponse(false, "Not well formed request.", null));
@@ -455,7 +476,8 @@ app.post("/activities/joinupdate",async(req,res)=>{
 
     var profileupdate;
     try{
-        var url = req.protocol + "://" + req.get('host') + "/profiles/join";
+        var url = req.protocol + "://localhost:3000/profiles/join";
+        //var url = req.protocol + "://" + req.get('host') + "/profiles/join";
         profileupdate = await axios.post(url,
                         req.body);
     } catch (err) {
@@ -481,9 +503,9 @@ app.post("/activities/leaveupdate",async(req,res)=>{
 
     var profileupdate;
     try{
-        var url = req.protocol + "://" + req.get('host') + "/profiles/leave";
-        profileupdate = await axios.post(url,
-                        req.body);
+        //var url = req.protocol + "://" + req.get('host') + "/profiles/leave";
+        var url = req.protocol + "://localhost:3000/profiles/leave";
+        profileupdate = await axios.post(url, req.body);
     } catch (err) {
         return res.json(formatResponse(false, "ERROR: " + err, null));
     }
@@ -497,6 +519,7 @@ app.post("/activities/leaveupdate",async(req,res)=>{
     }
 });
 
+//Not in use
 app.post('/activities/delete', async (req,res) =>{
     if(!req.body.hasOwnProperty("aid")){
         return res.json(formatResponse(false, "Not well formed request.", null));

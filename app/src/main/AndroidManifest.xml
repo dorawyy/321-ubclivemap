@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Joined"></activity>
+        <activity android:name=".ActivityPage"></activity>
+        <activity android:name=".Joined" />
         <activity android:name=".DisplayActivityDetails" />
         <activity android:name=".SortedActivityList" />
         <activity android:name=".GetMatchScore" />
@@ -32,7 +33,6 @@
         </service>
 
         <activity android:name=".ActivityStuffMenu" />
-
         <activity android:name=".MenuActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

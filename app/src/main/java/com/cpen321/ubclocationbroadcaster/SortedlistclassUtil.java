@@ -14,4 +14,19 @@ public class SortedlistclassUtil {
     public static String lat;
     public static String lon;
     public static String leader;
+
+    /**This is called on sign out*/
+    public static void cleanup(){
+        aids = null;
+        activity_to_be_displayed = null;
+        aname = null;
+        major = null;
+        aschool = null;
+        course = null;
+        users = null;
+        info = null;
+        lat = null;
+        lon = null;
+        leader = null;
+    }
 }

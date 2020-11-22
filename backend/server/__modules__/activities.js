@@ -123,8 +123,11 @@ router.post("/add", async (req, res) => {
     }
     var profileupdate;
     try{
-        var url = req.protocol + "://localhost:3000/profiles/join";
-        //var url = req.protocol + "://" + req.get('host') +"/profiles/join";
+        var host_str = req.get("host");
+        if(host_str == "10.0.2.2:3000"){
+            host_str = "localhost:3000";
+        }
+        var url = req.protocol + "://" + host_str + "/profiles/join";
         profileupdate = await axios.post(url, userJoin);
     } catch (err) {
         return res.json(formatResponse(false, "ERROR: " + err, null));
@@ -209,10 +212,21 @@ router.post("/joinupdate",async(req,res)=>{
 
     var profileupdate;
     try{
-        var url = req.protocol + "://localhost:3000/profiles/join";
-        //var url = req.protocol + "://" + req.get('host') + "/profiles/join";
+        var host_str = req.get("host");
+        if(host_str == "10.0.2.2:3000"){
+            host_str = "localhost:3000";
+        }
+        var url = req.protocol + "://" + host_str + "/profiles/join";
         profileupdate = await axios.post(url,
                         req.body);
+
+        var url = req.protocol + "://" + host_str + "/notifications/send";
+        var sendnotif = await axios.post(url,
+                        {
+                            username : response.leader,
+                            title : "ActivityLocator",
+                            message : req.body.username + " joined your activity!"
+                        });
     } catch (err) {
         return res.json(formatResponse(false, "ERROR: " + err, null));
     }
@@ -236,8 +250,11 @@ router.post("/leaveupdate",async(req,res)=>{
 
     var profileupdate;
     try{
-        //var url = req.protocol + "://" + req.get('host') + "/profiles/leave";
-        var url = req.protocol + "://localhost:3000/profiles/leave";
+        var host_str = req.get("host");
+        if(host_str == "10.0.2.2:3000"){
+            host_str = "localhost:3000";
+        }
+        var url = req.protocol + "://" + host_str + "/profiles/leave";
         profileupdate = await axios.post(url, req.body);
     } catch (err) {
         return res.json(formatResponse(false, "ERROR: " + err, null));
@@ -416,7 +433,11 @@ router.post("/sortnouser", async (req, res) => {
     }
 
     try{
-        var url = req.protocol + "://" + req.get('host') + "/profiles/search";
+        var host_str = req.get("host");
+        if(host_str == "10.0.2.2:3000"){
+            host_str = "localhost:3000";
+        }
+        var url = req.protocol + "://" + host_str + "/profiles/search";
         profilereq = await axios.post(url,
                         userjson);
     } catch (err) {

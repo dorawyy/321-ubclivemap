@@ -270,7 +270,7 @@ Content-Type: application/json
 {
     "aid" : "ultracheapcow",
     "name" : "Cpen331 Project",
-    "leader": "hulk",
+    "leader": "zyad",
     "usernames" : ["hulk","blackwidow"],
     "info" : "far ACTIVITY!",
     "major" : "CPSC",
@@ -382,5 +382,27 @@ Content-Type: application/json
     "locationweight" : 2,
     "coursesweight" : 3,
     "majorweight" : 1
+}
+
+### update users
+GET http://localhost:3000/notifications/alltokens
+
+### update users
+POST http://localhost:3000/notifications/addtoken
+Content-Type: application/json
+
+{
+    "username" : "Kyle",
+    "token" : "looolpag"
+}
+
+### update users
+POST http://localhost:3000/notifications/send
+Content-Type: application/json
+
+{
+    "username" : "zyad",
+    "title" : "hey",
+    "message" : "heyo"
 }
 

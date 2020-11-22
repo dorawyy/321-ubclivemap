@@ -32,6 +32,7 @@ import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                             return;
                         }
 
-                        String token = task.getResult().getToken();
+                        token = task.getResult().getToken();
                         String msg = getString(R.string.fcm_token, token);
                         Log.d("MainActivity", msg);
                     }
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         jsnRequest.put("name", usrname);
                         jsnRequest.put("password", passwrd);
+                        jsnRequest.put("token", token);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -98,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
                                         boolean successVal = (boolean) response.get("success"); // check if user signed in successfully
                                         String stat = response.get("status").toString(); // get status
                                         if (successVal) {
-                                            Log.d("WHATDAGKG", "WAOJIODJADOGJIAD");
                                             JSONObject userProfileResponse = response.getJSONObject("value");
                                             UserdetailsUtil.username = usrname;
                                             int numOfCourses = userProfileResponse.getJSONArray("CourseRegistered").length();
@@ -127,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.d("adgadgdag", error.toString());
                             if (error.networkResponse.statusCode == 401)
                                 Toast.makeText(MainActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                             else if (error.networkResponse.statusCode == 402)

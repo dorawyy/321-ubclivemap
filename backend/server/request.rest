@@ -11,8 +11,8 @@ POST http://localhost:3000/users/register
 Content-Type: application/json
 
 {
-    "name" : "Kyle",
-    "password" : "password"
+    "name" : "user1",
+    "password" : "password1"
 }
 
 ### store a user
@@ -21,10 +21,18 @@ POST http://localhost:3000/users/register
 Content-Type: application/json
 
 {
-    "name" : "Adam",
-    "password" : "password1"
+    "name" : "user2",
+    "password" : "password2"
 }
 
+###
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+    "name" : "user3",
+    "password" : "password2"
+}
 ### login user (wrong username)
 
 POST http://localhost:3000/users/login

@@ -31,15 +31,19 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.installations.FirebaseInstallations;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
@@ -51,22 +55,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(!UserdetailsUtil.tokenGenerated){
+            generateFirebaseToken();
+        }
+
         checkLocationPermission();
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,900000,0,this);
-        
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if(!task.isSuccessful()){
-                            return;
-                        }
-                        UserdetailsUtil.token = task.getResult().getToken();
-                        String msg = getString(R.string.fcm_token, UserdetailsUtil.token);
-                        Log.d("MainActivity", msg);
-                    }
-                });
 
         /**INITIALIZATION : START*/
         final EditText username;
@@ -102,7 +97,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     try {
                         jsnRequest.put("name", usrname);
                         jsnRequest.put("password", passwrd);
-                        jsnRequest.put("token", UserdetailsUtil.token);
+                        if(UserdetailsUtil.tokenGenerated){
+                            jsnRequest.put("token", UserdetailsUtil.token);
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -115,23 +112,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                                         boolean successVal = (boolean) response.get("success"); // check if user signed in successfully
                                         String stat = response.get("status").toString(); // get status
                                         if (successVal) {
-                                            JSONObject userProfileResponse = response.getJSONObject("value");
-                                            UserdetailsUtil.username = usrname;
-                                            int numOfCourses = userProfileResponse.getJSONArray("CourseRegistered").length();
-                                            UserdetailsUtil.name = userProfileResponse.getString("name");
-                                            UserdetailsUtil.phone = userProfileResponse.getString("phone");
-                                            UserdetailsUtil.school = userProfileResponse.getString("school");
-                                            UserdetailsUtil.major = userProfileResponse.getString("major");
-                                            UserdetailsUtil.privatePublic = userProfileResponse.getBoolean("private");
-                                            UserdetailsUtil.inactivity = userProfileResponse.getBoolean("inActivity");
-                                            UserdetailsUtil.activityID = userProfileResponse.getString("activityID");
-                                            UserdetailsUtil.courseRegistered = new String[numOfCourses];
-                                            UserdetailsUtil.signedIn = true;
-                                            for (int i = 0; i < numOfCourses; i++) {
-                                                UserdetailsUtil.courseRegistered[i] = userProfileResponse.getJSONArray("CourseRegistered").getString(i);
-                                            }
+                                            JSONObject userProfile = response.getJSONObject("value");
+                                            setProfileCache(userProfile);
 
                                             Intent sign_in_Intent = new Intent(MainActivity.this, MenuActivity.class);
+                                            UserdetailsUtil.signedIn = true;
                                             startActivity(sign_in_Intent);
                                         } else {
                                             Log.d("MainActivity", "Error: " + stat);
@@ -144,12 +129,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            if (error.networkResponse.statusCode == 401)
-                                Toast.makeText(MainActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
-                            else if (error.networkResponse.statusCode == 402)
-                                Toast.makeText(MainActivity.this, "Username does not exist. ", Toast.LENGTH_SHORT).show();
-                            else if (error.networkResponse.statusCode == 403)
-                                Toast.makeText(MainActivity.this, "Invalid Password!", Toast.LENGTH_SHORT).show();
                             error.printStackTrace();
                         }
                     });
@@ -157,7 +136,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 }
             }
         });
-
 
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,6 +145,50 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 Log.d("MainActivity", "Sign up button has been clicked");
             }
         });
+    }
+
+    private void setProfileCache(JSONObject userProfile) {
+        try {
+            UserdetailsUtil.username = userProfile.getString("username");
+            int numOfCourses = userProfile.getJSONArray("CourseRegistered").length();
+            UserdetailsUtil.name = userProfile.getString("name");
+            UserdetailsUtil.phone = userProfile.getString("phone");
+            UserdetailsUtil.school = userProfile.getString("school");
+            UserdetailsUtil.major = userProfile.getString("major");
+            UserdetailsUtil.privatePublic = userProfile.getBoolean("private");
+            UserdetailsUtil.inactivity = userProfile.getBoolean("inActivity");
+            UserdetailsUtil.activityID = userProfile.getString("activityID");
+            UserdetailsUtil.courseRegistered = new String[numOfCourses];
+            for (int i = 0; i < numOfCourses; i++) {
+                UserdetailsUtil.courseRegistered[i] = userProfile.getJSONArray("CourseRegistered").getString(i);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void generateFirebaseToken() {
+        FirebaseInstallations.getInstance().delete();
+        FirebaseMessaging.getInstance().deleteToken()
+            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    FirebaseMessaging.getInstance().getToken()
+                            .addOnCompleteListener(new OnCompleteListener<String>() {
+                                @Override
+                                public void onComplete(@NonNull Task<String> task) {
+                                    if(!task.isSuccessful()){
+                                        return;
+                                    }
+                                    UserdetailsUtil.tokenGenerated = true;
+                                    UserdetailsUtil.token = task.getResult();
+                                    String msg = getString(R.string.fcm_token, UserdetailsUtil.token);
+                                    Log.d("MainActivity", task.getResult());
+                                    //Log.d("MainActivity", "whats this " + FirebaseInstanceId.getInstance().getId());
+                                }
+                            });
+                }
+            });
     }
 
     private void checkLocationPermission() {

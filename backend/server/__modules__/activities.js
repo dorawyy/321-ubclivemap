@@ -4,28 +4,8 @@ var axios = require("axios");
 var router = express.Router();
 router.use(express.json());
 
+var formatResponse = require("./sharedfunctions");
 var Activity = require("../__models__/models").Activity;
-var Profile = require("../__models__/models").Profile;
-
-/****************************************************************************
- ********************* ACTIVITY DATA BASE API CALLS *************************
-****************************************************************************/
-
-function formatResponse(successVal, status, val) {
-    const resp = {
-        success : successVal,
-        status : status,
-        value : val
-    }
-    return resp;
-}
-
-// list all activities in database
-router.get('/all', async (req, res) => {
-    var retarr = [];
-    var cursor = await Activity.find().exec();
-    return res.json(cursor)
-});
 
 function activityIsGoodRequest(body){
     if(!body.hasOwnProperty('aid')){
@@ -95,192 +75,6 @@ function profileIsGoodRequest(body){
     return true;
 }
 
-// search for an activity in the database
-router.post("/search", async (req, res) => {
-    if(!req.body.hasOwnProperty("aid")){
-        return res.json(formatResponse(false, "Not well formed request.", null));
-    }
-    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
-    if(response == null) {
-        return res.json(formatResponse(false, "Activity does not exist.", null));
-    }
-    return res.json(formatResponse(true, "Activity found successfully.", response));
-});
-
-// add a new activity
-router.post("/add", async (req, res) => {
-    if(!activityIsGoodRequest(req.body)){
-        return res.json(formatResponse(false, "Not well formed request.", null));
-    }
-    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
-    if(response != null) {
-        return res.json(formatResponse(false, "Activity Id Taken", null));
-    }
-    
-    var userJoin = {
-        username : req.body.leader,
-        aid : req.body.aid
-    }
-    var profileupdate;
-    try{
-        var host_str = req.get("host");
-        if(host_str == "10.0.2.2:3000"){
-            host_str = "localhost:3000";
-        }
-        var url = req.protocol + "://" + host_str + "/profiles/join";
-        profileupdate = await axios.post(url, userJoin);
-    } catch (err) {
-        return res.json(formatResponse(false, "ERROR: " + err, null));
-    }
-    if(profileupdate.data.success == true){
-        await Activity.create(req.body);
-        return res.json(formatResponse(true, "Activity insert successful.", null));
-    } else {
-        return res.json(profileupdate.data);
-    }
-});
-
-//No Need
-router.post("/addleader", async (req, res) => {
-    if(!activityIsGoodRequest(req.body)){
-        return res.json(formatResponse(false, "Not well formed request.", null));
-    }
-    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
-    if(response != null) {
-        return res.json(formatResponse(false, "Activity Id Taken", null));
-    }
-
-    response = await Profile.findOne({"username" : req.body.leader}).exec();
-    if(response == null) {
-        return res.json(formatResponse(false, "Leader does not exist.", null));
-    }
-    if(response.inActivity == true){
-        return res.json(formatResponse(false, "Leader is in an activity.", null));
-    }
-    await Activity.create(req.body);
-    return res.json(formatResponse(true, "Activity insert successful.", null));
-});
-
-// No Need
-router.post("/usercreate", async (req, res) => {
-    if(!activityIsGoodRequest(req.body)){
-        return res.json(formatResponse(false, "Not well formed request.", null));
-    }
-    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
-    if(response != null) {
-        return res.json(formatResponse(false, "Activity Id Taken", null));
-    }
-
-    await Activity.create(req.body);
-    return res.json(formatResponse(true, "Activity insert successful.", null));
-});
-
-//No Need
-router.post("/update", async (req, res) => {
-    if(!activityIsGoodRequest(req.body)){
-        return res.json(formatResponse(false, "Not well formed request.", null));
-    }
-    var response = await Activity.replaceOne({"aid" : req.body.aid}, req.body)
-    if(response.n == 0){
-        return res.json(formatResponse(false, "Activity does not exist.", null));
-    }
-    return res.json(formatResponse(true, "Activity updated successfully.", null));
-});
-
-//No Need
-router.post("/join",async(req,res)=>{
-    if(!req.body.hasOwnProperty("aid") || !req.body.hasOwnProperty("username")){
-        return res.json(formatResponse(false, "Not well formed request.", null));
-    }
-    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
-    if(response == null) {
-        return res.json(formatResponse(false, "Activity does not exist.", null));
-    }
-    response.usernames.push(req.body.user);
-    var result = await Activity.replaceOne({"aid" : req.body.aid}, response)
-    return res.json(formatResponse(true, "Activity Joined successfully.", result));
-});
-
-router.post("/joinupdate",async(req,res)=>{
-    if(!req.body.hasOwnProperty("aid") || !req.body.hasOwnProperty("username")){
-        return res.json(formatResponse(false, "Not well formed request.", null));
-    }
-    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
-    if(response == null) {
-        return res.json(formatResponse(false, "Activity does not exist.", null));
-    }
-
-    var profileupdate;
-    try{
-        var host_str = req.get("host");
-        if(host_str == "10.0.2.2:3000"){
-            host_str = "localhost:3000";
-        }
-        var url = req.protocol + "://" + host_str + "/profiles/join";
-        profileupdate = await axios.post(url,
-                        req.body);
-
-        var url = req.protocol + "://" + host_str + "/notifications/send";
-        var sendnotif = await axios.post(url,
-                        {
-                            username : response.leader,
-                            title : "ActivityLocator",
-                            message : req.body.username + " joined your activity!"
-                        });
-    } catch (err) {
-        return res.json(formatResponse(false, "ERROR: " + err, null));
-    }
-    if(profileupdate.data.success == true){
-        response.usernames.push(req.body.username);
-        var result = await Activity.replaceOne({"aid" : req.body.aid}, response)
-        return res.json(formatResponse(true, "Activity Joined successfully.", result));
-    } else {
-        return res.json(profileupdate.data);
-    }
-});
-
-router.post("/leaveupdate",async(req,res)=>{
-    if(!req.body.hasOwnProperty("aid") || !req.body.hasOwnProperty("username")){
-        return res.json(formatResponse(false, "Not well formed request.", null));
-    }
-    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
-    if(response == null) {
-        return res.json(formatResponse(false, "Activity does not exist.", null));
-    }
-
-    var profileupdate;
-    try{
-        var host_str = req.get("host");
-        if(host_str == "10.0.2.2:3000"){
-            host_str = "localhost:3000";
-        }
-        var url = req.protocol + "://" + host_str + "/profiles/leave";
-        profileupdate = await axios.post(url, req.body);
-    } catch (err) {
-        return res.json(formatResponse(false, "ERROR: " + err, null));
-    }
-
-    if(profileupdate.data.success == true){
-        response.usernames = response.usernames.filter(e => e !== req.body.username);
-        var result = await Activity.replaceOne({"aid" : req.body.aid}, response)
-        return res.json(formatResponse(true, "Activity Left successfully.", result));
-    } else {
-        return res.json(profileupdate.data);
-    }
-});
-
-//Not in use
-router.post('/delete', async (req,res) =>{
-    if(!req.body.hasOwnProperty("aid")){
-        return res.json(formatResponse(false, "Not well formed request.", null));
-    }
-    var response = await Activity.deleteOne({"aid" : req.body.aid});
-    if(response.n === 0){
-        return res.json(formatResponse(false, "Activity does not exist.", null));
-    }
-    return res.json(formatResponse(true, "Activity deleted successfully.", null));
-})
-
 // REFERENCE : https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
     var R = 6371; // Radius of the earth in km
@@ -344,18 +138,216 @@ function isGoodSortRequest(func_type, body){
     return true;
 }
 
-router.post("/sort", async (req, res) => {
-    var cursor = await Activity.find().exec();
+/****************************************************************************
+ ********************* ACTIVITY DATA BASE API CALLS *************************
+****************************************************************************/
 
-    // NECESSARY REQUEST INFORMATION !!!
-    if(!isGoodSortRequest("with user", req.body)){
+/*
+ * All Activity Route.
+ *
+ * Returns all activities in activityDB.
+ */
+router.get('/all', async (req, res) => {
+    var cursor = await Activity.find().exec();
+    return res.json(cursor)
+});
+
+/*
+ * Search Activity Route.
+ *
+ * Takes in a request with {activity_id}
+ * Returns the activity with activity id 'activity_id' if it exists in activityDB,
+ * returns a null response otherwise.
+ */
+router.post("/search", async (req, res) => {
+    if(!req.body.hasOwnProperty("aid")){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
+    if(response == null) {
+        return res.json(formatResponse(false, "Activity does not exist.", null));
+    }
+    return res.json(formatResponse(true, "Activity found successfully.", response));
+});
+
+/*
+ * Add Activity Route.
+ *
+ * Takes in a request with the full information for an activity.
+ * Adds the request activity to the activityDB, and then updates the activity leader's profile
+ * to now be in the newly added activity.
+ */
+router.post("/add", async (req, res) => {
+    if(!activityIsGoodRequest(req.body)){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
+    if(response != null) {
+        return res.json(formatResponse(false, "Activity Id Taken", null));
+    }
+    
+    var userJoin = {
+        username : req.body.leader,
+        aid : req.body.aid
+    }
+    var profileupdate;
+    try{
+        // UPDATE ACTIVITY LEADER'S PROFILE
+        var host_str = req.get("host");
+        if(host_str == "10.0.2.2:3000"){
+            host_str = "localhost:3000";
+        }
+        var url = req.protocol + "://" + host_str + "/profiles/join";
+        profileupdate = await axios.post(url, userJoin);
+    } catch (err) {
+        return res.json(formatResponse(false, "ERROR: " + err, null));
+    }
+    if(profileupdate.data.success == true){
+        // ADD ACTIVITY
+        await Activity.create(req.body);
+        return res.json(formatResponse(true, "Activity insert successful.", null));
+    } else {
+        // 'PROFILE JOIN' ERROR
+        return res.json(profileupdate.data);
+    }
+});
+
+/*
+ * Join Activity Route.
+ *
+ * Takes in a request with {username, activity_id}. 
+ * Updates the users profile to be in an activity with id 'activity_id', and updates activity
+ * to include the user.
+ */
+router.post("/joinupdate",async(req,res)=>{
+    if(!req.body.hasOwnProperty("aid") || !req.body.hasOwnProperty("username")){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
+    if(response == null) {
+        return res.json(formatResponse(false, "Activity does not exist.", null));
+    }
+
+    var profileupdate;
+    try{
+        // UPDATE USER PROFILE TO BE IN ACTIVITY
+        var host_str = req.get("host");
+        if(host_str == "10.0.2.2:3000"){
+            host_str = "localhost:3000";
+        }
+        var url = req.protocol + "://" + host_str + "/profiles/join";
+        profileupdate = await axios.post(url,
+                        req.body);
+
+        // SEND NOTIFICATION TO ACTIVITY LEADER
+        var url = req.protocol + "://" + host_str + "/notifications/send";
+        var sendnotif = await axios.post(url,
+                        {
+                            username : response.leader,
+                            title : "Activity Locator",
+                            message : req.body.username + " joined your activity!"
+                        });
+    } catch (err) {
+        // AXIOS ERROR
+        return res.json(formatResponse(false, "ERROR: " + err, null));
+    }
+
+    if(profileupdate.data.success == true){
+        // UPDATE ACTIVITY TO NOW INCLUDE USER
+        response.usernames.push(req.body.username);
+        var result = await Activity.replaceOne({"aid" : req.body.aid}, response)
+        return res.json(formatResponse(true, "Activity Joined successfully.", result));
+    } else {
+        return res.json(profileupdate.data);
+    }
+});
+
+/*
+ * Leave Activity Route.
+ *
+ * Takes in a request with {username, activity_id}. 
+ * Updates the users profile to no longer be in an activity, and updates activity
+ * to no longer include user.
+ */
+router.post("/leaveupdate", async (req,res) => {
+    if(!req.body.hasOwnProperty("aid") || !req.body.hasOwnProperty("username")){
         return res.json(formatResponse(false, "Not well formed request.", null));
     }
 
-    var user = req.body.user; // user json
-    return res.json(sort_activities(req, user, cursor))
+    // FIND THE ACTIVITY
+    var response = await Activity.findOne({"aid" : req.body.aid}).exec()
+    if(response == null) {
+        return res.json(formatResponse(false, "Activity does not exist.", null));
+    }
+
+    var profileupdate;
+    try{
+        // UPDATE USER PROFILE TO NO LONGER BE IN ACTIVITY
+        var host_str = req.get("host");
+        if(host_str == "10.0.2.2:3000"){
+            host_str = "localhost:3000";
+        }
+        var url = req.protocol + "://" + host_str + "/profiles/leave";
+        profileupdate = await axios.post(url, req.body);
+
+        // SEND NOTIFICATION TO LEADER OF ACTIVITY
+        if(req.body.username != response.leader){
+            var url = req.protocol + "://" + host_str + "/notifications/send";
+            var sendnotif = await axios.post(url,
+                            {
+                                username : response.leader,
+                                title : "Activity Locator",
+                                message : req.body.username + " left your activity."
+                            });
+        }
+    } catch (err) {
+        // AXIOS ERROR
+        return res.json(formatResponse(false, "ERROR: " + err, null));
+    }
+
+    if(profileupdate.data.success == true){
+        // REMOVE USER FROM USERARRAY IN ACTIVITY
+        response.usernames = response.usernames.filter(e => e !== req.body.username);
+        if(response.usernames.length == 0){
+            // IF THERE ARE NO USERS LEFT IN ACTIVITY, DELETE THE ACTIVITY
+            await Activity.deleteOne({"aid" : req.body.aid});
+        } else {
+            if(req.body.username == response.leader){
+                // IF LEADER LEFT ACTIVITY, UPDATE ACTIVITY LEADER
+                response.leader = response.usernames[0];
+            }
+            var result = await Activity.replaceOne({"aid" : req.body.aid}, response)
+        } 
+        return res.json(formatResponse(true, "Activity Left successfully.", result));
+    } else {
+        // 'LEAVE PROFILE' ERROR
+        return res.json(profileupdate.data);
+    }
 });
 
+/*
+ * Delete Activity Route.
+ *
+ * Takes in a request with {activity_id}
+ * Removes activity with activity id 'activity_id' from activityDB.
+ */
+router.post('/delete', async (req,res) =>{
+    if(!req.body.hasOwnProperty("aid")){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+    var response = await Activity.deleteOne({"aid" : req.body.aid});
+    if(response.n === 0){
+        return res.json(formatResponse(false, "Activity does not exist.", null));
+    }
+    return res.json(formatResponse(true, "Activity deleted successfully.", null));
+})
+
+/*
+ * Sort Activity Complex Logic.
+ *
+ * Sorts all activities in activityDB within a given maxradius.
+ * Takes into account the weights in sort_options during the sorting.
+ */
 function sort_activities(req, user, cursor){
     var sorted_activities = []
     var activity_matchfactor = {} // maps an activity -> their match factor
@@ -404,20 +396,35 @@ function sort_activities(req, user, cursor){
         sorted_activities.push(currentactivity);
     }
 
-    //for(i=0; i<sorted_activities.length; i++){
-        //var currentactivity = sorted_activities[i];
-        //console.log("activity = %o", currentactivity)
-        //console.log("matchfactor = " + activity_matchfactor[JSON.stringify(currentactivity)])
-        //console.log("")
-        //console.log("")
-    //}
-
     sorted_activities.sort((a, b) => parseFloat(activity_matchfactor[JSON.stringify(b)]) - parseFloat(activity_matchfactor[JSON.stringify(a)]));
     return sorted_activities;
 }
 
+/*
+ * Sort Activity Route (with given user profile information).
+ *
+ * Takes in a request with {{userprofile}, {userlocation}, {sort_options}}
+ * Returns a sorted list of all activities in activityDB within a given max_radius in sort_options.
+ */
+router.post("/sort", async (req, res) => {
+    var cursor = await Activity.find().exec();
 
-// GET USER FROM USERID
+    // NECESSARY REQUEST INFORMATION !!!
+    if(!isGoodSortRequest("with user", req.body)){
+        return res.json(formatResponse(false, "Not well formed request.", null));
+    }
+
+    var user = req.body.user; // user json
+    return res.json(sort_activities(req, user, cursor))
+});
+
+/*
+ * Sort Activity Route (with only user's username).
+ *
+ * Takes in a request with {{username}, {userlocation}, {sort_options}}
+ * Searches for the profile with username='username'.
+ * Returns a sorted list of all activities in activityDB within a given max_radius in sort_options.
+ */
 router.post("/sortnouser", async (req, res) => {
     var cursor = await Activity.find().exec();
 
@@ -433,6 +440,7 @@ router.post("/sortnouser", async (req, res) => {
     }
 
     try{
+        // SEARCH FOR USER PROFILE
         var host_str = req.get("host");
         if(host_str == "10.0.2.2:3000"){
             host_str = "localhost:3000";
@@ -441,10 +449,12 @@ router.post("/sortnouser", async (req, res) => {
         profilereq = await axios.post(url,
                         userjson);
     } catch (err) {
+        // AXIOS ERROR
         return res.json(formatResponse(false, "ERROR: " + err, null));
     }
 
     if(profilereq.data.success == false){
+        // 'PROFILE SEARCH' ERROR
         return res.json(profilereq.data);
     }
     var user = profilereq.data.value;

@@ -2,44 +2,44 @@ var admin = require("firebase-admin");
 var serviceAccount = require("../accountkey.json");
 var express = require("express");
 
+var formatResponse = require("./sharedfunctions");
+
 var router = express.Router();
 router.use(express.json());
 
 var Token = require("../__models__/models").Token;
-
-/****************************************************************************
- ********************** PUSH NOTIFICATIONS BASE *****************************
-****************************************************************************/
-
-function formatResponse(successVal, status, val) {
-    const resp = {
-        success : successVal,
-        status : status,
-        value : val
-    }
-    return resp;
-}
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://cpen321projectworking.firebaseio.com"
 })
 
-module.exports.admin = admin
-
 const notification_options = {
     priority: "high",
     timeToLive: 60 * 60 * 24
 };
 
-// list all user profile in database
+/****************************************************************************
+ ********************** PUSH NOTIFICATIONS BASE *****************************
+****************************************************************************/
+
+/*
+ * All Tokens Route.
+ *
+ * Returns all stored tokens in tokenDB.
+ */
 router.get('/alltokens', async (req, res) => {
-    var retarr = [];
     var cursor = await Token.find().exec();
     return res.json(cursor)
 });
 
-// add user profile to database
+/*
+ * Add Tokens Route.
+ *
+ * Takes in a request with {username, token}
+ * Stores request in tokenDB, updates token if the username already exists in
+ * tokenDB.
+ */
 router.post("/addtoken", async (req, res) => {
     // if username is in database, cant add
     if(!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")){
@@ -49,6 +49,13 @@ router.post("/addtoken", async (req, res) => {
     return res.json(formatResponse(true, "Token insert successfully.", null));
 });
 
+/*
+ * Send Notification Route.
+ *
+ * Takes in a request with {username, title, message}
+ * Sends a notification to the user with username 'username'.
+ * Notification will have title 'title' and body 'message'.
+ */
 router.post('/send', async (req, res)=>{
     if(!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("title") || !req.body.hasOwnProperty("message")){
         return res.json(formatResponse(false, "Not well formed request.", null));
@@ -71,8 +78,6 @@ router.post('/send', async (req, res)=>{
         }
     }
 
-    console.log("sending notification to " + registrationToken);
-
     admin.messaging().sendToDevice(registrationToken, payload, options)
     .then( response => {
         res.json(formatResponse(true, "Notification sent successfully", null));
@@ -83,3 +88,4 @@ router.post('/send', async (req, res)=>{
 })
 
 module.exports = router;
+module.exports.admin = admin

@@ -295,7 +295,7 @@ POST http://localhost:3000/activities/search
 Content-Type: application/json
 
 {
-    "aid" : "ultracheapcow"
+    "aid" : "zyadact"
 }
 
 ### delete activity
@@ -303,7 +303,7 @@ POST http://localhost:3000/activities/delete
 Content-Type: application/json
 
 {
-    "aid" : "ultracheapcow"
+    "aid" : "zyadact"
 }
 
 ### search user by id
@@ -329,7 +329,16 @@ POST http://localhost:3000/activities/joinupdate
 Content-Type: application/json
 
 {
-    "aid" : "ultracheapcow",
+    "aid" : "zyadact",
+    "username" : "Kyle"
+}
+
+### search activity
+POST http://localhost:3000/activities/leaveupdate
+Content-Type: application/json
+
+{
+    "aid" : "zyadact",
     "username" : "Kyle"
 }
 

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\jaski\\Desktop\\ubc\\cpen321\\CPEN-321-Location-App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-small-v4\\values-small-v4.xml",
+            "outputFile": "C:\\Users\\solom\\Documents\\CPEN321\\CPEN-321-Location-App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-small-v4\\values-small-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\jaski\\.gradle\\caches\\transforms-2\\files-2.1\\4f9396753ee6da0e5baebb06ecac6482\\material-1.2.1\\res\\values-small-v4\\values-small-v4.xml",
+                    "source": "C:\\Users\\solom\\.gradle\\caches\\transforms-2\\files-2.1\\4f9396753ee6da0e5baebb06ecac6482\\material-1.2.1\\res\\values-small-v4\\values-small-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

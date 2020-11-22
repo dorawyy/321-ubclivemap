@@ -5,27 +5,8 @@ var axios = require("axios");
 var router = express.Router();
 router.use(express.json());
 
+var formatResponse = require("./sharedfunctions");
 var Account = require("../__models__/models").Account;
-
-/****************************************************************************
- ********************** ACCOUNT DATA BASE API CALLS *************************
-****************************************************************************/
-
-function formatResponse(successVal, status, val) {
-    const resp = {
-        success : successVal,
-        status : status,
-        value : val
-    }
-    return resp;
-}
-
-// list all users in database
-router.get('/all', async (req, res) => {
-    var retarr = [];
-    var cursor = await Account.find().exec();
-    return res.json(cursor)
-});
 
 function userIsGoodRequest(body){
     if(!body.hasOwnProperty('name')){
@@ -37,7 +18,27 @@ function userIsGoodRequest(body){
     return true;
 }
 
-// register a user 
+/****************************************************************************
+ ********************** ACCOUNT DATA BASE API CALLS *************************
+****************************************************************************/
+
+/*
+ * All Accounts Route.
+ *
+ * Returns all accounts in accountDB.
+ */
+router.get('/all', async (req, res) => {
+    var cursor = await Account.find().exec();
+    return res.json(cursor)
+});
+
+/*
+ * Register Account Route.
+ *
+ * Takes in a request with {username, password}.
+ * Stores an account with information in request to accountDB, encrypts password
+ * before storage.
+ */
 router.post('/register', async (req, res) => {
     // if username exists in database, fail
     if(!userIsGoodRequest(req.body)){
@@ -88,8 +89,12 @@ router.post('/register', async (req, res) => {
     return res.status(200).json(formatResponse(true, "Account registered successfully.", null));
 });
 
-
-//Not in Use
+/*
+ * Update Account Route.
+ *
+ * Takes in a request with {username, password}.
+ * Updates account with username 'username' to the information in request.
+ */
 router.post("/update", async (req, res) => {
     if(!userIsGoodRequest(req.body)){
         return res.status(401).json(formatResponse(false, "Not well formed request.", null));
@@ -117,7 +122,12 @@ router.post("/update", async (req, res) => {
     return res.status(200).json(formatResponse(true, "Account updated successfully.", null));
 });
 
-//Not in Use
+/*
+ * Delete Account Route.
+ *
+ * Takes in a request with {name}.
+ * Removes account with name 'name' from accountDB.
+ */
 router.post('/delete', async (req,res) =>{
     if(!req.body.hasOwnProperty("name")){
         return res.status(401).json(formatResponse(false, "Not well formed request.", null));
@@ -129,7 +139,13 @@ router.post('/delete', async (req,res) =>{
     return res.status(200).json(formatResponse(true, "Account deleted successfully.", null));
 })
 
-// Login route, checks if account exists, then searches for user profile.
+/*
+ * Login Account Route.
+ *
+ * Takes in a request with {name, password, token}.
+ * Returns the user profile with username 'name' after authenticating password, 
+ * stores the token 'token' in tokenDB.
+ */
 router.post('/login', async (req, res) => {
     if(!userIsGoodRequest(req.body)){
         return res.json(formatResponse(false, "Not well formed request.", null));

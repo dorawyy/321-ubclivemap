@@ -130,7 +130,8 @@ router.post('/login', async (req, res) => {
             // GET PROFILE OF LOGGED IN USER
             try{
                 console.log("WITHAIOGDHDAKLGJ");
-                var url = req.protocol + "://" + req.get('host') + "/profiles/search";
+                var url = req.protocol + "://localhost:3000/profiles/search";
+                //var url = req.protocol + "://" + req.get('host') + "/profiles/search";
                 profilereq = await axios.post(url,
                                 {username : req.body.name});
             } catch (err) {

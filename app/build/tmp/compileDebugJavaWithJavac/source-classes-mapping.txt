@@ -72,5 +72,7 @@ com/cpen321/ubclocationbroadcaster/MainActivity.java
  com.cpen321.ubclocationbroadcaster.MainActivity$2$1
  com.cpen321.ubclocationbroadcaster.MainActivity$2$2
  com.cpen321.ubclocationbroadcaster.MainActivity$3
+ com.cpen321.ubclocationbroadcaster.MainActivity$4
+ com.cpen321.ubclocationbroadcaster.MainActivity$5
 com/cpen321/ubclocationbroadcaster/MyFirebaseMessagingService.java
  com.cpen321.ubclocationbroadcaster.MyFirebaseMessagingService

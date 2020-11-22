@@ -47,7 +47,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name="com.cpen321.ubclocationbroadcaster.ActivityStuffMenu" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.MenuActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

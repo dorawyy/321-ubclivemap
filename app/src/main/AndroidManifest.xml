@@ -32,7 +32,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ActivityStuffMenu" />
         <activity android:name=".MenuActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

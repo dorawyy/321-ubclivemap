@@ -7,9 +7,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +33,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
@@ -37,7 +42,9 @@ import org.json.JSONObject;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LocationListener {
+
+    private static LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         checkLocationPermission();
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,900000,0,this);
+        
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if(!task.isSuccessful()){
+                            return;
+                        }
+                        UserdetailsUtil.token = task.getResult().getToken();
+                        String msg = getString(R.string.fcm_token, UserdetailsUtil.token);
+                        Log.d("MainActivity", msg);
+                    }
+                });
 
         /**INITIALIZATION : START*/
         final EditText username;
@@ -60,20 +82,6 @@ public class MainActivity extends AppCompatActivity {
         sign_up_btn = findViewById(R.id.sign_up_button);
 
         final RequestQueue q = Volley.newRequestQueue(this);
-
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if(!task.isSuccessful()){
-                            return;
-                        }
-
-                        String token = task.getResult().getToken();
-                        String msg = getString(R.string.fcm_token, token);
-                        Log.d("MainActivity", msg);
-                    }
-                });
         /**INITIALIZATION : END*/
 
         sign_in_btn.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         jsnRequest.put("name", usrname);
                         jsnRequest.put("password", passwrd);
+                        jsnRequest.put("token", UserdetailsUtil.token);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -106,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
                                         boolean successVal = (boolean) response.get("success"); // check if user signed in successfully
                                         String stat = response.get("status").toString(); // get status
                                         if (successVal) {
-                                            Log.d("WHATDAGKG", "WAOJIODJADOGJIAD");
                                             JSONObject userProfileResponse = response.getJSONObject("value");
                                             UserdetailsUtil.username = usrname;
                                             int numOfCourses = userProfileResponse.getJSONArray("CourseRegistered").length();
@@ -118,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                                             UserdetailsUtil.inactivity = userProfileResponse.getBoolean("inActivity");
                                             UserdetailsUtil.activityID = userProfileResponse.getString("activityID");
                                             UserdetailsUtil.courseRegistered = new String[numOfCourses];
+                                            UserdetailsUtil.signedIn = true;
                                             for (int i = 0; i < numOfCourses; i++) {
                                                 UserdetailsUtil.courseRegistered[i] = userProfileResponse.getJSONArray("CourseRegistered").getString(i);
                                             }
@@ -135,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.d("adgadgdag", error.toString());
                             if (error.networkResponse.statusCode == 401)
                                 Toast.makeText(MainActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                             else if (error.networkResponse.statusCode == 402)
@@ -145,9 +153,6 @@ public class MainActivity extends AppCompatActivity {
                             error.printStackTrace();
                         }
                     });
-                    json_obj.setRetryPolicy(new DefaultRetryPolicy(5000,
-                            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     q.add(json_obj);
                 }
             }
@@ -179,7 +184,6 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Toast.makeText(MainActivity.this, "We need your permissions to run the app!", Toast.LENGTH_LONG).show();
                                 checkLocationPermission();
-                                //dialogInterface.dismiss();
                             }
                         })
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -199,4 +203,10 @@ public class MainActivity extends AppCompatActivity {
         return;
     }
 
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        Log.d("LOCATIONTEST","Lat: " + location.getLatitude() + " Long: " + location.getLongitude());
+        UserdetailsUtil.lat =  location.getLatitude();
+        UserdetailsUtil.lon = location.getLongitude();
+    }
 }

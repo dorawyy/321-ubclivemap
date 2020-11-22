@@ -21,6 +21,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**Activity Name: MainMapsActivity
+ * This Activity Displays a Google Maps screen on the user device.
+ * This screen contains several markers. These Markers correspond to all of active activities
+ * The user can click on the marker and view the activity information.
+ * The user can also join an activity by clicking on a marker and following the prompts*/
 public class MainMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -29,44 +34,39 @@ public class MainMapsActivity extends FragmentActivity implements OnMapReadyCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+
+        /**The following code snippet is obtained from https://developers.google.com/maps/documentation/android-sdk/marker
+         * This tutorial explains how to display markers on Google Maps*/
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
+    /**This function is called when the Map has been created.
+     * Most of our code is implemented in this function*/
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
 
-        final RequestQueue requestQueueMA = Volley.newRequestQueue(this);
-        String urlMA = UserdetailsUtil.getURL() + "/activities/all";
+        final RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        MyJSONArrayRequest allActivities = new MyJSONArrayRequest(Request.Method.GET,urlMA,null,
+        MyJSONArrayRequest allActivities = new MyJSONArrayRequest(Request.Method.GET, UserdetailsUtil.getURL() + "/activities/all",null,
                 new Response.Listener<JSONArray> (){
                     @Override
                     public void onResponse(JSONArray response){
+
+                        /**Get all the activities JSONArray and then parse the array to read and display the required info*/
                         try {
                             for(int i=0; i<response.length();i++){
                                 JSONObject jsonObject = response.getJSONObject(i);
-                                String lat = jsonObject.getString("lat");
-                                Double la = Double.parseDouble(lat);
-                                String lon = jsonObject.getString("long");
-                                Double lo = Double.parseDouble(lon);
+
                                 String name = jsonObject.getString("name");
-                                LatLng sydney = new LatLng(la, lo);
-                                mMap.addMarker(new MarkerOptions().position(sydney).title(name));
-                                mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+                                LatLng marker = new LatLng(jsonObject.getDouble("lat"), jsonObject.getDouble("long"));
+
+                                mMap.addMarker(new MarkerOptions().position(marker).title(name).draggable(true));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker,14.0f));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -79,7 +79,7 @@ public class MainMapsActivity extends FragmentActivity implements OnMapReadyCall
             }
         });
 
-        requestQueueMA.add(allActivities);
+        requestQueue.add(allActivities);
 
     }
 }

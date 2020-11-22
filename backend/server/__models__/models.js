@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 var Account = require("./Account")
 var Profile = require("./Profile")
 var Activity = require("./Activity")
+var Token = require("./Token")
 
 const MONGO_URL = 'mongodb://localhost:27020';
 const connectDb = () => {
@@ -16,5 +17,6 @@ module.exports = {
     disconnectDb,
     Account,
     Profile,
-    Activity
+    Activity,
+    Token
 }

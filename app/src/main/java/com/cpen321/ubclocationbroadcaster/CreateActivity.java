@@ -1,6 +1,7 @@
 package com.cpen321.ubclocationbroadcaster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +38,8 @@ public class CreateActivity extends AppCompatActivity {
     private ListView reg_courses_view;
     final private ArrayList<String> activity_courses = new ArrayList<String>(); //List of courses from the registered courses of the leader to be put in the Activity
     private boolean activityS;
+    private Double inputLat;
+    private Double inputLong;
     /***INITIALIZATION - END*/
 
     @Override
@@ -42,7 +48,6 @@ public class CreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create);
 
         /***INITIALIZATION - START*/
-        //final RequestQueue r = Volley.newRequestQueue(this);
         final RequestQueue s = Volley.newRequestQueue(this);
         final String username = UserdetailsUtil.username;
         final String[] user_courses = new String[10];
@@ -50,17 +55,19 @@ public class CreateActivity extends AppCompatActivity {
         reg_courses_view = findViewById((R.id.registered_courses));
         Button showCoursesBtn = findViewById(R.id.courseBTN);
         Button done_btn = findViewById(R.id.activity_done);
+        Button addLoc = findViewById(R.id.LocButton);
+
         /***INITIALIZATION - START*/
 
         /**user_courses SET UP START*/
         user_courses[0] = "Choose from your courses";
-        for(int i = 0; i < UserdetailsUtil.courseRegistered.length; i++){
+        for (int i = 0; i < UserdetailsUtil.courseRegistered.length; i++) {
 
-            user_courses[i+1] = UserdetailsUtil.courseRegistered[i];
+            user_courses[i + 1] = UserdetailsUtil.courseRegistered[i];
             Log.d("courses", "Display reg course " + user_courses[i]);
         }
         //Fill the remaining places in the user_course with empty values, otherwise spinner gives an error
-        for(int i=(UserdetailsUtil.courseRegistered.length+1); i<10; i++){
+        for (int i = (UserdetailsUtil.courseRegistered.length + 1); i < 10; i++) {
             user_courses[i] = " ";
         }
         /**user_courses SET UP END*/
@@ -85,11 +92,12 @@ public class CreateActivity extends AppCompatActivity {
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                         String result = mySpinner.getSelectedItem().toString();
-                        if((position>0) && (!activity_courses.contains(result)) && (!result.equals(" "))){
+                        if ((position > 0) && (!activity_courses.contains(result)) && (!result.equals(" "))) {
                             activity_courses.add(result);
                         }
                         reg_course_list_adapter.notifyDataSetChanged();
                     }
+
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
 
@@ -98,9 +106,20 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
+        /**If the user wants to enter the location manually.
+         * Open up google maps, and ask them to long press a location to add marker
+         * The activity will be located on this location*/
+        addLoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent t = new Intent(CreateActivity.this,Getlocation.class);
+                startActivity(t);
+            }
+        });
+
 
         /**CREATE A NEW ACTIVITY
-         * CREATE A NEW JSONOBJECT WITH ACTIVITY FIELDS AND SEND A POST REQUEST*/
+         * CREATE A NEW JSONObject WITH ACTIVITY FIELDS AND SEND A POST REQUEST*/
         done_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,15 +128,24 @@ public class CreateActivity extends AppCompatActivity {
                 JSONObject jsnRequest = new JSONObject();
                 EditText name = findViewById(R.id.activity_name);
                 EditText info = findViewById(R.id.activity_desc);
-                EditText aid  = findViewById(R.id.activity_id);
+                EditText aid = findViewById(R.id.activity_id);
                 final String inputaid = aid.getText().toString();
                 String inputInfo = info.getText().toString();
-                String inputLat = "23";
-                String inputLong = "24";
+
+                if(UserdetailsUtil.activitylat == null){
+                    inputLat = UserdetailsUtil.lat;
+                    inputLong = UserdetailsUtil.lon;
+                }
+                else {
+                    inputLat = UserdetailsUtil.activitylat;
+                    inputLong = UserdetailsUtil.activitylon;
+                }
+                Log.d("LATLONG", " LAT : " + inputLat.toString() + " LONG : " + inputLong.toString() );
+
                 String inputName = name.getText().toString();
 
                 JSONArray courses = new JSONArray();
-                for(String course : activity_courses){
+                for (String course : activity_courses) {
                     courses.put(course);
                 }
 
@@ -132,32 +160,30 @@ public class CreateActivity extends AppCompatActivity {
                     jsnRequest.put("school", UserdetailsUtil.school);
                     jsnRequest.put("lat", inputLat);
                     jsnRequest.put("long", inputLong);
-                    jsnRequest.put("status","1");
+                    jsnRequest.put("status", "1");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                if(inputaid.isEmpty()||inputInfo.isEmpty()||inputName.isEmpty()){
+                if (inputaid.isEmpty() || inputInfo.isEmpty() || inputName.isEmpty()) {
                     Toast.makeText(CreateActivity.this, "Please Enter Valid Values for all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnRequest,
-                        new Response.Listener<JSONObject> (){
+                        new Response.Listener<JSONObject>() {
                             @Override
-                            public void onResponse(JSONObject response){
+                            public void onResponse(JSONObject response) {
                                 try {
                                     activityS = (boolean) response.get("success"); // check if user signed in successfully
                                     String stat = response.get("status").toString(); // get status
 
-                                    if(activityS){
+                                    if (activityS) {
                                         /**UPDATE THE userDB UserdetailsUtil TO REFLECT THAT THE USER IS NOW IN AN ACTIVITY*/
                                         UserdetailsUtil.inactivity = true;
                                         UserdetailsUtil.activityID = inputaid;
-                                        Intent menu_Intent = new Intent(CreateActivity.this, MenuActivity.class);
-                                        startActivity(menu_Intent);
-                                    }
-                                    else {
+                                        finish();
+                                    } else {
                                         Toast.makeText(CreateActivity.this, "ERROR: " + stat, Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
@@ -167,7 +193,7 @@ public class CreateActivity extends AppCompatActivity {
                             }
                         }, new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error){
+                    public void onErrorResponse(VolleyError error) {
                         Toast.makeText(CreateActivity.this, "Unable to send the create activity data to the server!", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
@@ -179,4 +205,5 @@ public class CreateActivity extends AppCompatActivity {
 
         });
     }
+
 }

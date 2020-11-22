@@ -1669,6 +1669,7 @@ id JoinButton
 id LeaderBox
 id LeaderBox2
 id LeaveButton
+id LocButton
 id LocationPriority
 id META
 id MajorBox
@@ -2186,6 +2187,7 @@ layout abc_tooltip
 layout activity_create
 layout activity_display_details
 layout activity_get_match_score
+layout activity_getlocation
 layout activity_joined
 layout activity_main
 layout activity_main_maps

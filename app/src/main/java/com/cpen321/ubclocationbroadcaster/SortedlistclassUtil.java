@@ -11,8 +11,8 @@ public class SortedlistclassUtil {
     public static String[] course;
     public static String[] users;
     public static String info;
-    public static String lat;
-    public static String lon;
+    public static Double lat;
+    public static Double lon;
     public static String leader;
 
     /**This is called on sign out*/

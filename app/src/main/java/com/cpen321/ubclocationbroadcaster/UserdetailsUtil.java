@@ -11,9 +11,18 @@ public class UserdetailsUtil {
     public static boolean privatePublic;
     public static boolean inactivity;
     public static String activityID;
+    public static boolean signedIn = false;
+    public static String token;
     public static String getURL(){
         return "http://10.0.2.2:3000";
     }
+
+    public static Double lat;
+    public static Double lon;
+
+    public static Double activitylat;
+    public static Double activitylon;
+
 
     /**This is called on sign out*/
     public static void cleanup() {
@@ -26,5 +35,11 @@ public class UserdetailsUtil {
         privatePublic = false;
         inactivity = false;
         activityID = null;
+        signedIn = false;
+        lat = null;
+        lon = null;
+        activitylat = null;
+        activitylon = null;
+
     }
 }

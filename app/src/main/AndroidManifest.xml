@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ActivityPage"></activity>
+        <activity android:name=".Getlocation"></activity>
+        <activity android:name=".ActivityPage" />
         <activity android:name=".Joined" />
         <activity android:name=".DisplayActivityDetails" />
         <activity android:name=".SortedActivityList" />

@@ -121,8 +121,8 @@ public class GetMatchScore extends AppCompatActivity {
                 String URL = UserdetailsUtil.getURL() + "/activities/sort";
 
                 final String inputDist = getRadius.getText().toString();
-                final double inputLat = 123.232;
-                final double inputLong = -100.432;
+                final double inputLat = UserdetailsUtil.lat;
+                final double inputLong = UserdetailsUtil.lon;
                 final int inputLoc = priorities[0];
                 final int inputCourse = priorities[1];
                 final int inputMajor = priorities[2];

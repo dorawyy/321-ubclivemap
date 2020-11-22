@@ -60,6 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
                 try {
                     jsnReq.put("name", inputUsername);
                     jsnReq.put("password", inputPassword);
+                    jsnReq.put("token", UserdetailsUtil.token);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

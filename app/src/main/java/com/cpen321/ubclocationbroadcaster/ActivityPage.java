@@ -99,8 +99,8 @@ public class ActivityPage extends AppCompatActivity {
                             }
 
                             SortedlistclassUtil.info = activity.getString("info");
-                            SortedlistclassUtil.lat = activity.getString("lat");
-                            SortedlistclassUtil.lon = activity.getString("long");
+                            SortedlistclassUtil.lat = activity.getDouble("lat");
+                            SortedlistclassUtil.lon = activity.getDouble("long");
                             SortedlistclassUtil.leader = activity.getString("leader");
 
 

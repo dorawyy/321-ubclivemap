@@ -9,11 +9,23 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
@@ -81,5 +93,33 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
+
+    @Override
+    public void onNewToken(@NonNull String s) {
+        super.onNewToken(s);
+        if(UserdetailsUtil.signedIn){
+            Log.d("FIREBASE", "CHANGING TOKEN");
+            JSONObject jsnRequest = new JSONObject();
+            UserdetailsUtil.token = s;
+            try {
+                jsnRequest.put("username", UserdetailsUtil.username);
+                jsnRequest.put("token", s);
+            } catch (Exception e) {
+
+            }
+            final RequestQueue q = Volley.newRequestQueue(this);
+            JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, UserdetailsUtil.getURL() + "/notifications/addtoken", jsnRequest,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            });
+            q.add(json_obj);
+        }
     }
 }

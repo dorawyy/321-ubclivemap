@@ -392,8 +392,8 @@ POST http://localhost:3000/notifications/addtoken
 Content-Type: application/json
 
 {
-    "username" : "Kyle",
-    "token" : "looolpag"
+    "username" : "Jack",
+    "token" : "looolaokda"
 }
 
 ### update users
@@ -402,6 +402,16 @@ Content-Type: application/json
 
 {
     "username" : "zyad",
+    "title" : "hey",
+    "message" : "heyo"
+}
+
+### update users
+POST http://localhost:3000/notifications/send
+Content-Type: application/json
+
+{
+    "username" : "john",
     "title" : "hey",
     "message" : "heyo"
 }

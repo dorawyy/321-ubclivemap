@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
@@ -32,12 +33,23 @@ import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
-    private String token;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if(!task.isSuccessful()){
+                            return;
+                        }
+                        UserdetailsUtil.token = task.getResult().getToken();
+                        String msg = getString(R.string.fcm_token, UserdetailsUtil.token);
+                        Log.d("MainActivity", msg);
+                    }
+                });
 
         /**INITIALIZATION : START*/
         final EditText username;
@@ -53,20 +65,6 @@ public class MainActivity extends AppCompatActivity {
         sign_up_btn = findViewById(R.id.sign_up_button);
 
         final RequestQueue q = Volley.newRequestQueue(this);
-
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if(!task.isSuccessful()){
-                            return;
-                        }
-
-                        token = task.getResult().getToken();
-                        String msg = getString(R.string.fcm_token, token);
-                        Log.d("MainActivity", msg);
-                    }
-                });
         /**INITIALIZATION : END*/
 
         sign_in_btn.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         jsnRequest.put("name", usrname);
                         jsnRequest.put("password", passwrd);
-                        jsnRequest.put("token", token);
+                        jsnRequest.put("token", UserdetailsUtil.token);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -111,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                                             UserdetailsUtil.inactivity = userProfileResponse.getBoolean("inActivity");
                                             UserdetailsUtil.activityID = userProfileResponse.getString("activityID");
                                             UserdetailsUtil.courseRegistered = new String[numOfCourses];
+                                            UserdetailsUtil.signedIn = true;
                                             for (int i = 0; i < numOfCourses; i++) {
                                                 UserdetailsUtil.courseRegistered[i] = userProfileResponse.getJSONArray("CourseRegistered").getString(i);
                                             }
@@ -137,9 +136,6 @@ public class MainActivity extends AppCompatActivity {
                             error.printStackTrace();
                         }
                     });
-                    json_obj.setRetryPolicy(new DefaultRetryPolicy(5000,
-                            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     q.add(json_obj);
                 }
             }

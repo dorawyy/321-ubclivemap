@@ -45,7 +45,7 @@ router.post("/addtoken", async (req, res) => {
     if(!req.body.hasOwnProperty("username") || !req.body.hasOwnProperty("token")){
         return res.json(formatResponse(false, "Not well formed request.", null));
     }
-    var response = await Token.update({"username" : req.body.username}, req.body, {upsert: true}).exec();
+    var response = await Token.updateOne({"username" : req.body.username}, req.body, {upsert: true}).exec();
     return res.json(formatResponse(true, "Token insert successfully.", null));
 });
 
@@ -54,13 +54,12 @@ router.post('/send', async (req, res)=>{
         return res.json(formatResponse(false, "Not well formed request.", null));
     }
 
-    
     var response = await Token.findOne({"username" : req.body.username}).exec()
     if(response == null) {
         return res.json(formatResponse(false, "Username does not exist.", null));
     }
-    const registrationToken = response.token;
-    const options = notification_options
+    var registrationToken = response.token;
+    var options = notification_options
 
     var payload = {
         data : {
@@ -72,7 +71,8 @@ router.post('/send', async (req, res)=>{
         }
     }
 
-    
+    console.log("sending notification to " + registrationToken);
+
     admin.messaging().sendToDevice(registrationToken, payload, options)
     .then( response => {
         res.json(formatResponse(true, "Notification sent successfully", null));

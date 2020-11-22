@@ -74,6 +74,10 @@ router.post('/register', async (req, res) => {
 
     if(req.body.hasOwnProperty("token")){
         // Store device token of user
+        var host_str = req.get("host");
+        if(host_str == "10.0.2.2:3000"){
+            host_str = "localhost:3000";
+        }
         url = req.protocol + "://" + host_str + "/notifications/addtoken";
         var tokenreq = await axios.post(url, 
             {

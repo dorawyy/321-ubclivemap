@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -70,11 +71,8 @@ public class MainActivity extends AppCompatActivity {
         sign_in_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String URL = UserdetailsUtil.getURL() + "/users/login";
                 final String usrname = username.getText().toString();
                 String passwrd = password.getText().toString();
-
 
                 if(usrname.isEmpty()){
                     Toast.makeText(MainActivity.this, "Enter a username", Toast.LENGTH_SHORT).show();
@@ -83,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Enter a password", Toast.LENGTH_SHORT).show();
                 }
                 else {
-
                     //format request
                     JSONObject jsnRequest = new JSONObject();
                     try {
@@ -93,67 +90,32 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnRequest,
+                    JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, UserdetailsUtil.getURL() + "/users/login", jsnRequest,
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
                                     try {
-
                                         boolean successVal = (boolean) response.get("success"); // check if user signed in successfully
                                         String stat = response.get("status").toString(); // get status
                                         if (successVal) {
-
-                                            final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(UserdetailsUtil.getURL() + "/profiles/all",
-                                                    new Response.Listener<JSONArray>() {
-                                                        @Override
-                                                        public void onResponse(JSONArray response) {
-                                                            try {
-                                                                //pos is the index of our user in userDB
-                                                                int pos = -1;
-                                                                for (int i = 0; i < response.length(); i++) {
-                                                                    JSONObject jsonObject = response.getJSONObject(i);
-                                                                    if (jsonObject.getString("username").toString().equals(usrname)) {
-                                                                        pos = i;
-                                                                        Log.d("poschange", "onResponse: " + pos);
-                                                                        break;
-                                                                    }
-                                                                }
-                                                                //jsonObject is the user object
-                                                                JSONObject jsonObject = response.getJSONObject(pos);
-                                                                UserdetailsUtil.username = usrname;
-                                                                int numOfCourses = jsonObject.getJSONArray("CourseRegistered").length();
-                                                                UserdetailsUtil.name = jsonObject.getString("name");
-                                                                UserdetailsUtil.phone = jsonObject.getString("phone");
-                                                                UserdetailsUtil.school = jsonObject.getString("school");
-                                                                UserdetailsUtil.major = jsonObject.getString("major");
-                                                                UserdetailsUtil.privatePublic = jsonObject.getBoolean("private");
-                                                                UserdetailsUtil.inactivity = jsonObject.getBoolean("inActivity");
-                                                                UserdetailsUtil.activityID = jsonObject.getString("activityID");
-                                                                UserdetailsUtil.courseRegistered = new String[numOfCourses];
-
-                                                                for (int i = 0; i < numOfCourses; i++) {
-                                                                    UserdetailsUtil.courseRegistered[i] = jsonObject.getJSONArray("CourseRegistered").getString(i);
-                                                                }
-
-                                                            } catch (JSONException e) {
-                                                                Toast.makeText(MainActivity.this, "PLEASE UPDATE YOUR PROFILE", Toast.LENGTH_SHORT).show();
-                                                                Log.d("MainActivity", "Unable to parse the User Details");
-                                                                e.printStackTrace();
-                                                            }
-                                                        }
-                                                    }, new Response.ErrorListener() {
-                                                @Override
-                                                public void onErrorResponse(VolleyError error) {
-                                                    Toast.makeText(MainActivity.this, "Server Error. Try Again", Toast.LENGTH_SHORT).show();
-                                                    Log.d("MainActivity", "profiles/all Server Error");
-                                                    error.printStackTrace();
-                                                }
-                                            });
-                                            q.add(jsonArrayRequest);
+                                            Log.d("WHATDAGKG", "WAOJIODJADOGJIAD");
+                                            JSONObject userProfileResponse = response.getJSONObject("value");
+                                            UserdetailsUtil.username = usrname;
+                                            int numOfCourses = userProfileResponse.getJSONArray("CourseRegistered").length();
+                                            UserdetailsUtil.name = userProfileResponse.getString("name");
+                                            UserdetailsUtil.phone = userProfileResponse.getString("phone");
+                                            UserdetailsUtil.school = userProfileResponse.getString("school");
+                                            UserdetailsUtil.major = userProfileResponse.getString("major");
+                                            UserdetailsUtil.privatePublic = userProfileResponse.getBoolean("private");
+                                            UserdetailsUtil.inactivity = userProfileResponse.getBoolean("inActivity");
+                                            UserdetailsUtil.activityID = userProfileResponse.getString("activityID");
+                                            UserdetailsUtil.courseRegistered = new String[numOfCourses];
+                                            for (int i = 0; i < numOfCourses; i++) {
+                                                UserdetailsUtil.courseRegistered[i] = userProfileResponse.getJSONArray("CourseRegistered").getString(i);
+                                            }
 
                                             Intent sign_in_Intent = new Intent(MainActivity.this, MenuActivity.class);
                                             startActivity(sign_in_Intent);
-
                                         } else {
                                             Log.d("MainActivity", "Error: " + stat);
                                             Toast.makeText(MainActivity.this, "ERROR: " + stat, Toast.LENGTH_SHORT).show();
@@ -165,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            Log.d("adgadgdag", error.toString());
                             if (error.networkResponse.statusCode == 401)
                                 Toast.makeText(MainActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                             else if (error.networkResponse.statusCode == 402)
@@ -174,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
                             error.printStackTrace();
                         }
                     });
+                    json_obj.setRetryPolicy(new DefaultRetryPolicy(5000,
+                            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     q.add(json_obj);
                 }
             }

@@ -1,5 +1,5 @@
 var express = require("express");
-var axios = require("../app").axios;
+var axios = require("axios");
 
 var router = express.Router();
 router.use(express.json());
@@ -59,6 +59,37 @@ function activityIsGoodRequest(body){
         return false;
     }
     if(!body.hasOwnProperty('status')){
+        return false;
+    }
+    return true;
+}
+
+function profileIsGoodRequest(body){
+    if(!body.hasOwnProperty('name')){
+        return false;
+    }
+    if(!body.hasOwnProperty('username')){
+        return false;
+    }
+    if(!body.hasOwnProperty('major')){
+        return false;
+    }
+    if(!body.hasOwnProperty('CourseRegistered')){
+        return false;
+    }
+    if(!body.hasOwnProperty('school')){
+        return false;
+    }
+    if(!body.hasOwnProperty('phone')){
+        return false;
+    }
+    if(!body.hasOwnProperty('private')){
+        return false;
+    }
+    if(!body.hasOwnProperty('inActivity')){
+        return false;
+    }
+    if(!body.hasOwnProperty('activityID')){
         return false;
     }
     return true;

@@ -1,5 +1,6 @@
 var express = require("express");
 var bcrypt = require("bcryptjs");
+var axios = require("axios");
 
 var router = express.Router();
 router.use(express.json());
@@ -114,24 +115,43 @@ router.post('/delete', async (req,res) =>{
     return res.status(200).json(formatResponse(true, "Account deleted successfully.", null));
 })
 
-// login a user
+// Login route, checks if account exists, then searches for user profile.
 router.post('/login', async (req, res) => {
     if(!userIsGoodRequest(req.body)){
-        return res.status(401).json(formatResponse(false, "Not well formed request.", null));
+        return res.json(formatResponse(false, "Not well formed request.", null));
     }
-
     var response = await Account.findOne({"name" : req.body.name}).exec();
     if(response == null){
-        return res.status(402).json(formatResponse(false, "Username does not exist.", null));
+        // Username doesnt exist
+        return res.json(formatResponse(false, "Username does not exist.", null));
     }
     try {
         if(await bcrypt.compare(req.body.password, response.password)) {
-            return res.status(200).json(formatResponse(true, "Authentication successful.", null));
+            // GET PROFILE OF LOGGED IN USER
+            try{
+                console.log("WITHAIOGDHDAKLGJ");
+                var url = req.protocol + "://" + req.get('host') + "/profiles/search";
+                profilereq = await axios.post(url,
+                                {username : req.body.name});
+            } catch (err) {
+                return res.json(formatResponse(false, "UHOH: "+ err, null));
+            }
+
+            if(profilereq.data.success == true){
+                // Logged in, got profile.
+                console.log("RETURINGDIANGDAING");
+                return res.json(formatResponse(true, "Authentication successful.", profilereq.data.value));
+            } else {
+                // profile search error
+                return res.json(profilereq.data);
+            }
         } else {
-            return res.status(403).json(formatResponse(false, "Invalid password.", null));
+            // Wrong password
+            return res.json(formatResponse(false, "Invalid password.", null));
         }
-    } catch (e) {
-        return res.json(formatResponse(false, "I dunno", null));
+    } catch (err) {
+        // Bcrypt error
+        return res.json(formatResponse(false, "UHOH: " + err, null));
     }
 });
 

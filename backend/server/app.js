@@ -1,5 +1,4 @@
 var express = require("express");
-var axios = require("axios");
 
 var usersEndpoint = require("./__modules__/users");
 var profilesEndpoint = require("./__modules__/profiles");
@@ -14,6 +13,5 @@ app.use("/activities", activitiesEndpoint);
 app.use("/notifications", notificationsEndpoint);
 
 module.exports = {
-    app,
-    axios
+    app
 }

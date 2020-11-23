@@ -1,10 +1,9 @@
 var express = require("express");
-var axios = require("axios");
 
 var router = express.Router();
 router.use(express.json());
 
-var formatResponse = require("./sharedfunctions");
+var formatResponse = require("./sharedfunctions").formatResponse;
 var Profile = require("../__models__/models").Profile;
 
 function profileIsGoodRequest(body){

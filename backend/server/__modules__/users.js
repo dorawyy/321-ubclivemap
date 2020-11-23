@@ -1,11 +1,11 @@
 var express = require("express");
 var bcrypt = require("bcryptjs");
-var axios = require("axios");
 
 var router = express.Router();
 router.use(express.json());
 
-var formatResponse = require("./sharedfunctions");
+var formatResponse = require("./sharedfunctions").formatResponse;
+var axiosPostRequest = require("./sharedfunctions").axiosPostRequest;
 var Account = require("../__models__/models").Account;
 
 function userIsGoodRequest(body){
@@ -73,18 +73,14 @@ router.post('/register', async (req, res) => {
         return res.json(formatResponse(false, err, null));
     }
 
+    var tokenreq;
     if(req.body.hasOwnProperty("token")){
         // Store device token of user
-        var host_str = req.get("host");
-        if(host_str == "10.0.2.2:3000"){
-            host_str = "localhost:3000";
+        token_data = {
+            username : req.body.name,
+            token : req.body.token
         }
-        url = req.protocol + "://" + host_str + "/notifications/addtoken";
-        var tokenreq = await axios.post(url, 
-            {
-                username : req.body.name,
-                token : req.body.token
-            });
+        tokenreq = await axiosPostRequest(req, "/notifications/addtoken", token_data);
     }
     return res.status(200).json(formatResponse(true, "Account registered successfully.", null));
 });
@@ -155,32 +151,23 @@ router.post('/login', async (req, res) => {
         // Username doesnt exist
         return res.json(formatResponse(false, "Username does not exist.", null));
     }
+
+    var profilereq;
+    var tokenreq;
     try {
         if(await bcrypt.compare(req.body.password, response.password)) {
+            // PASSWORD AUTHENTICATED
             // GET PROFILE OF LOGGED IN USER
-            try{
-                var host_str = req.get("host");
-                if(host_str == "10.0.2.2:3000"){
-                    host_str = "localhost:3000";
+            profilereq = await axiosPostRequest(req, "/profiles/search", {username: req.body.name});
+            if(req.body.hasOwnProperty("token")){
+                // STORE DEVICE TOKEN OF USER
+                var token_data = {
+                    username : req.body.name,
+                    token : req.body.token
                 }
-                var url = req.protocol + "://" + host_str + "/profiles/search";
-                var profilereq = await axios.post(url,
-                                {username : req.body.name});
-
-                if(req.body.hasOwnProperty("token")){
-                    // Store device token of user
-                    url = req.protocol + "://" + host_str + "/notifications/addtoken";
-                    var tokenreq = await axios.post(url, 
-                        {
-                            username : req.body.name,
-                            token : req.body.token
-                        });
-                }
-            } catch (err) {
-                return res.json(formatResponse(false, "UHOH: "+ err, null));
+                tokenreq = await axiosPostRequest(req, "/notifications/addtoken", token_data);
             }
                 
-
             if(profilereq.data.success == true){
                 // Logged in, got profile.
                 return res.json(formatResponse(true, "Authentication successful.", profilereq.data.value));

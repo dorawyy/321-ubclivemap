@@ -2,7 +2,7 @@ var admin = require("firebase-admin");
 var serviceAccount = require("../accountkey.json");
 var express = require("express");
 
-var formatResponse = require("./sharedfunctions");
+var formatResponse = require("./sharedfunctions").formatResponse;
 
 var router = express.Router();
 router.use(express.json());

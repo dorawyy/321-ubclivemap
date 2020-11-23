@@ -59,8 +59,8 @@ POST http://localhost:3000/users/login
 Content-Type: application/json
 
 {
-    "name" : "Kyle",
-    "password" : "password"
+    "name" : "user1",
+    "password" : "password1"
 }
 
 ### login user (success)
@@ -96,7 +96,7 @@ Content-Type: application/json
 
 {
     "name" : "Kyle",
-    "username" : "Kyle",
+    "username" : "user1",
     "major" : "CPEN",
     "CourseRegistered" : [
         "CPEN331", "CPEN321"
@@ -210,7 +210,7 @@ Content-Type: application/json
 {
     "aid" : "ultracheapcow",
     "name" : "Cpen331 Project",
-    "leader": "hulk",
+    "leader": "user1",
     "usernames" : ["hulk","blackwidow"],
     "info" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo vulputate condimentum. Mauris congue vulputate dignissim. Sed et nisi erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. ",
     "major" : "CPEN",
@@ -295,7 +295,7 @@ POST http://localhost:3000/activities/search
 Content-Type: application/json
 
 {
-    "aid" : "zyadact"
+    "aid" : "ultracheapcow"
 }
 
 ### delete activity
@@ -311,7 +311,7 @@ POST http://localhost:3000/profiles/search
 Content-Type: application/json
 
 {
-    "username" : "Kyle"
+    "username" : "user1"
 }
 
 
@@ -329,8 +329,8 @@ POST http://localhost:3000/activities/joinupdate
 Content-Type: application/json
 
 {
-    "aid" : "zyadact",
-    "username" : "Kyle"
+    "aid" : "ultracheapcow",
+    "username" : "user1"
 }
 
 ### search activity
@@ -338,8 +338,8 @@ POST http://localhost:3000/activities/leaveupdate
 Content-Type: application/json
 
 {
-    "aid" : "zyadact",
-    "username" : "Kyle"
+    "aid" : "ultracheapcow",
+    "username" : "user1"
 }
 
 

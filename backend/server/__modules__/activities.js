@@ -1,10 +1,10 @@
 var express = require("express");
-var axios = require("axios");
 
 var router = express.Router();
 router.use(express.json());
 
-var formatResponse = require("./sharedfunctions");
+var formatResponse = require("./sharedfunctions").formatResponse;
+var axiosPostRequest = require("./sharedfunctions").axiosPostRequest;
 var Activity = require("../__models__/models").Activity;
 
 function activityIsGoodRequest(body){
@@ -193,12 +193,7 @@ router.post("/add", async (req, res) => {
     var profileupdate;
     try{
         // UPDATE ACTIVITY LEADER'S PROFILE
-        var host_str = req.get("host");
-        if(host_str == "10.0.2.2:3000"){
-            host_str = "localhost:3000";
-        }
-        var url = req.protocol + "://" + host_str + "/profiles/join";
-        profileupdate = await axios.post(url, userJoin);
+        profileupdate = await axiosPostRequest(req, "/profiles/join", userJoin);
     } catch (err) {
         return res.json(formatResponse(false, "ERROR: " + err, null));
     }
@@ -229,24 +224,18 @@ router.post("/joinupdate",async(req,res)=>{
     }
 
     var profileupdate;
+    var sendnotif;
     try{
         // UPDATE USER PROFILE TO BE IN ACTIVITY
-        var host_str = req.get("host");
-        if(host_str == "10.0.2.2:3000"){
-            host_str = "localhost:3000";
-        }
-        var url = req.protocol + "://" + host_str + "/profiles/join";
-        profileupdate = await axios.post(url,
-                        req.body);
+        profileupdate = await axiosPostRequest(req, "/profiles/join", req.body);
 
         // SEND NOTIFICATION TO ACTIVITY LEADER
-        var url = req.protocol + "://" + host_str + "/notifications/send";
-        var sendnotif = await axios.post(url,
-                        {
-                            username : response.leader,
-                            title : "Activity Locator",
-                            message : req.body.username + " joined your activity!"
-                        });
+        var leader_notif = {
+            username : response.leader,
+            title : "Activity Locator",
+            message : req.body.username + " joined your activity!"
+        } 
+        sendnotif = await axiosPostRequest(req, "/notifications/send", leader_notif);
     } catch (err) {
         // AXIOS ERROR
         return res.json(formatResponse(false, "ERROR: " + err, null));
@@ -281,24 +270,19 @@ router.post("/leaveupdate", async (req,res) => {
     }
 
     var profileupdate;
+    var sendnotif;
     try{
         // UPDATE USER PROFILE TO NO LONGER BE IN ACTIVITY
-        var host_str = req.get("host");
-        if(host_str == "10.0.2.2:3000"){
-            host_str = "localhost:3000";
-        }
-        var url = req.protocol + "://" + host_str + "/profiles/leave";
-        profileupdate = await axios.post(url, req.body);
+        profileupdate = await axiosPostRequest(req, "/profiles/leave", req.body);
 
         // SEND NOTIFICATION TO LEADER OF ACTIVITY
         if(req.body.username != response.leader){
-            var url = req.protocol + "://" + host_str + "/notifications/send";
-            var sendnotif = await axios.post(url,
-                            {
-                                username : response.leader,
-                                title : "Activity Locator",
-                                message : req.body.username + " left your activity."
-                            });
+            var leader_notif = {
+                username : response.leader,
+                title : "Activity Locator",
+                message : req.body.username + " left your activity."
+            };
+            sendnotif = await axiosPostRequest(req, "/notifications/send", leader_notif);
         }
     } catch (err) {
         // AXIOS ERROR
@@ -441,13 +425,7 @@ router.post("/sortnouser", async (req, res) => {
 
     try{
         // SEARCH FOR USER PROFILE
-        var host_str = req.get("host");
-        if(host_str == "10.0.2.2:3000"){
-            host_str = "localhost:3000";
-        }
-        var url = req.protocol + "://" + host_str + "/profiles/search";
-        profilereq = await axios.post(url,
-                        userjson);
+        profilereq = await await axiosPostRequest(req, "/profiles/search", userjson);
     } catch (err) {
         // AXIOS ERROR
         return res.json(formatResponse(false, "ERROR: " + err, null));

@@ -4,8 +4,7 @@ var bcrypt = require("bcryptjs");
 var router = express.Router();
 router.use(express.json());
 
-var formatResponse = require("./sharedfunctions").formatResponse;
-var axiosPostRequest = require("./sharedfunctions").axiosPostRequest;
+var sharedfuncs = require("./sharedfunctions");
 var Account = require("../__models__/models").Account;
 
 function userIsGoodRequest(body){
@@ -42,13 +41,13 @@ router.get('/all', async (req, res) => {
 router.post('/register', async (req, res) => {
     // if username exists in database, fail
     if(!userIsGoodRequest(req.body)){
-        return res.status(401).json(formatResponse(false, "Not well formed request.", null));
+        return res.status(401).json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
     }
 
     findarr = [];
     var response = await Account.findOne({"name" : req.body.name}).exec();
     if(response != null){
-        return res.status(402).json(formatResponse(false, "Account already exists.", null));
+        return res.status(402).json(sharedfuncs.formatResponse(false, "Account already exists.", null));
     }
 
     // enter user into database, encrypt password
@@ -70,7 +69,7 @@ router.post('/register', async (req, res) => {
     try {
         await Account.create(user);
     } catch (err) {
-        return res.json(formatResponse(false, err, null));
+        return res.json(sharedfuncs.formatResponse(false, err, null));
     }
 
     var tokenreq;
@@ -80,9 +79,9 @@ router.post('/register', async (req, res) => {
             username : req.body.name,
             token : req.body.token
         }
-        tokenreq = await axiosPostRequest(req, "/notifications/addtoken", token_data);
+        tokenreq = await sharedfuncs.axiosPostRequest(req, "/notifications/addtoken", token_data);
     }
-    return res.status(200).json(formatResponse(true, "Account registered successfully.", null));
+    return res.status(200).json(sharedfuncs.formatResponse(true, "Account registered successfully.", null));
 });
 
 /*
@@ -93,7 +92,7 @@ router.post('/register', async (req, res) => {
  */
 router.post("/update", async (req, res) => {
     if(!userIsGoodRequest(req.body)){
-        return res.status(401).json(formatResponse(false, "Not well formed request.", null));
+        return res.status(401).json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
     }
 
     var salt;
@@ -113,9 +112,9 @@ router.post("/update", async (req, res) => {
     var response = await Account.replaceOne({"name" : req.body.name}, user);
 
     if(response.n == 0){
-        return res.status(402).json(formatResponse(false, "Username does not exist.", null));
+        return res.status(402).json(sharedfuncs.formatResponse(false, "Username does not exist.", null));
     }
-    return res.status(200).json(formatResponse(true, "Account updated successfully.", null));
+    return res.status(200).json(sharedfuncs.formatResponse(true, "Account updated successfully.", null));
 });
 
 /*
@@ -126,13 +125,13 @@ router.post("/update", async (req, res) => {
  */
 router.post('/delete', async (req,res) =>{
     if(!req.body.hasOwnProperty("name")){
-        return res.status(401).json(formatResponse(false, "Not well formed request.", null));
+        return res.status(401).json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
     }
     var response = await Account.deleteOne({"name" : req.body.name});
     if(response.n === 0){
-        return res.status(402).json(formatResponse(false, "Username does not exist.", null));
+        return res.status(402).json(sharedfuncs.formatResponse(false, "Username does not exist.", null));
     }
-    return res.status(200).json(formatResponse(true, "Account deleted successfully.", null));
+    return res.status(200).json(sharedfuncs.formatResponse(true, "Account deleted successfully.", null));
 })
 
 /*
@@ -144,12 +143,12 @@ router.post('/delete', async (req,res) =>{
  */
 router.post('/login', async (req, res) => {
     if(!userIsGoodRequest(req.body)){
-        return res.json(formatResponse(false, "Not well formed request.", null));
+        return res.json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
     }
     var response = await Account.findOne({"name" : req.body.name}).exec();
     if(response == null){
         // Username doesnt exist
-        return res.json(formatResponse(false, "Username does not exist.", null));
+        return res.json(sharedfuncs.formatResponse(false, "Username does not exist.", null));
     }
 
     var profilereq;
@@ -158,30 +157,30 @@ router.post('/login', async (req, res) => {
         if(await bcrypt.compare(req.body.password, response.password)) {
             // PASSWORD AUTHENTICATED
             // GET PROFILE OF LOGGED IN USER
-            profilereq = await axiosPostRequest(req, "/profiles/search", {username: req.body.name});
+            profilereq = await sharedfuncs.axiosPostRequest(req, "/profiles/search", {username: req.body.name});
             if(req.body.hasOwnProperty("token")){
                 // STORE DEVICE TOKEN OF USER
                 var token_data = {
                     username : req.body.name,
                     token : req.body.token
                 }
-                tokenreq = await axiosPostRequest(req, "/notifications/addtoken", token_data);
+                tokenreq = await sharedfuncs.axiosPostRequest(req, "/notifications/addtoken", token_data);
             }
                 
             if(profilereq.data.success == true){
                 // Logged in, got profile.
-                return res.json(formatResponse(true, "Authentication successful.", profilereq.data.value));
+                return res.json(sharedfuncs.formatResponse(true, "Authentication successful.", profilereq.data.value));
             } else {
                 // profile search error
                 return res.json(profilereq.data);
             }
         } else {
             // Wrong password
-            return res.json(formatResponse(false, "Invalid password.", null));
+            return res.json(sharedfuncs.formatResponse(false, "Invalid password.", null));
         }
     } catch (err) {
         // Bcrypt error
-        return res.json(formatResponse(false, "UHOH: " + err, null));
+        return res.json(sharedfuncs.formatResponse(false, "UHOH: " + err, null));
     }
 });
 

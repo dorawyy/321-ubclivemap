@@ -11,8 +11,11 @@ public class UserdetailsUtil {
     public static boolean privatePublic;
     public static boolean inactivity;
     public static String activityID;
+
     public static boolean signedIn = false;
+    public static boolean tokenGenerated = false;
     public static String token;
+
     public static String getURL(){
         return "http://10.0.2.2:3000";
     }
@@ -40,6 +43,5 @@ public class UserdetailsUtil {
         lon = null;
         activitylat = null;
         activitylon = null;
-
     }
 }

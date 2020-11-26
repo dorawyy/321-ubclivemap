@@ -24,16 +24,45 @@ describe("successful tests", () => {
         await Profile.deleteMany({})
     });
 
+    test("make user leader of activity", async () => {
+        var leader = JSON.parse(JSON.stringify(constants.kyle_p));
+        leader.username = "test";
+
+        var response = await request(app)
+            .post("/profiles/add")
+            .type('json')
+            .send(leader);
+
+        response = await request(app)
+            .post("/activities/add")
+            .type('json')
+            .send(constants.a1);
+
+        response = await request(app)
+            .post("/activities/search")
+            .type('json')
+            .send({
+                aid : "1",
+            })
+
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("Activity found successfully.");
+        expect(response.body.value.leader).toBe("test");
+
+        response = await request(app)
+            .post("/profiles/search")
+            .type('json')
+            .send({
+                username : "test",
+            })
+        expect(response.body.value.inActivity).toBe(true);
+    })
+
     test("user joins an activity", async () => {
         var response = await request(app)
             .post("/profiles/add")
             .type('json')
             .send(constants.kyle_p);
-        
-        response = await request(app)
-            .post("/activities/add")
-            .type('json')
-            .send(constants.a1);
 
         var response = await request(app)
             .post("/activities/joinupdate")
@@ -44,7 +73,6 @@ describe("successful tests", () => {
             })
         expect(response.body.success).toBe(true)
         expect(response.body.status).toBe("Activity Joined successfully.");
-
 
         response = await request(app)
             .post("/activities/search")
@@ -65,7 +93,6 @@ describe("successful tests", () => {
             .send({
                 username : "kyle",
             })
-
         correct_val = JSON.parse(JSON.stringify(constants.kyle_p));
         correct_val.inActivity = true;
         correct_val.activityID = "1";
@@ -89,7 +116,6 @@ describe("successful tests", () => {
             .send({
                 aid : "1",
             })
-
         expect(response.body.success).toBe(true)
         expect(response.body.status).toBe("Activity found successfully.");
         expect(response.body.value).toMatchObject(constants.a1);
@@ -102,45 +128,6 @@ describe("successful tests", () => {
             })
 
         expect(response.body.value).toMatchObject(constants.kyle_p);
-    });
-
-    test("add activity with leader", async () => {
-        var response = await request(app)
-            .post("/profiles/add")
-            .type('json')
-            .send({
-                name : "Jack",
-                username : "leadertest",
-                major : "CPEN",
-                CourseRegistered : [
-                    "CPEN331", "CPEN321"
-                ],
-                school : "UBC",
-                phone : "4444444444",
-                private : false,
-                inActivity : false,
-                activityID : "-1"
-            })
-
-        response = await request(app)
-            .post("/activities/addleader")
-            .type('json')
-            .send({
-                aid : "leadertestact",
-                name : "Cpen321 Project",
-                leader : "leadertest",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "1",
-                long : "-2",
-                status : "1"
-            })
-
-        expect(response.body.status).toBe("Activity insert successful.");
-        expect(response.body.success).toBe(true)
     });
 
     test("sort activity find user", async () => {
@@ -183,23 +170,57 @@ describe("fail tests", () => {
 
         beforePro2 = await Profile.find().exec();
         await Profile.deleteMany({})
+    });
 
+    var leader = JSON.parse(JSON.stringify(constants.kyle_p));
+    leader.username = "test";
+    leader.inActivity = true;
+    leader.activityID = "2";
+
+    test("make user leader of activity", async () => {
         var response = await request(app)
             .post("/profiles/add")
             .type('json')
-            .send(constants.kyle_inact_p);
+            .send(leader);
+
         response = await request(app)
             .post("/activities/add")
             .type('json')
             .send(constants.a1);
-        response = await request(app)
-            .post("/profiles/add")
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("User is already in an activity.");
+
+        leader.inActivity = false;
+        var response = await request(app)
+            .post("/profiles/update")
             .type('json')
-            .send(constants.noact_p1);
-    });
+            .send(leader);
+
+        response = await request(app)
+            .post("/activities/add")
+            .type('json')
+            .send(constants.a1);
+        expect(response.body.success).toBe(true);
+
+        var otheractivity = JSON.parse(JSON.stringify(constants.a1));
+        otheractivity.leader = "doesntexist";
+        otheractivity.aid = "2";
+        response = await request(app)
+            .post("/activities/add")
+            .type('json')
+            .send(otheractivity);
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("User does not exist.");
+    })
 
     test("user joins an activity", async () => {
         var response = await request(app)
+            .post("/profiles/add")
+            .type('json')
+            .send(constants.kyle_inact_p);
+        expect(response.body.success).toBe(true)
+
+        response = await request(app)
             .post("/activities/joinupdate")
             .type('json')
             .send({
@@ -209,7 +230,7 @@ describe("fail tests", () => {
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("User does not exist.");
 
-        var response = await request(app)
+        response = await request(app)
             .post("/activities/joinupdate")
             .type('json')
             .send({
@@ -219,7 +240,7 @@ describe("fail tests", () => {
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("User is already in an activity.");
 
-        var response = await request(app)
+        response = await request(app)
             .post("/activities/joinupdate")
             .type('json')
             .send({
@@ -228,7 +249,7 @@ describe("fail tests", () => {
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
 
-        var response = await request(app)
+        response = await request(app)
             .post("/activities/joinupdate")
             .type('json')
             .send({
@@ -240,20 +261,35 @@ describe("fail tests", () => {
 
     test("user leaves an activity", async () => {
         var response = await request(app)
-            .post("/activities/leaveupdate")
+            .post("/profiles/delete")
             .type('json')
-            .send({
-                username : "test1",
-                aid : "1"
-            })
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("User is not in an activity.");
+            .send({username : "kyle"});
+        var response = await request(app)
+            .post("/profiles/add")
+            .type('json')
+            .send(constants.kyle_p);
 
         var response = await request(app)
             .post("/activities/leaveupdate")
             .type('json')
             .send({
                 username : "kyle",
+                aid : "1"
+            })
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("User is not in an activity.");
+
+        leader.inActivity = true;
+        leader.activityID = "2";
+        var response = await request(app)
+            .post("/profiles/update")
+            .type('json')
+            .send(leader);
+        var response = await request(app)
+            .post("/activities/leaveupdate")
+            .type('json')
+            .send({
+                username : "test",
                 aid : "1"
             })
         expect(response.body.success).toBe(false)
@@ -268,16 +304,6 @@ describe("fail tests", () => {
             })
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("User does not exist.");
-
-        var response = await request(app)
-            .post("/activities/leaveupdate")
-            .type('json')
-            .send({
-                username : "test1",
-                aid : "1"
-            })
-        expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("User is not in an activity.");
 
         var response = await request(app)
             .post("/activities/leaveupdate")
@@ -306,68 +332,6 @@ describe("fail tests", () => {
             })
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Not well formed request.");
-    });
-
-    test("add activity with leader", async () => {
-        response = await request(app)
-            .post("/activities/addleader")
-            .type('json')
-            .send({
-                aid : "leadertestact",
-                name : "Cpen321 Project",
-                leader : "kyle",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "1",
-                long : "-2",
-                status : "1"
-            })
-
-        expect(response.body.status).toBe("Leader is in an activity.");
-        expect(response.body.success).toBe(false)
-
-        response = await request(app)
-            .post("/activities/addleader")
-            .type('json')
-            .send({
-                aid : "leadertestact",
-                name : "Cpen321 Project",
-                leader : "oadgdakjg",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "1",
-                long : "-2",
-                status : "1"
-            })
-
-        expect(response.body.status).toBe("Leader does not exist.");
-        expect(response.body.success).toBe(false)
-
-        response = await request(app)
-            .post("/activities/addleader")
-            .type('json')
-            .send({
-                aid : "1",
-                name : "Cpen321 Project",
-                leader : "oadgdakjg",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "1",
-                long : "-2",
-                status : "1"
-            })
-
-        expect(response.body.status).toBe("Activity Id Taken");
-        expect(response.body.success).toBe(false)
     });
 
     test("sort activity find user", async () => {

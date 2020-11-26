@@ -1,14 +1,10 @@
 const request = require("supertest")
 const app = require("../app").app;
 const axios = require("../app").axios;
+var sharedfuncs = require("../__modules__/sharedfunctions");
 var models = require("../__models__/models");
 var constants = require("../__vars__/constants");
-var Account = models.Account;
-var Profile = models.Profile;
 var Activity = models.Activity;
-
-var connected = false
-
 
 /****************************************************************************
  ********************* SUCCESSFUL RESPONSE TESTS *************************
@@ -23,26 +19,29 @@ describe("successful tests", () => {
 
     // test adding an activity
     test("add activity", async () => {
-        await Activity.deleteOne({aid : "sparklingdangers"});
-        const response = await request(app)
+        sharedfuncs.axiosPostRequest = jest.fn((arg1,arg2,arg3) => new Promise((resolve,reject) => {
+            resolve({data : {success : true}});
+        }));
+
+        var response = await request(app)
             .post("/activities/add")
             .type('json')
-            .send({
-                aid : "sparklingdangers",
-                name : "Cpen321 Project",
-                leader : "test",
-                usernames : ["test","aplha"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331"],
-                school : "UBC",
-                lat : "49.267941",
-                long : "-123.247360",
-                status : "1"
-            })
+            .send(constants.a1);
 
         expect(response.body.success).toBe(true)
         expect(response.body.status).toBe("Activity insert successful.");
+
+        var response = await request(app)
+            .post("/activities/add")
+            .type('json')
+            .send(constants.a2);
+
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("Activity insert successful.");
+
+        response = await request(app)
+            .get("/activities/all");
+        expect(response.body).toMatchObject([constants.a1,constants.a2]);
     })
 
     // test searching an activity
@@ -51,46 +50,23 @@ describe("successful tests", () => {
             .post("/activities/search")
             .type('json')
             .send({
-                aid : "sparklingdangers",
+                aid : constants.a1.aid 
             })
-
-        var val = {
-            aid : "sparklingdangers",
-            name : "Cpen321 Project",
-            leader : "test",
-            usernames : ["test","aplha"],
-            info : "Understanding Javascript with TA",
-            major : "CPEN",
-            course : ["CPEN321", "CPEN331"],
-            school : "UBC",
-            lat : "49.267941",
-            long : "-123.247360",
-            status : "1"
-        }
 
         expect(response.body.success).toBe(true)
         expect(response.body.status).toBe("Activity found successfully.");
-        expect(response.body.value).toMatchObject(val);
+        expect(response.body.value).toMatchObject(constants.a1);
     })
 
+    var new_a1;
     // test updating an activity
     test("update activity", async () => {
+        new_a1 = JSON.parse(JSON.stringify(constants.a1));
+        new_a1.usernames.push("anotheruser");
         var response = await request(app)
             .post("/activities/update")
             .type('json')
-            .send({
-                aid : "sparklingdangers",
-                name : "Cpen321 Project",
-                leader : "test",
-                usernames : ["test","aplha","anotheruser"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331", "CPEN400"],
-                school : "UBC",
-                lat : "50.2321039",
-                long : "-123.247360",
-                status : "1"
-            })
+            .send(new_a1);
         expect(response.body.success).toBe(true)
         expect(response.body.status).toBe("Activity updated successfully.");
 
@@ -98,56 +74,16 @@ describe("successful tests", () => {
             .post("/activities/search")
             .type('json')
             .send({
-                aid : "sparklingdangers",
+                aid : constants.a1.aid
             })
-
-        var val = {
-            aid : "sparklingdangers",
-            name : "Cpen321 Project",
-            leader : "test",
-            usernames : ["test","aplha","anotheruser"],
-            info : "Understanding Javascript with TA",
-            major : "CPEN",
-            course : ["CPEN321", "CPEN331", "CPEN400"],
-            school : "UBC",
-            lat : "50.2321039",
-            long : "-123.247360",
-            status : "1"
-        }
-
         expect(response.body.success).toBe(true)
         expect(response.body.status).toBe("Activity found successfully.");
-        expect(response.body.value).toMatchObject(val);
-    })
-
-    test("update activity", async () => {
-        var response = await request(app)
-            .post("/activities/update")
-            .type('json')
-            .send({
-                aid : "sparklingdangers",
-                name : "Cpen321 Project",
-                leader : "test",
-                usernames : ["test","aplha","anotheruser","ano"],
-                info : "Understanding Javascript with TA",
-                major : "CPEN",
-                course : ["CPEN321", "CPEN331", "CPEN400"],
-                school : "UBC",
-                lat : "50.2321039",
-                long : "-123.247360",
-                status : "1"
-            })
-        expect(response.body.success).toBe(true)
-        expect(response.body.status).toBe("Activity updated successfully.");
+        expect(response.body.value).toMatchObject(new_a1);
     })
 
     test("join and update activity", async () => {
-        axios.post = jest.fn((url, jsonObj) => new Promise((resolve, reject) => {
-            resolve({
-                data : {
-                    success : true
-                }
-            });
+        sharedfuncs.axiosPostRequest = jest.fn((arg1,arg2,arg3) => new Promise((resolve,reject) => {
+            resolve({data : {success : true}});
         }));
 
         var response = await request(app)
@@ -155,43 +91,27 @@ describe("successful tests", () => {
             .type('json')
             .send({
                 username : "Kyle",
-                aid : "sparklingdangers",
+                aid : new_a1.aid
             })
         expect(response.body.success).toBe(true)
         expect(response.body.status).toBe("Activity Joined successfully.");
+
+        new_a1.usernames.push("Kyle");
 
         response = await request(app)
             .post("/activities/search")
             .type('json')
             .send({
-                aid : "sparklingdangers",
+                aid : new_a1.aid
             })
-
-        var val = {
-            aid : "sparklingdangers",
-            name : "Cpen321 Project",
-            leader : "test",
-            usernames : ["test","aplha","anotheruser","ano","Kyle"],
-            info : "Understanding Javascript with TA",
-            major : "CPEN",
-            course : ["CPEN321", "CPEN331", "CPEN400"],
-            school : "UBC",
-            lat : "50.2321039",
-            long : "-123.247360",
-            status : "1"
-        }
         expect(response.body.success).toBe(true)
         expect(response.body.status).toBe("Activity found successfully.");
-        expect(response.body.value).toMatchObject(val);
+        expect(response.body.value).toMatchObject(new_a1);
     })
 
     test("leave and update activity", async () => {
-        axios.post = jest.fn((url, jsonObj) => new Promise((resolve, reject) => {
-            resolve({
-                data : {
-                    success : true
-                }
-            });
+        sharedfuncs.axiosPostRequest = jest.fn((arg1,arg2,arg3) => new Promise((resolve,reject) => {
+            resolve({data : {success : true}});
         }));
 
         var response = await request(app)
@@ -199,34 +119,83 @@ describe("successful tests", () => {
             .type('json')
             .send({
                 username : "Kyle",
-                aid : "sparklingdangers",
+                aid : new_a1.aid
             })
         expect(response.body.success).toBe(true)
         expect(response.body.status).toBe("Activity Left successfully.");
-
         response = await request(app)
             .post("/activities/search")
             .type('json')
             .send({
-                aid : "sparklingdangers",
+                aid : new_a1.aid
             })
-
-        var val = {
-            aid : "sparklingdangers",
-            name : "Cpen321 Project",
-            leader : "test",
-            usernames : ["test","aplha","anotheruser","ano"],
-            info : "Understanding Javascript with TA",
-            major : "CPEN",
-            course : ["CPEN321", "CPEN331", "CPEN400"],
-            school : "UBC",
-            lat : "50.2321039",
-            long : "-123.247360",
-            status : "1"
-        }
+        new_a1.usernames = new_a1.usernames.filter(e => e !== "Kyle");
         expect(response.body.success).toBe(true)
         expect(response.body.status).toBe("Activity found successfully.");
-        expect(response.body.value).toMatchObject(val);
+        expect(response.body.value).toMatchObject(new_a1);
+
+        //leader leaves
+        var response = await request(app)
+            .post("/activities/joinupdate")
+            .type('json')
+            .send({
+                username : "Kyle",
+                aid : new_a1.aid
+            })
+        new_a1.usernames.push("Kyle");
+        var old_leader = new_a1.leader;
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("Activity Joined successfully.");
+
+        var response = await request(app)
+            .post("/activities/leaveupdate")
+            .type('json')
+            .send({
+                username : new_a1.leader,
+                aid : new_a1.aid
+            })
+        new_a1.usernames = new_a1.usernames.filter(e => e !== old_leader);
+        new_a1.leader = new_a1.usernames[0];
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("Activity Left successfully.");
+        response = await request(app)
+            .post("/activities/search")
+            .type('json')
+            .send({
+                aid : new_a1.aid
+            })
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("Activity found successfully.");
+        expect(response.body.value).toMatchObject(new_a1);
+
+        var response = await request(app)
+            .post("/activities/leaveupdate")
+            .type('json')
+            .send({
+                username : "Kyle",
+                aid : new_a1.aid
+            })
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("Activity Left successfully.");
+
+        var response = await request(app)
+            .post("/activities/leaveupdate")
+            .type('json')
+            .send({
+                username : "anotheruser",
+                aid : new_a1.aid
+            })
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("Activity Left successfully.");
+        response = await request(app)
+            .post("/activities/search")
+            .type('json')
+            .send({
+                aid : new_a1.aid
+            })
+        
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Activity does not exist.");
     })
 
     // test deleting an activity
@@ -235,7 +204,7 @@ describe("successful tests", () => {
             .post("/activities/delete")
             .type('json')
             .send({
-                aid : "sparklingdangers",
+                aid : constants.a2.aid
             })
         expect(response.body.success).toBe(true)
         expect(response.body.status).toBe("Activity deleted successfully.");
@@ -302,27 +271,23 @@ describe("successful tests", () => {
 
     // test sorting activities
     test("sort activities without user information", async () => {
-        axios.post = jest.fn((url, jsonObj) => new Promise((resolve, reject) => {
-            if(!jsonObj.hasOwnProperty("username")){
-                reject(new Error("bad request"));
-            }
-            resolve({
-                data : {
-                    value : {
-                        name : "Kyle",
-                        username : "12",
-                        major : "CPEN",
-                        CourseRegistered : [
-                            "CPEN331", "CPEN321", "CPEN400"
-                        ],
-                        school : "UBC",
-                        phone : "4444445555",
-                        private : false,
-                        inActivity : false,
-                        activityID : -1
-                    }
+        sharedfuncs.axiosPostRequest = jest.fn((arg1,arg2,arg3) => new Promise((resolve,reject) => {
+            resolve({data : {
+                success : true,
+                value : {
+                    name : "Kyle",
+                    username : "12",
+                    major : "CPEN",
+                    CourseRegistered : [
+                        "CPEN331", "CPEN321", "CPEN400"
+                    ],
+                    school : "UBC",
+                    phone : "4444445555",
+                    private : false,
+                    inActivity : false,
+                    activityID : -1
                 }
-            });
+            }});
         }));
         
         response = await request(app)
@@ -357,20 +322,45 @@ describe("fail tests", () => {
         await models.connectDb()
         before2 = await Activity.find().exec();
         await Activity.deleteMany({})
-        const response = await request(app)
-            .post("/activities/add")
-            .type('json')
-            .send(constants.a1);
     });
 
     // test adding an activity
     test("add activity", async () => {
+        sharedfuncs.axiosPostRequest = jest.fn((arg1,arg2,arg3) => new Promise((resolve,reject) => {
+            if(arg3.username == "catch test"){
+                reject("exception");
+            }
+            resolve({data : {success : true, status : "profile error"}});
+        }));
         var response = await request(app)
+            .post("/activities/add")
+            .type('json')
+            .send(constants.a1);
+
+        response = await request(app)
             .post("/activities/add")
             .type('json')
             .send(constants.a1);
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("Activity Id Taken");
+
+        response = await request(app)
+            .post("/activities/add")
+            .type('json')
+            .send(constants.a6);
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("ERROR: exception");
+
+        sharedfuncs.axiosPostRequest = jest.fn((arg1,arg2,arg3) => new Promise((resolve,reject) => {
+            resolve({data : {success : false, status : "profile error"}});
+        }));
+
+        var response = await request(app)
+            .post("/activities/add")
+            .type('json')
+            .send(constants.a2);
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("profile error");
 
         for(i=0; i<constants.bad_activities.length; i++){
             response = await request(app)
@@ -492,7 +482,7 @@ describe("fail tests", () => {
             .post("/activities/sort")
             .type('json')
             .send({
-                user : constants.kyle_p[i],
+                user : constants.kyle_p,
                 userlong : "-124",
                 maxradius : "2000",
                 locationweight : 1,
@@ -506,7 +496,7 @@ describe("fail tests", () => {
             .post("/activities/sort")
             .type('json')
             .send({
-                user : constants.kyle_p[i],
+                user : constants.kyle_p,
                 userlat : "50",
                 maxradius : "2000",
                 locationweight : 1,
@@ -520,7 +510,7 @@ describe("fail tests", () => {
         .post("/activities/sort")
         .type('json')
         .send({
-            user : constants.kyle_p[i],
+            user : constants.kyle_p,
             userlat : "50",
             userlong : "-124",
             locationweight : 1,
@@ -534,7 +524,7 @@ describe("fail tests", () => {
         .post("/activities/sort")
         .type('json')
         .send({
-            user : constants.kyle_p[i],
+            user : constants.kyle_p,
             userlat : "50",
             userlong : "-124",
             maxradius : "2000",
@@ -548,7 +538,7 @@ describe("fail tests", () => {
         .post("/activities/sort")
         .type('json')
         .send({
-            user : constants.kyle_p[i],
+            user : constants.kyle_p,
             userlat : "50",
             userlong : "-124",
             maxradius : "2000",
@@ -562,7 +552,7 @@ describe("fail tests", () => {
         .post("/activities/sort")
         .type('json')
         .send({
-            user : constants.kyle_p[i],
+            user : constants.kyle_p,
             userlat : "50",
             userlong : "-124",
             maxradius : "2000",
@@ -575,32 +565,23 @@ describe("fail tests", () => {
 
     // test sorting activities
     test("sort activities without user information", async () => {
-        axios.post = jest.fn((url, jsonObj) => new Promise((resolve, reject) => {
-            if(!jsonObj.hasOwnProperty("username") || jsonObj.username == "test"){
-                reject(new Error("bad request"));
+        sharedfuncs.axiosPostRequest = jest.fn((arg1,arg2,arg3) => new Promise((resolve,reject) => {
+            if(arg3.username == "catch test"){
+                reject("exception");
             }
             resolve(
                 {
-                    val : {
-                        name : "Kyle",
-                        username : "12",
-                        major : "CPEN",
-                        CourseRegistered : [
-                            "CPEN331", "CPEN321", "CPEN400"
-                        ],
-                        school : "UBC",
-                        phone : "4444445555",
-                        private : false,
-                        inActivity : false,
-                        activityID : -1
+                    data : {
+                        success : false,
+                        status : "search error"
                     }
                 });
         }));
-        
         response = await request(app)
             .post("/activities/sortnouser")
             .type('json')
             .send({
+                username : "name",
                 userlat : "50",
                 userlong : "-124",
                 maxradius : "2000",
@@ -608,15 +589,14 @@ describe("fail tests", () => {
                 coursesweight : 1,
                 majorweight : 1
             });
-        
         expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("Not well formed request.");
+        expect(response.body.status).toBe("search error");
 
         response = await request(app)
             .post("/activities/sortnouser")
             .type('json')
             .send({
-                username : "test",
+                username : "catch test",
                 userlat : "50",
                 userlong : "-124",
                 maxradius : "2000",
@@ -624,9 +604,129 @@ describe("fail tests", () => {
                 coursesweight : 1,
                 majorweight : 1
             });
-        
         expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("ERROR: exception");
+
+        response = await request(app)
+            .post("/activities/sortnouser")
+            .type('json')
+            .send({
+                username : "name",
+                userlong : "-124",
+                maxradius : "2000",
+                locationweight : 1,
+                coursesweight : 1,
+                majorweight : 1
+            });
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Not well formed request.");
     })
+
+    test("join update test", async () => {
+        sharedfuncs.axiosPostRequest = jest.fn((arg1,arg2,arg3) => new Promise((resolve,reject) => {
+            if(arg3.username == "catch test"){
+                reject("exception");
+            }
+            resolve(
+                {
+                    data : {
+                        success : false,
+                        status : "join error"
+                    }
+                });
+        }));
+        response = await request(app)
+            .post("/activities/joinupdate")
+            .type('json')
+            .send({
+                username : "user",
+                aid : "blahblah"
+            });
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Activity does not exist.");
+
+        response = await request(app)
+            .post("/activities/joinupdate")
+            .type('json')
+            .send({
+                username : "user",
+                aid : constants.a1.aid
+            });
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("join error");
+
+        response = await request(app)
+            .post("/activities/joinupdate")
+            .type('json')
+            .send({
+                username : "catch test",
+                aid : constants.a1.aid
+            });
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("ERROR: exception");
+
+        response = await request(app)
+            .post("/activities/joinupdate")
+            .type('json')
+            .send({
+                aid : "blahblah"
+            });
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Not well formed request.");
+    });
+
+    test("leave update test", async () => {
+        sharedfuncs.axiosPostRequest = jest.fn((arg1,arg2,arg3) => new Promise((resolve,reject) => {
+            if(arg3.username == "catch test"){
+                reject("exception");
+            }
+            resolve(
+                {
+                    data : {
+                        success : false,
+                        status : "leave error"
+                    }
+                });
+        }));
+        response = await request(app)
+            .post("/activities/leaveupdate")
+            .type('json')
+            .send({
+                username : "user",
+                aid : "blahblah"
+            });
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Activity does not exist.");
+
+        response = await request(app)
+            .post("/activities/leaveupdate")
+            .type('json')
+            .send({
+                username : "user",
+                aid : constants.a1.aid
+            });
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("leave error");
+
+        response = await request(app)
+            .post("/activities/leaveupdate")
+            .type('json')
+            .send({
+                username : "catch test",
+                aid : constants.a1.aid
+            });
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("ERROR: exception");
+
+        response = await request(app)
+            .post("/activities/leaveupdate")
+            .type('json')
+            .send({
+                aid : "blahblah"
+            });
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Not well formed request.");
+    });
 
     afterAll(async () => {
         await Activity.deleteMany({});

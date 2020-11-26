@@ -98,6 +98,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String s) {
         super.onNewToken(s);
+        Log.d("FIREBASE", "ON NEW TOKEN!");
         if(UserdetailsUtil.signedIn){
             Log.d("FIREBASE", "CHANGING TOKEN");
             JSONObject jsnRequest = new JSONObject();

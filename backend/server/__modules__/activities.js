@@ -3,8 +3,7 @@ var express = require("express");
 var router = express.Router();
 router.use(express.json());
 
-var formatResponse = require("./sharedfunctions").formatResponse;
-var axiosPostRequest = require("./sharedfunctions").axiosPostRequest;
+var sharedfuncs = require("./sharedfunctions");
 var Activity = require("../__models__/models").Activity;
 
 function activityIsGoodRequest(body){
@@ -161,13 +160,13 @@ router.get('/all', async (req, res) => {
  */
 router.post("/search", async (req, res) => {
     if(!req.body.hasOwnProperty("aid")){
-        return res.json(formatResponse(false, "Not well formed request.", null));
+        return res.json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
     }
     var response = await Activity.findOne({"aid" : req.body.aid}).exec()
     if(response == null) {
-        return res.json(formatResponse(false, "Activity does not exist.", null));
+        return res.json(sharedfuncs.formatResponse(false, "Activity does not exist.", null));
     }
-    return res.json(formatResponse(true, "Activity found successfully.", response));
+    return res.json(sharedfuncs.formatResponse(true, "Activity found successfully.", response));
 });
 
 /*
@@ -179,11 +178,11 @@ router.post("/search", async (req, res) => {
  */
 router.post("/add", async (req, res) => {
     if(!activityIsGoodRequest(req.body)){
-        return res.json(formatResponse(false, "Not well formed request.", null));
+        return res.json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
     }
     var response = await Activity.findOne({"aid" : req.body.aid}).exec()
     if(response != null) {
-        return res.json(formatResponse(false, "Activity Id Taken", null));
+        return res.json(sharedfuncs.formatResponse(false, "Activity Id Taken", null));
     }
     
     var userJoin = {
@@ -193,14 +192,14 @@ router.post("/add", async (req, res) => {
     var profileupdate;
     try{
         // UPDATE ACTIVITY LEADER'S PROFILE
-        profileupdate = await axiosPostRequest(req, "/profiles/join", userJoin);
+        profileupdate = await sharedfuncs.axiosPostRequest(req, "/profiles/join", userJoin);
     } catch (err) {
-        return res.json(formatResponse(false, "ERROR: " + err, null));
+        return res.json(sharedfuncs.formatResponse(false, "ERROR: " + err, null));
     }
     if(profileupdate.data.success == true){
         // ADD ACTIVITY
         await Activity.create(req.body);
-        return res.json(formatResponse(true, "Activity insert successful.", null));
+        return res.json(sharedfuncs.formatResponse(true, "Activity insert successful.", null));
     } else {
         // 'PROFILE JOIN' ERROR
         return res.json(profileupdate.data);
@@ -216,18 +215,18 @@ router.post("/add", async (req, res) => {
  */
 router.post("/joinupdate",async(req,res)=>{
     if(!req.body.hasOwnProperty("aid") || !req.body.hasOwnProperty("username")){
-        return res.json(formatResponse(false, "Not well formed request.", null));
+        return res.json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
     }
     var response = await Activity.findOne({"aid" : req.body.aid}).exec()
     if(response == null) {
-        return res.json(formatResponse(false, "Activity does not exist.", null));
+        return res.json(sharedfuncs.formatResponse(false, "Activity does not exist.", null));
     }
 
     var profileupdate;
     var sendnotif;
     try{
         // UPDATE USER PROFILE TO BE IN ACTIVITY
-        profileupdate = await axiosPostRequest(req, "/profiles/join", req.body);
+        profileupdate = await sharedfuncs.axiosPostRequest(req, "/profiles/join", req.body);
 
         // SEND NOTIFICATION TO ACTIVITY LEADER
         var leader_notif = {
@@ -235,17 +234,17 @@ router.post("/joinupdate",async(req,res)=>{
             title : "Activity Locator",
             message : req.body.username + " joined your activity!"
         } 
-        sendnotif = await axiosPostRequest(req, "/notifications/send", leader_notif);
+        sendnotif = await sharedfuncs.axiosPostRequest(req, "/notifications/send", leader_notif);
     } catch (err) {
         // AXIOS ERROR
-        return res.json(formatResponse(false, "ERROR: " + err, null));
+        return res.json(sharedfuncs.formatResponse(false, "ERROR: " + err, null));
     }
 
     if(profileupdate.data.success == true){
         // UPDATE ACTIVITY TO NOW INCLUDE USER
         response.usernames.push(req.body.username);
         var result = await Activity.replaceOne({"aid" : req.body.aid}, response)
-        return res.json(formatResponse(true, "Activity Joined successfully.", result));
+        return res.json(sharedfuncs.formatResponse(true, "Activity Joined successfully.", result));
     } else {
         return res.json(profileupdate.data);
     }
@@ -260,20 +259,20 @@ router.post("/joinupdate",async(req,res)=>{
  */
 router.post("/leaveupdate", async (req,res) => {
     if(!req.body.hasOwnProperty("aid") || !req.body.hasOwnProperty("username")){
-        return res.json(formatResponse(false, "Not well formed request.", null));
+        return res.json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
     }
 
     // FIND THE ACTIVITY
     var response = await Activity.findOne({"aid" : req.body.aid}).exec()
     if(response == null) {
-        return res.json(formatResponse(false, "Activity does not exist.", null));
+        return res.json(sharedfuncs.formatResponse(false, "Activity does not exist.", null));
     }
 
     var profileupdate;
     var sendnotif;
     try{
         // UPDATE USER PROFILE TO NO LONGER BE IN ACTIVITY
-        profileupdate = await axiosPostRequest(req, "/profiles/leave", req.body);
+        profileupdate = await sharedfuncs.axiosPostRequest(req, "/profiles/leave", req.body);
 
         // SEND NOTIFICATION TO LEADER OF ACTIVITY
         if(req.body.username != response.leader){
@@ -282,11 +281,11 @@ router.post("/leaveupdate", async (req,res) => {
                 title : "Activity Locator",
                 message : req.body.username + " left your activity."
             };
-            sendnotif = await axiosPostRequest(req, "/notifications/send", leader_notif);
+            sendnotif = await sharedfuncs.axiosPostRequest(req, "/notifications/send", leader_notif);
         }
     } catch (err) {
         // AXIOS ERROR
-        return res.json(formatResponse(false, "ERROR: " + err, null));
+        return res.json(sharedfuncs.formatResponse(false, "ERROR: " + err, null));
     }
 
     if(profileupdate.data.success == true){
@@ -302,11 +301,28 @@ router.post("/leaveupdate", async (req,res) => {
             }
             var result = await Activity.replaceOne({"aid" : req.body.aid}, response)
         } 
-        return res.json(formatResponse(true, "Activity Left successfully.", result));
+        return res.json(sharedfuncs.formatResponse(true, "Activity Left successfully.", result));
     } else {
         // 'LEAVE PROFILE' ERROR
         return res.json(profileupdate.data);
     }
+});
+
+/*
+ * Delete Activity Route.
+ *
+ * Takes in a request with the full information of an activity.
+ * Updates activity with activity id 'activity_id' to the request activity.
+ */
+router.post("/update", async (req, res) => {
+    if(!activityIsGoodRequest(req.body)){
+        return res.json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
+    }
+    var response = await Activity.replaceOne({"aid" : req.body.aid}, req.body)
+    if(response.n == 0){
+        return res.json(sharedfuncs.formatResponse(false, "Activity does not exist.", null));
+    }
+    return res.json(sharedfuncs.formatResponse(true, "Activity updated successfully.", null));
 });
 
 /*
@@ -317,13 +333,13 @@ router.post("/leaveupdate", async (req,res) => {
  */
 router.post('/delete', async (req,res) =>{
     if(!req.body.hasOwnProperty("aid")){
-        return res.json(formatResponse(false, "Not well formed request.", null));
+        return res.json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
     }
     var response = await Activity.deleteOne({"aid" : req.body.aid});
     if(response.n === 0){
-        return res.json(formatResponse(false, "Activity does not exist.", null));
+        return res.json(sharedfuncs.formatResponse(false, "Activity does not exist.", null));
     }
-    return res.json(formatResponse(true, "Activity deleted successfully.", null));
+    return res.json(sharedfuncs.formatResponse(true, "Activity deleted successfully.", null));
 })
 
 /*
@@ -395,7 +411,7 @@ router.post("/sort", async (req, res) => {
 
     // NECESSARY REQUEST INFORMATION !!!
     if(!isGoodSortRequest("with user", req.body)){
-        return res.json(formatResponse(false, "Not well formed request.", null));
+        return res.json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
     }
 
     var user = req.body.user; // user json
@@ -414,7 +430,7 @@ router.post("/sortnouser", async (req, res) => {
 
     // NECESSARY REQUEST INFORMATION !!!
     if(!isGoodSortRequest("without user", req.body)){
-        return res.json(formatResponse(false, "Not well formed request.", null));
+        return res.json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
     }
 
     var r_username = req.body.username;
@@ -425,10 +441,10 @@ router.post("/sortnouser", async (req, res) => {
 
     try{
         // SEARCH FOR USER PROFILE
-        profilereq = await await axiosPostRequest(req, "/profiles/search", userjson);
+        profilereq = await await sharedfuncs.axiosPostRequest(req, "/profiles/search", userjson);
     } catch (err) {
         // AXIOS ERROR
-        return res.json(formatResponse(false, "ERROR: " + err, null));
+        return res.json(sharedfuncs.formatResponse(false, "ERROR: " + err, null));
     }
 
     if(profilereq.data.success == false){

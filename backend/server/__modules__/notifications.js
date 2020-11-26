@@ -79,13 +79,15 @@ router.post('/send', async (req, res)=>{
     }
 
     admin.messaging().sendToDevice(registrationToken, payload, options)
-    .then( response => {
+    .then(response => {
         res.json(formatResponse(true, "Notification sent successfully", null));
     })
     .catch( error => {
-        console.log(error);
+        res.json(formatResponse(true, "ERROR: " + error, null));
     });
 })
 
-module.exports = router;
-module.exports.admin = admin
+module.exports = {
+    router,
+    admin
+}

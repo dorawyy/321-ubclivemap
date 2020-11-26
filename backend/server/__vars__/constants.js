@@ -3,7 +3,7 @@ const a1 = {
     aid : "1",
     name : "bad",
     leader : "test",
-    usernames : ["test","aplha"],
+    usernames : ["test"],
     info : "Understanding Javascript with TA",
     major : "CPEN",
     course : ["CPEN321"],
@@ -17,7 +17,7 @@ const a2 = {
     aid : "2",
     name : "better",
     leader : "test",
-    usernames : ["test","aplha"],
+    usernames : ["test"],
     info : "Understanding Javascript with TA",
     major : "CPEN",
     course : ["CPEN321", "CPEN331"],
@@ -59,6 +59,20 @@ const a5 = {
     aid : "5",
     name : "best",
     leader : "test",
+    usernames : ["test","aplha"],
+    info : "Understanding Javascript with TA",
+    major : "CPEN",
+    course : ["CPEN321", "CPEN331", "CPEN400"],
+    school : "UBC",
+    lat : "1",
+    long : "-2",
+    status : "1"
+}
+
+const a6 = {
+    aid : "6",
+    name : "best",
+    leader : "catch test",
     usernames : ["test","aplha"],
     info : "Understanding Javascript with TA",
     major : "CPEN",
@@ -388,6 +402,7 @@ module.exports = {
     a3,
     a4,
     a5,
+    a6,
     
     bad_activities,
     bad_profiles,

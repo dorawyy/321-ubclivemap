@@ -47,7 +47,6 @@ function profileIsGoodRequest(body){
  * Returns all profiles in profileDB.
  */
 router.get('/all', async (req, res) => {
-    var retarr = [];
     var cursor = await Profile.find().exec();
     return res.json(cursor)
 });

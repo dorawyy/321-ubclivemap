@@ -23,8 +23,6 @@ import org.json.JSONObject;
 
 public class ActivityInfoWindow extends AppCompatActivity {
 
-    private Button back_btn;
-    private Button details_btn;
     private TextView name_btn;
     private TextView info_btn;
 
@@ -38,8 +36,8 @@ public class ActivityInfoWindow extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        back_btn = findViewById(R.id.back_to_map);
-        details_btn = findViewById((R.id.ActDetail));
+        Button back_btn = findViewById(R.id.back_to_map);
+        Button details_btn = findViewById((R.id.ActDetail));
         name_btn = findViewById(R.id.actName);
         info_btn = findViewById((R.id.ActDetails));
 
@@ -65,10 +63,10 @@ public class ActivityInfoWindow extends AppCompatActivity {
         });
 
         getVolleyReq();
-
     }
 
     private void getVolleyReq() {
+
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
         JSONObject aid_for_search = new JSONObject();
         try{
@@ -94,8 +92,6 @@ public class ActivityInfoWindow extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -104,7 +100,6 @@ public class ActivityInfoWindow extends AppCompatActivity {
                 error.printStackTrace();
             }
         });
-
         requestQueue.add(activity_object);
     }
 }

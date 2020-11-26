@@ -163,11 +163,12 @@ public class GetMatchScore extends AppCompatActivity {
                                 try {
                                     if(response.length()>0) {
                                         SortedlistclassUtil.aids = new String[response.length()];
+                                        SortedlistclassUtil.anames = new String[response.length()];
                                         for(int i=0; i<response.length();i++){
                                             SortedlistclassUtil.aids[i] = response.getJSONObject(i).getString("aid");
+                                            SortedlistclassUtil.anames[i] = response.getJSONObject(i).getString("name");
                                         }
-                                        Intent transition = new Intent(GetMatchScore.this, SortedActivityList.class);
-                                        Toast.makeText(GetMatchScore.this, "Activity added", Toast.LENGTH_SHORT).show();
+                                        Intent transition = new Intent(GetMatchScore.this, DisplaySortedList.class);
                                         startActivity(transition);
                                     } else {
                                         Toast.makeText(GetMatchScore.this, "No activities in this range" , Toast.LENGTH_SHORT).show();

@@ -17,11 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Getlocation"></activity>
+        <activity android:name=".DisplaySortedList"></activity>
+        <activity android:name=".ActivityOnMap" />
+        <activity android:name=".Getlocation" />
         <activity android:name=".ActivityPage" />
         <activity android:name=".Joined" />
         <activity android:name=".DisplayActivityDetails" />
-        <activity android:name=".SortedActivityList" />
         <activity android:name=".GetMatchScore" />
 
         <service

@@ -1588,6 +1588,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable check
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -1607,6 +1608,7 @@ drawable common_google_signin_btn_text_light
 drawable common_google_signin_btn_text_light_focused
 drawable common_google_signin_btn_text_light_normal
 drawable common_google_signin_btn_text_light_normal_background
+drawable cross
 drawable design_bottom_navigation_item_background
 drawable design_fab_background
 drawable design_ic_visibility
@@ -1655,10 +1657,13 @@ drawable test_custom_background
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 id ALT
+id ActivityFooter
+id ActivityHeader
 id ActivityNameBox
 id ActivityNameBox2
 id BOTTOM_END
 id BOTTOM_START
+id BackButton
 id CTRL
 id CoursesSpinner
 id CoursesSpinner2
@@ -1674,9 +1679,9 @@ id LocationPriority
 id META
 id MajorBox
 id MajorBox2
-id MapButton
 id MapButton2
 id NO_DEBUG
+id OnMapButton
 id SHIFT
 id SHOW_ALL
 id SHOW_PATH
@@ -1762,6 +1767,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id backToMenu
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -1961,6 +1967,7 @@ id progress_horizontal
 id radio
 id ratio
 id rectangles
+id recycleView
 id reg_course_spinner
 id registered_courses
 id reverseSawtooth
@@ -1991,6 +1998,7 @@ id search_mag_icon
 id search_plate
 id search_src_text
 id search_voice_btn
+id seeMoreButton
 id select_dialog_listview
 id selected
 id shortcut
@@ -2186,12 +2194,14 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_create
 layout activity_display_details
+layout activity_display_sorted_list
 layout activity_get_match_score
 layout activity_getlocation
 layout activity_joined
 layout activity_main
 layout activity_main_maps
 layout activity_menu
+layout activity_on_map
 layout activity_page
 layout activity_profile
 layout activity_sign_up
@@ -2242,6 +2252,7 @@ layout mtrl_picker_header_title_text
 layout mtrl_picker_header_toggle
 layout mtrl_picker_text_input_date
 layout mtrl_picker_text_input_date_range
+layout my_row
 layout notification_action
 layout notification_action_tombstone
 layout notification_template_custom_big

@@ -4,6 +4,8 @@ package com.cpen321.ubclocationbroadcaster;
 * in the database ordered by most suggested at position aids[0] and least suggested at aids[total number of activities-1] */
 public class SortedlistclassUtil {
     public static String [] aids;
+    public static String [] anames;
+
     public static String activity_to_be_displayed;
     public static String aname;
     public static String major;

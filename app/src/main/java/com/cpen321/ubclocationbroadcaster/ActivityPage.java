@@ -28,8 +28,9 @@ public class ActivityPage extends AppCompatActivity {
     private Spinner coursesSpinner;
     //Displays the users in this activity
     private Spinner usersSpinner;
-    //Boolean value becomes true if successfully received activity details from server
-    //private boolean success = false;
+
+    private Button onMap;
+    private Button leave;
 
     private int counter = 0;
     @Override
@@ -40,11 +41,10 @@ public class ActivityPage extends AppCompatActivity {
 
 
         /**LOCAL VARIABLES SET UP - START*/
-        final Button leave = findViewById(R.id.LeaveButton);
+        leave = findViewById(R.id.LeaveButton);
+        onMap = findViewById(R.id.MapButton2);
         /**LOCAL VARIABLES SET UP - END*/
 
-
-        //Log.d("PageActivity", SortedlistclassUtil.activity_to_be_displayed);
 
         JSONObject aid_for_search = new JSONObject();
         try{
@@ -63,6 +63,14 @@ public class ActivityPage extends AppCompatActivity {
                 leaveActivity();
                 Intent intent = new Intent(ActivityPage.this, MenuActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        onMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent onMapTransition = new Intent(ActivityPage.this, ActivityOnMap.class);
+                startActivity(onMapTransition);
             }
         });
 

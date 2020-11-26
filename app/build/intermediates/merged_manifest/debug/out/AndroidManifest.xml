@@ -33,6 +33,8 @@
         android:testOnly="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
+        <activity android:name="com.cpen321.ubclocationbroadcaster.DisplaySortedList" />
+        <activity android:name="com.cpen321.ubclocationbroadcaster.ActivityOnMap" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.Getlocation" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.ActivityPage" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.Joined" />

@@ -1,0 +1,67 @@
+######################################################################
+#################      GET ALL ACTIVITIES     ########################
+######################################################################
+GET http://localhost:3000/activities/all
+
+######################################################################
+##################  POPULATE DB WITH ACTIVITIES  #####################
+######################################################################
+POST http://localhost:3000/activities/add
+Content-Type: application/json
+
+{ "aid" : "a1", "name" : "Cpen221 Exam Prep", "leader" : "user1", "usernames" : ["user1"], "major" : "CPEN", "course" : ["CPEN221"], "school" : "UBC", "lat" : "49.264708", "long" : "-123.238712", "status" : "1",
+    "info" : "Preparing for CPEN221 Exam 2020W Term1" }
+#####################################################################
+POST http://localhost:3000/activities/add
+Content-Type: application/json
+
+{ "aid" : "a2", "name" : "OS161 and Chill", "leader" : "user3", "usernames" : ["user3"], "major" : "ELEC", "course" : ["CPEN331"], "school" : "UBC", "lat" : "49.237816", "long" : "-123.157516", "status" : "1",
+    "info" : "Crying and debuggind session every day:)" }
+#####################################################################
+POST http://localhost:3000/activities/add
+Content-Type: application/json
+
+{ "aid" : "a3", "name" : "System Architecture Interviews", "leader" : "user5", "usernames" : ["user5"], "major" : "CPSC", "course" : ["CPEN411"], "school" : "UBC", "lat" : "49.286659", "long" : "-123.137947", "status" : "1",
+    "info" : "Job Interview Practice Sessions with CPEN411 Alumni" }
+#####################################################################
+POST http://localhost:3000/activities/add
+Content-Type: application/json
+
+{ "aid" : "a4", "name" : "400A Research Group", "leader" : "user7", "usernames" : ["user7"], "major" : "IGEN", "course" : ["CPEN400A"], "school" : "UBC", "lat" : "49.248911", "long" : "-123.029285", "status" : "1",
+    "info" : "Meeting and discussing Modern Web Application Security DrawBacks" }
+#####################################################################
+POST http://localhost:3000/activities/add
+Content-Type: application/json
+
+{ "aid" : "a5", "name" : "Cpen412 Lab Group 2", "leader" : "user9", "usernames" : ["user9"], "major" : "MECH", "course" : ["CPEN411", "CPEN412" , "CPEN421"], "school" : "UBC", "lat" : "49.313525", "long" : "-123.142238", "status" : "1",
+    "info" : "Meet and Discuss CPEN412 Labs with TA" }
+#####################################################################
+
+######################################################################
+#################       JOIN AN ACTIVITY       #######################
+######################################################################
+POST http://localhost:3000/activities/joinupdate
+Content-Type: application/json
+
+{ "username" : "user2", "aid" : "a1" }
+######################################################################
+POST http://localhost:3000/activities/joinupdate
+Content-Type: application/json
+
+{ "username" : "user4", "aid" : "a2" }
+######################################################################
+POST http://localhost:3000/activities/joinupdate
+Content-Type: application/json
+
+{ "username" : "user6", "aid" : "a3" }
+######################################################################
+POST http://localhost:3000/activities/joinupdate
+Content-Type: application/json
+
+{ "username" : "user8", "aid" : "a4" }
+######################################################################
+POST http://localhost:3000/activities/joinupdate
+Content-Type: application/json
+
+{ "username" : "user10", "aid" : "a5" }
+######################################################################

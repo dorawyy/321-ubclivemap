@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,10 +34,12 @@ public class DisplayActivityDetails extends AppCompatActivity {
     private Spinner coursesSpinner;
     //Displays the users in this activity
     private Spinner usersSpinner;
-    //Boolean value becomes true if successfully received activity details from server
-    //private boolean success = false;
+    private Button join;
+    private Button viewActivtiyOnMap;
+    private Button backToMenu;
 
     private int counter = 0;
+
 
 
     @Override
@@ -48,8 +51,9 @@ public class DisplayActivityDetails extends AppCompatActivity {
         /**LOCAL VARIABLES SET UP - START*/
         String URL = UserdetailsUtil.getURL() + "/activities/search";
         final RequestQueue queue = Volley.newRequestQueue(this);
-        //Button onMap = findViewById(R.id.MapButton);
-        final Button join = findViewById(R.id.JoinButton);
+        join = findViewById(R.id.JoinButton);
+        viewActivtiyOnMap = findViewById(R.id.OnMapButton);
+        backToMenu = findViewById(R.id.backToMenu);
         /**LOCAL VARIABLES SET UP - END*/
 
         Log.d("DisplayActivity", SortedlistclassUtil.activity_to_be_displayed);
@@ -58,7 +62,7 @@ public class DisplayActivityDetails extends AppCompatActivity {
         try{
             aid_for_search.put("aid", SortedlistclassUtil.activity_to_be_displayed);
         }catch (JSONException e) {
-            Log.d("Check0","Not able to form JSON Object aid_for_search");
+            Log.d("DisplayActivityDetails","Not able to form JSON Object aid_for_search");
             e.printStackTrace();
         }
 
@@ -157,9 +161,24 @@ public class DisplayActivityDetails extends AppCompatActivity {
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent sign_up_Intent = new Intent(DisplayActivityDetails.this, Joined.class);
-                startActivity(sign_up_Intent);
+                Intent intent = new Intent(DisplayActivityDetails.this, Joined.class);
+                startActivity(intent);
                 Log.d("Done", "Going Joined");
+            }
+        });
+
+        viewActivtiyOnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent onMapTransition = new Intent(DisplayActivityDetails.this, ActivityOnMap.class);
+                startActivity(onMapTransition);
+            }
+        });
+
+        backToMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

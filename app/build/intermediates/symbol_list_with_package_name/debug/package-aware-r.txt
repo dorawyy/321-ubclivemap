@@ -1578,6 +1578,8 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable amu_bubble_mask
+drawable amu_bubble_shadow
 drawable avd_hide_password
 drawable avd_show_password
 drawable btn_checkbox_checked_mtrl
@@ -1655,6 +1657,8 @@ drawable test_custom_background
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 id ALT
+id ActDetail
+id ActDetails
 id ActivityNameBox
 id ActivityNameBox2
 id BOTTOM_END
@@ -1722,6 +1726,7 @@ id accessibility_custom_action_6
 id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
+id actName
 id action_bar
 id action_bar_activity_content
 id action_bar_container
@@ -1754,6 +1759,7 @@ id alertTitle
 id aligned
 id all
 id always
+id amu_text
 id animateToEnd
 id animateToStart
 id asConfigured
@@ -1762,6 +1768,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id back_to_map
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -1963,6 +1970,7 @@ id ratio
 id rectangles
 id reg_course_spinner
 id registered_courses
+id relativeLayout
 id reverseSawtooth
 id right
 id right_icon
@@ -2068,6 +2076,8 @@ id textView2
 id textView21
 id textView22
 id textView23
+id textView24
+id textView25
 id textView3
 id textView33
 id textView332
@@ -2117,7 +2127,9 @@ id view_map_btn
 id view_offset_helper
 id visible
 id visible_removing_fragment_view_tag
+id webview
 id wide
+id window
 id withText
 id withinBounds
 id wrap
@@ -2188,6 +2200,7 @@ layout activity_create
 layout activity_display_details
 layout activity_get_match_score
 layout activity_getlocation
+layout activity_info_window
 layout activity_joined
 layout activity_main
 layout activity_main_maps
@@ -2197,6 +2210,9 @@ layout activity_profile
 layout activity_sign_up
 layout activity_sorted_list
 layout activity_stuff_menu
+layout amu_info_window
+layout amu_text_bubble
+layout amu_webview
 layout content_scrolling
 layout custom_dialog
 layout design_bottom_navigation_item
@@ -2270,6 +2286,26 @@ menu menu_list_scrolling
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
+raw amu_ballon_gx_prefix
+raw amu_basic_folder
+raw amu_basic_placemark
+raw amu_cdata
+raw amu_default_balloon
+raw amu_document_nest
+raw amu_draw_order_ground_overlay
+raw amu_extended_data
+raw amu_ground_overlay
+raw amu_ground_overlay_color
+raw amu_inline_style
+raw amu_multigeometry_placemarks
+raw amu_multiple_placemarks
+raw amu_nested_folders
+raw amu_nested_multigeometry
+raw amu_poly_style_boolean_alpha
+raw amu_poly_style_boolean_numeric
+raw amu_unknwown_folder
+raw amu_unsupported
+raw amu_visibility_ground_overlay
 string Course_selecting_spinner
 string abc_action_bar_home_description
 string abc_action_bar_up_description
@@ -3117,6 +3153,9 @@ style Widget_MaterialComponents_Toolbar_PrimarySurface
 style Widget_MaterialComponents_Toolbar_Surface
 style Widget_MaterialComponents_Tooltip
 style Widget_Support_CoordinatorLayout
+style amu_Bubble_TextAppearance_Dark
+style amu_Bubble_TextAppearance_Light
+style amu_ClusterIcon_TextAppearance
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth

@@ -1,12 +1,9 @@
-com/cpen321/ubclocationbroadcaster/SortedlistclassUtil.java
- com.cpen321.ubclocationbroadcaster.SortedlistclassUtil
-com/cpen321/ubclocationbroadcaster/MyJSONArrayRequest.java
- com.cpen321.ubclocationbroadcaster.MyJSONArrayRequest
-com/cpen321/ubclocationbroadcaster/BuildConfig.java
- com.cpen321.ubclocationbroadcaster.BuildConfig
-com/cpen321/ubclocationbroadcaster/SortedActivityList.java
- com.cpen321.ubclocationbroadcaster.SortedActivityList
- com.cpen321.ubclocationbroadcaster.SortedActivityList$1
+com/cpen321/ubclocationbroadcaster/ActivityInfoWindow.java
+ com.cpen321.ubclocationbroadcaster.ActivityInfoWindow
+ com.cpen321.ubclocationbroadcaster.ActivityInfoWindow$1
+ com.cpen321.ubclocationbroadcaster.ActivityInfoWindow$2
+ com.cpen321.ubclocationbroadcaster.ActivityInfoWindow$3
+ com.cpen321.ubclocationbroadcaster.ActivityInfoWindow$4
 com/cpen321/ubclocationbroadcaster/CreateActivity.java
  com.cpen321.ubclocationbroadcaster.CreateActivity
  com.cpen321.ubclocationbroadcaster.CreateActivity$1
@@ -15,6 +12,8 @@ com/cpen321/ubclocationbroadcaster/CreateActivity.java
  com.cpen321.ubclocationbroadcaster.CreateActivity$3
  com.cpen321.ubclocationbroadcaster.CreateActivity$3$1
  com.cpen321.ubclocationbroadcaster.CreateActivity$3$2
+com/cpen321/ubclocationbroadcaster/MyJSONArrayRequest.java
+ com.cpen321.ubclocationbroadcaster.MyJSONArrayRequest
 com/cpen321/ubclocationbroadcaster/Getlocation.java
  com.cpen321.ubclocationbroadcaster.Getlocation
  com.cpen321.ubclocationbroadcaster.Getlocation$1
@@ -23,10 +22,14 @@ com/cpen321/ubclocationbroadcaster/Getlocation.java
  com.cpen321.ubclocationbroadcaster.Getlocation$4
 com/cpen321/ubclocationbroadcaster/UserdetailsUtil.java
  com.cpen321.ubclocationbroadcaster.UserdetailsUtil
+com/cpen321/ubclocationbroadcaster/SortedlistclassUtil.java
+ com.cpen321.ubclocationbroadcaster.SortedlistclassUtil
 com/cpen321/ubclocationbroadcaster/MainMapsActivity.java
  com.cpen321.ubclocationbroadcaster.MainMapsActivity
  com.cpen321.ubclocationbroadcaster.MainMapsActivity$1
  com.cpen321.ubclocationbroadcaster.MainMapsActivity$2
+com/cpen321/ubclocationbroadcaster/BuildConfig.java
+ com.cpen321.ubclocationbroadcaster.BuildConfig
 com/cpen321/ubclocationbroadcaster/DisplayActivityDetails.java
  com.cpen321.ubclocationbroadcaster.DisplayActivityDetails
  com.cpen321.ubclocationbroadcaster.DisplayActivityDetails$1
@@ -76,6 +79,9 @@ com/cpen321/ubclocationbroadcaster/ProfileActivity.java
  com.cpen321.ubclocationbroadcaster.ProfileActivity$1$1
  com.cpen321.ubclocationbroadcaster.ProfileActivity$1$2
  com.cpen321.ubclocationbroadcaster.ProfileActivity$2
+com/cpen321/ubclocationbroadcaster/SortedActivityList.java
+ com.cpen321.ubclocationbroadcaster.SortedActivityList
+ com.cpen321.ubclocationbroadcaster.SortedActivityList$1
 com/cpen321/ubclocationbroadcaster/Joined.java
  com.cpen321.ubclocationbroadcaster.Joined
  com.cpen321.ubclocationbroadcaster.Joined$1

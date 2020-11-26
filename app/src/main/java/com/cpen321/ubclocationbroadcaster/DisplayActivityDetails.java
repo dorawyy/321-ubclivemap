@@ -52,7 +52,7 @@ public class DisplayActivityDetails extends AppCompatActivity {
         final Button join = findViewById(R.id.JoinButton);
         /**LOCAL VARIABLES SET UP - END*/
 
-        Log.d("DisplayActivity", SortedlistclassUtil.activity_to_be_displayed);
+//        Log.d("DisplayActivity", SortedlistclassUtil.activity_to_be_displayed);
 
         JSONObject aid_for_search = new JSONObject();
         try{

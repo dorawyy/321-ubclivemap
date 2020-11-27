@@ -1139,6 +1139,7 @@ color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
 color test_mtrl_calendar_day
 color test_mtrl_calendar_day_selected
+color textColor
 color tooltip_background_dark
 color tooltip_background_light
 dimen abc_action_bar_content_inset_material
@@ -1669,6 +1670,8 @@ id ActivityNameBox2
 id BOTTOM_END
 id BOTTOM_START
 id BackButton
+id BackToMenuFromSettings
+id BackfromCurrentActivity
 id CTRL
 id CoursesSpinner
 id CoursesSpinner2
@@ -2058,6 +2061,7 @@ id stop
 id stretch
 id submenuarrow
 id submit_area
+id switch1
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -2480,6 +2484,7 @@ string status_bar_notification_info_overflow
 string tab_text_1
 string tab_text_2
 string tab_text_3
+string text
 string title_activity_display_activitiy_details
 string title_activity_display_details
 string title_activity_list_scrolling

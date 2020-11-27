@@ -31,6 +31,7 @@ public class ActivityPage extends AppCompatActivity {
 
     private Button onMap;
     private Button leave;
+    private Button back;
 
     private int counter = 0;
     @Override
@@ -43,6 +44,7 @@ public class ActivityPage extends AppCompatActivity {
         /**LOCAL VARIABLES SET UP - START*/
         leave = findViewById(R.id.LeaveButton);
         onMap = findViewById(R.id.MapButton2);
+        back = findViewById(R.id.BackfromCurrentActivity);
         /**LOCAL VARIABLES SET UP - END*/
 
 
@@ -61,8 +63,7 @@ public class ActivityPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 leaveActivity();
-                Intent intent = new Intent(ActivityPage.this, MenuActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -71,6 +72,13 @@ public class ActivityPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent onMapTransition = new Intent(ActivityPage.this, ActivityOnMap.class);
                 startActivity(onMapTransition);
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

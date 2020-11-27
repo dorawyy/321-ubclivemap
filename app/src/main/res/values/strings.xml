@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Activity Locator</string>
 
+    <string name="text">Light Mode</string>
+
     //buttons for sign in page
     <string name="title_activity_login">Activity Locator</string>
     <string name="prompt_username">Username</string>

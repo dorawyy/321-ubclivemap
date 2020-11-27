@@ -14,10 +14,11 @@
 
         <TextView
             android:id="@+id/ActivityNameBox2"
-            android:layout_width="116dp"
-            android:layout_height="32dp"
+            android:layout_width="331dp"
+            android:layout_height="34dp"
             android:text="ActivityName"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,9 +94,12 @@
 
         <TextView
             android:id="@+id/InfoBox2"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="144dp"
             android:layout_marginTop="25dp"
+            android:autoSizeMaxTextSize="18sp"
+            android:autoSizeMinTextSize="5sp"
+            android:autoSizeTextType="uniform"
             android:text="TextView"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -105,11 +109,14 @@
 
         <TextView
             android:id="@+id/LeaderBox2"
-            android:layout_width="101dp"
-            android:layout_height="19dp"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
             android:layout_marginTop="25dp"
             android:text="TextView"
-            android:textSize="18sp"
+            android:autoSizeMaxTextSize="18sp"
+            android:autoSizeMinTextSize="5sp"
+            android:autoSizeTextType="uniform"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -117,11 +124,13 @@
 
         <TextView
             android:id="@+id/MajorBox2"
-            android:layout_width="101dp"
-            android:layout_height="19dp"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
             android:layout_marginTop="25dp"
             android:text="TextView"
-            android:textSize="18sp"
+            android:autoSizeMaxTextSize="18sp"
+            android:autoSizeMinTextSize="5sp"
+            android:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -129,11 +138,13 @@
 
         <TextView
             android:id="@+id/SchoolBox2"
-            android:layout_width="101dp"
-            android:layout_height="19dp"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
             android:layout_marginTop="25dp"
             android:text="TextView"
-            android:textSize="18sp"
+            android:autoSizeMaxTextSize="18sp"
+            android:autoSizeMinTextSize="5sp"
+            android:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -141,10 +152,10 @@
 
         <Button
             android:id="@+id/MapButton2"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
+            android:layout_width="154dp"
+            android:layout_height="37dp"
             android:layout_marginTop="25dp"
-            android:text="On Map"
+            android:text="View On Map"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -152,15 +163,25 @@
 
         <Button
             android:id="@+id/LeaveButton"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
+            android:layout_width="154dp"
+            android:layout_height="38dp"
             android:layout_marginTop="25dp"
-            android:text="LEAVE"
+            android:text="LEAVE Activity"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/UsersSpinner2" />
 
+        <Button
+            android:id="@+id/BackfromCurrentActivity"
+            android:layout_width="330dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="80dp"
+            android:text="Back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.992"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/UsersSpinner2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

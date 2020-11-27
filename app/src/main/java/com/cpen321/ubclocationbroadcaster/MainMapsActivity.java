@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -70,7 +69,6 @@ public class MainMapsActivity extends FragmentActivity implements GoogleMap.OnMa
                                 JSONObject jsonObject = response.getJSONObject(i);
 
                                 String name = jsonObject.getString("name");
-                                String courseName = jsonObject.getString("course");
 
                                 IconGenerator mGenerator = new IconGenerator(MainMapsActivity.this);
                                 Bitmap iconBitmap = mGenerator.makeIcon(name);
@@ -97,7 +95,6 @@ public class MainMapsActivity extends FragmentActivity implements GoogleMap.OnMa
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        //Toast.makeText(this, marker.getTitle() + " has been clicked ", Toast.LENGTH_SHORT).show();
         markerID = marker.getTitle();
         Intent marker_Intent = new Intent(MainMapsActivity.this, ActivityInfoWindow.class);
         startActivity(marker_Intent);

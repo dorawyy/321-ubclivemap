@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-#Wed Nov 25 20:50:13 PST 2020
+#Thu Nov 26 16:08:13 PST 2020
 base.0=C\:\\Users\\jaski\\Desktop\\ubc\\cpen321\\CPEN-321-Location-App\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-=======
-#Sun Nov 22 09:28:09 PST 2020
-base.0=C\:\\Users\\solom\\Documents\\CPEN321\\CPEN-321-Location-App\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
->>>>>>> 676aaa9a2e3909186fb4326dd441c52ff5a9086f
 path.0=classes.dex
 renamed.0=classes.dex

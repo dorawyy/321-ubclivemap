@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,6 +33,8 @@ public class DisplaySortedList extends AppCompatActivity {
     private int check = (R.drawable.check);
     private int cross = (R.drawable.cross);
     RecyclerView recyclerView;
+    Button backToMenu;
+    Button back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,5 +46,22 @@ public class DisplaySortedList extends AppCompatActivity {
         MyAdapter myAdapter = new MyAdapter(this,SortedlistclassUtil.aids,SortedlistclassUtil.anames);
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        backToMenu = findViewById(R.id.backToMenu);
+        backToMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DisplaySortedList.this, MenuActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        back = findViewById(R.id.backToGetMatchScore);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

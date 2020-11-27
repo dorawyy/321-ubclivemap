@@ -17,9 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DisplaySortedList"></activity>
+        <activity android:name=".ViewProfile"></activity>
+        <activity android:name=".Settings" />
+        <activity android:name=".MenuProfiles" />
+        <activity android:name=".MenuActivities" />
+        <activity android:name=".DisplaySortedList" />
         <activity android:name=".ActivityOnMap" />
         <activity android:name=".Getlocation" />
+        <activity android:name=".ActivityInfoWindow" />
         <activity android:name=".ActivityPage" />
         <activity android:name=".Joined" />
         <activity android:name=".DisplayActivityDetails" />

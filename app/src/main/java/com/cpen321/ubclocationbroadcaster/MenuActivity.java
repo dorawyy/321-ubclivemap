@@ -15,78 +15,51 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        Button viewMapButton;
-        Button myActivityButton;
-        Button editProfileButton;
+        Button activitesMenuButton;
+        Button profileMenuButton;
         Button signOutButton;
-        Button createActivityButton;
-        Button currActivityButton;
+        Button settingsButton;
 
-        viewMapButton = findViewById(R.id.view_map_btn);
-        viewMapButton.setOnClickListener(new View.OnClickListener() {
+        activitesMenuButton = findViewById(R.id.ActivityMenu);
+        activitesMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mapIntent = new Intent(MenuActivity.this, MainMapsActivity.class);
-                startActivity(mapIntent);
+                Intent intent = new Intent(MenuActivity.this, MenuActivities.class);
+                startActivity(intent);
             }
         });
 
-        myActivityButton = findViewById(R.id.my_activity_btn);
-        myActivityButton.setOnClickListener(new View.OnClickListener() {
+        profileMenuButton = findViewById(R.id.ProfileMenu);
+        profileMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent activityIntent = new Intent(MenuActivity.this, GetMatchScore.class);
+                Intent activityIntent = new Intent(MenuActivity.this, MenuProfiles.class);
                 startActivity(activityIntent);
             }
         });
 
-        editProfileButton = findViewById(R.id.edit_profile_btn);
-        editProfileButton.setOnClickListener(new View.OnClickListener() {
+        settingsButton = findViewById(R.id.Settings);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent editProfileIntent = new Intent(MenuActivity.this, ProfileActivity.class);
-                startActivity(editProfileIntent);
+                Intent activityIntent = new Intent(MenuActivity.this, Settings.class);
+                startActivity(activityIntent);
             }
         });
 
-        currActivityButton = findViewById(R.id.currentActivity);
-        currActivityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!UserdetailsUtil.inactivity){
-                    Toast.makeText(MenuActivity.this, "~ Such Empty, Much Wow ~", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Intent intent = new Intent(MenuActivity.this, ActivityPage.class);
-                    startActivity(intent);
-                }
-            }
-        });
-
-        signOutButton = findViewById(R.id.sign_out_btn);
+        signOutButton = findViewById(R.id.SignOut);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 UserdetailsUtil.cleanup();
                 SortedlistclassUtil.cleanup();
-                Intent signInIntent = new Intent(MenuActivity.this, MainActivity.class);
-                startActivity(signInIntent);
+                Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 
-        createActivityButton = findViewById(R.id.create_activity_button);
-        createActivityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!UserdetailsUtil.inactivity){
-                    Intent signInIntent = new Intent(MenuActivity.this, CreateActivity.class);
-                    startActivity(signInIntent);
-                }
-                else{
-                    Toast.makeText(MenuActivity.this, "You are already in an Activity!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
     }
 
 }

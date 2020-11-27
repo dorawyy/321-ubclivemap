@@ -33,13 +33,17 @@
         android:testOnly="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
+        <activity android:name="com.cpen321.ubclocationbroadcaster.ViewProfile" />
+        <activity android:name="com.cpen321.ubclocationbroadcaster.Settings" />
+        <activity android:name="com.cpen321.ubclocationbroadcaster.MenuProfiles" />
+        <activity android:name="com.cpen321.ubclocationbroadcaster.MenuActivities" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.DisplaySortedList" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.ActivityOnMap" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.Getlocation" />
+        <activity android:name="com.cpen321.ubclocationbroadcaster.ActivityInfoWindow" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.ActivityPage" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.Joined" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.DisplayActivityDetails" />
-        <activity android:name="com.cpen321.ubclocationbroadcaster.SortedActivityList" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.GetMatchScore" />
 
         <service
@@ -83,6 +87,10 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <!--
              FirebaseMessagingService performs security checks at runtime,
              but set to not exported to explicitly avoid allowing another app to call it.
@@ -151,10 +159,6 @@
             android:enabled="true"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
 
         <provider
             android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"

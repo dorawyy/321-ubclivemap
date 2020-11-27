@@ -2,20 +2,27 @@ package com.cpen321.ubclocationbroadcaster;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.google.maps.android.ui.IconGenerator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,9 +33,10 @@ import org.json.JSONObject;
  * This screen contains several markers. These Markers correspond to all of active activities
  * The user can click on the marker and view the activity information.
  * The user can also join an activity by clicking on a marker and following the prompts*/
-public class MainMapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MainMapsActivity extends FragmentActivity implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
 
     private GoogleMap mMap;
+    public static String markerID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +70,14 @@ public class MainMapsActivity extends FragmentActivity implements OnMapReadyCall
                                 JSONObject jsonObject = response.getJSONObject(i);
 
                                 String name = jsonObject.getString("name");
+                                String courseName = jsonObject.getString("course");
+
+                                IconGenerator mGenerator = new IconGenerator(MainMapsActivity.this);
+                                Bitmap iconBitmap = mGenerator.makeIcon(name);
 
                                 LatLng marker = new LatLng(jsonObject.getDouble("lat"), jsonObject.getDouble("long"));
 
-                                mMap.addMarker(new MarkerOptions().position(marker).title(name).draggable(true));
+                                mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(iconBitmap)).position(marker).title(jsonObject.getString("aid")).draggable(true));
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker,14.0f));
                             }
                         } catch (JSONException e) {
@@ -80,6 +92,16 @@ public class MainMapsActivity extends FragmentActivity implements OnMapReadyCall
         });
 
         requestQueue.add(allActivities);
+        mMap.setOnMarkerClickListener(this);
+    }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        //Toast.makeText(this, marker.getTitle() + " has been clicked ", Toast.LENGTH_SHORT).show();
+        markerID = marker.getTitle();
+        Intent marker_Intent = new Intent(MainMapsActivity.this, ActivityInfoWindow.class);
+        startActivity(marker_Intent);
+        Log.d("MainMapsActivity", "A marker has been clicked");
+        return false;
     }
 }

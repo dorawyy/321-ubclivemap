@@ -111,4 +111,12 @@ Content-Type: application/json
 { "username" : "user10" }
 ######################################################################
 
+POST http://localhost:3000/profiles/update
+Content-Type: application/json
 
+{   "username" : "user10", "name" : "Jeremy", "major" : "MECH", "school" : "UBC", "phone" : "012-345-6789", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN311"] }
+######################################################################
+POST http://localhost:3000/profiles/delete
+Content-Type: application/json
+
+{ "username" : "user1" }

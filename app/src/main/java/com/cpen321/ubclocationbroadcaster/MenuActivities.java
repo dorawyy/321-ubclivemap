@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -13,6 +16,7 @@ public class MenuActivities extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_menu_activities);
 
         Button viewActivitiesOnMapButton;
@@ -20,7 +24,15 @@ public class MenuActivities extends AppCompatActivity {
         Button createActivityButton;
         Button suggestedActivitiesButton;
 
+        Animation topAnim, bottomAnim, topAnim2, bottomAnim2;
+
+        topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
+        bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
+        topAnim2 = AnimationUtils.loadAnimation(this,R.anim.top_anime_another);
+        bottomAnim2 = AnimationUtils.loadAnimation(this,R.anim.bottom_anime_another);
+
         viewActivitiesOnMapButton = findViewById(R.id.ViewActivitiesOnMap);
+        viewActivitiesOnMapButton.setAnimation(topAnim);
         viewActivitiesOnMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -30,6 +42,7 @@ public class MenuActivities extends AppCompatActivity {
         });
 
         currentActivityButton = findViewById(R.id.CurrentActivity);
+        currentActivityButton.setAnimation(topAnim2);
         currentActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +57,7 @@ public class MenuActivities extends AppCompatActivity {
         });
 
         createActivityButton = findViewById(R.id.CreateActivity);
+        createActivityButton.setAnimation(bottomAnim);
         createActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +72,7 @@ public class MenuActivities extends AppCompatActivity {
         });
 
         suggestedActivitiesButton = findViewById(R.id.SuggestedActivites);
+        suggestedActivitiesButton.setAnimation(bottomAnim2);
         suggestedActivitiesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

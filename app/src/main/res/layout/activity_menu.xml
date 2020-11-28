@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuActivity">
+    tools:context=".MenuActivity"
+    android:background="@drawable/bo">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,35 +19,36 @@
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
                 android:layout_weight="2"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
                 <Button
                     android:id="@+id/ActivityMenu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/o1"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textSize="34dp"
+                    android:textStyle="bold"
                     android:text="ACTIVITY MENU"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.004"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                     />
             </LinearLayout>
             <LinearLayout
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
                 <Button
                     android:id="@+id/SignOut"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Sign Out"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.597"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view_map_btn"
-                    app:layout_constraintVertical_bias="0.059" />
+                    android:background="@drawable/o2"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textStyle="bold"
+                    android:textSize="34dp"
+                    android:text="Sign Out" />
             </LinearLayout>
         </LinearLayout>
 
@@ -56,40 +58,40 @@
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:orientation="vertical" >
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
                 <Button
                     android:id="@+id/ProfileMenu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Profile Menu"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.597"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/create_activity_button"
-                    app:layout_constraintVertical_bias="0.079" />
+                    android:background="@drawable/o3"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textStyle="bold"
+                    android:textSize="34dp"
+                    android:text="Profile Menu" />
             </LinearLayout>
             <LinearLayout
                 android:layout_height="0dp"
                 android:layout_width="match_parent"
                 android:layout_weight="2"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
                 <Button
                     android:id="@+id/Settings"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Settings"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.597"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/my_activity_btn"
-                    app:layout_constraintVertical_bias="0.064" />
+                    android:background="@drawable/o4"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textSize="34dp"
+                    android:text="Settings" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

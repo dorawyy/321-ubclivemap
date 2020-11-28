@@ -4,13 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DisplaySortedList">
+    tools:context=".DisplaySortedList"
+    android:background="@drawable/bo">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"
         android:layout_width="396dp"
         android:layout_height="403dp"
         android:layout_marginTop="56dp"
+
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,6 +25,10 @@
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
         android:text="Back To Menu"
+        android:background="@drawable/o2"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +40,10 @@
         android:layout_width="389dp"
         android:layout_height="50dp"
         android:text="Try Another Priorities?"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"
+        android:background="@drawable/o2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,10 +52,11 @@
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="346dp"
+        android:layout_width="360dp"
         android:layout_height="33dp"
         android:text="SCROLL TO SEE ALL THE ACTIVITIES"
-        android:textSize="20sp"
+        android:textSize="24sp"
+        android:fontFamily="sans-serif-condensed-medium"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/recycleView"
         app:layout_constraintEnd_toEndOf="parent"

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewProfile">
+    tools:context=".ViewProfile"
+    android:background="@drawable/bo">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,14 +25,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="ABCDEFGHIJKLMNOP"
-                    android:textSize="20dp"
+                    android:fontFamily="sans-serif-condensed-medium"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.052"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.05" />
+                    android:textSize="20dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -46,14 +42,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="ABCDEFGHIJKLMNOP"
-                android:textSize="20dp"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.052"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.05" />
+                android:textSize="20dp" />
         </LinearLayout>
         <LinearLayout
             android:layout_height="0dp"
@@ -67,19 +58,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="ABCDEFGHIJKLMNOP"
-                android:textSize="20dp"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.052"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.05" />
+                android:textSize="20dp" />
         </LinearLayout>
         <LinearLayout
             android:layout_height="0dp"
             android:layout_width="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:orientation="vertical"
             android:layout_margin="5dp">
 
@@ -88,14 +74,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="ABCDEFGHIJKLMNOP"
-                android:textSize="20dp"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.052"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.05" />
+                android:textSize="20dp"  />
         </LinearLayout>
         <LinearLayout
             android:layout_height="0dp"
@@ -109,14 +90,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="ABCDEFGHIJKLMNOP"
-                android:textSize="20dp"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.052"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.05" />
+                android:textSize="20dp" />
         </LinearLayout>
         <LinearLayout
             android:layout_height="0dp"
@@ -130,14 +106,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="ABCDEFGHIJKLMNOP"
-                android:textSize="20dp"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.052"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.05" />
+                android:textSize="20dp"  />
         </LinearLayout>
         <LinearLayout
             android:layout_height="0dp"
@@ -151,14 +122,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="ABCDEFGHIJKLMNOP"
-                android:textSize="20dp"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.052"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.05" />
+                android:textSize="20dp" />
         </LinearLayout>
         <LinearLayout
             android:layout_height="0dp"
@@ -172,14 +138,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="ABCDEFGHIJKLMNOP"
-                android:textSize="20dp"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.052"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.05" />
+                android:textSize="20dp"  />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_margin="5dp">
+
+            <Button
+                android:id="@+id/backFromViewProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="BACK"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textStyle="bold"
+                android:textSize="28dp"
+                android:background="@drawable/o2"/>
         </LinearLayout>
     </LinearLayout>
 

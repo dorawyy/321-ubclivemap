@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Settings">
+    tools:context=".Settings"
+    android:background="@drawable/bo">
 
     <Switch
         android:id="@+id/switch1"
@@ -22,13 +23,17 @@
     <Button
         android:id="@+id/BackToMenuFromSettings"
         android:layout_width="374dp"
-        android:layout_height="47dp"
+        android:layout_height="50dp"
         android:text="Back To Menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch1"
-        app:layout_constraintVertical_bias="0.202" />
+        app:layout_constraintVertical_bias="0.202"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:background="@drawable/o2"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

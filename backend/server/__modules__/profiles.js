@@ -83,7 +83,7 @@ router.post("/update", async (req, res) => {
     if(response.n == 0){
         return res.json(formatResponse(false, "Username does not exist.", null));
     }
-    return res.json(formatResponse(true, "User profile updated successfully.", null));
+    return res.json(formatResponse(true, "User profile updated successfully.", req.body));
 });
 
 /*

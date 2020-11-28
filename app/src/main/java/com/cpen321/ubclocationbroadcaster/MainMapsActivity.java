@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.android.volley.Request;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -40,6 +41,7 @@ public class MainMapsActivity extends FragmentActivity implements GoogleMap.OnMa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main_maps);
 
         /**The following code snippet is obtained from https://developers.google.com/maps/documentation/android-sdk/marker

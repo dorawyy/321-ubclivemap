@@ -18,10 +18,15 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -42,15 +47,26 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
     private static LocationManager locationManager;
+    Animation topAnim, bottomAnim;
+    ImageView img;
+    EditText username,password;
+    Button sign_in_btn, sign_up_btn;
+    TextView t1,t2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         if(!UserdetailsUtil.tokenGenerated){
             generateFirebaseToken();
         }
+
+        //Animations
+        topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
+        bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
 
 
         checkLocationPermission();
@@ -58,17 +74,23 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,900000,0,this);
 
         /**INITIALIZATION : START*/
-        final EditText username;
         username = findViewById(R.id.username_button);
-
-        final EditText password;
         password = findViewById(R.id.password_button);
-
-        Button sign_in_btn;
         sign_in_btn = findViewById(R.id.sign_in_button);
-
-        Button sign_up_btn;
         sign_up_btn = findViewById(R.id.sign_up_button);
+        t1 = findViewById(R.id.textView2);
+        t2 = findViewById(R.id.textView3);
+        img = findViewById(R.id.imageView4);
+
+        img.setAnimation(topAnim);
+
+        username.setAnimation(bottomAnim);
+        password.setAnimation(bottomAnim);
+        sign_in_btn.setAnimation(bottomAnim);
+        sign_up_btn.setAnimation(bottomAnim);
+        t1.setAnimation(bottomAnim);
+        t2.setAnimation(bottomAnim);
+
 
         final RequestQueue q = Volley.newRequestQueue(this);
         /**INITIALIZATION : END*/
@@ -112,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                                             Intent sign_in_Intent = new Intent(MainActivity.this, MenuActivity.class);
                                             Toast.makeText(MainActivity.this, "Login Succeeded!", Toast.LENGTH_SHORT).show();
                                             UserdetailsUtil.signedIn = true;
+                                            finish();
                                             startActivity(sign_in_Intent);
                                         } else {
                                             Log.d("MainActivity", "Error: " + stat);

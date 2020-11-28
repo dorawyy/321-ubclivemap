@@ -12,7 +12,7 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class MenuActivityTest {
     @Rule
@@ -23,45 +23,53 @@ public class MenuActivityTest {
         // unused
     }
 
-    @After
-    public void tearDown() throws Exception {
-        // unused
+    /** Testing if selecting each button leads us to the corresponding intent **/
+    @Test
+    public void buttonSelectionTest1() {
+        Espresso.onView(withId(R.id.ActivityMenu)).perform(click());
+
+        try {
+        intended(hasComponent(MenuActivities.class.getName()));
+    } catch(Exception e) {
+        fail("Exception thrown.");
+        }
     }
 
     @Test
-    public void buttonSelectionTest1() {
-        Espresso.onView(withId(R.id.view_map_btn)).perform(click());
-        intended(hasComponent(MainMapsActivity.class.getName()));
-        assertEquals(1, 1);
+    public void buttonSelectionTest2() {
+        Espresso.onView(withId(R.id.ProfileMenu)).perform(click());
+
+        try {
+        intended(hasComponent(MenuProfiles.class.getName()));
+        } catch(Exception e) {
+            fail("Exception thrown.");
+        }
     }
 
     @Test
     public void buttonSelectionTest3() {
-        Espresso.onView(withId(R.id.my_activity_btn)).perform(click());
-        intended(hasComponent(ActivityStuffMenu.class.getName()));
-        assertEquals(1, 1);
+        Espresso.onView(withId(R.id.SignOut)).perform(click());
+
+        try {
+        intended(hasComponent(MainActivity.class.getName()));
+        } catch(Exception e) {
+            fail("Exception thrown.");
+        }
     }
 
     @Test
     public void buttonSelectionTest4() {
-        Espresso.onView(withId(R.id.edit_profile_btn)).perform(click());
-        intended(hasComponent(ProfileActivity.class.getName()));
-        assertEquals(1, 1);
+        Espresso.onView(withId(R.id.Settings)).perform(click());
+
+        try {
+        intended(hasComponent(Settings.class.getName()));
+        } catch(Exception e) {
+            fail("Exception thrown.");
+        }
     }
 
-    @Test
-    public void buttonSelectionTest5() {
-        Espresso.onView(withId(R.id.sign_out_btn)).perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
-        assertEquals(1, 1);
-    }
-
-    @Test
-    public void buttonSelectionTest6(){
-        UserdetailsUtil.inactivity = false;
-        UserdetailsUtil.courseRegistered = new String[]{"cpen321", "cpen 331"};
-        Espresso.onView(withId(R.id.create_activity_button)).perform(click());
-        intended(hasComponent(CreateActivity.class.getName()));
-        assertEquals(1, 1);
+    @After
+    public void tearDown() throws Exception {
+        // unused
     }
 }

@@ -4,30 +4,84 @@ import androidx.test.espresso.Espresso;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 
 public class SignUpActivityTest {
     @Rule
     public IntentsTestRule<SignUpActivity> mActivityTestRule = new IntentsTestRule<SignUpActivity>(SignUpActivity.class);
-    private String username_t = "newUser";
+    private String username_t = "newUser2";
     private String password_t = "password";
+    private String username2_t = "user1";
 
-    /*
+
     @Before
     public void setUp() throws Exception {
+        //unused
     }
-    */
+
+    @Test
+    public void testSignUpNoUsername(){
+        /** testing sign up with leaving username field blank, expecting to get an ERROR message **/
+        Espresso.onView(withId(R.id.sign_up_password_button)).perform(typeText(password_t));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.sign_up_button)).perform(click());
+        Espresso.onView(withText("Enter a username")).inRoot(withDecorView(not(is(mActivityTestRule
+                .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        assertEquals(1, 1);
+    }
+
+    @Test
+    public void testSignUpNoPassword(){
+        /** testing sign up with leaving password field blank, expecting to get an ERROR message **/
+        Espresso.onView(withId(R.id.sign_up_username_button)).perform(typeText(username_t));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.sign_up_button)).perform(click());
+        Espresso.onView(withText("Enter a password")).inRoot(withDecorView(not(is(mActivityTestRule
+                .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        assertEquals(1, 1);
+    }
+
+    @Test
+    public void testSignUpNoUserNoPass(){
+        /** testing sign up with leaving password and username fields blank, expecting to get an ERROR message **/
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.sign_up_button)).perform(click());
+        Espresso.onView(withText("Enter a username")).inRoot(withDecorView(not(is(mActivityTestRule
+                .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        assertEquals(1, 1);
+    }
+
+    @Test
+    public void testSignUpExistedUser(){
+        /** testing sign up with with an already existed username, expecting to get an ERROR message **/
+        Espresso.onView(withId(R.id.sign_up_username_button)).perform(typeText(username2_t));
+        Espresso.onView(withId(R.id.sign_up_password_button)).perform(typeText(password_t));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.sign_up_button)).perform(click());
+        Espresso.onView(withText("Username Already Exists")).inRoot(withDecorView(not(is(mActivityTestRule
+                .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        assertEquals(1, 1);
+    }
 
     @Test
     public void testSignUp(){
+        /** testing sign up by entering valid username and password **/
         Espresso.onView(withId(R.id.sign_up_username_button)).perform(typeText(username_t));
         Espresso.onView(withId(R.id.sign_up_password_button)).perform(typeText(password_t));
         Espresso.closeSoftKeyboard();
@@ -36,32 +90,9 @@ public class SignUpActivityTest {
         assertEquals(1, 1);
     }
 
-    @Test
-    public void testSignUpNoUsername(){
-        Espresso.onView(withId(R.id.sign_up_password_button)).perform(typeText(password_t));
-        Espresso.closeSoftKeyboard();
-        Espresso.onView(withId(R.id.sign_up_button)).perform(click());
-        assertEquals(1, 1);
-    }
-
-    @Test
-    public void testSignUpNoPassword(){
-        Espresso.onView(withId(R.id.sign_up_username_button)).perform(typeText(username_t));
-        Espresso.closeSoftKeyboard();
-        Espresso.onView(withId(R.id.sign_up_button)).perform(click());
-        assertEquals(1, 1);
-    }
-
-    @Test
-    public void testSignUpNoUserNoPass(){
-        Espresso.closeSoftKeyboard();
-        Espresso.onView(withId(R.id.sign_up_button)).perform(click());
-        assertEquals(1, 1);
-    }
-
-    /*
     @After
     public void tearDown() throws Exception {
+        //unused
     }
-     */
+
 }

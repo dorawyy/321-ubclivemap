@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                                             setProfileCache(userProfile);
 
                                             Intent sign_in_Intent = new Intent(MainActivity.this, MenuActivity.class);
+                                            Toast.makeText(MainActivity.this, "Login Succeeded!", Toast.LENGTH_SHORT).show();
                                             UserdetailsUtil.signedIn = true;
                                             finish();
                                             startActivity(sign_in_Intent);

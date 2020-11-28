@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateActivity">
+    tools:context=".CreateActivity"
+    android:background="@drawable/bo">
 
     <EditText
         android:id="@+id/activity_id"
@@ -12,12 +13,15 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.582"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.12" />
+        app:layout_constraintVertical_bias="0.12"
+        />
 
     <EditText
         android:id="@+id/activity_name"
@@ -25,6 +29,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.572"
@@ -39,6 +45,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.582"
@@ -52,6 +61,9 @@
         android:layout_height="wrap_content"
         android:background="#C1BEBE"
         android:spinnerMode="dropdown"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.522"
@@ -63,31 +75,40 @@
         android:id="@+id/registered_courses"
         android:layout_width="298dp"
         android:layout_height="179dp"
-        android:background="#BCB9B9"
+        android:background="@drawable/o2"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.637" />
+        app:layout_constraintVertical_bias="0.637"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Activity ID"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.129" />
+        app:layout_constraintVertical_bias="0.129"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Activity Name"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
@@ -100,6 +121,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Description"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
@@ -109,21 +133,29 @@
 
     <Button
         android:id="@+id/activity_done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:background="@drawable/o2"
+        android:fontFamily="sans-serif-condensed-medium"
         android:text="NEXT"
+        android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toEndOf="@+id/LocButton"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.957" />
+        app:layout_constraintVertical_bias="0.958" />
 
     <Button
         android:id="@+id/LocButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
         android:text="Add Custom Location"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:background="@drawable/o2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.069"
@@ -136,7 +168,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CREATE A NEW ACTIVITY"
-        android:textSize="18sp"
+        android:textSize="28sp"
+        android:fontFamily="sans-serif-condensed-medium"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,9 +180,13 @@
 
     <Button
         android:id="@+id/courseBTN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:background="@drawable/o2"
         android:text="SHOW COURSES"
+        android:textSize="18dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

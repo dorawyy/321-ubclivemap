@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -29,12 +31,11 @@ import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
 
-
     private Spinner mySpinner;
     private EditText name;
     private EditText phone_number;
-    private EditText school;
-    private EditText major;
+    private AutoCompleteTextView school;
+    private AutoCompleteTextView major;
     private ListView course_list_view;
     private ArrayList<String> course_list;
 
@@ -42,16 +43,18 @@ public class ProfileActivity extends AppCompatActivity {
     private String inputPhone;
     private String inputSchool;
     private String inputMajor;
-    private boolean inputPrivate;
-    private boolean inputInActivity;
-    private String inputActivityID;
+
+    public static final String[] SCHOOLS = new String[]{"UBC","SFU","KPU","UVIC","UoT","BCIT"};
+    public static final String[] MAJORS = new String[]{"CPEN","MECH","ELEC","IGEN","CHEM","BMED","CIVL","CPSC"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_profile);
 
         setVar();
+
         course_list = new ArrayList<String>();
         final ArrayAdapter<String> course_list_adapter = new ArrayAdapter<String>(ProfileActivity.this,
                 android.R.layout.simple_list_item_1, course_list);
@@ -71,10 +74,6 @@ public class ProfileActivity extends AppCompatActivity {
         done_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent doneIntent = new Intent(ProfileActivity.this, MenuActivity.class);
-                //startActivity(doneIntent);
-                Log.d("done button", "done button has been clicked");
-
                 String URL = UserdetailsUtil.getURL() + "/profiles/add";
                 setInputs();
 
@@ -93,7 +92,6 @@ public class ProfileActivity extends AppCompatActivity {
                 if (inputName.isEmpty() || inputPhone.isEmpty() || inputSchool.isEmpty() || inputMajor.isEmpty()){
                     Toast.makeText(ProfileActivity.this, "ERROR: Enter all fields!", Toast.LENGTH_SHORT).show();
                 }
-
                 else if (course_list.isEmpty()){
                     Toast.makeText(ProfileActivity.this, "Select your courses!", Toast.LENGTH_SHORT).show();
                 }
@@ -127,9 +125,6 @@ public class ProfileActivity extends AppCompatActivity {
         inputPhone = phone_number.getText().toString();
         inputSchool = school.getText().toString();
         inputMajor = major.getText().toString();
-        inputPrivate = false;
-        inputInActivity = false;
-        inputActivityID = "-1";
     }
 
     private void spinnerSet(final ArrayAdapter<String> course_list_adapter) {
@@ -164,19 +159,16 @@ public class ProfileActivity extends AppCompatActivity {
         POSTjsnReq.put("school", inputSchool);
         POSTjsnReq.put("major", inputMajor);
         POSTjsnReq.put("CourseRegistered",jsnReq);
-        POSTjsnReq.put("private", inputPrivate);
+        POSTjsnReq.put("private", false);
         POSTjsnReq.put("username", UserdetailsUtil.username);
-        POSTjsnReq.put("inActivity", inputInActivity);
-        POSTjsnReq.put("activityID", inputActivityID);
+        POSTjsnReq.put("inActivity", false);
+        POSTjsnReq.put("activityID", "-1");
     }
 
     private void helperFunction(JSONObject response, String inputName, String inputPhone, String inputSchool, String inputMajor) throws JSONException {
         boolean successVal = (boolean) response.get("success");
         String stat = response.get("status").toString();
         if(successVal){
-            Intent doneIntent = new Intent(ProfileActivity.this, MenuActivity.class);
-            startActivity(doneIntent);
-
             UserdetailsUtil.name = inputName;
             UserdetailsUtil.phone = inputPhone;
             UserdetailsUtil.school = inputSchool;
@@ -190,9 +182,8 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.d("courseList", "Element" + i + ": " + course_list.get(i));
                 Log.d("courseRegistered", "Element" + i + ": " + UserdetailsUtil.courseRegistered[i]);
             }
-
-
-            Log.d("SignUpActivity", stat);
+            Intent doneIntent = new Intent(ProfileActivity.this, MenuActivity.class);
+            startActivity(doneIntent);
         }
         else{
             Log.d("error1", "Error1 " + stat);
@@ -202,12 +193,15 @@ public class ProfileActivity extends AppCompatActivity {
     private void setVar() {
         name = findViewById((R.id.sign_up_name_button));
         phone_number = findViewById(R.id.phone_number_button);
+
         school = findViewById(R.id.school_button);
+        ArrayAdapter<String> schoolsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,SCHOOLS);
+        school.setAdapter(schoolsAdapter);
+
         major = findViewById(R.id.major_button);
-        //final SharedPreferences userSettings = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        ArrayAdapter<String> majorsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,MAJORS);
+        major.setAdapter(majorsAdapter);
 
-
-        //drop down menu and view list
         mySpinner = findViewById(R.id.course_spinner);
         course_list_view = findViewById((R.id.course_list));
 
@@ -217,4 +211,43 @@ public class ProfileActivity extends AppCompatActivity {
         mySpinner.setAdapter(myAdapter);
     }
 
+    @Override
+    public void onBackPressed() {
+        JSONObject jsnReq = new JSONObject();
+        try{
+            jsnReq.put("name",UserdetailsUtil.username);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        final JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, UserdetailsUtil.getURL() + "/users/delete", jsnReq,
+                new Response.Listener<JSONObject> (){
+                    @Override
+                    public void onResponse(JSONObject response){
+                        try {
+                            boolean successVal = (boolean) response.get("success");
+                            if (successVal){
+                                finish();
+                            }
+                            else {
+                                Log.d("ProfileActivity", "Could not delete username");
+                            }
+                            UserdetailsUtil.cleanup();
+                        } catch (JSONException e) {
+                            Log.d("ProfileActivity", "Error parsing the response from users/delete");
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error){
+                Toast.makeText(ProfileActivity.this, "Unable to send the sign up data to the server!", Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+            }
+        });
+
+        RequestQueue q = Volley.newRequestQueue(this);
+        q.add(json_obj);
+        super.onBackPressed();
+    }
 }

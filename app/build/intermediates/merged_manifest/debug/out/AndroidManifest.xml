@@ -33,6 +33,9 @@
         android:testOnly="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
+        <activity
+            android:name="com.cpen321.ubclocationbroadcaster.UpdateProfile"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.ViewProfile" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.Settings" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.MenuProfiles" />
@@ -68,7 +71,9 @@
             android:name="com.cpen321.ubclocationbroadcaster.MainMapsActivity"
             android:label="@string/title_activity_main_maps" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.CreateActivity" />
-        <activity android:name="com.cpen321.ubclocationbroadcaster.ProfileActivity" />
+        <activity
+            android:name="com.cpen321.ubclocationbroadcaster.ProfileActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name="com.cpen321.ubclocationbroadcaster.SignUpActivity" />
         <activity
             android:name="com.cpen321.ubclocationbroadcaster.MainActivity"
@@ -83,6 +88,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <uses-library
             android:name="org.apache.http.legacy"

@@ -11,6 +11,8 @@ anim abc_slide_out_bottom
 anim abc_slide_out_top
 anim abc_tooltip_enter
 anim abc_tooltip_exit
+anim bottom_animation
+anim bottom_anime_another
 anim btn_checkbox_to_checked_box_inner_merged_animation
 anim btn_checkbox_to_checked_box_outer_merged_animation
 anim btn_checkbox_to_checked_icon_null_animation
@@ -37,6 +39,8 @@ anim fragment_open_exit
 anim mtrl_bottom_sheet_slide_in
 anim mtrl_bottom_sheet_slide_out
 anim mtrl_card_lowers_interpolator
+anim top_animation
+anim top_anime_another
 animator design_appbar_state_list_animator
 animator design_fab_hide_motion_spec
 animator design_fab_show_motion_spec
@@ -52,6 +56,10 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
+array com_google_android_gms_fonts_certs
+array com_google_android_gms_fonts_certs_dev
+array com_google_android_gms_fonts_certs_prod
+array preloaded_fonts
 array spinner
 array spinner2
 attr actionBarDivider
@@ -1581,8 +1589,11 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable amu_bubble_mask
 drawable amu_bubble_shadow
+drawable applogo
 drawable avd_hide_password
 drawable avd_show_password
+drawable bg
+drawable bo
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -1620,6 +1631,8 @@ drawable design_password_eye
 drawable design_snackbar_background
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
+drawable green
+drawable greypattern
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_mtrl_checked_circle
@@ -1656,9 +1669,17 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable o1
+drawable o2
+drawable o3
+drawable o4
+drawable orange
 drawable test_custom_background
+drawable tinyorange
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+font bangers
+font cormorant_unicase_bold
 id ALT
 id ActDetail
 id ActDetails
@@ -1707,6 +1728,7 @@ id SuggestedActivites
 id TOP_END
 id TOP_START
 id UpdateProfile
+id UpdateProfileHeading
 id UsersSpinner
 id UsersSpinner2
 id ViewActivitiesOnMap
@@ -1786,6 +1808,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id backFromViewProfile
 id backToGetMatchScore
 id backToMenu
 id back_to_map
@@ -1827,7 +1850,6 @@ id coursePriority
 id course_list
 id course_page_done_button
 id course_spinner
-id create_activity_button
 id custom
 id customPanel
 id cut
@@ -1879,7 +1901,6 @@ id flip
 id floating
 id forever
 id fragment_container_view_tag
-id getMatchScore_button
 id getRadius
 id ghost_view
 id ghost_view_holder
@@ -1901,6 +1922,7 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imageView4
 id info
 id invisible
 id italic
@@ -1953,7 +1975,6 @@ id mtrl_picker_text_input_range_end
 id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id multiply
-id my_activity_btn
 id navigation_header_container
 id never
 id noScroll
@@ -2148,9 +2169,19 @@ id unchecked
 id uniform
 id unlabeled
 id up
+id updateDone
+id updateMajor
+id updateMajorValue
+id updateName
+id updateNameValue
+id updatePhone
+id updatePhoneValue
+id updateSchool
+id updateSchoolValue
+id update_course_list
+id update_course_spinner
 id useLogo
 id username_button
-id view_map_btn
 id view_offset_helper
 id visible
 id visible_removing_fragment_view_tag
@@ -2240,7 +2271,7 @@ layout activity_page
 layout activity_profile
 layout activity_settings
 layout activity_sign_up
-layout activity_stuff_menu
+layout activity_update_profile
 layout activity_view_profile
 layout amu_info_window
 layout amu_text_bubble

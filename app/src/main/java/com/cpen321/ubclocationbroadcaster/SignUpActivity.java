@@ -5,10 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,20 +35,34 @@ public class SignUpActivity extends AppCompatActivity {
     /**INITIALIZATION - START*/
     private EditText username;
     private EditText password;
-
+    TextView t1,t2;
     private String URL = UserdetailsUtil.getURL() + "/users/register";
+    Animation topAnim, bottomAnim;
+    Button sign_up_btn;
     /**INITIALIZATION - END*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign_up);
 
-        Button sign_up_btn;
 
+        topAnim = AnimationUtils.loadAnimation(this,R.anim.top_anime_another);
+        bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_anime_another);
         username = findViewById(R.id.sign_up_username_button);
         password = findViewById(R.id.sign_up_password_button);
         sign_up_btn = findViewById(R.id.sign_up_button);
+        t1 = findViewById(R.id.textView5);
+        t2 = findViewById(R.id.textView6);
+
+        /**ANIMATION START*/
+        t1.setAnimation(topAnim);
+        t2.setAnimation(topAnim);
+        username.setAnimation(topAnim);
+        password.setAnimation(topAnim);
+        sign_up_btn.setAnimation(bottomAnim);
+        /**ANIMATION END*/
 
         final RequestQueue q = Volley.newRequestQueue(this);
 
@@ -56,7 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
                 final String inputPassword = password.getText().toString();
 
 
-                JSONObject jsnReq = new JSONObject();
+                final JSONObject jsnReq = new JSONObject();
                 try {
                     jsnReq.put("name", inputUsername);
                     jsnReq.put("password", inputPassword);
@@ -82,6 +101,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     boolean successVal = (boolean) response.get("success");
                                     if (successVal){
                                         Intent signUpIntent = new Intent(SignUpActivity.this, ProfileActivity.class);
+                                        //signUpIntent.putExtra("object", (Parcelable) jsnReq);
                                         startActivity(signUpIntent);
                                     }
                                     else {
@@ -113,6 +133,5 @@ public class SignUpActivity extends AppCompatActivity {
 
             }}
         });
-
     }
 }

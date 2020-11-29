@@ -11,7 +11,7 @@ import org.junit.Test;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
+    public void additioniscorrect() {
         assertEquals(4, 2 + 2);
     }
 }

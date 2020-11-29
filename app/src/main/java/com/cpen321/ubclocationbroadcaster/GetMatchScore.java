@@ -23,8 +23,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.SharedPreferences;
-
 
 public class GetMatchScore extends AppCompatActivity {
 
@@ -83,12 +81,12 @@ public class GetMatchScore extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                Log.d("GetMatchScore","onStartTrackingTouch2");
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                Log.d("GetMatchScore","onStopTrackingTouch2");
             }
         });
 

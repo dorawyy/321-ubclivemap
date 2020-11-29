@@ -34,12 +34,7 @@ public class SignUpActivity extends AppCompatActivity {
     /**INITIALIZATION - START*/
     private EditText username;
     private EditText password;
-    private TextView t1;
-    private TextView t2;
     private String URL = UserdetailsUtil.getURL() + "/users/register";
-    private Animation topAnim;
-    private Animation bottomAnim;
-    private Button sign_up_btn;
     /**INITIALIZATION - END*/
 
     @Override
@@ -49,13 +44,13 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
 
-        topAnim = AnimationUtils.loadAnimation(this,R.anim.top_anime_another);
-        bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_anime_another);
+        Animation topAnim = AnimationUtils.loadAnimation(this,R.anim.top_anime_another);
+        Animation bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_anime_another);
         username = findViewById(R.id.sign_up_username_button);
         password = findViewById(R.id.sign_up_password_button);
-        sign_up_btn = findViewById(R.id.sign_up_button);
-        t1 = findViewById(R.id.textView5);
-        t2 = findViewById(R.id.textView6);
+        Button sign_up_btn = findViewById(R.id.sign_up_button);
+        TextView t1 = findViewById(R.id.textView5);
+        TextView t2 = findViewById(R.id.textView6);
 
         /**ANIMATION START*/
         t1.setAnimation(topAnim);

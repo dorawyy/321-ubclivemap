@@ -49,10 +49,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private ImageView img;
     private EditText username;
     private EditText password;
-    private Button sign_in_btn;
-    private Button sign_up_btn;
-    private TextView t1;
-    private TextView t2;
+
 
 
     @Override
@@ -60,6 +57,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+        Animation topAnim;
+        Animation bottomAnim;
+        ImageView img;
+
+        Button sign_in_btn;
+        Button sign_up_btn;
+        TextView t1;
+        TextView t2;
 
         if(!UserdetailsUtil.tokenGenerated){
             generateFirebaseToken();

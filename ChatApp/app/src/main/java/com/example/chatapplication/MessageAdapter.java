@@ -124,6 +124,9 @@ public class MessageAdapter extends RecyclerView.Adapter {
                 view = inflater.inflate(R.layout.item_received_photo, parent, false);
                 return new ReceivedImageHolder(view);
                 //break;
+            default:
+                Log.d("MessageAdapter","Should not reach here. Added for codacy");
+                break;
         }
         return null;
     }

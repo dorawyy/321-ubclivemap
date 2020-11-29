@@ -76,7 +76,6 @@ public class Getlocation extends FragmentActivity implements OnMapReadyCallback,
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Log.d(TAG, "No Pressed on Alert");
-                        return;
                     }
                 })
                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {

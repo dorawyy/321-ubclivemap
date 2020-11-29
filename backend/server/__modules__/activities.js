@@ -240,7 +240,7 @@ router.post("/joinupdate",async(req,res)=>{
         return res.json(sharedfuncs.formatResponse(false, "ERROR: " + err, null));
     }
 
-    if(profileupdate.data.success == true){
+    if(profileupdate.data.success === true){
         // UPDATE ACTIVITY TO NOW INCLUDE USER
         response.usernames.push(req.body.username);
         var result = await Activity.replaceOne({"aid" : req.body.aid}, response)

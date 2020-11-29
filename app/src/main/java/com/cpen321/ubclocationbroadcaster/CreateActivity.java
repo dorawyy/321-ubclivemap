@@ -45,24 +45,19 @@ public class CreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create);
 
         /***INITIALIZATION - START*/
-        final RequestQueue s = Volley.newRequestQueue(this);
-        final String username = UserdetailsUtil.username;
         final String[] user_courses = new String[10];
         mySpinner = findViewById(R.id.reg_course_spinner);
         reg_courses_view = findViewById((R.id.registered_courses));
         Button showCoursesBtn = findViewById(R.id.courseBTN);
         Button done_btn = findViewById(R.id.activity_done);
         Button addLoc = findViewById(R.id.LocButton);
-
         /***INITIALIZATION - START*/
 
         /**user_courses SET UP START*/
         user_courses[0] = "Choose from your courses";
-        for (int i = 0; i < UserdetailsUtil.courseRegistered.length; i++) {
-
+        for (int i = 0; i < UserdetailsUtil.courseRegistered.length; i++)
             user_courses[i + 1] = UserdetailsUtil.courseRegistered[i];
-            Log.d("courses", "Display reg course " + user_courses[i]);
-        }
+
         //Fill the remaining places in the user_course with empty values, otherwise spinner gives an error
         for (int i = (UserdetailsUtil.courseRegistered.length + 1); i < 10; i++) {
             user_courses[i] = " ";
@@ -73,7 +68,7 @@ public class CreateActivity extends AppCompatActivity {
         showCoursesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Usercourse:", "Usercourse1 is: " + user_courses[1]);
+
                 ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(CreateActivity.this,
                         android.R.layout.simple_list_item_1, user_courses);
                 myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -120,87 +115,100 @@ public class CreateActivity extends AppCompatActivity {
         done_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String URL = UserdetailsUtil.getURL() + "/activities/add";
-
-                JSONObject jsnRequest = new JSONObject();
-                EditText name = findViewById(R.id.activity_name);
-                EditText info = findViewById(R.id.activity_desc);
-                EditText aid = findViewById(R.id.activity_id);
-                final String inputaid = aid.getText().toString();
-                String inputInfo = info.getText().toString();
-
-                if(UserdetailsUtil.activitylat == null){
-                    inputLat = UserdetailsUtil.lat;
-                    inputLong = UserdetailsUtil.lon;
-                }
-                else {
-                    inputLat = UserdetailsUtil.activitylat;
-                    inputLong = UserdetailsUtil.activitylon;
-                }
-                Log.d("LATLONG", " LAT : " + inputLat.toString() + " LONG : " + inputLong.toString() );
-
-                String inputName = name.getText().toString();
-
-                JSONArray courses = new JSONArray();
-                for (String course : activity_courses) {
-                    courses.put(course);
-                }
-
-                try {
-                    jsnRequest.put("name", inputName);
-                    jsnRequest.put("aid", inputaid);
-                    jsnRequest.put("leader", username);
-                    jsnRequest.put("usernames", username);
-                    jsnRequest.put("info", inputInfo);
-                    jsnRequest.put("major", UserdetailsUtil.major);
-                    jsnRequest.put("course", courses);
-                    jsnRequest.put("school", UserdetailsUtil.school);
-                    jsnRequest.put("lat", inputLat);
-                    jsnRequest.put("long", inputLong);
-                    jsnRequest.put("status", "1");
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                if (inputaid.isEmpty() || inputInfo.isEmpty() || inputName.isEmpty()) {
-                    Toast.makeText(CreateActivity.this, "Please Enter Valid Values for all fields", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST, URL, jsnRequest,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                try {
-                                    boolean activityS = (boolean) response.get("success"); // check if user signed in successfully
-                                    String stat = response.get("status").toString(); // get status
-
-                                    if (activityS) {
-                                        /**UPDATE THE userDB UserdetailsUtil TO REFLECT THAT THE USER IS NOW IN AN ACTIVITY*/
-                                        UserdetailsUtil.inactivity = true;
-                                        UserdetailsUtil.activityID = inputaid;
-                                        finish();
-                                    } else {
-                                        Toast.makeText(CreateActivity.this, "ERROR: " + stat, Toast.LENGTH_SHORT).show();
-                                    }
-                                } catch (JSONException e) {
-                                    Log.d("CreateActivity", "Error Parsing the Object Returned in activities/add");
-                                    e.printStackTrace();
-                                }
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(CreateActivity.this, "Unable to send the create activity data to the server!", Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
-                    }
-                });
-                s.add(json_obj);
-
+                donePressed();
             }
-
-
         });
+    }
+
+    private void donePressed(){
+
+        EditText name = findViewById(R.id.activity_name);
+        EditText info = findViewById(R.id.activity_desc);
+        EditText aid = findViewById(R.id.activity_id);
+
+        final String inputaid = aid.getText().toString();
+        String inputInfo = info.getText().toString();
+
+        if(UserdetailsUtil.activitylat == null){
+            inputLat = UserdetailsUtil.lat;
+            inputLong = UserdetailsUtil.lon;
+        }
+        else {
+            inputLat = UserdetailsUtil.activitylat;
+            inputLong = UserdetailsUtil.activitylon;
+        }
+
+        String inputName = name.getText().toString();
+
+        JSONArray courses = new JSONArray();
+        for (String course : activity_courses) {
+            courses.put(course);
+        }
+
+        checkIfUserEnteredAllFields(inputaid, inputInfo, inputName);
+        sendReqtoServer(createJSON(inputaid, inputInfo, inputName,courses), inputaid);
+
+    }
+
+    private JSONObject createJSON(String inputaid, String inputInfo, String inputName, JSONArray courses){
+        JSONObject jsnRequest = new JSONObject();
+        try {
+            jsnRequest.put("name", inputName);
+            jsnRequest.put("aid", inputaid);
+            jsnRequest.put("leader", UserdetailsUtil.username);
+            jsnRequest.put("usernames", UserdetailsUtil.username);
+            jsnRequest.put("info", inputInfo);
+            jsnRequest.put("major", UserdetailsUtil.major);
+            jsnRequest.put("course", courses);
+            jsnRequest.put("school", UserdetailsUtil.school);
+            jsnRequest.put("lat", inputLat);
+            jsnRequest.put("long", inputLong);
+            jsnRequest.put("status", "1");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsnRequest;
+    }
+
+    private void checkIfUserEnteredAllFields(String inputaid, String inputInfo, String inputName){
+        if (inputaid.isEmpty() || inputInfo.isEmpty() || inputName.isEmpty() || activity_courses.isEmpty()) {
+            Toast.makeText(CreateActivity.this, "Please Enter Valid Values for all fields", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
+    private void sendReqtoServer(JSONObject jsnRequest, final String inputaid){
+        final RequestQueue s = Volley.newRequestQueue(this);
+        JsonObjectRequest json_obj = new JsonObjectRequest(Request.Method.POST,UserdetailsUtil.getURL() + "/activities/add", jsnRequest,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            boolean activityS = (boolean) response.get("success"); // check if user signed in successfully
+                            String stat = response.get("status").toString(); // get status
+
+                            if (activityS) {
+                                /**UPDATE THE userDB UserdetailsUtil TO REFLECT THAT THE USER IS NOW IN AN ACTIVITY*/
+                                UserdetailsUtil.inactivity = true;
+                                UserdetailsUtil.activityID = inputaid;
+                                finish();
+                            } else {
+                                Toast.makeText(CreateActivity.this, "ERROR: " + stat, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            Log.d("CreateActivity", "Error Parsing the Object Returned in activities/add");
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(CreateActivity.this, "Unable to send the create activity data to the server!", Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+            }
+        });
+        s.add(json_obj);
     }
 
 }

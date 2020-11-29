@@ -54,8 +54,6 @@ public class DisplayActivityDetails extends AppCompatActivity {
         backToMenu = findViewById(R.id.backToMenu);
         /**LOCAL VARIABLES SET UP - END*/
 
-//        Log.d("DisplayActivity", SortedlistclassUtil.activity_to_be_displayed);
-
         JSONObject aid_for_search = new JSONObject();
         try{
             aid_for_search.put("aid", SortedlistclassUtil.activity_to_be_displayed);
@@ -141,7 +139,7 @@ public class DisplayActivityDetails extends AppCompatActivity {
                             }
 
                         }catch (JSONException e){
-                            Log.d("ActivityExtractor",":(");
+                            Log.d("DisplayActivityDetails",":(");
                             e.printStackTrace();
                         }
 

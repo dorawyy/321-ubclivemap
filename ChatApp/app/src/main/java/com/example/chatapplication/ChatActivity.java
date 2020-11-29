@@ -36,10 +36,12 @@ public class ChatActivity extends AppCompatActivity implements TextWatcher {
     //ws://10.0.2.2:3000
     //"ws://echo.websocket.org";
     private EditText messageEdit;
-    private View sendBtn, pickImgBtn;
+    private View sendBtn;
+    private View pickImgBtn;
     private RecyclerView recyclerView;
     private int IMAGE_REQUEST_ID = 1; //just a random value
     private MessageAdapter messageAdapter;
+    private String TAG = "ChatActivtiy";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +60,12 @@ public class ChatActivity extends AppCompatActivity implements TextWatcher {
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+        Log.d(TAG,"beforeTextChanged");
     }
 
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+        Log.d(TAG,"onTextChanged");
     }
 
     @Override

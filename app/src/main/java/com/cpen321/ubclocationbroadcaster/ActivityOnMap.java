@@ -18,14 +18,13 @@ import android.view.View;
  * Inorder to go back, the user can either press the back button on their device or click on the Button named : "BACK" on the device screen.*/
 public class ActivityOnMap extends AppCompatActivity implements OnMapReadyCallback {
 
-    private Button backButton;
-    private GoogleMap mMap;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_on_map);
+
+        final Button backButton;
 
         /**The following code snippet is obtained from https://developers.google.com/maps/documentation/android-sdk/marker
          * This tutorial explains how to display markers on Google Maps*/
@@ -44,7 +43,7 @@ public class ActivityOnMap extends AppCompatActivity implements OnMapReadyCallba
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        GoogleMap mMap = googleMap;
         LatLng marker = new LatLng(SortedlistclassUtil.lat, SortedlistclassUtil.lon);
         mMap.addMarker(new MarkerOptions().position(marker).title(SortedlistclassUtil.aname).snippet(SortedlistclassUtil.info));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker,14.0f));

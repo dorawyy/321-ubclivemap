@@ -3,7 +3,6 @@ package com.cpen321.ubclocationbroadcaster;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -22,10 +21,8 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,11 +44,15 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
     private static LocationManager locationManager;
-    Animation topAnim, bottomAnim;
-    ImageView img;
-    EditText username,password;
-    Button sign_in_btn, sign_up_btn;
-    TextView t1,t2;
+    private Animation topAnim;
+    private Animation bottomAnim;
+    private ImageView img;
+    private EditText username;
+    private EditText password;
+    private Button sign_in_btn;
+    private Button sign_up_btn;
+    private TextView t1;
+    private TextView t2;
 
 
     @Override
@@ -200,9 +201,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                                     }
                                     UserdetailsUtil.tokenGenerated = true;
                                     UserdetailsUtil.token = task.getResult();
-                                    String msg = getString(R.string.fcm_token, UserdetailsUtil.token);
+                                    //String msg = getString(R.string.fcm_token, UserdetailsUtil.token);
                                     Log.d("MainActivity", task.getResult());
-                                    //Log.d("MainActivity", "whats this " + FirebaseInstanceId.getInstance().getId());
                                 }
                             });
                 }
@@ -239,8 +239,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
         }
-
-        return;
     }
 
     @Override

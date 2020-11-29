@@ -138,6 +138,7 @@ public class ProfileActivityTest {
             Espresso.onView(withText("Profile Created Successfully!")).inRoot(withDecorView(not(is(mActivityTestRule
                     .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         }catch (Exception e) {
+            e.printStackTrace();
             fail("Exception thrown");
         }
     }

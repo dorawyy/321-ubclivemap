@@ -111,7 +111,7 @@ router.post("/update", async (req, res) => {
 
     var response = await Account.replaceOne({"name" : req.body.name}, user);
 
-    if(response.n == 0){
+    if(response.n === 0){
         return res.status(402).json(sharedfuncs.formatResponse(false, "Username does not exist.", null));
     }
     return res.status(200).json(sharedfuncs.formatResponse(true, "Account updated successfully.", null));

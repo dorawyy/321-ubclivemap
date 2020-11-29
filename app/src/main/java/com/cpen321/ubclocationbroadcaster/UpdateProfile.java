@@ -33,13 +33,18 @@ import java.util.ArrayList;
 
 public class UpdateProfile extends AppCompatActivity {
 
-    EditText name,phone;
-    AutoCompleteTextView school,major;
-    Spinner mySpinner;
-    ListView course_list_view;
-    ArrayList<String> course_list;
+    private EditText name;
+    private EditText phone;
+    private AutoCompleteTextView school;
+    private AutoCompleteTextView major;
+    private Spinner mySpinner;
+    private ListView course_list_view;
+    private ArrayList<String> course_list;
 
-    String inputName,inputPhone,inputSchool,inputMajor;
+    private String inputName;
+    private String inputPhone;
+    private String inputSchool;
+    private String inputMajor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +109,6 @@ public class UpdateProfile extends AppCompatActivity {
     }
 
     private void donePressed (final RequestQueue requestQueue, Button done, Context ct){
-        final Context context = ct;
         final Activity act = (Activity)ct;
         done.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -35,10 +34,12 @@ public class SignUpActivity extends AppCompatActivity {
     /**INITIALIZATION - START*/
     private EditText username;
     private EditText password;
-    TextView t1,t2;
+    private TextView t1;
+    private TextView t2;
     private String URL = UserdetailsUtil.getURL() + "/users/register";
-    Animation topAnim, bottomAnim;
-    Button sign_up_btn;
+    private Animation topAnim;
+    private Animation bottomAnim;
+    private Button sign_up_btn;
     /**INITIALIZATION - END*/
 
     @Override

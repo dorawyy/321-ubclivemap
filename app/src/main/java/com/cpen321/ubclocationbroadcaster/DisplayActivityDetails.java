@@ -19,7 +19,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,13 +34,7 @@ public class DisplayActivityDetails extends AppCompatActivity {
     private Spinner coursesSpinner;
     //Displays the users in this activity
     private Spinner usersSpinner;
-    private Button join;
-    private Button viewActivtiyOnMap;
-    private Button backToMenu;
-
     private int counter = 0;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +44,9 @@ public class DisplayActivityDetails extends AppCompatActivity {
         setContentView(R.layout.activity_display_details);
 
         /**LOCAL VARIABLES SET UP - START*/
+        final Button join;
+        final Button viewActivtiyOnMap;
+        final Button backToMenu;
         String URL = UserdetailsUtil.getURL() + "/activities/search";
         final RequestQueue queue = Volley.newRequestQueue(this);
         join = findViewById(R.id.JoinButton);

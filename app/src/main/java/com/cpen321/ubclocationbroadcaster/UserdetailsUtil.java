@@ -2,7 +2,7 @@ package com.cpen321.ubclocationbroadcaster;
 
 /*Stores the details of the user logged in on the front end.*/
 public class UserdetailsUtil {
-    public static String username;
+    public static String username = "user1";
     public static String name;
     public static String major;
     public static String[] courseRegistered ;
@@ -16,16 +16,15 @@ public class UserdetailsUtil {
     public static boolean tokenGenerated = false;
     public static String token;
 
-    public static String getURL(){
-        return "http://10.0.2.2:3000";
-    }
-
     public static Double lat;
     public static Double lon;
 
     public static Double activitylat;
     public static Double activitylon;
 
+    public static String getURL(){
+        return "http://10.0.2.2:3000";
+    }
 
     /**This is called on sign out*/
     public static void cleanup() {

@@ -196,7 +196,7 @@ router.post("/add", async (req, res) => {
     } catch (err) {
         return res.json(sharedfuncs.formatResponse(false, "ERROR: " + err, null));
     }
-    if(profileupdate.data.success == true){
+    if(profileupdate.data.success === true){
         // ADD ACTIVITY
         await Activity.create(req.body);
         return res.json(sharedfuncs.formatResponse(true, "Activity insert successful.", null));
@@ -292,7 +292,7 @@ router.post("/leaveupdate", async (req,res) => {
         // REMOVE USER FROM USERARRAY IN ACTIVITY
         response.usernames = response.usernames.filter(e => e !== req.body.username);
         await Activity.replaceOne({"aid" : req.body.aid}, response);
-        if(response.usernames.length == 0){
+        if(response.usernames.length === 0){
             // IF THERE ARE NO USERS LEFT IN ACTIVITY, DELETE THE ACTIVITY
             await Activity.deleteOne({"aid" : req.body.aid});
         } else {
@@ -448,7 +448,7 @@ router.post("/sortnouser", async (req, res) => {
         return res.json(sharedfuncs.formatResponse(false, "ERROR: " + err, null));
     }
 
-    if(profilereq.data.success == false){
+    if(profilereq.data.success === false){
         // 'PROFILE SEARCH' ERROR
         return res.json(profilereq.data);
     }

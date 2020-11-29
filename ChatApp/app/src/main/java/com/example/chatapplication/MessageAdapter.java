@@ -34,7 +34,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     private class SentMessageHolder extends RecyclerView.ViewHolder {
 
-        TextView messageTxt;
+        private TextView messageTxt;
 
         public SentMessageHolder(@NonNull View itemView) {
             super(itemView);
@@ -45,7 +45,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     private class SentImageHolder extends RecyclerView.ViewHolder {
 
-        ImageView imageView;
+        public ImageView imageView;
 
         public SentImageHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,7 +56,8 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     private class ReceivedMessageHolder extends RecyclerView.ViewHolder {
 
-        TextView nameTxt, messageTxt;
+        public TextView nameTxt;
+        public TextView messageTxt;
 
         public ReceivedMessageHolder(@NonNull View itemView) {
             super(itemView);

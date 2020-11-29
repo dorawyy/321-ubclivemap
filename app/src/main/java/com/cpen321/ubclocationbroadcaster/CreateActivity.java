@@ -1,7 +1,6 @@
 package com.cpen321.ubclocationbroadcaster;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,9 +21,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +34,6 @@ public class CreateActivity extends AppCompatActivity {
     private Spinner mySpinner; //For the user registered courses list drop down
     private ListView reg_courses_view;
     final private ArrayList<String> activity_courses = new ArrayList<String>(); //List of courses from the registered courses of the leader to be put in the Activity
-    private boolean activityS;
     private Double inputLat;
     private Double inputLong;
     /***INITIALIZATION - END*/
@@ -177,7 +172,7 @@ public class CreateActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONObject response) {
                                 try {
-                                    activityS = (boolean) response.get("success"); // check if user signed in successfully
+                                    boolean activityS = (boolean) response.get("success"); // check if user signed in successfully
                                     String stat = response.get("status").toString(); // get status
 
                                     if (activityS) {

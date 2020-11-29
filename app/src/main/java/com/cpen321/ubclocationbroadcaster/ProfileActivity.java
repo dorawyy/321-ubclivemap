@@ -81,7 +81,7 @@ public class ProfileActivity extends AppCompatActivity {
                 for(String course : course_list){
                     jsnReq.put(course);
                 }
-                Log.d("debgg1", "username: " + UserdetailsUtil.username);
+                //Log.d("debgg1", "username: " + UserdetailsUtil.username);
 
                 JSONObject POSTjsnReq = new JSONObject();
                 try {
@@ -101,8 +101,11 @@ public class ProfileActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(JSONObject response){
                                     try {
+                                        System.out.println("JASKIRAT 1");
+                                        Toast.makeText(ProfileActivity.this, "POINT 1", Toast.LENGTH_SHORT).show();
                                         helperFunction(response, inputName, inputPhone, inputSchool, inputMajor);
                                     } catch (JSONException e) {
+                                        Toast.makeText(ProfileActivity.this, "Point2", Toast.LENGTH_SHORT).show();
                                         e.printStackTrace();
                                         Log.d("error2", "-------------------- " );
                                     }
@@ -166,8 +169,11 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void helperFunction(JSONObject response, String inputName, String inputPhone, String inputSchool, String inputMajor) throws JSONException {
+        System.out.println("JASKIRAT 2");
         boolean successVal = (boolean) response.get("success");
+        System.out.println("JASKIRAT 3");
         String stat = response.get("status").toString();
+        System.out.println("JASKIRAT 4");
         if(successVal){
             UserdetailsUtil.name = inputName;
             UserdetailsUtil.phone = inputPhone;
@@ -182,10 +188,12 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.d("courseList", "Element" + i + ": " + course_list.get(i));
                 Log.d("courseRegistered", "Element" + i + ": " + UserdetailsUtil.courseRegistered[i]);
             }
+            Toast.makeText(ProfileActivity.this, "Profile Created Successfully!", Toast.LENGTH_SHORT).show();
             Intent doneIntent = new Intent(ProfileActivity.this, MenuActivity.class);
             startActivity(doneIntent);
         }
         else{
+            System.out.println("JASKIRAT 5" + stat);
             Log.d("error1", "Error1 " + stat);
         }
     }

@@ -1,6 +1,8 @@
 package com.cpen321.ubclocationbroadcaster;
 
 
+import android.util.Log;
+
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
@@ -52,6 +54,7 @@ public class ProfileActivityTest {
 
     @Before
     public void setUp() throws Exception {
+        Log.d("ProfileActivityTest", "Exception");
     }
 
 

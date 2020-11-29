@@ -162,12 +162,12 @@ public class GetMatchScore extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                Log.d("GetMatchScore", "onStartTrackingTouch2");
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                Log.d("GetMatchScore", "onStartTrackingTouch2");
             }
         });
     }

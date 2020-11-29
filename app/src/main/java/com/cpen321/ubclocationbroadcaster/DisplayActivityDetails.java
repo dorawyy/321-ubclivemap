@@ -30,10 +30,6 @@ import org.json.JSONObject;
  * the user has clicked. The user can also join the activity from in here.*/
 public class DisplayActivityDetails extends AppCompatActivity {
 
-    //Displays the courses in this activity
-    private Spinner coursesSpinner;
-    //Displays the users in this activity
-    private Spinner usersSpinner;
     private int counter = 0;
 
     @Override
@@ -50,6 +46,7 @@ public class DisplayActivityDetails extends AppCompatActivity {
         join = findViewById(R.id.JoinButton);
         viewActivtiyOnMap = findViewById(R.id.OnMapButton);
         backToMenu = findViewById(R.id.backToMenu);
+        final Spinner sersSpinner;
         /**LOCAL VARIABLES SET UP - END*/
 
         JSONObject aid_for_search = new JSONObject();
@@ -91,6 +88,8 @@ public class DisplayActivityDetails extends AppCompatActivity {
 
         setActivityDetailsLocally(response.getJSONObject("value"));
 
+        Spinner coursesSpinner;
+        Spinner usersSpinner;
         TextView nameBox = findViewById(R.id.ActivityNameBox);
         TextView infoBox = findViewById(R.id.InfoBox);
         TextView leaderBox = findViewById(R.id.LeaderBox);

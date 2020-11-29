@@ -46,17 +46,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private static LocationManager locationManager;
     private EditText username;
     private EditText password;
-
-    private Animation topAnim;
-    private Animation bottomAnim;
-    private ImageView img;
-
     private Button sign_in_btn;
     private Button sign_up_btn;
-    private TextView t1;
-    private TextView t2;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,13 +141,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         password = findViewById(R.id.password_button);
         sign_in_btn = findViewById(R.id.sign_in_button);
         sign_up_btn = findViewById(R.id.sign_up_button);
-        t1 = findViewById(R.id.textView2);
-        t2 = findViewById(R.id.textView3);
-        img = findViewById(R.id.imageView4);
+        TextView t1 = findViewById(R.id.textView2);
+        TextView t2 = findViewById(R.id.textView3);
+        ImageView img = findViewById(R.id.imageView4);
 
         //Animations
-        topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
-        bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
+        Animation topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
+        Animation bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
         img.setAnimation(topAnim);
         username.setAnimation(bottomAnim);
         password.setAnimation(bottomAnim);

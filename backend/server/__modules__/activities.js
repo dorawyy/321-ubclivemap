@@ -95,7 +95,7 @@ function deg2rad(deg) {
 
 var type = 0;
 function isGoodSortRequest(func_type, body){
-    if(func_type == "with user"){
+    if(func_type === "with user"){
         if(!body.hasOwnProperty("user")){
             type =1;
             return false;
@@ -163,7 +163,7 @@ router.post("/search", async (req, res) => {
         return res.json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
     }
     var response = await Activity.findOne({"aid" : req.body.aid}).exec()
-    if(response == null) {
+    if(response === null) {
         return res.json(sharedfuncs.formatResponse(false, "Activity does not exist.", null));
     }
     return res.json(sharedfuncs.formatResponse(true, "Activity found successfully.", response));
@@ -218,7 +218,7 @@ router.post("/joinupdate",async(req,res)=>{
         return res.json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
     }
     var response = await Activity.findOne({"aid" : req.body.aid}).exec()
-    if(response == null) {
+    if(response === null) {
         return res.json(sharedfuncs.formatResponse(false, "Activity does not exist.", null));
     }
 
@@ -264,7 +264,7 @@ router.post("/leaveupdate", async (req,res) => {
 
     // FIND THE ACTIVITY
     var response = await Activity.findOne({"aid" : req.body.aid}).exec()
-    if(response == null) {
+    if(response === null) {
         return res.json(sharedfuncs.formatResponse(false, "Activity does not exist.", null));
     }
 
@@ -288,15 +288,15 @@ router.post("/leaveupdate", async (req,res) => {
         return res.json(sharedfuncs.formatResponse(false, "ERROR: " + err, null));
     }
 
-    if(profileupdate.data.success == true){
+    if(profileupdate.data.success === true){
         // REMOVE USER FROM USERARRAY IN ACTIVITY
-        response.usernames = response.usernames.filter(e => e !== req.body.username);
+        response.usernames = response.usernames.filter(e => e !=== req.body.username);
         await Activity.replaceOne({"aid" : req.body.aid}, response);
         if(response.usernames.length === 0){
             // IF THERE ARE NO USERS LEFT IN ACTIVITY, DELETE THE ACTIVITY
             await Activity.deleteOne({"aid" : req.body.aid});
         } else {
-            if(req.body.username == response.leader){
+            if(req.body.username === response.leader){
                 // IF LEADER LEFT ACTIVITY, UPDATE ACTIVITY LEADER
                 response.leader = response.usernames[0];
             }
@@ -320,7 +320,7 @@ router.post("/update", async (req, res) => {
         return res.json(sharedfuncs.formatResponse(false, "Not well formed request.", null));
     }
     var response = await Activity.replaceOne({"aid" : req.body.aid}, req.body)
-    if(response.n == 0){
+    if(response.n === 0){
         return res.json(sharedfuncs.formatResponse(false, "Activity does not exist.", null));
     }
     return res.json(sharedfuncs.formatResponse(true, "Activity updated successfully.", null));
@@ -388,7 +388,7 @@ function sort_activities(req, user, cursor){
 
         // Calculate major factor
         var majorfactor = 0
-        majorfactor = majorweight * (user.major == currentactivity.major) ? 1 : 0;
+        majorfactor = majorweight * (user.major === currentactivity.major) ? 1 : 0;
 
         // Store matchfactor with their respective activity
         var matchfactor = 0;

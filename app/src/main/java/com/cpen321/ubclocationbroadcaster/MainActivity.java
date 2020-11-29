@@ -44,11 +44,17 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
     private static LocationManager locationManager;
+    private EditText username;
+    private EditText password;
+
     private Animation topAnim;
     private Animation bottomAnim;
     private ImageView img;
-    private EditText username;
-    private EditText password;
+
+    private Button sign_in_btn;
+    private Button sign_up_btn;
+    private TextView t1;
+    private TextView t2;
 
 
 
@@ -58,49 +64,16 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-        Animation topAnim;
-        Animation bottomAnim;
-        ImageView img;
-
-        Button sign_in_btn;
-        Button sign_up_btn;
-        TextView t1;
-        TextView t2;
-
         if(!UserdetailsUtil.tokenGenerated){
             generateFirebaseToken();
         }
-
-        //Animations
-        topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
-        bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
-
+        setup();
 
         checkLocationPermission();
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,900000,0,this);
 
-        /**INITIALIZATION : START*/
-        username = findViewById(R.id.username_button);
-        password = findViewById(R.id.password_button);
-        sign_in_btn = findViewById(R.id.sign_in_button);
-        sign_up_btn = findViewById(R.id.sign_up_button);
-        t1 = findViewById(R.id.textView2);
-        t2 = findViewById(R.id.textView3);
-        img = findViewById(R.id.imageView4);
-
-        img.setAnimation(topAnim);
-
-        username.setAnimation(bottomAnim);
-        password.setAnimation(bottomAnim);
-        sign_in_btn.setAnimation(bottomAnim);
-        sign_up_btn.setAnimation(bottomAnim);
-        t1.setAnimation(bottomAnim);
-        t2.setAnimation(bottomAnim);
-
-
         final RequestQueue q = Volley.newRequestQueue(this);
-        /**INITIALIZATION : END*/
 
         sign_in_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +143,27 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 Log.d("MainActivity", "Sign up button has been clicked");
             }
         });
+    }
+
+    private void setup(){
+        username = findViewById(R.id.username_button);
+        password = findViewById(R.id.password_button);
+        sign_in_btn = findViewById(R.id.sign_in_button);
+        sign_up_btn = findViewById(R.id.sign_up_button);
+        t1 = findViewById(R.id.textView2);
+        t2 = findViewById(R.id.textView3);
+        img = findViewById(R.id.imageView4);
+
+        //Animations
+        topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
+        bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
+        img.setAnimation(topAnim);
+        username.setAnimation(bottomAnim);
+        password.setAnimation(bottomAnim);
+        sign_in_btn.setAnimation(bottomAnim);
+        sign_up_btn.setAnimation(bottomAnim);
+        t1.setAnimation(bottomAnim);
+        t2.setAnimation(bottomAnim);
     }
 
     private void setProfileCache(JSONObject userProfile) {

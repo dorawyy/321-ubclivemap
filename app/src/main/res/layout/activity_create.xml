@@ -7,129 +7,128 @@
     tools:context=".CreateActivity"
     android:background="@drawable/bo">
 
+
     <EditText
         android:id="@+id/activity_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
         android:fontFamily="sans-serif-condensed-medium"
+        android:inputType="textPersonName"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.582"
+        app:layout_constraintHorizontal_bias="0.736"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.12"
-        />
+        app:layout_constraintVertical_bias="0.119" />
 
     <EditText
         android:id="@+id/activity_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="42dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:fontFamily="sans-serif-condensed-medium"
+        android:inputType="textPersonName"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.572"
+        app:layout_constraintHorizontal_bias="0.774"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.241" />
-
+        app:layout_constraintVertical_bias="0.242" />
 
     <EditText
         android:id="@+id/activity_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="247dp"
+        android:layout_height="63dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:fontFamily="sans-serif-condensed-medium"
-        android:textStyle="bold"
+        android:inputType="textPersonName"
         android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.582"
+        app:layout_constraintHorizontal_bias="0.743"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.829" />
+        app:layout_constraintVertical_bias="0.836" />
 
     <Spinner
         android:id="@+id/reg_course_spinner"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:background="#C1BEBE"
-        android:spinnerMode="dropdown"
+        android:layout_height="50dp"
+        android:background="@drawable/o2"
         android:fontFamily="sans-serif-condensed-medium"
-        android:textStyle="bold"
+        android:spinnerMode="dropdown"
         android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395" />
+        app:layout_constraintVertical_bias="0.421" />
 
     <ListView
         android:id="@+id/registered_courses"
         android:layout_width="298dp"
         android:layout_height="179dp"
         android:background="@drawable/o2"
+        android:fontFamily="sans-serif-condensed-medium"
         android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.539"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.637"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:textStyle="bold"/>
+        app:layout_constraintVertical_bias="0.637" />
 
     <TextView
         android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Activity ID"
-        android:textSize="18dp"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Activity ID:"
+        android:autoSizeTextType="uniform"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.129"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:textStyle="bold"/>
+        app:layout_constraintVertical_bias="0.118" />
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Activity Name"
+        android:layout_width="133dp"
+        android:layout_height="41dp"
+        android:autoSizeTextType="uniform"
         android:fontFamily="sans-serif-condensed-medium"
+        android:text="Activity Name"
         android:textStyle="bold"
-        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.243" />
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Description"
+        android:layout_width="98dp"
+        android:layout_height="51dp"
+        android:autoSizeTextType="uniform"
         android:fontFamily="sans-serif-condensed-medium"
+        android:text="Description"
         android:textStyle="bold"
-        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.818" />
+        app:layout_constraintVertical_bias="0.85" />
 
     <Button
         android:id="@+id/activity_done"

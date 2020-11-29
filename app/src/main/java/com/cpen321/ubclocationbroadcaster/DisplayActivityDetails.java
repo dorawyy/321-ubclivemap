@@ -46,7 +46,6 @@ public class DisplayActivityDetails extends AppCompatActivity {
         join = findViewById(R.id.JoinButton);
         viewActivtiyOnMap = findViewById(R.id.OnMapButton);
         backToMenu = findViewById(R.id.backToMenu);
-        final Spinner sersSpinner;
         /**LOCAL VARIABLES SET UP - END*/
 
         JSONObject aid_for_search = new JSONObject();

@@ -1,13 +1,8 @@
 package com.cpen321.ubclocationbroadcaster;
 
 
-<<<<<<< Updated upstream
 import android.util.Log;
 
-import androidx.test.espresso.Espresso;
-import androidx.test.espresso.assertion.ViewAssertions;
-=======
->>>>>>> Stashed changes
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -135,12 +130,9 @@ public class ProfileActivityTest {
         try {
             onView(withText("ERROR: Enter all fields!")).inRoot(withDecorView(not(is(mActivityTestRule
                     .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-<<<<<<< Updated upstream
+
         }catch (Exception e) {
             e.printStackTrace();
-=======
-        }catch(Exception e) {
->>>>>>> Stashed changes
             fail("Exception thrown");
         }
     }

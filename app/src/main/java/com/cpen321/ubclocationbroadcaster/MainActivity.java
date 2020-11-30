@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                                             UserdetailsUtil.signedIn = true;
                                             finish();
                                             startActivity(sign_in_Intent);
+
                                         } else {
                                             Log.d("MainActivity", "Error: " + stat);
                                             Toast.makeText(MainActivity.this, "ERROR: " + stat, Toast.LENGTH_SHORT).show();

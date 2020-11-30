@@ -99,6 +99,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         Intent signUpIntent = new Intent(SignUpActivity.this, ProfileActivity.class);
                                         //signUpIntent.putExtra("object", (Parcelable) jsnReq);
                                         startActivity(signUpIntent);
+                                        Toast.makeText(SignUpActivity.this, "Thanks for signing up!", Toast.LENGTH_SHORT).show();
                                     }
                                     else {
                                             Toast.makeText(SignUpActivity.this, "ERROR: Username Already Exists", Toast.LENGTH_SHORT).show();

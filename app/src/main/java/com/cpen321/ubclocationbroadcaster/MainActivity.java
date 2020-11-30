@@ -101,15 +101,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                                         if (successVal) {
                                             JSONObject userProfile = response.getJSONObject("value");
                                             setProfileCache(userProfile);
-
                                             Intent sign_in_Intent = new Intent(MainActivity.this, MenuActivity.class);
                                             Toast.makeText(MainActivity.this, "Login Succeeded!", Toast.LENGTH_SHORT).show();
                                             UserdetailsUtil.signedIn = true;
-                                            finish();
                                             startActivity(sign_in_Intent);
-
+                                            finish();
                                         } else {
-                                            Log.d("MainActivity", "Error: " + stat);
                                             Toast.makeText(MainActivity.this, "ERROR: " + stat, Toast.LENGTH_SHORT).show();
                                         }
                                     } catch (JSONException e) {

@@ -28,7 +28,7 @@ public class MainActivityTest {
     public IntentsTestRule<MainActivity> mActivityTestRule = new IntentsTestRule<MainActivity>(MainActivity.class);
     private String username_t = "user1";
     private String password1_t = "1111";
-    private String password2_t = "1234";
+    private String password2_t = "password1";
 
 
     @Before
@@ -45,10 +45,13 @@ public class MainActivityTest {
         onView(withId(R.id.sign_in_button)).perform(click());
 
         try {
-            intended(hasComponent(MenuActivity.class.getName()));
-        } catch(Exception e) {
-            fail("Exception thrown.");
+            onView(withText("Login Succeeded!")).inRoot(withDecorView(not(is(mActivityTestRule
+                    .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        }catch (Exception e) {
+            e.printStackTrace();
+            fail("Exception thrown");
         }
+
     }
 
     @Test

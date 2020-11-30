@@ -290,7 +290,7 @@ router.post("/leaveupdate", async (req,res) => {
 
     if(profileupdate.data.success === true){
         // REMOVE USER FROM USERARRAY IN ACTIVITY
-        response.usernames = response.usernames.filter(e => e !=== req.body.username);
+        response.usernames = response.usernames.filter(e => e !== req.body.username);
         await Activity.replaceOne({"aid" : req.body.aid}, response);
         if(response.usernames.length === 0){
             // IF THERE ARE NO USERS LEFT IN ACTIVITY, DELETE THE ACTIVITY

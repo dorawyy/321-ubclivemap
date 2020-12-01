@@ -36,7 +36,9 @@ public class MenuProfiles extends AppCompatActivity {
         Button viewProfileButton;
         Button deleteAccountButton;
 
-        Animation topAnim, bottomAnim, topAnim2;
+        Animation topAnim;
+        Animation bottomAnim;
+        Animation topAnim2;
 
         topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
         bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
@@ -73,7 +75,8 @@ public class MenuProfiles extends AppCompatActivity {
                         .setMessage("You will not be able to retrieve your data.")
                         .setNegativeButton("NO", new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialogInterface, int i) { return;
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Log.d("MenuProfiles","onClick");
                                 }
                             })
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {

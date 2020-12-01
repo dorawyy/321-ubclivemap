@@ -3,7 +3,6 @@ package com.cpen321.ubclocationbroadcaster;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -22,10 +21,8 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,12 +44,10 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
     private static LocationManager locationManager;
-    Animation topAnim, bottomAnim;
-    ImageView img;
-    EditText username,password;
-    Button sign_in_btn, sign_up_btn;
-    TextView t1,t2;
-
+    private EditText username;
+    private EditText password;
+    private Button sign_in_btn;
+    private Button sign_up_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,37 +58,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         if(!UserdetailsUtil.tokenGenerated){
             generateFirebaseToken();
         }
-
-        //Animations
-        topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
-        bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
-
+        setup();
 
         checkLocationPermission();
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,900000,0,this);
 
-        /**INITIALIZATION : START*/
-        username = findViewById(R.id.username_button);
-        password = findViewById(R.id.password_button);
-        sign_in_btn = findViewById(R.id.sign_in_button);
-        sign_up_btn = findViewById(R.id.sign_up_button);
-        t1 = findViewById(R.id.textView2);
-        t2 = findViewById(R.id.textView3);
-        img = findViewById(R.id.imageView4);
-
-        img.setAnimation(topAnim);
-
-        username.setAnimation(bottomAnim);
-        password.setAnimation(bottomAnim);
-        sign_in_btn.setAnimation(bottomAnim);
-        sign_up_btn.setAnimation(bottomAnim);
-        t1.setAnimation(bottomAnim);
-        t2.setAnimation(bottomAnim);
-
-
         final RequestQueue q = Volley.newRequestQueue(this);
-        /**INITIALIZATION : END*/
 
         sign_in_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,14 +101,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                                         if (successVal) {
                                             JSONObject userProfile = response.getJSONObject("value");
                                             setProfileCache(userProfile);
-
                                             Intent sign_in_Intent = new Intent(MainActivity.this, MenuActivity.class);
                                             Toast.makeText(MainActivity.this, "Login Succeeded!", Toast.LENGTH_SHORT).show();
                                             UserdetailsUtil.signedIn = true;
-                                            finish();
                                             startActivity(sign_in_Intent);
+                                            finish();
                                         } else {
-                                            Log.d("MainActivity", "Error: " + stat);
                                             Toast.makeText(MainActivity.this, "ERROR: " + stat, Toast.LENGTH_SHORT).show();
                                         }
                                     } catch (JSONException e) {
@@ -163,6 +132,27 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 Log.d("MainActivity", "Sign up button has been clicked");
             }
         });
+    }
+
+    private void setup(){
+        username = findViewById(R.id.username_button);
+        password = findViewById(R.id.password_button);
+        sign_in_btn = findViewById(R.id.sign_in_button);
+        sign_up_btn = findViewById(R.id.sign_up_button);
+        TextView t1 = findViewById(R.id.textView2);
+        TextView t2 = findViewById(R.id.textView3);
+        ImageView img = findViewById(R.id.imageView4);
+
+        //Animations
+        Animation topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
+        Animation bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
+        img.setAnimation(topAnim);
+        username.setAnimation(bottomAnim);
+        password.setAnimation(bottomAnim);
+        sign_in_btn.setAnimation(bottomAnim);
+        sign_up_btn.setAnimation(bottomAnim);
+        t1.setAnimation(bottomAnim);
+        t2.setAnimation(bottomAnim);
     }
 
     private void setProfileCache(JSONObject userProfile) {
@@ -200,9 +190,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                                     }
                                     UserdetailsUtil.tokenGenerated = true;
                                     UserdetailsUtil.token = task.getResult();
-                                    String msg = getString(R.string.fcm_token, UserdetailsUtil.token);
+                                    //String msg = getString(R.string.fcm_token, UserdetailsUtil.token);
                                     Log.d("MainActivity", task.getResult());
-                                    //Log.d("MainActivity", "whats this " + FirebaseInstanceId.getInstance().getId());
                                 }
                             });
                 }
@@ -239,8 +228,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
         }
-
-        return;
     }
 
     @Override

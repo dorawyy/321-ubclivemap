@@ -34,7 +34,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     private class SentMessageHolder extends RecyclerView.ViewHolder {
 
-        TextView messageTxt;
+        private TextView messageTxt;
 
         public SentMessageHolder(@NonNull View itemView) {
             super(itemView);
@@ -45,7 +45,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     private class SentImageHolder extends RecyclerView.ViewHolder {
 
-        ImageView imageView;
+        public ImageView imageView;
 
         public SentImageHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,7 +56,8 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     private class ReceivedMessageHolder extends RecyclerView.ViewHolder {
 
-        TextView nameTxt, messageTxt;
+        public TextView nameTxt;
+        public TextView messageTxt;
 
         public ReceivedMessageHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,8 +69,8 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     private class ReceivedImageHolder extends RecyclerView.ViewHolder {
 
-        ImageView imageView;
-        TextView nameTxt;
+        public ImageView imageView;
+        public TextView nameTxt;
 
         public ReceivedImageHolder(@NonNull View itemView) {
             super(itemView);
@@ -123,6 +124,9 @@ public class MessageAdapter extends RecyclerView.Adapter {
                 view = inflater.inflate(R.layout.item_received_photo, parent, false);
                 return new ReceivedImageHolder(view);
                 //break;
+            default:
+                Log.d("MessageAdapter","Should not reach here. Added for codacy");
+                break;
         }
         return null;
     }

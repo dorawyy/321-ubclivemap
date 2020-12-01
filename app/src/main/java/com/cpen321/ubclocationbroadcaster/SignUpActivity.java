@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -35,10 +34,7 @@ public class SignUpActivity extends AppCompatActivity {
     /**INITIALIZATION - START*/
     private EditText username;
     private EditText password;
-    TextView t1,t2;
     private String URL = UserdetailsUtil.getURL() + "/users/register";
-    Animation topAnim, bottomAnim;
-    Button sign_up_btn;
     /**INITIALIZATION - END*/
 
     @Override
@@ -48,13 +44,13 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
 
-        topAnim = AnimationUtils.loadAnimation(this,R.anim.top_anime_another);
-        bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_anime_another);
+        Animation topAnim = AnimationUtils.loadAnimation(this,R.anim.top_anime_another);
+        Animation bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_anime_another);
         username = findViewById(R.id.sign_up_username_button);
         password = findViewById(R.id.sign_up_password_button);
-        sign_up_btn = findViewById(R.id.sign_up_button);
-        t1 = findViewById(R.id.textView5);
-        t2 = findViewById(R.id.textView6);
+        Button sign_up_btn = findViewById(R.id.sign_up_button);
+        TextView t1 = findViewById(R.id.textView5);
+        TextView t2 = findViewById(R.id.textView6);
 
         /**ANIMATION START*/
         t1.setAnimation(topAnim);
@@ -103,6 +99,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         Intent signUpIntent = new Intent(SignUpActivity.this, ProfileActivity.class);
                                         //signUpIntent.putExtra("object", (Parcelable) jsnReq);
                                         startActivity(signUpIntent);
+                                        Toast.makeText(SignUpActivity.this, "Thanks for signing up!", Toast.LENGTH_SHORT).show();
                                     }
                                     else {
                                             Toast.makeText(SignUpActivity.this, "ERROR: Username Already Exists", Toast.LENGTH_SHORT).show();

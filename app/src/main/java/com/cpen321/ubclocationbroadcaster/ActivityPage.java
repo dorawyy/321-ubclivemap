@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -32,10 +30,6 @@ public class ActivityPage extends AppCompatActivity {
     //Displays the users in this activity
     private Spinner usersSpinner;
 
-    private Button onMap;
-    private Button leave;
-    private Button back;
-
     private int counter = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +38,13 @@ public class ActivityPage extends AppCompatActivity {
         setContentView(R.layout.activity_page);
 
 
-
         /**LOCAL VARIABLES SET UP - START*/
+        final Button onMap;
+        final Button leave;
+        final Button back;
         leave = findViewById(R.id.LeaveButton);
         onMap = findViewById(R.id.MapButton2);
         back = findViewById(R.id.BackfromCurrentActivity);
-
         /**LOCAL VARIABLES SET UP - END*/
 
 

@@ -33,13 +33,17 @@ import java.util.ArrayList;
 
 public class UpdateProfile extends AppCompatActivity {
 
-    EditText name,phone;
-    AutoCompleteTextView school,major;
-    Spinner mySpinner;
-    ListView course_list_view;
-    ArrayList<String> course_list;
+    private EditText name;
+    private EditText phone;
+    private AutoCompleteTextView school;
+    private AutoCompleteTextView major;
+    private Spinner mySpinner;
+    private ArrayList<String> course_list;
 
-    String inputName,inputPhone,inputSchool,inputMajor;
+    private String inputName;
+    private String inputPhone;
+    private String inputSchool;
+    private String inputMajor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +75,7 @@ public class UpdateProfile extends AppCompatActivity {
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
 
-        course_list_view = findViewById(R.id.update_course_list);
+        ListView course_list_view = findViewById(R.id.update_course_list);
         course_list = new ArrayList<String>();
         final ArrayAdapter<String> course_list_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course_list);
         course_list_view.setAdapter(course_list_adapter);
@@ -104,7 +108,6 @@ public class UpdateProfile extends AppCompatActivity {
     }
 
     private void donePressed (final RequestQueue requestQueue, Button done, Context ct){
-        final Context context = ct;
         final Activity act = (Activity)ct;
         done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,13 +178,9 @@ public class UpdateProfile extends AppCompatActivity {
         else
             enterJSONfield(ret,"major",inputMajor);
 
-        try{
-            ret.put("private", UserdetailsUtil.privatePublic);
-            ret.put("inActivity", UserdetailsUtil.inactivity);
-            ret.put("activityID", UserdetailsUtil.activityID);
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
+        enterBooleanJSONfield(ret,"private",UserdetailsUtil.privatePublic);
+        enterBooleanJSONfield(ret,"inActivity",UserdetailsUtil.inactivity);
+        enterJSONfield(ret,"activityID",UserdetailsUtil.activityID);
 
         JSONArray courseObj = new JSONArray();
         if(course_list.isEmpty()){
@@ -194,15 +193,27 @@ public class UpdateProfile extends AppCompatActivity {
                 courseObj.put(course);
             }
         }
-        try{
-            ret.put("CourseRegistered",courseObj);
-        }catch (JSONException ee){
-            ee.printStackTrace();
-        }
+        enterJSONJSONfield(ret,"CourseRegistered",courseObj);
         return ret;
     }
 
     private void enterJSONfield(JSONObject obj, String fieldName, String fieldValue){
+        try{
+            obj.put(fieldName,fieldValue);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void enterBooleanJSONfield(JSONObject obj, String fieldName, boolean fieldValue){
+        try{
+            obj.put(fieldName,fieldValue);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void enterJSONJSONfield(JSONObject obj, String fieldName, JSONArray fieldValue){
         try{
             obj.put(fieldName,fieldValue);
         }catch (JSONException e){

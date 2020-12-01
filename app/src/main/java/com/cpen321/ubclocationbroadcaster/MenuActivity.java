@@ -23,7 +23,10 @@ public class MenuActivity extends AppCompatActivity {
         Button signOutButton;
         Button settingsButton;
 
-        Animation topAnim, bottomAnim, topAnim2, bottomAnim2;
+        Animation topAnim;
+        Animation bottomAnim;
+        Animation topAnim2;
+        Animation bottomAnim2;
 
         topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
         bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);

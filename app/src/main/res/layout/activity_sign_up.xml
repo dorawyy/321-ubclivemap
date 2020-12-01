@@ -10,22 +10,22 @@
 
     <EditText
         android:id="@+id/sign_up_username_button"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_width="224dp"
+        android:layout_height="41dp"
         android:autoSizeTextType="uniform"
+        android:ems="10"
         android:fontFamily="sans-serif-condensed-medium"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.944"
+        app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.218" />
+        app:layout_constraintVertical_bias="0.217" />
 
     <EditText
         android:id="@+id/sign_up_password_button"
-        android:layout_width="250dp"
+        android:layout_width="224dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:autoSizeTextType="uniform"

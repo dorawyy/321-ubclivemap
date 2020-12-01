@@ -12,20 +12,18 @@ import org.junit.Test;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.intent.Intents.intended;
-import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class SignUpActivityTest {
     @Rule
     public IntentsTestRule<SignUpActivity> mActivityTestRule = new IntentsTestRule<SignUpActivity>(SignUpActivity.class);
-    private String username_t = "newUser2";
+    private String username_t = "newUser";
     private String password_t = "password";
     private String username2_t = "user1";
 
@@ -41,9 +39,13 @@ public class SignUpActivityTest {
         Espresso.onView(withId(R.id.sign_up_password_button)).perform(typeText(password_t));
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.sign_up_button)).perform(click());
+
+        try {
         Espresso.onView(withText("Enter a username")).inRoot(withDecorView(not(is(mActivityTestRule
                 .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-        assertEquals(1, 1);
+        }catch (Exception e) {
+            fail("Exception thrown");
+        }
     }
 
     @Test
@@ -52,9 +54,13 @@ public class SignUpActivityTest {
         Espresso.onView(withId(R.id.sign_up_username_button)).perform(typeText(username_t));
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.sign_up_button)).perform(click());
+
+        try {
         Espresso.onView(withText("Enter a password")).inRoot(withDecorView(not(is(mActivityTestRule
                 .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-        assertEquals(1, 1);
+        }catch (Exception e) {
+            fail("Exception thrown");
+        }
     }
 
     @Test
@@ -62,9 +68,13 @@ public class SignUpActivityTest {
         /** testing sign up with leaving password and username fields blank, expecting to get an ERROR message **/
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.sign_up_button)).perform(click());
+
+        try {
         Espresso.onView(withText("Enter a username")).inRoot(withDecorView(not(is(mActivityTestRule
                 .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-        assertEquals(1, 1);
+        }catch (Exception e) {
+            fail("Exception thrown");
+        }
     }
 
     @Test
@@ -74,20 +84,29 @@ public class SignUpActivityTest {
         Espresso.onView(withId(R.id.sign_up_password_button)).perform(typeText(password_t));
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.sign_up_button)).perform(click());
+
+        try {
         Espresso.onView(withText("Username Already Exists")).inRoot(withDecorView(not(is(mActivityTestRule
                 .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-        assertEquals(1, 1);
+        }catch (Exception e) {
+            fail("Exception thrown");
+        }
     }
 
     @Test
     public void testSignUp(){
-        /** testing sign up by entering valid username and password **/
+        /** testing sign up by entering valid username and password, expected success message **/
         Espresso.onView(withId(R.id.sign_up_username_button)).perform(typeText(username_t));
         Espresso.onView(withId(R.id.sign_up_password_button)).perform(typeText(password_t));
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.sign_up_button)).perform(click());
-        intended(hasComponent(ProfileActivity.class.getName()));
-        assertEquals(1, 1);
+
+        try {
+        Espresso.onView(withText("Thanks for signing up!")).inRoot(withDecorView(not(is(mActivityTestRule
+                .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        }catch (Exception e) {
+            fail("Exception thrown");
+        }
     }
 
     @After

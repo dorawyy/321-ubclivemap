@@ -1,8 +1,8 @@
 package com.cpen321.ubclocationbroadcaster;
 
 
-import androidx.test.espresso.Espresso;
-import androidx.test.espresso.assertion.ViewAssertions;
+import android.util.Log;
+
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -44,7 +44,7 @@ public class ProfileActivityTest {
 
     private String name_t = "Jack";
     private String school_t = "UBC";
-    private String major_t = "Computer Engineering";
+    private String major_t = "CPEN";
     private String number_t = "6045557777";
     private String course_sel1 = "CPEN 211";
     private String course_sel2 = "CPEN 331";
@@ -52,32 +52,23 @@ public class ProfileActivityTest {
 
     @Before
     public void setUp() throws Exception {
+        Log.d("ProfileActivityTest", "Exception");
     }
-
-
-    /*
-    @Test
-    public void useAppContext() {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.cpen321.ubclocationbroadcaster", appContext.getPackageName());
-    }
-    */
 
     //helper functions
     public void setEntry() {
         onView(withId(R.id.sign_up_name_button)).perform(typeText(name_t));
+        onView(withId(R.id.phone_number_button)).perform(typeText(number_t));
         onView(withId(R.id.school_button)).perform(typeText(school_t));
         onView(withId(R.id.major_button)).perform(typeText(major_t));
-        onView(withId(R.id.phone_number_button)).perform(typeText(number_t));
         closeSoftKeyboard();
     }
 
     public void checkEntry() {
-            onView(withId(R.id.sign_up_name_button)).check(ViewAssertions.matches(withText(name_t)));
-            onView(withId(R.id.school_button)).check(ViewAssertions.matches(withText(school_t)));
-            onView(withId(R.id.major_button)).check(ViewAssertions.matches(withText(major_t)));
-            onView(withId(R.id.phone_number_button)).check(ViewAssertions.matches(withText(number_t)));
+        onView(withId(R.id.sign_up_name_button)).check(matches(withText(name_t)));
+        onView(withId(R.id.school_button)).check(matches(withText(school_t)));
+        onView(withId(R.id.major_button)).check(matches(withText(major_t)));
+        onView(withId(R.id.phone_number_button)).check(matches(withText(number_t)));
     }
 
     @Test
@@ -102,10 +93,29 @@ public class ProfileActivityTest {
 
         //check if it has items in list
         try {
-            onView(withId(R.id.course_list)).check(ViewAssertions.matches(hasDescendant(withText(course_sel1))));
-            onView(withId(R.id.course_list)).check(ViewAssertions.matches(hasDescendant(withText(course_sel2))));
+            onView(withId(R.id.course_list)).check(matches(hasDescendant(withText(course_sel1))));
+            onView(withId(R.id.course_list)).check(matches(hasDescendant(withText(course_sel2))));
         }catch(Exception e){
             fail("Exception thrown.");
+        }
+    }
+
+    @Test
+    public void createProfileWithValidInfo(){
+        /** trying to create a profile with empty fields, expecting a success toast message **/
+        UserdetailsUtil.username = "user2";
+        setEntry();
+        onView(withId(R.id.course_spinner)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is(course_sel1))).perform(click());
+        closeSoftKeyboard();
+        onView(withId(R.id.course_page_done_button)).perform(click());
+
+        try {
+            onView(withText("Profile Created Successfully!")).inRoot(withDecorView(not(is(mActivityTestRule
+                    .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        }catch (Exception e) {
+            e.printStackTrace();
+            fail("Exception thrown");
         }
     }
 
@@ -118,26 +128,11 @@ public class ProfileActivityTest {
         onView(withId(R.id.course_page_done_button)).perform(click());
 
         try {
-            Espresso.onView(withText("ERROR: Enter all fields!")).inRoot(withDecorView(not(is(mActivityTestRule
+            onView(withText("ERROR: Enter all fields!")).inRoot(withDecorView(not(is(mActivityTestRule
                     .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-        }catch(Exception e) {
-            fail("Exception thrown");
-        }
-    }
 
-    @Test
-    public void createProfileWithValidInfo(){
-        /** trying to create a profile with empty fields, expecting a success toast message **/
-        setEntry();
-        onView(withId(R.id.course_spinner)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is(course_sel1))).perform(click());
-        closeSoftKeyboard();
-        onView(withId(R.id.course_page_done_button)).perform(click());
-
-        try {
-            Espresso.onView(withText("Profile Created Successfully!")).inRoot(withDecorView(not(is(mActivityTestRule
-                    .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         }catch (Exception e) {
+            e.printStackTrace();
             fail("Exception thrown");
         }
     }
@@ -150,7 +145,7 @@ public class ProfileActivityTest {
         onView(withId(R.id.course_page_done_button)).perform(click());
 
         try {
-            Espresso.onView(withText("Select your courses!")).inRoot(withDecorView(not(is(mActivityTestRule
+            onView(withText("Select your courses!")).inRoot(withDecorView(not(is(mActivityTestRule
                     .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         }catch (Exception e) {
             fail("Exception thrown");

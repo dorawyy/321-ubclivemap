@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 /**HELPER CLASS FOR DisplaySortedList.java*/
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
-    String activityNames[];
-    String actividyIds[];
-    Context context;
+    public String activityNames[];
+    public String actividyIds[];
+    public Context context;
     public MyAdapter(Context ct, String s1[] , String s2[]) {
         context = ct;
         activityNames = s1;
@@ -45,9 +45,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView myText1;
-        TextView myText2;
-        Button seeMore2;
+        public TextView myText1;
+        public TextView myText2;
+        public Button seeMore2;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

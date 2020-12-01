@@ -1,6 +1,5 @@
 package com.cpen321.ubclocationbroadcaster;
 
-import androidx.test.espresso.Espresso;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 
 import org.junit.After;
@@ -8,6 +7,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static androidx.test.espresso.Espresso.closeSoftKeyboard;
+import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -26,8 +27,8 @@ public class MainActivityTest {
     @Rule
     public IntentsTestRule<MainActivity> mActivityTestRule = new IntentsTestRule<MainActivity>(MainActivity.class);
     private String username_t = "user1";
-    private String password1_t = "wrongPassword";
-    private String password2_t = "1234";
+    private String password1_t = "1111";
+    private String password2_t = "password1";
 
 
     @Before
@@ -35,17 +36,34 @@ public class MainActivityTest {
         //unused
     }
 
+    @Test
+    public void testSignIn(){
+        /** testing if correct username/password leads to the corresponding intent, expecting to get the "Login Succeeded" message **/
+        onView(withId(R.id.username_button)).perform(typeText(username_t));
+        onView(withId(R.id.password_button)).perform(typeText(password2_t));
+        closeSoftKeyboard();
+        onView(withId(R.id.sign_in_button)).perform(click());
+
+        try {
+            onView(withText("Login Succeeded!")).inRoot(withDecorView(not(is(mActivityTestRule
+                    .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        }catch (Exception e) {
+            e.printStackTrace();
+            fail("Exception thrown");
+        }
+
+    }
 
     @Test
     public void testSignInWithWrongPassword() throws Exception{
         /** testing sign in with wrong username and password, expecting to get an ERROR message **/
-        Espresso.onView(withId(R.id.username_button)).perform(typeText(username_t));
-        Espresso.onView(withId(R.id.password_button)).perform(typeText(password1_t));
-        Espresso.closeSoftKeyboard();
-        Espresso.onView(withId(R.id.sign_in_button)).perform(click());
+        onView(withId(R.id.username_button)).perform(typeText(username_t));
+        onView(withId(R.id.password_button)).perform(typeText(password1_t));
+        closeSoftKeyboard();
+        onView(withId(R.id.sign_in_button)).perform(click());
 
         try {
-            Espresso.onView(withText("ERROR: Invalid password.")).inRoot(withDecorView(not(is(mActivityTestRule
+            onView(withText("ERROR: Invalid password.")).inRoot(withDecorView(not(is(mActivityTestRule
                     .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         } catch(Exception e) {
             fail("Exception thrown.");
@@ -55,12 +73,12 @@ public class MainActivityTest {
     @Test
     public void testSignInWithNoUsername() {
         /** testing sign in with no username, expecting to get an ERROR message **/
-        Espresso.onView(withId(R.id.password_button)).perform(typeText(password2_t));
-        Espresso.closeSoftKeyboard();
-        Espresso.onView(withId(R.id.sign_in_button)).perform(click());
+        onView(withId(R.id.password_button)).perform(typeText(password2_t));
+        closeSoftKeyboard();
+        onView(withId(R.id.sign_in_button)).perform(click());
 
         try {
-        Espresso.onView(withText("Enter a username")).inRoot(withDecorView(not(is(mActivityTestRule
+        onView(withText("Enter a username")).inRoot(withDecorView(not(is(mActivityTestRule
                 .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         } catch(Exception e) {
             fail("Exception thrown.");
@@ -70,12 +88,12 @@ public class MainActivityTest {
     @Test
     public void testSignInWithNoPassword() {
         /** testing sign in with no password entered, expecting to get the "Enter a password" message **/
-        Espresso.onView(withId(R.id.username_button)).perform(typeText(username_t));
-        Espresso.closeSoftKeyboard();
-        Espresso.onView(withId(R.id.sign_in_button)).perform(click());
+        onView(withId(R.id.username_button)).perform(typeText(username_t));
+        closeSoftKeyboard();
+        onView(withId(R.id.sign_in_button)).perform(click());
 
         try {
-        Espresso.onView(withText("Enter a password")).inRoot(withDecorView(not(is(mActivityTestRule
+        onView(withText("Enter a password")).inRoot(withDecorView(not(is(mActivityTestRule
                 .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         } catch(Exception e) {
             fail("Exception thrown.");
@@ -85,27 +103,11 @@ public class MainActivityTest {
     @Test
     public void testSignInWithNoPassNoUsername() {
         /** testing sign in with no password entered, expecting to get the "Enter a username" message **/
-        Espresso.closeSoftKeyboard();
-        Espresso.onView(withId(R.id.sign_in_button)).perform(click());
+        closeSoftKeyboard();
+        onView(withId(R.id.sign_in_button)).perform(click());
 
         try {
-        Espresso.onView(withText("Enter a username")).inRoot(withDecorView(not(is(mActivityTestRule
-                .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-        } catch(Exception e) {
-            fail("Exception thrown.");
-        }
-    }
-
-    @Test
-    public void testSignIn(){
-        /** testing if correct username/password leads to the corresponding intent, expecting to get the "Login Succeeded" message **/
-        Espresso.onView(withId(R.id.username_button)).perform(typeText(username_t));
-        Espresso.onView(withId(R.id.password_button)).perform(typeText(password2_t));
-        Espresso.closeSoftKeyboard();
-        Espresso.onView(withId(R.id.sign_in_button)).perform(click());
-
-        try {
-        Espresso.onView(withText("Login Succeeded!")).inRoot(withDecorView(not(is(mActivityTestRule
+        onView(withText("Enter a username")).inRoot(withDecorView(not(is(mActivityTestRule
                 .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         } catch(Exception e) {
             fail("Exception thrown.");
@@ -115,7 +117,7 @@ public class MainActivityTest {
     @Test
     public void testSignUp(){
         /** testing the sign up button, expecting to open up the sign up intent **/
-        Espresso.onView(withId(R.id.sign_up_button)).perform(click());
+        onView(withId(R.id.sign_up_button)).perform(click());
 
         try {
         intended(hasComponent(SignUpActivity.class.getName()));

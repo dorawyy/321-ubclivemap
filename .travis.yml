@@ -11,4 +11,4 @@ before_install:
 
 script:
   - cd ./backend/server
-  - npm test -- --coverage
+  - npm test -- --coverage --runInBand

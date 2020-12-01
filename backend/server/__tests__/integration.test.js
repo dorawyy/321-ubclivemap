@@ -1,22 +1,32 @@
+
 /**
  * @jest-environment node
  */
 
 const request = require("supertest")
 const app = require("../app").app;
-const axios = require("../app").axios;
 var constants = require("../__vars__/constants")
 var models = require("../__models__/models");
+var admin = require("../__modules__/notifications").admin;
 var Account = models.Account;
 var Profile = models.Profile;
 var Activity = models.Activity;
 
 
+admin.messaging = jest.fn();
+admin.messaging().sendToDevice = jest.fn((arg1,arg2,arg3) => new Promise((resolve,reject) => {
+    resolve({data : {success : true}});
+}));
+
+var beforeUsr;
 var beforeAct;
 var beforePro;
 describe("successful tests", () => {
     beforeAll(async () => {
         await models.connectDb()
+        beforeUsr = await Account.find().exec();
+        await Account.deleteMany({})
+
         beforeAct = await Activity.find().exec();
         await Activity.deleteMany({})
 
@@ -24,15 +34,63 @@ describe("successful tests", () => {
         await Profile.deleteMany({})
     });
 
-    test("make user leader of activity", async () => {
+
+    test("user makes an account and profile", async () =>{
+        var testacc = {
+            name : "test",
+            password : "pass1234",
+            token : "cooltoken"
+        }
+        var response = await request(app)
+            .post("/users/register")
+            .type('json')
+            .send(testacc);
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("Account registered successfully.");
+
+        response = await request(app)
+            .get("/users/all");
+        expect(response.body[0].name).toBe("test");
+
+        response = await request(app)
+            .get("/notifications/alltokens")
+        expect(response.body[0].username).toBe("test");
+        expect(response.body[0].token).toBe("cooltoken");
+    })
+
+    test("user logs in", async () => {
         var leader = JSON.parse(JSON.stringify(constants.kyle_p));
         leader.username = "test";
-
         var response = await request(app)
             .post("/profiles/add")
             .type('json')
             .send(leader);
+        response = await request(app)
+            .post("/users/login")
+            .type('json')
+            .send({
+                name : "test",
+                password : "pass1234",
+                token : "coolertoken"
+            });
 
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("Authentication successful.");
+        expect(response.body.value).toMatchObject(leader)
+
+        response = await request(app)
+            .get("/notifications/alltokens")
+        expect(response.body[0].username).toBe("test");
+        expect(response.body[0].token).toBe("coolertoken");
+    })
+
+    test("make user leader of activity", async () => {
+        var leader = JSON.parse(JSON.stringify(constants.kyle_p));
+        leader.username = "test";
+        var response = await request(app)
+            .post("/profiles/add")
+            .type('json')
+            .send(leader);
         response = await request(app)
             .post("/activities/add")
             .type('json')
@@ -96,6 +154,7 @@ describe("successful tests", () => {
         correct_val = JSON.parse(JSON.stringify(constants.kyle_p));
         correct_val.inActivity = true;
         correct_val.activityID = "1";
+        expect(response.body.success).toBe(true);
         expect(response.body.value).toMatchObject(correct_val);
     });
 
@@ -151,12 +210,16 @@ describe("successful tests", () => {
     });
 
     afterAll(async () => {
+        await Account.deleteMany({});
+        await Account.insertMany(beforeUsr);
+
         await Activity.deleteMany({});
         await Activity.insertMany(beforeAct);
 
         await Profile.deleteMany({});
         await Profile.insertMany(beforePro);
-        await models.disconnectDb()
+        await models.disconnectDb();
+        done();
     });
 })
 
@@ -211,6 +274,15 @@ describe("fail tests", () => {
             .send(otheractivity);
         expect(response.body.success).toBe(false)
         expect(response.body.status).toBe("User does not exist.");
+
+        for(i=0; i<constants.bad_activities.length; i++){
+            response = await request(app)
+                .post("/activities/add")
+                .type('json')
+                .send(constants.bad_activities[i]);
+            expect(response.body.success).toBe(false)
+            expect(response.body.status).toBe("Not well formed request.");
+        }
     })
 
     test("user joins an activity", async () => {
@@ -365,6 +437,23 @@ describe("fail tests", () => {
 
         expect(response.body.status).toBe("Not well formed request.");
         expect(response.body.success).toBe(false)
+
+        for(i=0; i<constants.bad_profiles.length; i++){
+            response = await request(app)
+                .post("/activities/sort")
+                .type('json')
+                .send({
+                    user : constants.bad_profiles[i],
+                    userlat : "50",
+                    userlong : "-124",
+                    maxradius : "2000",
+                    locationweight : 1,
+                    coursesweight : 1,
+                    majorweight : 1
+                });
+            expect(response.body.success).toBe(false)
+            expect(response.body.status).toBe("Not well formed request.");
+        }
     });
 
     afterAll(async () => {
@@ -374,5 +463,6 @@ describe("fail tests", () => {
         await Profile.deleteMany({});
         await Profile.insertMany(beforePro2);
         await models.disconnectDb()
+        done();
     });
 })

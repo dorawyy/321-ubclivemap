@@ -229,12 +229,14 @@ router.post("/joinupdate",async(req,res)=>{
         profileupdate = await sharedfuncs.axiosPostRequest(req, "/profiles/join", req.body);
 
         // SEND NOTIFICATION TO ACTIVITY LEADER
-        var leader_notif = {
-            username : response.leader,
-            title : "Activity Locator",
-            message : req.body.username + " joined your activity!"
-        } 
-        sendnotif = await sharedfuncs.axiosPostRequest(req, "/notifications/send", leader_notif);
+        if(profileupdate.data.success === true){
+            var leader_notif = {
+                username : response.leader,
+                title : "Activity Locator",
+                message : req.body.username + " joined your activity!"
+            } 
+            sendnotif = await sharedfuncs.axiosPostRequest(req, "/notifications/send", leader_notif);
+        }
     } catch (err) {
         // AXIOS ERROR
         return res.json(sharedfuncs.formatResponse(false, "ERROR: " + err, null));
@@ -275,7 +277,7 @@ router.post("/leaveupdate", async (req,res) => {
         profileupdate = await sharedfuncs.axiosPostRequest(req, "/profiles/leave", req.body);
 
         // SEND NOTIFICATION TO LEADER OF ACTIVITY
-        if(req.body.username != response.leader){
+        if(req.body.username != response.leader && profileupdate.data.success === true){
             var leader_notif = {
                 username : response.leader,
                 title : "Activity Locator",

@@ -95,7 +95,7 @@ POST http://localhost:3000/profiles/add
 Content-Type: application/json
 
 {
-    "name" : "Kyle",
+    "name" : "user1",
     "username" : "user1",
     "major" : "CPEN",
     "CourseRegistered" : [
@@ -295,7 +295,7 @@ POST http://localhost:3000/activities/search
 Content-Type: application/json
 
 {
-    "aid" : "ultracheapcow"
+    "aid" : "zyadact"
 }
 
 ### delete activity
@@ -311,7 +311,7 @@ POST http://localhost:3000/profiles/search
 Content-Type: application/json
 
 {
-    "username" : "user1"
+    "username" : "zyad"
 }
 
 
@@ -320,8 +320,8 @@ POST http://localhost:3000/profiles/leave
 Content-Type: application/json
 
 {
-    "aid" : "ultracheapcow",
-    "username" : "Kyle"
+    "aid" : "zyadact",
+    "username" : "zyad"
 }
 
 ### search activity
@@ -329,7 +329,7 @@ POST http://localhost:3000/activities/joinupdate
 Content-Type: application/json
 
 {
-    "aid" : "ultracheapcow",
+    "aid" : "zyadact",
     "username" : "user1"
 }
 
@@ -338,8 +338,17 @@ POST http://localhost:3000/activities/leaveupdate
 Content-Type: application/json
 
 {
-    "aid" : "ultracheapcow",
+    "aid" : "zyadact",
     "username" : "user1"
+}
+
+### search activity
+POST http://localhost:3000/activities/leaveupdate
+Content-Type: application/json
+
+{
+    "aid" : "bad",
+    "username" : "test"
 }
 
 

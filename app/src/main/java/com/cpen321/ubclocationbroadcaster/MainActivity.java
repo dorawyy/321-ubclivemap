@@ -55,9 +55,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-        if(!UserdetailsUtil.tokenGenerated){
+        //if(!UserdetailsUtil.tokenGenerated){
             generateFirebaseToken();
-        }
+        //}
         setup();
 
         checkLocationPermission();

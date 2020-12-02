@@ -28,7 +28,7 @@ public class NonFuncReqTest2 {
         //unused
     }
 
-    /** testing if display of map is done in lss than 5 seconds **/
+    /** testing if display of map is done in lss than 10 seconds **/
 
     @Test
     public void testActivitesDisplay() {

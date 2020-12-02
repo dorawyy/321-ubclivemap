@@ -28,8 +28,7 @@ public class ActivityPage extends AppCompatActivity {
 
     //Displays the courses in this activity
     private Spinner coursesSpinner;
-    //Displays the users in this activity
-    private Spinner usersSpinner;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,7 +191,7 @@ public class ActivityPage extends AppCompatActivity {
                             for(int i = 0; i< SortedlistclassUtil.users.length; i++){
                                 users[i+1] = SortedlistclassUtil.users[i];
                             }
-                            usersSpinner = findViewById(R.id.UsersSpinner2);
+                            Spinner usersSpinner = findViewById(R.id.UsersSpinner2);
                             ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(ActivityPage.this,
                                     android.R.layout.simple_list_item_1, users);
                             myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

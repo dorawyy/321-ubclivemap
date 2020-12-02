@@ -1,5 +1,6 @@
 package com.cpen321.ubclocationbroadcaster;
 
+
 /*Public Static String array 'aids' holds the Activity Ids of all the activities
 * in the database ordered by most suggested at position aids[0] and least suggested at aids[total number of activities-1] */
 public class SortedlistclassUtil {
@@ -17,6 +18,8 @@ public class SortedlistclassUtil {
     public static Double lon;
     public static String leader;
 
+    public static String[] allUsers;
+    public static String[] allphones;
     /**This is called on sign out*/
     public static void cleanup(){
         aids = null;

@@ -15,10 +15,11 @@
 
         <TextView
             android:id="@+id/ActivityNameBox"
-            android:layout_width="335dp"
-            android:layout_height="34dp"
+            android:layout_width="331dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bo"
+            android:autoSizeTextType="uniform"
             android:text="ActivityName"
-            android:textSize="18sp"
             android:fontFamily="sans-serif-condensed-medium"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,8 +29,10 @@
 
         <TextView
             android:id="@+id/textView33"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="109dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bo"
+            android:autoSizeTextType="uniform"
             android:layout_marginTop="25dp"
             android:text="About:"
             android:fontFamily="sans-serif-condensed-medium"
@@ -42,10 +45,11 @@
 
         <TextView
             android:id="@+id/textView34"
-            android:layout_width="68dp"
-            android:layout_height="30dp"
+            android:layout_width="109dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bo"
+            android:autoSizeTextType="uniform"
             android:layout_marginTop="24dp"
-
             android:text="Leader:"
             android:fontFamily="sans-serif-condensed-medium"
             android:textStyle="bold"
@@ -57,8 +61,10 @@
 
         <TextView
             android:id="@+id/textView35"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_width="109dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bo"
+            android:autoSizeTextType="uniform"
             android:layout_marginTop="25dp"
             android:text="Major:"
             android:fontFamily="sans-serif-condensed-medium"
@@ -71,8 +77,10 @@
 
         <TextView
             android:id="@+id/textView36"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_width="109dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bo"
+            android:autoSizeTextType="uniform"
             android:layout_marginTop="25dp"
             android:text="School:"
             app:layout_constraintEnd_toEndOf="parent"
@@ -85,8 +93,10 @@
 
         <Spinner
             android:id="@+id/CoursesSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_width="330dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bo"
+            android:popupBackground="@drawable/bo"
             android:layout_marginTop="25dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:textStyle="bold"
@@ -98,12 +108,14 @@
 
         <Spinner
             android:id="@+id/UsersSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_width="330dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bo"
             android:layout_marginTop="25dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:textStyle="bold"
             android:textSize="18dp"
+            android:popupBackground="@drawable/bo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -111,11 +123,16 @@
 
         <TextView
             android:id="@+id/InfoBox"
-            android:layout_width="235dp"
-            android:layout_height="145dp"
+            android:layout_width="200dp"
+            android:layout_height="144dp"
             android:layout_marginTop="25dp"
+            android:autoSizeMaxTextSize="18sp"
+            android:autoSizeMinTextSize="5sp"
+            android:autoSizeTextType="uniform"
             android:text="TextView"
-            android:textSize="18sp"
+
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed-medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -123,14 +140,15 @@
 
         <TextView
             android:id="@+id/LeaderBox"
-            android:layout_width="236dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="24dp"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
             android:text="TextView"
             android:autoSizeMaxTextSize="18sp"
-            android:autoSizeMinTextSize="10sp"
+            android:autoSizeMinTextSize="5sp"
             android:autoSizeTextType="uniform"
-            android:textSize="18sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -138,11 +156,15 @@
 
         <TextView
             android:id="@+id/MajorBox"
-            android:layout_width="236dp"
-            android:layout_height="30dp"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
             android:layout_marginTop="25dp"
             android:text="TextView"
-            android:textSize="18sp"
+            android:autoSizeMaxTextSize="18sp"
+            android:autoSizeMinTextSize="5sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -150,11 +172,15 @@
 
         <TextView
             android:id="@+id/SchoolBox"
-            android:layout_width="236dp"
-            android:layout_height="30dp"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
             android:layout_marginTop="25dp"
             android:text="TextView"
-            android:textSize="18sp"
+            android:autoSizeMaxTextSize="18sp"
+            android:autoSizeMinTextSize="5sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"

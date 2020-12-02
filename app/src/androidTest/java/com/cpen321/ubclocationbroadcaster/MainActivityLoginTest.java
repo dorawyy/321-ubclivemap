@@ -55,7 +55,7 @@ public class MainActivityLoginTest {
         }
     }
 
-    /** testing if correct username/password leads to the corresponding intent, expecting to get to menu activity **/
+    /** testing if correct username/password leads to the corresponding intent, expecting to get a success message **/
     @Test
     public void testSignIn() {
         onView(withId(R.id.username_button)).perform(typeText(entered_username));
@@ -64,7 +64,8 @@ public class MainActivityLoginTest {
         onView(withId(R.id.sign_in_button)).perform(click());
 
         try {
-            intended(hasComponent(MenuActivity.class.getName()));
+            onView(withText("Login Succeeded!")).inRoot(withDecorView(not(is(mActivityTestRule
+                    .getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
         } catch(Exception e) {
             e.printStackTrace();
             fail("Exception thrown.");

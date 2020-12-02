@@ -32,6 +32,7 @@ public class MainActivityLoginTest {
     private String entered_username = "test_user1";
     private String entered_password = "password";
     private String wrong_password = "wrong_password";
+
     @Before
     public void setUp() throws Exception {
         //unused

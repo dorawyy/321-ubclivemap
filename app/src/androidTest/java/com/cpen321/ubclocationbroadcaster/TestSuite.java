@@ -12,6 +12,8 @@ import org.junit.runners.Suite;
         ProfileActivityTest.class,
         MenuActivityTest.class,
         MainActivityLoginTest.class,
+        NonFuncReqTest1.class,
+        NonFuncReqTest2.class,
         MenuProfilesTest.class
 })
 public class TestSuite {

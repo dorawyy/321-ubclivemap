@@ -30,7 +30,7 @@ public class NonFuncReqTest1 {
         //unused
     }
 
-    /** testing if sign in is done in less than 5 seconds**/
+    /** testing if sign in is done in less than 10 seconds**/
     @Test
     public void testSignInTimed() {
         onView(withId(R.id.username_button)).perform(typeText(entered_username));

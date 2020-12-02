@@ -56,7 +56,7 @@ public class MenuProfilesTest {
     public void buttonSelectionTest3() {
         onView(withId(R.id.DeleteAccount)).perform(click());
         onView(withText("YES")).inRoot(withDecorView(not(is(mActivityTestRule
-                .getActivity().getWindow().getDecorView())))).check(ViewAssertions.matches(isDisplayed())).perform(click());;
+                .getActivity().getWindow().getDecorView())))).check(ViewAssertions.matches(isDisplayed())).perform(click());
         try {
             intended(hasComponent(MainActivity.class.getName()));
         } catch(Exception e) {

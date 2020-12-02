@@ -2,6 +2,7 @@ const request = require("supertest");
 const app = require("../app").app;
 var sharedfuncs = require("../__modules__/sharedfunctions");
 var models = require("../__models__/models");
+var bcrypt = require("../__modules__/users").bcrypt;
 var Account = models.Account;
 
 var jack_a1 = {
@@ -188,7 +189,7 @@ describe("fail tests", () => {
             .type('json')
             .send(jack_a1);
         expect(response.body.success).toBe(false)
-        expect(response.body.status).toBe("no profile");
+        expect(response.body.status).toBe("PROFILE ERROR: no profile");
 
         var response = await request(app)
             .post("/users/login")

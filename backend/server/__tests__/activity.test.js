@@ -1,6 +1,5 @@
 const request = require("supertest")
 const app = require("../app").app;
-const axios = require("../app").axios;
 var sharedfuncs = require("../__modules__/sharedfunctions");
 var models = require("../__models__/models");
 var constants = require("../__vars__/constants");

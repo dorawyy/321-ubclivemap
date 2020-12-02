@@ -312,7 +312,7 @@ router.post("/leaveupdate", async (req,res) => {
 });
 
 /*
- * Delete Activity Route.
+ * Update Activity Route.
  *
  * Takes in a request with the full information of an activity.
  * Updates activity with activity id 'activity_id' to the request activity.

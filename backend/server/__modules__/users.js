@@ -56,8 +56,8 @@ router.post('/register', async (req, res) => {
     try{
         salt = await bcrypt.genSalt(); 
         hashedPassword = await bcrypt.hash(req.body.password, salt);
-    } catch (e) {
-        res.status(500).send("ERROR");
+    } catch (err) {
+        return res.json(sharedfuncs.formatResponse(false, err, null));
     }
 
     const user = { 
@@ -172,7 +172,7 @@ router.post('/login', async (req, res) => {
                 return res.json(sharedfuncs.formatResponse(true, "Authentication successful.", profilereq.data.value));
             } else {
                 // profile search error
-                return res.json(profilereq.data);
+                return res.json(sharedfuncs.formatResponse(false, "PROFILE ERROR: " +profilereq.data.status, null));
             }
         } else {
             // Wrong password
@@ -184,4 +184,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = {
+    router,
+    bcrypt
+}

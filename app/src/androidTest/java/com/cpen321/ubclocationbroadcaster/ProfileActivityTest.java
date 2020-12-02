@@ -71,11 +71,10 @@ public class ProfileActivityTest {
         onView(withId(R.id.phone_number_button)).check(matches(withText(number_t)));
     }
 
+    /** check to make sure entries work **/
     @Test
     public void testStringEntry() {
         setEntry();
-
-        /** check to make sure entries work **/
         try {
             checkEntry();
         }catch (Exception e) {
@@ -83,6 +82,7 @@ public class ProfileActivityTest {
         }
     }
 
+    /** trying to create a profile with empty fields, expecting a success toast message **/
     @Test
     public void testSpinner() {
         /** place 2 items in list **/
@@ -100,10 +100,10 @@ public class ProfileActivityTest {
         }
     }
 
+    /** trying to create a profile with empty fields, expecting a success toast message **/
     @Test
     public void createProfileWithValidInfo(){
-        /** trying to create a profile with empty fields, expecting a success toast message **/
-        UserdetailsUtil.username = "user2";
+        UserdetailsUtil.username = "test_user1";
         setEntry();
         onView(withId(R.id.course_spinner)).perform(click());
         onData(allOf(is(instanceOf(String.class)), is(course_sel1))).perform(click());

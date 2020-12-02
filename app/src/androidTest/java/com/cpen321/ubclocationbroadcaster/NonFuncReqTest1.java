@@ -41,7 +41,7 @@ public class NonFuncReqTest1 {
         onView(withId(R.id.sign_in_button)).perform(click());
 
         long currentTime = System.nanoTime();
-        assertEquals((currentTime - startTime)/1_000_000_000 < 5, true);
+        assertEquals((currentTime - startTime)/1_000_000_000 < 10, true);
     }
 
     @After

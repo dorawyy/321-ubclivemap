@@ -45,7 +45,7 @@ public class NonFuncReqTest2 {
         long startTime = System.nanoTime();
         onView(withId(R.id.ViewActivitiesOnMap)).perform(click());
         long currentTime = System.nanoTime();
-        assertEquals((currentTime - startTime)/1_000_000_000 < 5, true);
+        assertEquals((currentTime - startTime)/1_000_000_000 < 10, true);
     }
 
     @After

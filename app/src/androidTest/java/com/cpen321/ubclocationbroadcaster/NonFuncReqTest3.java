@@ -26,7 +26,6 @@ public class NonFuncReqTest3 {
     }
 
     /** testing if display of map is done in less than 4 clicks from menu**/
-
     @Test
     public void testActivitesDisplayClicks() {
         int num_clicks = 0;

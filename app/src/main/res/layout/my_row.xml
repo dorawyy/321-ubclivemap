@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="83dp"
             android:background="@drawable/bo"
-            android:layout_marginBottom="12dp">
+            android:layout_margin="5dp">
 
             <TextView
                 android:id="@+id/ActivityHeader"

@@ -23,7 +23,7 @@ public class UserdetailsUtil {
     public static Double activitylon;
 
     public static String getURL(){
-        return "http://10.0.2.2:3000";
+        return "http://40.117.186.20:3000";
     }
 
     /**This is called on sign out*/

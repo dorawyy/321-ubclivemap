@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/bo"
     android:gravity="center">
 
     <fragment
@@ -16,7 +17,8 @@
     <Button
         android:id="@+id/BackButton"
         android:layout_width="401dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/bo"
         android:text="BACK" />
 
 </LinearLayout>

@@ -61,6 +61,7 @@
         android:background="@drawable/o2"
         android:fontFamily="sans-serif-condensed-medium"
         android:spinnerMode="dropdown"
+        android:popupBackground="@drawable/bo"
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

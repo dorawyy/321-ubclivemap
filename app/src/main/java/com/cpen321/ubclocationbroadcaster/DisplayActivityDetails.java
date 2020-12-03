@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,8 +30,6 @@ import org.json.JSONObject;
  * Through this activity, the user can see the details of the activity
  * the user has clicked. The user can also join the activity from in here.*/
 public class DisplayActivityDetails extends AppCompatActivity {
-
-    private int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +63,8 @@ public class DisplayActivityDetails extends AppCompatActivity {
                         try {
                             boolean success = (boolean) response.get("success");
                             if (success)
-                                displayDetails(response);
+                                getPhoneNum(response);
+                                //displayDetails(response);
                         } catch (JSONException e) {
                             Log.d("DisplayActivityDetails", ":(");
                             e.printStackTrace();
@@ -106,15 +106,10 @@ public class DisplayActivityDetails extends AppCompatActivity {
             courses[i+1] = SortedlistclassUtil.course[i];
         }
 
-        for(int i = 0; i< SortedlistclassUtil.users.length; i++){
-            if(!SortedlistclassUtil.users[i].equals(" "))
-                counter++;
-        }
-        final String [] users = new String[counter + 1];
+        final String [] users = new String[ SortedlistclassUtil.users.length+1];
         users[0] = "Click to see Users in Activity";
         for(int i = 0; i< SortedlistclassUtil.users.length; i++){
-            if(!SortedlistclassUtil.users[i].equals(" "))
-                users[i+1] = SortedlistclassUtil.users[i];
+            users[i+1] = SortedlistclassUtil.users[i];
         }
 
         coursesSpinner = findViewById(R.id.CoursesSpinner);
@@ -139,12 +134,13 @@ public class DisplayActivityDetails extends AppCompatActivity {
             SortedlistclassUtil.course[i] = activity.getJSONArray("course").getString(i);
         }
 
-        SortedlistclassUtil.users = new String[10];
+        SortedlistclassUtil.users = new String[activity.getJSONArray("usernames").length()];
         for(int i=0;i<activity.getJSONArray("usernames").length();i++){
-            SortedlistclassUtil.users[i] = activity.getJSONArray("usernames").getString(i);
-        }
-        for(int i=activity.getJSONArray("usernames").length();i<10;i++){
-            SortedlistclassUtil.users[i] = " ";
+            for(int j=0; j<SortedlistclassUtil.allUsers.length; j++){
+                if(activity.getJSONArray("usernames").getString(i).equals(SortedlistclassUtil.allUsers[j])){
+                    SortedlistclassUtil.users[i] = activity.getJSONArray("usernames").getString(i) + " (" + SortedlistclassUtil.allphones[j] + ")";
+                }
+            }
         }
 
         SortedlistclassUtil.info = activity.getString("info");
@@ -153,6 +149,39 @@ public class DisplayActivityDetails extends AppCompatActivity {
         SortedlistclassUtil.leader = activity.getString("leader");
     }
 
+    private void getPhoneNum(final JSONObject obj)throws JSONException{
+        final RequestQueue queue2 = Volley.newRequestQueue(DisplayActivityDetails.this);
+
+        MyJSONArrayRequest allActivities = new MyJSONArrayRequest(Request.Method.GET, UserdetailsUtil.getURL() + "/profiles/all",null,
+                new Response.Listener<JSONArray> (){
+                    @Override
+                    public void onResponse(JSONArray response){
+                        /**Get all the activities JSONArray and then parse the array to read and display the required info*/
+                        try {
+                            SortedlistclassUtil.allphones = new String[response.length()];
+                            SortedlistclassUtil.allUsers = new String[response.length()];
+                            for(int i=0; i<response.length();i++){
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                SortedlistclassUtil.allUsers[i] = jsonObject.getString("username");
+                                Log.d("TESTER","SortedlistclassUtil.allUsers["+i+"]"+SortedlistclassUtil.allUsers[i]);
+                                SortedlistclassUtil.allphones[i] = jsonObject.getString("phone");
+                                Log.d("TESTER","SortedlistclassUtil.allphones["+i+"]"+SortedlistclassUtil.allphones[i]);
+                            }
+                            displayDetails(obj);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        queue2.add(allActivities);
+
+    }
     private void setupClickListeners(Button join, Button viewActivtiyOnMap, Button backToMenu){
         join.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -184,6 +184,7 @@
                 android:id="@+id/course_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:popupBackground="@drawable/bo"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:textStyle="bold"
                 android:textSize="20dp"

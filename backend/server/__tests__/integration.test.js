@@ -84,9 +84,9 @@ describe("successful tests", () => {
         expect(response.body[0].token).toBe("coolertoken");
     })
 
+    var leader = JSON.parse(JSON.stringify(constants.kyle_p));
+    leader.username = "test";
     test("make user leader of activity", async () => {
-        var leader = JSON.parse(JSON.stringify(constants.kyle_p));
-        leader.username = "test";
         var response = await request(app)
             .post("/profiles/add")
             .type('json')
@@ -209,6 +209,75 @@ describe("successful tests", () => {
         }
     });
 
+    test("update activity", async () => {
+        new_a1 = JSON.parse(JSON.stringify(constants.a1));
+        new_a1.usernames.push("anotheruser");
+        var response = await request(app)
+            .post("/activities/update")
+            .type('json')
+            .send(new_a1);
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("Activity updated successfully.");
+
+
+        leader.phone = "444";
+        var response = await request(app)
+            .post("/profiles/update")
+            .type('json')
+            .send(leader);
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("User profile updated successfully.");
+
+
+        response = await request(app)
+            .post("/users/update")
+            .type('json')
+            .send({
+                name : "test",
+                password : "pass12345"
+            });
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("Account updated successfully.");
+    })
+
+    test("delete activity and profile", async () => {
+        var response = await request(app)
+            .post("/activities/delete")
+            .type('json')
+            .send({
+                aid : constants.a1.aid
+            });
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("Activity deleted successfully.");
+
+        response = await request(app)
+            .post("/profiles/delete")
+            .type('json')
+            .send({
+                username : "test",
+            })
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("User profile deleted successfully.");
+
+
+        response = await request(app)
+            .get("/profiles/all");
+        expect(response.body[0].username).toBe("kyle");
+
+        response = await request(app)
+            .post("/users/delete")
+            .type('json')
+            .send({
+                name : "test",
+            })
+        expect(response.body.success).toBe(true)
+        expect(response.body.status).toBe("Account deleted successfully.");
+
+        response = await request(app)
+            .get("/users/all")
+        expect(response.body.length).toBe(0);
+    })
+
     afterAll(async () => {
         await Account.deleteMany({});
         await Account.insertMany(beforeUsr);
@@ -239,6 +308,95 @@ describe("fail tests", () => {
     leader.username = "test";
     leader.inActivity = true;
     leader.activityID = "2";
+
+    test("user makes an account and profile", async () =>{
+        var testacc = {
+            name : "test",
+            password : "pass1234",
+            token : "cooltoken"
+        }
+        var response = await request(app)
+            .post("/users/register")
+            .type('json')
+            .send(testacc);
+
+        var response = await request(app)
+            .post("/users/register")
+            .type('json')
+            .send(testacc);
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Account already exists.");
+
+        response = await request(app)
+            .post("/users/register")
+            .type('json')
+            .send({
+                name : "test"
+            });
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Not well formed request.");
+
+        response = await request(app)
+            .post("/users/register")
+            .type('json')
+            .send({
+                password : "hey"
+            });
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Not well formed request.");
+
+    })
+
+    test("user logs in", async () => {
+        var response = await request(app)
+            .post("/users/login")
+            .type('json')
+            .send({
+                name: "JackADKGJGKAD",
+                password: "pass123"
+            })
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Username does not exist.");
+
+        var testacc = {
+            name : "test",
+            password : "pass1234"
+        }
+        var response = await request(app)
+            .post("/users/login")
+            .type('json')
+            .send(testacc);
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("PROFILE ERROR: Username does not exist.");
+
+        var response = await request(app)
+            .post("/users/login")
+            .type('json')
+            .send({
+                name: "test",
+                password: "pass12344113"
+            })
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Invalid password.");
+
+        var response = await request(app)
+            .post("/users/login")
+            .type('json')
+            .send({
+                name : "test"
+            });
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Not well formed request.");
+
+        var response = await request(app)
+            .post("/users/login")
+            .type('json')
+            .send({
+                password : "heyyy"
+            });
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Not well formed request.");
+    })
 
     test("make user leader of activity", async () => {
         var response = await request(app)
@@ -455,6 +613,75 @@ describe("fail tests", () => {
             expect(response.body.status).toBe("Not well formed request.");
         }
     });
+
+    test("update activity", async () => {
+        var response = await request(app)
+            .post("/activities/update")
+            .type('json')
+            .send({
+                aid : "sparklingdangers",
+                name : "Cpen321 Project",
+                leader : "test",
+                usernames : ["test","aplha","anotheruser"],
+                info : "Understanding Javascript with TA",
+                major : "CPEN",
+                course : ["CPEN321", "CPEN331", "CPEN400"],
+                school : "UBC",
+                lat : "50.2321039",
+                long : "-123.247360",
+                status : "1"
+            })
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Activity does not exist.");
+        
+        var response = await request(app)
+            .post("/profiles/update")
+            .type('json')
+            .send({
+                name : "blahblah",
+                username : "12039210392109",
+                major : "CPEN",
+                CourseRegistered : [
+                    "CPEN331", "CPEN321", "CPEN400"
+                ],
+                school : "UBC",
+                phone : "4444445555",
+                private : false,
+                inActivity : false,
+                activityID : "-1"
+            })
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Username does not exist.");
+    })
+
+    test("delete activity and profile", async () => {
+        var response = await request(app)
+            .post("/activities/delete")
+            .type('json')
+            .send({
+                aid : "sparklingdangers"
+            })
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Activity does not exist.");
+
+        response = await request(app)
+            .post("/activities/delete")
+            .type('json')
+            .send({
+                weirdkey : "sparklingdangers",
+            })
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Not well formed request.");
+
+        var response = await request(app)
+            .post("/profiles/delete")
+            .type('json')
+            .send({
+                username : "1239218932189",
+            })
+        expect(response.body.success).toBe(false)
+        expect(response.body.status).toBe("Username does not exist.");
+    })
 
     afterAll(async () => {
         await Activity.deleteMany({});

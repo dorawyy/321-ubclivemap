@@ -433,11 +433,11 @@ Content-Type: application/json
 }
 
 ### update users
-POST http://localhost:3000/notifications/send
+POST http://40.117.186.20:3000/notifications/send
 Content-Type: application/json
 
 {
-    "username" : "john",
+    "username" : "John Albert",
     "title" : "hey",
     "message" : "heyo"
 }

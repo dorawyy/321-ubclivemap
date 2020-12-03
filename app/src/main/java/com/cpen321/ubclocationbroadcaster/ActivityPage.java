@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,10 +28,8 @@ public class ActivityPage extends AppCompatActivity {
 
     //Displays the courses in this activity
     private Spinner coursesSpinner;
-    //Displays the users in this activity
-    private Spinner usersSpinner;
 
-    private int counter = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,18 +100,13 @@ public class ActivityPage extends AppCompatActivity {
                             SortedlistclassUtil.aname = activity.getString("name");
                             SortedlistclassUtil.major = activity.getString("major");
                             SortedlistclassUtil.aschool = activity.getString("school");
+                            setupUsers(activity);
                             SortedlistclassUtil.course = new String[activity.getJSONArray("course").length()];
                             for(int i=0;i<activity.getJSONArray("course").length();i++){
                                 SortedlistclassUtil.course[i] = activity.getJSONArray("course").getString(i);
                             }
 
-                            SortedlistclassUtil.users = new String[10];
-                            for(int i=0;i<activity.getJSONArray("usernames").length();i++){
-                                SortedlistclassUtil.users[i] = activity.getJSONArray("usernames").getString(i);
-                            }
-                            for(int i=activity.getJSONArray("usernames").length();i<10;i++){
-                                SortedlistclassUtil.users[i] = " ";
-                            }
+
 
                             SortedlistclassUtil.info = activity.getString("info");
                             SortedlistclassUtil.lat = activity.getDouble("lat");
@@ -140,17 +134,6 @@ public class ActivityPage extends AppCompatActivity {
                                     courses[i+1] = SortedlistclassUtil.course[i];
                                 }
 
-                                //numOfusers = SortedListClass.users.length;
-                                for(int i = 0; i< SortedlistclassUtil.users.length; i++){
-                                    if(!SortedlistclassUtil.users[i].equals(" "))
-                                        counter++;
-                                }
-                                final String [] users = new String[counter + 1];
-                                users[0] = "Click to see Users in Activity";
-                                for(int i = 0; i< SortedlistclassUtil.users.length; i++){
-                                    if(!SortedlistclassUtil.users[i].equals(" "))
-                                        users[i+1] = SortedlistclassUtil.users[i];
-                                }
 
                                 coursesSpinner = findViewById(R.id.CoursesSpinner2);
                                 ArrayAdapter<String> myAdapter1 = new ArrayAdapter<String>(ActivityPage.this,
@@ -158,11 +141,6 @@ public class ActivityPage extends AppCompatActivity {
                                 myAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 coursesSpinner.setAdapter(myAdapter1);
 
-                                usersSpinner = findViewById(R.id.UsersSpinner2);
-                                ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(ActivityPage.this,
-                                        android.R.layout.simple_list_item_1, users);
-                                myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                usersSpinner.setAdapter(myAdapter2);
 
                             }
 
@@ -183,6 +161,55 @@ public class ActivityPage extends AppCompatActivity {
         queue.add(activity_object);
 
     }
+    private void setupUsers(final JSONObject activity)throws JSONException{
+
+        final RequestQueue queue2 = Volley.newRequestQueue(ActivityPage.this);
+
+        MyJSONArrayRequest allActivities = new MyJSONArrayRequest(Request.Method.GET, UserdetailsUtil.getURL() + "/profiles/all",null,
+                new Response.Listener<JSONArray> (){
+                    @Override
+                    public void onResponse(JSONArray response){
+                        /**Get all the activities JSONArray and then parse the array to read and display the required info*/
+                        try {
+                            SortedlistclassUtil.allphones = new String[response.length()];
+                            SortedlistclassUtil.allUsers = new String[response.length()];
+                            for(int i=0; i<response.length();i++){
+                                SortedlistclassUtil.allUsers[i] = response.getJSONObject(i).getString("username");
+                                SortedlistclassUtil.allphones[i] = response.getJSONObject(i).getString("phone");
+                            }
+
+                            SortedlistclassUtil.users = new String[activity.getJSONArray("usernames").length()];
+                            for(int i=0;i<activity.getJSONArray("usernames").length();i++){
+                                for(int j=0; j<SortedlistclassUtil.allUsers.length; j++){
+                                    if(activity.getJSONArray("usernames").getString(i).equals(SortedlistclassUtil.allUsers[j])){
+                                        SortedlistclassUtil.users[i] = activity.getJSONArray("usernames").getString(i) + " (" + SortedlistclassUtil.allphones[j] + ")";
+                                    }
+                                }
+                            }
+                            final String [] users = new String[activity.getJSONArray("usernames").length() + 1];
+                            users[0] = "Click to see Users in Activity";
+                            for(int i = 0; i< SortedlistclassUtil.users.length; i++){
+                                users[i+1] = SortedlistclassUtil.users[i];
+                            }
+                            Spinner usersSpinner = findViewById(R.id.UsersSpinner2);
+                            ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(ActivityPage.this,
+                                    android.R.layout.simple_list_item_1, users);
+                            myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            usersSpinner.setAdapter(myAdapter2);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        queue2.add(allActivities);
+    }
+
 
     private JSONObject getLeaveObject(){
         JSONObject leaveObject = new JSONObject();

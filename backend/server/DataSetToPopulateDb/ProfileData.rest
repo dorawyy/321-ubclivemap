@@ -1,122 +1,122 @@
 ######################################################################
 #################       GET ALL PROFILES      ########################
 ######################################################################
-GET http://localhost:3000/profiles/all
+GET http://40.117.186.20:3000/profiles/all
 
 ######################################################################
 ################   POPULATE DB WITH PROFILES   #######################
 ######################################################################
-POST http://localhost:3000/profiles/add
+POST http://40.117.186.20:3000/profiles/add
 Content-Type: application/json
 
-{   "username" : "user1", "name" : "John", "major" : "CPEN", "school" : "UBC", "phone" : "123-456-7890", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN221"] }
+{   "username" : "John Albert", "name" : "John", "major" : "CPEN", "school" : "UBC", "phone" : "123-456-7890", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN221"] }
 ######################################################################
-POST http://localhost:3000/profiles/add
+POST http://40.117.186.20:3000/profiles/add
 Content-Type: application/json
 
-{   "username" : "user2", "name" : "Mary", "major" : "CPEN", "school" : "UBC", "phone" : "234-567-8901", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN221", "CPEN211"] }
+{   "username" : "Mary Monroe", "name" : "Mary", "major" : "CPEN", "school" : "UBC", "phone" : "234-567-8901", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN221", "CPEN211"] }
 ######################################################################
-POST http://localhost:3000/profiles/add
+POST http://40.117.186.20:3000/profiles/add
 Content-Type: application/json
 
-{   "username" : "user3", "name" : "Aryan", "major" : "ELEC", "school" : "UBC", "phone" : "345-678-9012", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN331"] }
+{   "username" : "Aryan Sharma", "name" : "Aryan", "major" : "ELEC", "school" : "UBC", "phone" : "345-678-9012", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN331"] }
 ######################################################################
-POST http://localhost:3000/profiles/add
+POST http://40.117.186.20:3000/profiles/add
 Content-Type: application/json
 
-{   "username" : "user4", "name" : "Watson", "major" : "ELEC", "school" : "UBC", "phone" : "456-789-0123", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN321", "CPEN331"] }
+{   "username" : "John Watson", "name" : "Watson", "major" : "ELEC", "school" : "UBC", "phone" : "456-789-0123", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN321", "CPEN331"] }
 ######################################################################
-POST http://localhost:3000/profiles/add
+POST http://40.117.186.20:3000/profiles/add
 Content-Type: application/json
 
-{   "username" : "user5", "name" : "Tim", "major" : "CPSC", "school" : "UBC", "phone" : "567-890-1234", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN411"] }
+{   "username" : "Tim Paine", "name" : "Tim", "major" : "CPSC", "school" : "UBC", "phone" : "567-890-1234", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN411"] }
 ######################################################################
-POST http://localhost:3000/profiles/add
+POST http://40.117.186.20:3000/profiles/add
 Content-Type: application/json
 
-{   "username" : "user6", "name" : "Leslie", "major" : "CPSC", "school" : "UBC", "phone" : "678-901-2345", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN421", "CPEN41"] }
+{   "username" : "Leslie Major", "name" : "Leslie", "major" : "CPSC", "school" : "UBC", "phone" : "678-901-2345", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN421", "CPEN41"] }
 ######################################################################
-POST http://localhost:3000/profiles/add
+POST http://40.117.186.20:3000/profiles/add
 Content-Type: application/json
 
-{   "username" : "user7", "name" : "Albert", "major" : "IGEN", "school" : "UBC", "phone" : "789-012-3456", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN400A"] }
+{   "username" : "Albert Nosetien", "name" : "Albert", "major" : "IGEN", "school" : "UBC", "phone" : "789-012-3456", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN400A"] }
 ######################################################################
-POST http://localhost:3000/profiles/add
+POST http://40.117.186.20:3000/profiles/add
 Content-Type: application/json
 
-{   "username" : "user8", "name" : "Mohammad", "major" : "IGEN", "school" : "UBC", "phone" : "890-123-4567", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN331", "CPEN321", "CPEN311"] }
+{   "username" : "Mohammad Ali", "name" : "Mohammad", "major" : "IGEN", "school" : "UBC", "phone" : "890-123-4567", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN331", "CPEN321", "CPEN311"] }
 ######################################################################
-POST http://localhost:3000/profiles/add
+POST http://40.117.186.20:3000/profiles/add
 Content-Type: application/json
 
-{   "username" : "user9", "name" : "Ali", "major" : "MECH", "school" : "UBC", "phone" : "901-234-5678", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN411", "CPEN412" , "CPEN421"] }
+{   "username" : "Ali Zayed", "name" : "Ali", "major" : "MECH", "school" : "UBC", "phone" : "901-234-5678", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN411", "CPEN412" , "CPEN421"] }
 ######################################################################
-POST http://localhost:3000/profiles/add
+POST http://40.117.186.20:3000/profiles/add
 Content-Type: application/json
 
-{   "username" : "user10", "name" : "Justin", "major" : "MECH", "school" : "UBC", "phone" : "012-345-6789", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN311"] }
+{   "username" : "Justin Jackson", "name" : "Justin", "major" : "MECH", "school" : "UBC", "phone" : "012-345-6789", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN311"] }
 ######################################################################
 
 ######################################################################
 #################       SEE USER PROFILE       #######################
 ######################################################################
-POST http://localhost:3000/profiles/search
+POST http://40.117.186.20:3000/profiles/search
 Content-Type: application/json
 
-{ "username" : "user1" }
+{ "username" : "John Albert" }
 ######################################################################
-POST http://localhost:3000/profiles/search
+POST http://40.117.186.20:3000/profiles/search
 Content-Type: application/json
 
-{ "username" : "user2" }
+{ "username" : "Mary Monroe" }
 ######################################################################
-POST http://localhost:3000/profiles/search
+POST http://40.117.186.20:3000/profiles/search
 Content-Type: application/json
 
-{ "username" : "user3" }
+{ "username" : "Aryan Sharma" }
 ######################################################################
-POST http://localhost:3000/profiles/search
+POST http://40.117.186.20:3000/profiles/search
 Content-Type: application/json
 
-{ "username" : "user4" }
+{ "username" : "John Watson" }
 ######################################################################
-POST http://localhost:3000/profiles/search
+POST http://40.117.186.20:3000/profiles/search
 Content-Type: application/json
 
-{ "username" : "user5" }
+{ "username" : "Tim Paine" }
 ######################################################################
-POST http://localhost:3000/profiles/search
+POST http://40.117.186.20:3000/profiles/search
 Content-Type: application/json
 
-{ "username" : "user6" }
+{ "username" : "Leslie Major" }
 ######################################################################
-POST http://localhost:3000/profiles/search
+POST http://40.117.186.20:3000/profiles/search
 Content-Type: application/json
 
-{ "username" : "user7" }
+{ "username" : "Albert Nosetien" }
 ######################################################################
-POST http://localhost:3000/profiles/search
+POST http://40.117.186.20:3000/profiles/search
 Content-Type: application/json
 
-{ "username" : "user8" }
+{ "username" : "Mohammad Ali" }
 ######################################################################
-POST http://localhost:3000/profiles/search
+POST http://40.117.186.20:3000/profiles/search
 Content-Type: application/json
 
-{ "username" : "user9" }
+{ "username" : "Ali Zayed" }
 ######################################################################
-POST http://localhost:3000/profiles/search
+POST http://40.117.186.20:3000/profiles/search
 Content-Type: application/json
 
-{ "username" : "user10" }
+{ "username" : "Justin Jackson" }
 ######################################################################
 
-POST http://localhost:3000/profiles/update
+POST http://40.117.186.20:3000/profiles/update
 Content-Type: application/json
 
-{   "username" : "user10", "name" : "Jeremy", "major" : "MECH", "school" : "UBC", "phone" : "012-345-6789", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN311"] }
+{   "username" : "Justin Jackson", "name" : "Jeremy", "major" : "MECH", "school" : "UBC", "phone" : "012-345-6789", "private" : false, "inActivity" : false, "activityID" : "-1", "CourseRegistered" : ["CPEN311"] }
 ######################################################################
-POST http://localhost:3000/profiles/delete
+POST http://40.117.186.20:3000/profiles/delete
 Content-Type: application/json
 
-{ "username" : "user1" }
+{ "username" : "John Albert" }

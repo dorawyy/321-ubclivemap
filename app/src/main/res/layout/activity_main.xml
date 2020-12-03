@@ -13,6 +13,7 @@
         android:layout_height="40dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:background="@drawable/bo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView2"
@@ -23,6 +24,7 @@
         android:id="@+id/password_button"
         android:layout_width="200dp"
         android:layout_height="40dp"
+        android:background="@drawable/bo"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/sign_in_button"
@@ -38,6 +40,7 @@
         android:autoSizeTextType="uniform"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="Username:"
+        android:background="@drawable/bo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.111"
@@ -48,17 +51,17 @@
     <Button
         android:id="@+id/sign_in_button"
         android:layout_width="150dp"
-        android:layout_height="63dp"
+        android:layout_height="62dp"
         android:background="@drawable/orange"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="@string/sign_in"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.736" />
+        app:layout_constraintVertical_bias="0.733" />
 
     <TextView
         android:id="@+id/textView3"
@@ -67,6 +70,7 @@
         android:autoSizeTextType="uniform"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="Password:"
+        android:background="@drawable/bo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.111"
@@ -76,18 +80,17 @@
 
     <Button
         android:id="@+id/sign_up_button"
-        android:layout_width="150dp"
-        android:layout_height="63dp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
         android:background="@drawable/orange"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="Sign Up"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toEndOf="@+id/sign_in_button"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.736" />
+        app:layout_constraintVertical_bias="0.734" />
 
     <ImageView
         android:id="@+id/imageView4"

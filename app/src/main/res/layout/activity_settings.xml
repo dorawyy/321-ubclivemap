@@ -11,7 +11,7 @@
         android:id="@+id/switch1"
         android:layout_width="387dp"
         android:layout_height="71dp"
-        android:text="Swtich on to turn Dark Mode on."
+        android:text="Change Text Colour To White."
         android:textSize="22dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
